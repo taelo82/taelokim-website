@@ -1,0 +1,42 @@
+/Users/gimeunjong/Downloads/files/taelo-content-system/outputs/build-kit/site-sketch.svg:root {
+  /* PALETTE — 5 colors max */
+  --void:    #050510;        /* hero background, page bg */
+  --paper:   #E8E4DC;        /* primary text on void */
+  --thread:  #FFB347;        /* signature warm amber, the light */
+  --dust:    #6B5B4F;        /* secondary text, muted UI */
+  --signal:  #00C2FF;        /* used ONCE — the email CTA only */
+
+  /* TYPOGRAPHY — display serif + neo-grotesque body */
+  --font-display: "Migra", "GT Sectra", Georgia, serif;
+  --font-body:    "Inter Tight", "Söhne", system-ui, sans-serif;
+  --font-mono:    "JetBrains Mono", "Berkeley Mono", monospace;
+
+  /* TYPE SCALE */
+  --type-hero:     clamp(64px, 9vw, 120px);
+  --type-h1:       clamp(40px, 5vw, 64px);
+  --type-h2:       clamp(28px, 3vw, 40px);
+  --type-body:     17px;
+  --type-small:    14px;
+  --type-mono:     13px;
+
+  /* SPACING — 4px base */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  16px;
+  --space-4:  24px;
+  --space-5:  40px;
+  --space-6:  64px;
+  --space-7:  96px;
+  --space-8:  160px;
+
+  /* RADIUS — almost none */
+  --radius-sm:  2px;
+  --radius-md:  4px;
+  --radius-lg:  8px;
+  /* NO pill / fully-rounded by default */
+
+  /* MOTION */
+  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-slow: 1200ms;
+  --duration-med:  600ms;
+}

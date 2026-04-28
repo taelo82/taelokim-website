@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taelo Kim</title>
+<link rel="stylesheet" href="tokens.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  html { background: var(--void); }
+  body {
+    background: transparent;
+    color: var(--paper);
+    font-family: var(--font-body), 'Inter Tight', sans-serif;
+    font-size: var(--type-body);
+    line-height: 1.5;
+    overflow-x: hidden;
+  }
+
+  /* ── TESSERACT BACKDROP ──
+     Fixed full-bleed layer behind everything. Reads as: bookshelves glimpsed
+     through dimensional slats of warm light, with a soft window-glow from the
+     upper-left evoking the reality room (the bedroom in Interstellar).
+     Stack (bottom → top in the bg-image list, top → bottom visually):
+       1. Vignette — keeps content readable in the center
+       2. Window glow — warm bloom from upper-left
+       3. Tesseract slats A — main warm vertical slivers (period 220px)
+       4. Tesseract slats B — finer offset slivers (period 367px) for irregularity
+       5. Tesseract slats C — sparsest dim slivers (period 593px)
+       6. Bookshelf SVG tile — the books themselves */
+  #tesseract-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-color: #07060d;
+    background-image:
+      radial-gradient(
+        ellipse 95% 75% at 50% 45%,
+        transparent 0%,
+        rgba(7, 6, 13, 0.55) 65%,
+        rgba(7, 6, 13, 0.94) 100%
+      ),
+      radial-gradient(
+        ellipse 55% 38% at 14% 8%,
+        rgba(255, 200, 130, 0.13),
+        rgba(255, 179, 71, 0.04) 45%,
+        transparent 70%
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent 0,
+        transparent 108px,
+        rgba(255, 224, 176, 0.05) 109px,
+        rgba(255, 200, 130, 0.13) 110px,
+        rgba(255, 224, 176, 0.05) 111px,
+        transparent 112px,
+        transparent 220px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent 0,
+        transparent 183px,
+        rgba(255, 224, 176, 0.03) 184px,
+        rgba(255, 200, 130, 0.08) 185px,
+        rgba(255, 224, 176, 0.03) 186px,
+        transparent 187px,
+        transparent 367px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent 0,
+        transparent 296px,
+        rgba(255, 200, 130, 0.05) 297px,
+        rgba(255, 200, 130, 0.05) 298px,
+        transparent 299px,
+        transparent 593px
+      ),
+      url("tesseract-bg.svg");
+    background-size:
+      100% 100%,
+      100% 100%,
+      auto auto,
+      auto auto,
+      auto auto,
+      560px 374px;
+    background-position:
+      center center,
+      0 0,
+      0 0,
+      40px 0,
+      120px 0,
+      0 0;
+    background-repeat:
+      no-repeat,
+      no-repeat,
+      repeat,
+      repeat,
+      repeat,
+      repeat;
+    background-attachment: fixed;
+    opacity: 0.85;
+  }
+  /* The slats breathe almost imperceptibly — the warm light is alive,
+     not a static decal. Disabled for reduced-motion. */
+  @keyframes tesseract-breathe {
+    0%, 100% { opacity: 0.82; }
+    50%      { opacity: 0.92; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    #tesseract-bg { animation: tesseract-breathe 11s ease-in-out infinite; }
+  }
+  /* Perspective moved off body so it doesn't create a containing block
+     for fixed-positioned spaceman/threads. Apply only to a sections wrapper. */
+  .scenes {
+    perspective: 1400px;
+    perspective-origin: 50% 30%;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: var(--space-5);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    display: flex;
+    gap: var(--space-4);
+    align-items: center;
+    padding: var(--space-2) var(--space-5);
+    background: transparent;
+  }
+
+  nav a {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: var(--type-small);
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dust);
+    text-decoration: none;
+    transition: color var(--duration-med) var(--ease-cinematic);
+  }
+  nav a:hover { color: var(--paper); }
+  nav .nav-dot {
+    width: 3px; height: 3px;
+    border-radius: 50%;
+    background: var(--dust);
+    opacity: 0.4;
+  }
+
+  /* ── HERO ── */
+  /* Full-bleed hero. NO transform here — that would create a containing block
+     and break position:fixed for the spaceman + threads. */
+  #hero {
+    position: relative !important;
+    width: 100vw !important;
+    max-width: none !important;
+    height: 100vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    left: 0 !important;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Tiny debug overlay — remove after layout is confirmed.
+     Tells us actual computed dimensions of #hero vs viewport. */
+  #__debug {
+    position: fixed;
+    bottom: 8px; left: 8px;
+    z-index: 9999;
+    font: 11px/1.2 monospace;
+    color: #FFB347;
+    background: rgba(0,0,0,0.7);
+    padding: 6px 10px;
+    pointer-events: none;
+  }
+
+  #hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0.6;
+    filter: brightness(0.85) saturate(0.85) blur(0.5px);
+    /* Fade the video to transparent at top + bottom so the tesseract
+       bookshelf bleeds through the edges instead of getting clipped. */
+    -webkit-mask-image: linear-gradient(to bottom,
+      transparent 0%, black 18%, black 70%, transparent 100%);
+            mask-image: linear-gradient(to bottom,
+      transparent 0%, black 18%, black 70%, transparent 100%);
+  }
+  /* Hero/value boundary — softer than before. Used to fade to opaque void,
+     which would have hidden the bookshelf. Now a faint dimming layer only. */
+  #hero::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 30vh;
+    background: linear-gradient(to bottom,
+      transparent 0%,
+      rgba(7, 6, 13, 0.35) 100%);
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  #spaceman {
+    position: fixed;
+    z-index: 50;
+    pointer-events: none;
+    width: auto;
+    filter: url(#luma-key) contrast(1.05) brightness(1.02);
+    /* Belt-and-suspenders watermark removal: clip-path crops 8% off each corner,
+       then radial mask feathers the remaining edges. */
+    clip-path: inset(4% 7% 12% 7%);
+    -webkit-mask-image: radial-gradient(
+      ellipse 44% 62% at 50% 50%,
+      black 32%,
+      rgba(0,0,0,0.92) 52%,
+      rgba(0,0,0,0.45) 74%,
+      transparent 90%
+    );
+            mask-image: radial-gradient(
+      ellipse 44% 62% at 50% 50%,
+      black 32%,
+      rgba(0,0,0,0.92) 52%,
+      rgba(0,0,0,0.45) 74%,
+      transparent 90%
+    );
+    will-change: transform, height, top, right, opacity;
+  }
+
+  /* Thread SVG overlay — fixed so threads can extend across the whole page */
+  #thread-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100vw; height: 100vh;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 4;
+    padding-left: var(--space-8);
+    max-width: 520px;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--thread);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-3);
+    opacity: 0.85;
+  }
+
+  .hero-headline {
+    font-family: var(--font-display);
+    font-size: var(--type-hero);
+    font-weight: 400;
+    line-height: 1.02;
+    color: var(--paper);
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-4);
+  }
+
+  .hero-headline em {
+    font-style: italic;
+    color: var(--thread);
+  }
+
+  .hero-sub {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: var(--type-body);
+    font-weight: 300;
+    color: var(--dust);
+    line-height: 1.6;
+    max-width: 340px;
+    margin-bottom: var(--space-5);
+  }
+
+  .hero-cta {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: var(--type-small);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--thread);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    transition: gap var(--duration-med) var(--ease-cinematic);
+  }
+  .hero-cta:hover { gap: var(--space-3); }
+  .hero-cta::after { content: '→'; }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: var(--space-5);
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--dust);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    z-index: 5;
+    animation: bob 2s ease-in-out infinite;
+  }
+  @keyframes bob {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* ── SECTION SHARED ── */
+  section {
+    padding: var(--space-8) var(--space-8);
+    max-width: 860px;
+    margin: 0 auto;
+    position: relative;
+    transform-style: preserve-3d;
+  }
+
+  /* Glowing top bar appears when section becomes active.
+     Reads as "the thread connected — this section is now in focus." */
+  section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 179, 71, 0) 20%,
+      rgba(255, 179, 71, 0.7) 50%,
+      rgba(255, 179, 71, 0) 80%,
+      transparent 100%);
+    opacity: 0;
+    transform: scaleX(0.6);
+    transition:
+      opacity var(--duration-slow) var(--ease-cinematic),
+      transform var(--duration-slow) var(--ease-cinematic);
+    pointer-events: none;
+  }
+  section.active-section::before {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  /* Subtle amber halo behind active section */
+  section.active-section {
+    box-shadow:
+      inset 0 60px 120px -60px rgba(255, 179, 71, 0.05),
+      inset 0 -60px 120px -60px rgba(255, 179, 71, 0.03);
+  }
+
+  .section-label {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--dust);
+    margin-bottom: var(--space-5);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    transition:
+      color var(--duration-slow) var(--ease-cinematic),
+      text-shadow var(--duration-slow) var(--ease-cinematic);
+  }
+  .section-label::after {
+    content: '';
+    display: block;
+    flex: 1;
+    height: 1px;
+    background: rgba(107,91,79,0.25);
+    transition: background var(--duration-slow) var(--ease-cinematic);
+  }
+  /* Active-section label lights up amber — "the thread reached me" */
+  section.active-section .section-label {
+    color: var(--thread);
+    text-shadow: 0 0 24px rgba(255, 179, 71, 0.35);
+  }
+  section.active-section .section-label::after {
+    background: linear-gradient(90deg, rgba(255,179,71,0.3), rgba(107,91,79,0.1));
+  }
+
+  /* Section reveal — section gets pulled forward as it enters view.
+     Combines: translateY rise, translateZ forward push, slight scale, blur-to-focus.
+     Reads as "the spaceman is pulling this content toward the viewer." */
+  .reveal {
+    opacity: 0;
+    transform: translateY(60px) translateZ(-80px) scale(0.96);
+    filter: blur(4px);
+    transition:
+      opacity var(--duration-slow) var(--ease-cinematic),
+      transform var(--duration-slow) var(--ease-cinematic),
+      filter var(--duration-slow) var(--ease-cinematic);
+    transform-style: preserve-3d;
+    will-change: transform, filter, opacity;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0) translateZ(0) scale(1);
+    filter: blur(0);
+  }
+
+  /* ── 2. VALUE — what's inside ── */
+  #value {
+    border-top: 1px solid rgba(107,91,79,0.2);
+    padding-top: var(--space-7);
+  }
+
+  .intro-para {
+    font-family: var(--font-display);
+    font-size: var(--type-h2);
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--paper);
+    max-width: 720px;
+    margin-bottom: var(--space-7);
+    font-style: italic;
+  }
+
+  .value-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid rgba(107,91,79,0.25);
+    padding-top: var(--space-5);
+    gap: var(--space-6);
+  }
+  .value-item {}
+  .value-label {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(22px, 2.2vw, 28px);
+    color: var(--thread);
+    line-height: 1.1;
+    margin-bottom: var(--space-3);
+  }
+  .value-desc {
+    font-size: var(--type-small);
+    color: var(--dust);
+    line-height: 1.55;
+  }
+
+  /* ── 3. RESOURCES ── */
+  #resources {
+    border-top: 1px solid rgba(107,91,79,0.2);
+  }
+
+  .resource-featured {
+    border: 1px solid var(--thread);
+    padding: var(--space-5);
+    margin-bottom: var(--space-5);
+    position: relative;
+  }
+  .resource-featured-tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--thread);
+    margin-bottom: var(--space-3);
+  }
+  .resource-featured-title {
+    font-family: var(--font-display);
+    font-size: var(--type-h2);
+    color: var(--paper);
+    margin-bottom: var(--space-3);
+    line-height: 1.2;
+  }
+  .resource-featured-desc {
+    font-size: var(--type-small);
+    color: var(--dust);
+    margin-bottom: var(--space-4);
+    max-width: 480px;
+  }
+  .resource-link {
+    font-size: var(--type-small);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--thread);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+  .resource-link::after { content: '→'; }
+
+  .resource-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+  }
+  .resource-card {
+    border: 1px solid rgba(232,228,220,0.12);
+    padding: var(--space-4);
+  }
+  .resource-card-tag {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dust);
+    margin-bottom: var(--space-3);
+  }
+  .resource-card-title {
+    font-family: var(--font-display);
+    font-size: 18px;
+    color: var(--paper);
+    line-height: 1.3;
+    margin-bottom: var(--space-3);
+  }
+  .resource-card-desc {
+    font-size: var(--type-small);
+    color: var(--dust);
+    line-height: 1.5;
+  }
+
+  /* ── 4. BUILDS ── */
+  #builds {
+    border-top: 1px solid rgba(107,91,79,0.2);
+  }
+
+  .builds-table { width: 100%; border-collapse: collapse; }
+  .builds-table tr {
+    border-bottom: 1px solid rgba(58,58,74,0.6);
+    transition: background var(--duration-med);
+  }
+  .builds-table tr:hover { background: rgba(255,179,71,0.04); }
+  .builds-table td {
+    padding: var(--space-4) var(--space-3);
+    font-size: var(--type-body);
+    vertical-align: middle;
+  }
+  .build-name {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--paper);
+  }
+  .build-status {
+    font-size: var(--type-small);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: right;
+  }
+  .build-status.working { color: var(--thread); }
+  .build-status.paused { color: var(--dust); }
+  .build-status.shipped { color: var(--paper); opacity: 0.5; }
+  .build-meta {
+    font-size: var(--type-small);
+    color: var(--dust);
+    text-align: right;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* ── 5. WRITING ── */
+  #writing {
+    border-top: 1px solid rgba(107,91,79,0.2);
+  }
+
+  .writing-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: var(--space-4) 0;
+    border-bottom: 1px solid rgba(58,58,74,0.6);
+    text-decoration: none;
+    gap: var(--space-5);
+    transition: all var(--duration-med) var(--ease-cinematic);
+  }
+  .writing-row:hover .writing-title { color: var(--thread); }
+  .writing-left { flex: 1; }
+  .writing-title {
+    font-family: var(--font-display);
+    font-size: 20px;
+    color: var(--paper);
+    margin-bottom: var(--space-1);
+    transition: color var(--duration-med);
+  }
+  .writing-desc {
+    font-size: var(--type-small);
+    color: var(--dust);
+  }
+  .writing-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: var(--type-mono);
+    color: var(--dust);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* ── 6. ABOUT ── */
+  #about {
+    border-top: 1px solid rgba(107,91,79,0.2);
+  }
+
+  .about-text {
+    font-family: var(--font-display);
+    font-size: 20px;
+    color: var(--paper);
+    line-height: 1.6;
+    max-width: 640px;
+    font-weight: 400;
+  }
+
+  /* ── 7. EMAIL CAPTURE ── */
+  #email-capture {
+    border-top: 1px solid var(--signal);
+    padding: var(--space-7) var(--space-8);
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .email-headline {
+    font-family: var(--font-display);
+    font-size: var(--type-h2);
+    color: var(--paper);
+    margin-bottom: var(--space-3);
+  }
+  .email-sub {
+    font-size: var(--type-small);
+    color: var(--dust);
+    margin-bottom: var(--space-5);
+  }
+  .email-form {
+    display: flex;
+    gap: 0;
+    max-width: 520px;
+  }
+  .email-input {
+    flex: 1;
+    background: transparent;
+    border: 1px solid rgba(232,228,220,0.2);
+    border-right: none;
+    padding: var(--space-3) var(--space-4);
+    font-family: 'Inter Tight', sans-serif;
+    font-size: var(--type-small);
+    color: var(--paper);
+    outline: none;
+  }
+  .email-input::placeholder { color: var(--dust); }
+  .email-input:focus { border-color: var(--signal); }
+  .email-btn {
+    background: var(--signal);
+    color: var(--void);
+    border: none;
+    padding: var(--space-3) var(--space-5);
+    font-family: 'Inter Tight', sans-serif;
+    font-size: var(--type-small);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity var(--duration-med);
+  }
+  .email-btn:hover { opacity: 0.85; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid rgba(107,91,79,0.15);
+    padding: var(--space-6) var(--space-8);
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  footer .foot-copy {
+    font-size: var(--type-small);
+    color: var(--dust);
+  }
+  footer .foot-links {
+    display: flex;
+    gap: var(--space-4);
+  }
+  footer a {
+    font-size: var(--type-small);
+    color: var(--dust);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color var(--duration-med);
+  }
+  footer a:hover { color: var(--paper); }
+
+  .wf-anno { display: none; }
+</style>
+</head>
+<body>
+
+<!-- Tesseract bookshelf backdrop. Fixed-attached so it sits still while the
+     page scrolls — the spaceman/threads/content move through it like Cooper
+     drifting through dimensional slats. Sits behind everything (z:-1). -->
+<div id="tesseract-bg" aria-hidden="true"></div>
+
+<!-- Hidden SVG <defs> — the #luma-key filter is referenced by #spaceman's CSS.
+     Maps each pixel's alpha to its luminance, turning dark backgrounds transparent. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="luma-key">
+      <feColorMatrix type="matrix" values="
+        1 0 0 0 0
+        0 1 0 0 0
+        0 0 1 0 0
+        0.299 0.587 0.114 0 -0.05"/>
+    </filter>
+  </defs>
+</svg>
+
+<!-- Spaceman + threads are siblings of <main>, NOT inside any <section>.
+     This way position:fixed anchors to the viewport, not to a hero containing block,
+     so the spaceman persists throughout the scroll. -->
+<video id="spaceman" src="spaceman.mp4" muted playsinline preload="auto" aria-label="spaceman pulling threads"></video>
+
+<svg id="thread-canvas" aria-hidden="true">
+  <defs>
+    <!-- Tighter stacked-blur glow — visible halo, not washed out diffuse. -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="big"/>
+      <feGaussianBlur stdDeviation="1.5" result="mid" in="SourceGraphic"/>
+      <feMerge>
+        <feMergeNode in="big"/>
+        <feMergeNode in="mid"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <radialGradient id="origin-glow">
+      <stop offset="0%"   stop-color="#FFE0B0" stop-opacity="1"/>
+      <stop offset="35%"  stop-color="#FFB347" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#FFB347" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="thread-grad-1" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#FFE0B0" stop-opacity="1"/>
+      <stop offset="20%"  stop-color="#FFB347" stop-opacity="0.85"/>
+      <stop offset="60%"  stop-color="#FFB347" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#FFB347" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="thread-grad-2" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#FFE0B0" stop-opacity="0.9"/>
+      <stop offset="60%"  stop-color="#FFB347" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#FFB347" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="thread-grad-3" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#FFE0B0" stop-opacity="0.75"/>
+      <stop offset="60%"  stop-color="#FFB347" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#FFB347" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Threads are now <path> with quadratic Bezier curves — JS computes the 'd' attr.
+       Two strokes per thread: a thicker glowing core + a thinner bright filament. -->
+  <!-- Each thread = bright continuous filament + thicker blurred glow underneath.
+       Long dashes (lit:gap > 1) so it reads as a flowing light line, not dots. -->
+  <path id="thread-1-glow" d="M0 0" stroke="url(#thread-grad-1)" stroke-width="4"
+        fill="none" filter="url(#glow)" stroke-linecap="round" opacity="0.85"/>
+  <path id="thread-1" d="M0 0" stroke="#FFE0B0" stroke-width="1.3"
+        fill="none" stroke-linecap="round" stroke-dasharray="20 6" opacity="0.95"/>
+
+  <path id="thread-2-glow" d="M0 0" stroke="url(#thread-grad-2)" stroke-width="3"
+        fill="none" filter="url(#glow)" stroke-linecap="round" opacity="0.7"/>
+  <path id="thread-2" d="M0 0" stroke="#FFB347" stroke-width="1"
+        fill="none" stroke-linecap="round" stroke-dasharray="14 5" opacity="0.85"/>
+
+  <path id="thread-3-glow" d="M0 0" stroke="url(#thread-grad-3)" stroke-width="2.2"
+        fill="none" filter="url(#glow)" stroke-linecap="round" opacity="0.5"/>
+  <path id="thread-3" d="M0 0" stroke="#FFB347" stroke-width="0.8"
+        fill="none" stroke-linecap="round" stroke-dasharray="10 6" opacity="0.7"/>
+
+  <circle id="origin-1" cx="0" cy="0" r="18" fill="url(#origin-glow)" opacity="0"/>
+  <circle id="origin-2" cx="0" cy="0" r="14" fill="url(#origin-glow)" opacity="0"/>
+  <circle id="origin-3" cx="0" cy="0" r="11" fill="url(#origin-glow)" opacity="0"/>
+</svg>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="#hero">Home</a>
+  <div class="nav-dot"></div>
+  <a href="#value">What's inside</a>
+  <div class="nav-dot"></div>
+  <a href="#resources">Resources</a>
+  <div class="nav-dot"></div>
+  <a href="#writing">Reads</a>
+  <div class="nav-dot"></div>
+  <a href="#email-capture">Subscribe</a>
+</nav>
+
+<!-- All sections wrapped so 3D perspective applies only to them, not the
+     fixed-positioned spaceman/threads above. -->
+<main class="scenes">
+
+<!-- ── 1. HERO ── -->
+<section id="hero" data-screen-label="01 Hero">
+
+  <video id="hero-video" autoplay muted loop playsinline>
+    <source src="hero-loop.mp4" type="video/mp4">
+  </video>
+
+  <div class="hero-content reveal">
+    <p class="hero-eyebrow">Taelo Kim · Seoul · 2026</p>
+    <h1 class="hero-headline">Pull the<br><em>thread.</em></h1>
+    <p class="hero-sub">Operator playbooks, prompt packs, and frameworks for builders shipping AI products in Asia. Free. Direct. No cadence.</p>
+    <a href="#resources" class="hero-cta">See what's inside</a>
+  </div>
+
+  <span class="scroll-hint">↓ scroll</span>
+</section>
+
+<!-- ── 2. VALUE — What's inside ── -->
+<section id="value" data-screen-label="02 What's inside">
+  <div class="reveal">
+    <div class="section-label">What's inside</div>
+    <p class="intro-para">Three things you'll get if you stay. No filler.</p>
+    <div class="value-row">
+      <div class="value-item">
+        <div class="value-label">Prompt packs.</div>
+        <p class="value-desc">The exact prompts I use to ship faster. Banned defaults sheets, reference dictionaries, voice specs, design tokens. Steal them.</p>
+      </div>
+      <div class="value-item">
+        <div class="value-label">Operator playbooks.</div>
+        <p class="value-desc">How to enter Korea and Southeast Asia. What to validate. The failure modes I've seen across 150+ pitches and my own shipped products.</p>
+      </div>
+      <div class="value-item">
+        <div class="value-label">Build logs.</div>
+        <p class="value-desc">Real numbers from real products. What's working, what isn't, what I'd do differently. No theory.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 3. RESOURCES ── -->
+<section id="resources" data-screen-label="03 Resources">
+  <div class="reveal">
+    <div class="section-label">Resources</div>
+
+    <div class="resource-featured">
+      <div class="resource-featured-tag">Featured — Free download</div>
+      <div class="resource-featured-title">The Claude Design Overrides Pack</div>
+      <p class="resource-featured-desc">The seven overrides I used to build this site so it doesn't look like every other AI tutorial output. Banned defaults sheet, reference dictionary template, voice spec, design tokens starter — every prompt I actually used. Drop into your own Claude Design session.</p>
+      <a href="#email-capture" class="resource-link">Get it free</a>
+    </div>
+
+    <div class="resource-grid">
+      <div class="resource-card">
+        <div class="resource-card-tag">Framework</div>
+        <div class="resource-card-title">KR / SEA Market Entry Checklist</div>
+        <p class="resource-card-desc">What to validate before launching across Korea, Japan, Vietnam, Indonesia. The questions I wish someone had handed me.</p>
+      </div>
+      <div class="resource-card">
+        <div class="resource-card-tag">Template</div>
+        <div class="resource-card-title">AI Product Spec Template</div>
+        <p class="resource-card-desc">How I spec products before writing code. The exact doc structure I used for the last five things I shipped.</p>
+      </div>
+      <div class="resource-card">
+        <div class="resource-card-tag">Playbook</div>
+        <div class="resource-card-title">Cross-Border Ops Playbook</div>
+        <p class="resource-card-desc">Logistics, partners, returns, taxes across 6 markets. The unglamorous stuff that decides whether your product survives.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 4. FOR WHO + WHY LISTEN ── -->
+<section id="for-who" data-screen-label="04 For who">
+  <div class="reveal">
+    <div class="section-label">For</div>
+    <p class="intro-para">Builders shipping AI products. Operators running cross-border ecommerce. Anyone who'd rather see real numbers than another AI demo — especially if you're working between Korea, Japan, Southeast Asia, and Western markets.</p>
+
+    <div class="section-label" style="margin-top: var(--space-7);">Why listen</div>
+    <p class="about-text">Reviewed 150+ pitches as a VC. Then crossed the table and shipped products in K-beauty, AI tooling, and ecommerce across Korea, Japan, and Southeast Asia. Everything I write here is something I'm using, not something I think might work.</p>
+  </div>
+</section>
+
+<!-- ── 5. READS ── -->
+<section id="writing" data-screen-label="05 Reads">
+  <div class="reveal">
+    <div class="section-label">Deeper reads</div>
+    <a href="#" class="writing-row">
+      <div class="writing-left">
+        <div class="writing-title">Why most AI products die at distribution, not the model</div>
+        <div class="writing-desc">It's not the model. It's the motion.</div>
+      </div>
+      <div class="writing-date">2026-04-21</div>
+    </a>
+    <a href="#" class="writing-row">
+      <div class="writing-left">
+        <div class="writing-title">What 150 pitch decks taught me about narrative</div>
+        <div class="writing-desc">Pattern recognition from the other side of the table.</div>
+      </div>
+      <div class="writing-date">2026-03-30</div>
+    </a>
+    <a href="#" class="writing-row">
+      <div class="writing-left">
+        <div class="writing-title">Operating cross-border in KR and SEA, plainly</div>
+        <div class="writing-desc">The part no one writes about because it's unglamorous.</div>
+      </div>
+      <div class="writing-date">2026-03-12</div>
+    </a>
+    <a href="#" class="writing-row">
+      <div class="writing-left">
+        <div class="writing-title">How I think about e-commerce at scale</div>
+        <div class="writing-desc">Global logistics is a design problem, not a spreadsheet.</div>
+      </div>
+      <div class="writing-date">2026-02-18</div>
+    </a>
+  </div>
+</section>
+
+<!-- ── 6. EMAIL CAPTURE ── -->
+<div id="email-capture" data-screen-label="06 Subscribe">
+  <div class="reveal">
+    <div class="section-label" style="color: var(--signal); --dust: var(--signal);">The list</div>
+    <h2 class="email-headline">Get new resources first.</h2>
+    <p class="email-sub">Free packs and playbooks, sent only when something's actually ready. No weekly newsletter, no hype, no upsells. Unsubscribe in one click.</p>
+    <form class="email-form" onsubmit="return false;">
+      <input class="email-input" type="email" placeholder="your@email.com" autocomplete="email">
+      <button class="email-btn" type="submit">Subscribe</button>
+    </form>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer data-screen-label="08 Footer">
+  <span class="foot-copy">© 2026 Taelo Kim</span>
+  <div class="foot-links">
+    <a href="#">YouTube</a>
+    <a href="#">X</a>
+    <a href="#">Email</a>
+  </div>
+</footer>
+
+</main>
+<!-- /.scenes -->
+
+<div id="__debug">init</div>
+<script>
+  // ── DEBUG OVERLAY ──
+  const __dbg = document.getElementById('__debug');
+  function __updateDebug() {
+    const hero = document.getElementById('hero');
+    if (!hero || !__dbg) return;
+    const r = hero.getBoundingClientRect();
+    const cs = getComputedStyle(hero);
+    __dbg.textContent =
+      `viewport ${window.innerWidth}×${window.innerHeight}  |  ` +
+      `hero ${Math.round(r.width)}×${Math.round(r.height)}  |  ` +
+      `max-w ${cs.maxWidth}  pad ${cs.padding}`;
+  }
+  window.addEventListener('resize', __updateDebug);
+  setTimeout(__updateDebug, 100);
+
+  // ── SCROLL REVEAL ──
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Fire hero reveal immediately
+  document.querySelector('#hero .reveal').classList.add('visible');
+
+  // ── THREAD MECHANIC ──
+  // Spaceman is flipped (scaleX(-1)) so his outstretched arm points TOWARD content.
+  // Hands therefore appear on the LEFT side of his bounding box.
+  // - Thread endpoints lerp smoothly toward target (no snap between sections).
+  // - Spaceman receives a scroll-velocity-driven tug: pulls on scroll-down, recoils on scroll-up.
+  // - Active section gets .active-section class (drives glow + top bar from CSS).
+  // Threads are now PAIRS of paths: a wide blurred "glow" + a sharp filament on top.
+  const t1   = document.getElementById('thread-1');
+  const t1g  = document.getElementById('thread-1-glow');
+  const t2   = document.getElementById('thread-2');
+  const t2g  = document.getElementById('thread-2-glow');
+  const t3   = document.getElementById('thread-3');
+  const t3g  = document.getElementById('thread-3-glow');
+  const o1 = document.getElementById('origin-1');
+  const o2 = document.getElementById('origin-2');
+  const o3 = document.getElementById('origin-3');
+  const g1 = document.getElementById('thread-grad-1');
+  const g2 = document.getElementById('thread-grad-2');
+  const g3 = document.getElementById('thread-grad-3');
+  const spaceman = document.getElementById('spaceman');
+
+  // Quadratic-Bezier path from (sx,sy) to (ex,ey) with a perpendicular bow.
+  // curvature = 0 → straight line. 0.15 → gentle Interstellar-style arc.
+  function curvedPath(sx, sy, ex, ey, curvature) {
+    const dx = ex - sx, dy = ey - sy;
+    const dist = Math.hypot(dx, dy) || 1;
+    const px = -dy / dist;  // perpendicular unit vector
+    const py =  dx / dist;
+    const off = dist * curvature;
+    const cx = (sx + ex) / 2 + px * off;
+    const cy = (sy + ey) / 2 + py * off;
+    return `M ${sx.toFixed(1)} ${sy.toFixed(1)} Q ${cx.toFixed(1)} ${cy.toFixed(1)} ${ex.toFixed(1)} ${ey.toFixed(1)}`;
+  }
+  const setPathPair = (mainPath, glowPath, sx, sy, ex, ey, curvature) => {
+    const d = curvedPath(sx, sy, ex, ey, curvature);
+    mainPath.setAttribute('d', d);
+    glowPath.setAttribute('d', d);
+  };
+  const setGrad = (g, x1, y1, x2, y2) => {
+    g.setAttribute('x1', x1); g.setAttribute('y1', y1);
+    g.setAttribute('x2', x2); g.setAttribute('y2', y2);
+  };
+  const setOrigin = (c, cx, cy, opacity) => {
+    c.setAttribute('cx', cx); c.setAttribute('cy', cy);
+    c.setAttribute('opacity', opacity);
+  };
+
+  // Smooth scroll-progress sizing for the spaceman. The change is now gentler in
+  // absolute terms (less position movement) AND spread over a longer scroll zone,
+  // so it never feels snappy even on fast wheel pushes.
+  const heroEl = document.getElementById('hero');
+  let smoothT = 0;
+  function updateSpacemanLayout() {
+    const vh = window.innerHeight;
+    // Transition zone: 0.15vh → 1.65vh (1.5 viewports of scroll for the full change)
+    const raw = Math.min(Math.max((window.scrollY - vh * 0.15) / (vh * 1.50), 0), 1);
+    // Slower lerp — even buttery-er.
+    smoothT += (raw - smoothT) * 0.05;
+    const t = smoothT;
+
+    const ease = t * t * (3 - 2 * t);  // smoothstep
+
+    // Gentler position change so the spaceman doesn't traverse half the viewport.
+    // Stays right of center vertically; just shrinks and drifts slightly upward.
+    const heightVh  = 62 - (62 - 36) * ease;   // 62vh → 36vh
+    const topPct    = 50 - (50 - 32) * ease;   // 50% → 32% (was 50→11; way less travel)
+    const rightPct  =  4;                       // no horizontal shift
+    const opacity   =  1 - (1 - 0.85) * ease;
+    const yShiftPct = -50 * (1 - ease);
+
+    // Body tilt — leans into the pull at peak. After scaleX(-1), POSITIVE rotation
+    // is visually CCW (head tilts left toward content). Falls back to scroll progress
+    // if the video's currentTime isn't reliable yet.
+    const totalScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+    const scrollProg = Math.min(window.scrollY / totalScroll, 1);
+    let pullProg = scrollProg;
+    if (videoReady && spaceman.duration && spaceman.currentTime > 0) {
+      pullProg = (spaceman.currentTime || 0) / spaceman.duration;
+    }
+    const tiltDeg = Math.sin(pullProg * Math.PI) * 13;
+
+    spaceman.style.height = heightVh + 'vh';
+    spaceman.style.top = topPct + '%';
+    spaceman.style.right = rightPct + '%';
+    spaceman.style.opacity = opacity;
+    spaceman.style.transform =
+      `translateY(${yShiftPct}%) scaleX(-1) rotate(${tiltDeg}deg)`;
+  }
+
+  // Active-section tracking → drives glow band + label glow via CSS
+  const sectionIds = ['hero', 'value', 'resources', 'for-who', 'writing', 'email-capture'];
+  const sectionEls = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+  let activeSection = heroEl;
+  function updateActiveSection() {
+    let best = activeSection;
+    let bestVisible = 0;
+    sectionEls.forEach(el => {
+      const r = el.getBoundingClientRect();
+      const visible = Math.max(0, Math.min(r.bottom, window.innerHeight) - Math.max(r.top, 0));
+      if (visible > bestVisible) { best = el; bestVisible = visible; }
+    });
+    if (best !== activeSection) {
+      sectionEls.forEach(s => s.classList.remove('active-section'));
+      best.classList.add('active-section');
+      activeSection = best;
+    }
+  }
+
+  // Spaceman is now a <video>. Scroll position drives video.currentTime directly:
+  // scroll down → video plays forward (he pulls). Scroll up → video reverses (he releases).
+  // Page scroll mapped 0-1 to video duration 0 → duration.
+  let videoReady = false;
+  spaceman.addEventListener('loadedmetadata', () => {
+    videoReady = true;
+    spaceman.pause();
+    spaceman.currentTime = 0;
+  });
+  // Some browsers need a play attempt before currentTime can be set
+  spaceman.addEventListener('canplay', () => { videoReady = true; });
+
+  // Lerp targets — threads ease toward target instead of snapping on section change
+  const targets = { e1: {x:0,y:0}, e2: {x:0,y:0}, e3: {x:0,y:0} };
+  const current = { e1: {x:0,y:0}, e2: {x:0,y:0}, e3: {x:0,y:0} };
+  const hands   = { h1: {x:0,y:0}, h2: {x:0,y:0}, h3: {x:0,y:0} };
+  let initialized = false;
+  let revealAmount = 0.85;
+
+  function computeHandsAndTargets() {
+    const rect = spaceman.getBoundingClientRect();
+    // Flipped spaceman: hands now visually appear on LEFT side of bounding box.
+    hands.h1.x = rect.left + rect.width * 0.10;  // upper outstretched glove
+    hands.h1.y = rect.top  + rect.height * 0.38;
+    hands.h2.x = rect.left + rect.width * 0.16;  // lower reaching glove
+    hands.h2.y = rect.top  + rect.height * 0.52;
+    hands.h3.x = rect.left + rect.width * 0.26;  // chest/forearm
+    hands.h3.y = rect.top  + rect.height * 0.44;
+
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+
+    if (activeSection === heroEl) {
+      // Hero: threads extend left+down as user scrolls within hero
+      const scrollPct = Math.min(window.scrollY / vh, 1);
+      const progress = Math.min(scrollPct * 3.5, 1);
+      revealAmount = Math.min(scrollPct * 6 + 0.15, 1);
+      targets.e1.x = hands.h1.x - vw * 0.30 * progress;
+      targets.e1.y = hands.h1.y + vh * 0.55 * progress;
+      targets.e2.x = hands.h2.x - vw * 0.22 * progress;
+      targets.e2.y = hands.h2.y + vh * 0.68 * progress;
+      targets.e3.x = hands.h3.x - vw * 0.18 * progress;
+      targets.e3.y = hands.h3.y + vh * 0.45 * progress;
+    } else {
+      // Other sections: threads converge on active section's content
+      const aRect = activeSection.getBoundingClientRect();
+      const visTop = Math.max(aRect.top, 0);
+      const visBottom = Math.min(aRect.bottom, vh);
+      const sectionLeft = Math.max(aRect.left + 40, vw * 0.05);
+      targets.e1.x = sectionLeft + 80;
+      targets.e1.y = visTop + Math.min(140, (visBottom - visTop) * 0.20);
+      targets.e2.x = sectionLeft;
+      targets.e2.y = visTop + (visBottom - visTop) * 0.45;
+      targets.e3.x = sectionLeft + 50;
+      targets.e3.y = visTop + (visBottom - visTop) * 0.78;
+      revealAmount = 0.85;
+    }
+  }
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const SMOOTH = reduceMotion ? 1 : 0.10;
+  let dashOffset = 0;
+
+  function frame() {
+    updateSpacemanLayout();
+    updateActiveSection();
+    computeHandsAndTargets();
+
+    if (!initialized) {
+      Object.assign(current.e1, targets.e1);
+      Object.assign(current.e2, targets.e2);
+      Object.assign(current.e3, targets.e3);
+      initialized = true;
+    }
+    current.e1.x += (targets.e1.x - current.e1.x) * SMOOTH;
+    current.e1.y += (targets.e1.y - current.e1.y) * SMOOTH;
+    current.e2.x += (targets.e2.x - current.e2.x) * SMOOTH;
+    current.e2.y += (targets.e2.y - current.e2.y) * SMOOTH;
+    current.e3.x += (targets.e3.x - current.e3.x) * SMOOTH;
+    current.e3.y += (targets.e3.y - current.e3.y) * SMOOTH;
+
+    // Each thread = pair of paths (filament + glow), drawn as a quadratic Bezier
+    // with a small perpendicular bow. Three different curvatures so threads
+    // fan out organically instead of looking parallel.
+    setPathPair(t1, t1g, hands.h1.x, hands.h1.y, current.e1.x, current.e1.y,  0.24);
+    setPathPair(t2, t2g, hands.h2.x, hands.h2.y, current.e2.x, current.e2.y, -0.18);
+    setPathPair(t3, t3g, hands.h3.x, hands.h3.y, current.e3.x, current.e3.y,  0.34);
+
+    setGrad(g1, hands.h1.x, hands.h1.y, current.e1.x, current.e1.y);
+    setGrad(g2, hands.h2.x, hands.h2.y, current.e2.x, current.e2.y);
+    setGrad(g3, hands.h3.x, hands.h3.y, current.e3.x, current.e3.y);
+
+    setOrigin(o1, hands.h1.x, hands.h1.y, revealAmount * 0.95);
+    setOrigin(o2, hands.h2.x, hands.h2.y, revealAmount * 0.80);
+    setOrigin(o3, hands.h3.x, hands.h3.y, revealAmount * 0.60);
+
+    // Spaceman: scrub video to match scroll position.
+    // Down → forward (pulls). Up → reverse (releases). Lerped so it doesn't jump.
+    if (videoReady && spaceman.duration) {
+      const totalScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+      const scrollPct = Math.max(0, Math.min(window.scrollY / totalScroll, 1));
+      const targetTime = scrollPct * spaceman.duration;
+      const diff = targetTime - spaceman.currentTime;
+      // Only seek if the diff is meaningful — avoids constant micro-seeks that cause stutter
+      if (Math.abs(diff) > 0.02) {
+        spaceman.currentTime = spaceman.currentTime + diff * 0.20;
+      }
+    }
+
+    // Outward dash flow (skip if reduce-motion)
+    if (!reduceMotion) {
+      dashOffset = (dashOffset - 0.6) % 10000;
+      t1.style.strokeDashoffset = dashOffset;
+      t2.style.strokeDashoffset = dashOffset * 0.7;
+      t3.style.strokeDashoffset = dashOffset * 1.3;
+    }
+
+    requestAnimationFrame(frame);
+  }
+  frame();
+</script>
+
+</body>
+</html>

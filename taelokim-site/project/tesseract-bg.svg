@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice">
+  <!-- Tile of irregular bookshelves. Two rows, ~37 books per row.
+       Warm earth-toned spines. Heavily shadowed; the page-level blend modes
+       do the rest of the work to make this read as "books glimpsed in dim light." -->
+  <rect width="600" height="400" fill="#0a0807"/>
+
+  <!-- ── Shelf row 1 (y = 0 → 195) ── -->
+  <g>
+    <rect x="0"   y="0" width="14" height="195" fill="#2a1d14"/>
+    <rect x="14"  y="0" width="22" height="195" fill="#3a2818"/>
+    <rect x="36"  y="0" width="12" height="195" fill="#1c1308"/>
+    <rect x="48"  y="0" width="18" height="195" fill="#4a3520"/>
+    <rect x="66"  y="0" width="10" height="195" fill="#231811"/>
+    <rect x="76"  y="0" width="24" height="195" fill="#3d2a18"/>
+    <rect x="100" y="0" width="16" height="195" fill="#1f1610"/>
+    <rect x="116" y="0" width="14" height="195" fill="#3a1814"/>
+    <rect x="130" y="0" width="20" height="195" fill="#34231a"/>
+    <rect x="150" y="0" width="12" height="195" fill="#28190f"/>
+    <rect x="162" y="0" width="18" height="195" fill="#3f2a1c"/>
+    <rect x="180" y="0" width="14" height="195" fill="#1a110a"/>
+    <rect x="194" y="0" width="22" height="195" fill="#2e1f14"/>
+    <rect x="216" y="0" width="10" height="195" fill="#42301f"/>
+    <rect x="226" y="0" width="16" height="195" fill="#251810"/>
+    <rect x="242" y="0" width="20" height="195" fill="#382518"/>
+    <rect x="262" y="0" width="14" height="195" fill="#1d130c"/>
+    <rect x="276" y="0" width="12" height="195" fill="#1a2028"/>
+    <rect x="288" y="0" width="18" height="195" fill="#2a1c12"/>
+    <rect x="306" y="0" width="24" height="195" fill="#4a3422"/>
+    <rect x="330" y="0" width="10" height="195" fill="#1c130a"/>
+    <rect x="340" y="0" width="16" height="195" fill="#33221a"/>
+    <rect x="356" y="0" width="22" height="195" fill="#221610"/>
+    <rect x="378" y="0" width="14" height="195" fill="#3d2a1c"/>
+    <rect x="392" y="0" width="10" height="195" fill="#1d130c"/>
+    <rect x="402" y="0" width="20" height="195" fill="#2c1d14"/>
+    <rect x="422" y="0" width="16" height="195" fill="#3a2818"/>
+    <rect x="438" y="0" width="12" height="195" fill="#1c130b"/>
+    <rect x="450" y="0" width="22" height="195" fill="#34241a"/>
+    <rect x="472" y="0" width="14" height="195" fill="#28190f"/>
+    <rect x="486" y="0" width="18" height="195" fill="#3f2c1e"/>
+    <rect x="504" y="0" width="12" height="195" fill="#4d2418"/>
+    <rect x="516" y="0" width="24" height="195" fill="#2e1f14"/>
+    <rect x="540" y="0" width="10" height="195" fill="#1a110a"/>
+    <rect x="550" y="0" width="16" height="195" fill="#42301f"/>
+    <rect x="566" y="0" width="14" height="195" fill="#251810"/>
+    <rect x="580" y="0" width="20" height="195" fill="#382518"/>
+  </g>
+
+  <!-- Shelf separator: dark band + thin warm highlight on top (light catching shelf edge) -->
+  <rect x="0" y="195" width="600" height="5" fill="#050302"/>
+  <rect x="0" y="195" width="600" height="1" fill="#5a3f24" opacity="0.35"/>
+
+  <!-- ── Shelf row 2 (y = 200 → 395) ── -->
+  <g>
+    <rect x="0"   y="200" width="18" height="195" fill="#3d2a18"/>
+    <rect x="18"  y="200" width="12" height="195" fill="#1c1308"/>
+    <rect x="30"  y="200" width="16" height="195" fill="#34231a"/>
+    <rect x="46"  y="200" width="22" height="195" fill="#2a1d14"/>
+    <rect x="68"  y="200" width="10" height="195" fill="#1a110a"/>
+    <rect x="78"  y="200" width="20" height="195" fill="#4a3520"/>
+    <rect x="98"  y="200" width="14" height="195" fill="#231811"/>
+    <rect x="112" y="200" width="24" height="195" fill="#3a2818"/>
+    <rect x="136" y="200" width="12" height="195" fill="#1f1610"/>
+    <rect x="148" y="200" width="18" height="195" fill="#3d3528"/>
+    <rect x="166" y="200" width="14" height="195" fill="#28190f"/>
+    <rect x="180" y="200" width="22" height="195" fill="#3f2a1c"/>
+    <rect x="202" y="200" width="10" height="195" fill="#1c130a"/>
+    <rect x="212" y="200" width="16" height="195" fill="#2e1f14"/>
+    <rect x="228" y="200" width="20" height="195" fill="#42301f"/>
+    <rect x="248" y="200" width="14" height="195" fill="#251810"/>
+    <rect x="262" y="200" width="12" height="195" fill="#382518"/>
+    <rect x="274" y="200" width="18" height="195" fill="#1d130c"/>
+    <rect x="292" y="200" width="22" height="195" fill="#2a1c12"/>
+    <rect x="314" y="200" width="14" height="195" fill="#4a3422"/>
+    <rect x="328" y="200" width="10" height="195" fill="#1c130a"/>
+    <rect x="338" y="200" width="20" height="195" fill="#33221a"/>
+    <rect x="358" y="200" width="16" height="195" fill="#221610"/>
+    <rect x="374" y="200" width="14" height="195" fill="#3d2a1c"/>
+    <rect x="388" y="200" width="22" height="195" fill="#1d130c"/>
+    <rect x="410" y="200" width="12" height="195" fill="#2c1d14"/>
+    <rect x="422" y="200" width="18" height="195" fill="#3a2818"/>
+    <rect x="440" y="200" width="10" height="195" fill="#14181f"/>
+    <rect x="450" y="200" width="24" height="195" fill="#34241a"/>
+    <rect x="474" y="200" width="14" height="195" fill="#28190f"/>
+    <rect x="488" y="200" width="12" height="195" fill="#3f2c1e"/>
+    <rect x="500" y="200" width="20" height="195" fill="#2e1f14"/>
+    <rect x="520" y="200" width="10" height="195" fill="#1a110a"/>
+    <rect x="530" y="200" width="18" height="195" fill="#42301f"/>
+    <rect x="548" y="200" width="16" height="195" fill="#251810"/>
+    <rect x="564" y="200" width="14" height="195" fill="#382518"/>
+    <rect x="578" y="200" width="22" height="195" fill="#2a1d14"/>
+  </g>
+
+  <!-- Shelf separator (bottom of tile) -->
+  <rect x="0" y="395" width="600" height="5" fill="#050302"/>
+  <rect x="0" y="395" width="600" height="1" fill="#5a3f24" opacity="0.35"/>
+
+  <!-- Top warm highlight on row 1 (light grazing the top of the books) -->
+  <rect x="0" y="0" width="600" height="1" fill="#6b4a2c" opacity="0.4"/>
+</svg>

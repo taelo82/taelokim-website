@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 2400" style="background:#050510" font-family="monospace">
+  
+  <rect x="40" y="40" width="720" height="540" fill="none" stroke="#FFB347" stroke-width="2"></rect>
+  <text x="60" y="65" fill="#FFB347" font-size="11">PILL NAV: HOME · BUILDS · RESOURCES · WRITING · CONTACT</text>
+  <text x="60" y="95" fill="#E8E4DC" font-size="16" font-weight="bold">1. HERO (full viewport)</text>
+  <text x="60" y="115" fill="#6B5B4F" font-size="10">video bg = hero-loop.mp4 (the warm light shaft)</text>
+
+  
+  <rect x="70" y="220" width="320" height="180" fill="none" stroke="#E8E4DC" stroke-width="1" stroke-dasharray="4,3"></rect>
+  <text x="85" y="245" fill="#E8E4DC" font-size="11">HERO TEXT (left side, void area)</text>
+  <text x="85" y="290" fill="#E8E4DC" font-size="22" font-weight="bold">[ Headline ]</text>
+  <text x="85" y="310" fill="#6B5B4F" font-size="9">display serif, 64–120px, max 8 words</text>
+  <text x="85" y="345" fill="#E8E4DC" font-size="11">[ Sub — one sentence, max 14 words ]</text>
+  <text x="85" y="385" fill="#FFB347" font-size="13">→ See the resources</text>
+
+  
+  <ellipse cx="580" cy="320" rx="55" ry="80" fill="none" stroke="#FFB347" stroke-width="2"></ellipse>
+  <text x="555" y="320" fill="#E8E4DC" font-size="10">spaceman</text>
+  <text x="555" y="335" fill="#6B5B4F" font-size="9">PNG, ~60vh</text>
+
+  
+  <path d="M 540 390 Q 400 480 200 580" fill="none" stroke="#FFB347" stroke-width="1.5" stroke-dasharray="3,4"></path>
+  <path d="M 590 400 Q 580 520 480 580" fill="none" stroke="#FFB347" stroke-width="1.5" stroke-dasharray="3,4"></path>
+  <path d="M 620 395 Q 700 500 720 580" fill="none" stroke="#FFB347" stroke-width="1.5" stroke-dasharray="3,4"></path>
+  <text x="60" y="555" fill="#FFB347" font-size="10">↓ scroll: spaceman pulls threads → next section reveals</text>
+
+  
+  <rect x="40" y="620" width="720" height="180" fill="none" stroke="#E8E4DC" stroke-width="2"></rect>
+  <text x="60" y="645" fill="#E8E4DC" font-size="16" font-weight="bold">2. INTRO STRIP</text>
+  <text x="60" y="685" fill="#E8E4DC" font-size="11">1 paragraph: who is Taelo (operator + VC + Korea/SEA)</text>
+  <line x1="60" y1="730" x2="740" y2="730" stroke="#3A3A4A"></line>
+  <text x="80" y="765" fill="#FFB347" font-size="20">150+</text>
+  <text x="80" y="785" fill="#6B5B4F" font-size="10">pitches reviewed</text>
+  <text x="320" y="765" fill="#FFB347" font-size="20">5</text>
+  <text x="320" y="785" fill="#6B5B4F" font-size="10">products shipped</text>
+  <text x="560" y="765" fill="#FFB347" font-size="20">KR/SEA</text>
+  <text x="560" y="785" fill="#6B5B4F" font-size="10">cross-border ops</text>
+
+  
+  <rect x="40" y="840" width="720" height="380" fill="none" stroke="#E8E4DC" stroke-width="2"></rect>
+  <text x="60" y="865" fill="#E8E4DC" font-size="16" font-weight="bold">3. RESOURCES (lead magnet)</text>
+
+  
+  <rect x="60" y="900" width="680" height="120" fill="none" stroke="#FFB347" stroke-width="2"></rect>
+  <text x="80" y="930" fill="#FFB347" font-size="13" font-weight="bold">FEATURED — Claude Design Overrides Pack</text>
+  <text x="80" y="955" fill="#E8E4DC" font-size="11">7 overrides, banned defaults sheet, tokens.css starter, voice spec</text>
+  <text x="80" y="985" fill="#FFB347" font-size="11">Download free →</text>
+
+  
+  <rect x="60" y="1050" width="220" height="140" fill="none" stroke="#E8E4DC" stroke-width="1"></rect>
+  <text x="80" y="1075" fill="#E8E4DC" font-size="11">Resource 2</text>
+  <rect x="290" y="1050" width="220" height="140" fill="none" stroke="#E8E4DC" stroke-width="1"></rect>
+  <text x="310" y="1075" fill="#E8E4DC" font-size="11">Resource 3</text>
+  <rect x="520" y="1050" width="220" height="140" fill="none" stroke="#E8E4DC" stroke-width="1"></rect>
+  <text x="540" y="1075" fill="#E8E4DC" font-size="11">Resource 4</text>
+  <text x="60" y="1215" fill="#6B5B4F" font-size="9">CARDS: hard edges, no shadows, no rounded corners — typographic only</text>
+
+  
+  <rect x="40" y="1260" width="720" height="320" fill="none" stroke="#E8E4DC" stroke-width="2"></rect>
+  <text x="60" y="1285" fill="#E8E4DC" font-size="16" font-weight="bold">4. BUILDS (in public)</text>
+  <text x="60" y="1310" fill="#6B5B4F" font-size="10">list: status (working / paused / shipped) · real metrics · linked write-up</text>
+  <line x1="60" y1="1335" x2="740" y2="1335" stroke="#3A3A4A"></line>
+  <text x="60" y="1360" fill="#E8E4DC" font-size="11">[Build name]</text>
+  <text x="500" y="1360" fill="#FFB347" font-size="10">working</text>
+  <text x="600" y="1360" fill="#6B5B4F" font-size="10">$X MRR · 2026-04</text>
+  <line x1="60" y1="1385" x2="740" y2="1385" stroke="#3A3A4A"></line>
+  <text x="60" y="1410" fill="#E8E4DC" font-size="11">[Build name]</text>
+  <text x="500" y="1410" fill="#FFB347" font-size="10">working</text>
+  <text x="600" y="1410" fill="#6B5B4F" font-size="10">XK users · 2026-03</text>
+  <line x1="60" y1="1435" x2="740" y2="1435" stroke="#3A3A4A"></line>
+  <text x="60" y="1460" fill="#E8E4DC" font-size="11">[Build name]</text>
+  <text x="500" y="1460" fill="#6B5B4F" font-size="10">paused</text>
+  <line x1="60" y1="1485" x2="740" y2="1485" stroke="#3A3A4A"></line>
+  <text x="60" y="1510" fill="#E8E4DC" font-size="11">[Build name]</text>
+  <text x="500" y="1510" fill="#6B5B4F" font-size="10">shipped</text>
+
+  
+  <rect x="40" y="1620" width="720" height="280" fill="none" stroke="#E8E4DC" stroke-width="2"></rect>
+  <text x="60" y="1645" fill="#E8E4DC" font-size="16" font-weight="bold">5. WRITING / NOTES</text>
+  <text x="60" y="1670" fill="#6B5B4F" font-size="10">3–5 entries: title + 1-line description + date. NO featured images.</text>
+  <line x1="60" y1="1695" x2="740" y2="1695" stroke="#3A3A4A"></line>
+  <text x="60" y="1720" fill="#E8E4DC" font-size="12">[essay title]</text>
+  <text x="640" y="1720" fill="#6B5B4F" font-size="10">2026-04-21</text>
+  <text x="60" y="1740" fill="#6B5B4F" font-size="10">one-line description, neutral and quiet</text>
+  <line x1="60" y1="1765" x2="740" y2="1765" stroke="#3A3A4A"></line>
+  <text x="60" y="1790" fill="#E8E4DC" font-size="12">[essay title]</text>
+  <text x="640" y="1790" fill="#6B5B4F" font-size="10">2026-03-30</text>
+  <line x1="60" y1="1815" x2="740" y2="1815" stroke="#3A3A4A"></line>
+  <text x="60" y="1840" fill="#E8E4DC" font-size="12">[essay title]</text>
+  <text x="640" y="1840" fill="#6B5B4F" font-size="10">2026-03-12</text>
+
+  
+  <rect x="40" y="1940" width="720" height="160" fill="none" stroke="#E8E4DC" stroke-width="2"></rect>
+  <text x="60" y="1965" fill="#E8E4DC" font-size="16" font-weight="bold">6. ABOUT (compressed)</text>
+  <text x="60" y="2000" fill="#E8E4DC" font-size="11">1 paragraph, third-person feel. VC + operator + KR/SEA framing.</text>
+  <text x="60" y="2025" fill="#6B5B4F" font-size="10">Optional small headshot or no photo at all.</text>
+
+  
+  <rect x="40" y="2140" width="720" height="120" fill="none" stroke="#00C2FF" stroke-width="2"></rect>
+  <text x="60" y="2165" fill="#00C2FF" font-size="16" font-weight="bold">7. EMAIL CAPTURE</text>
+  <text x="60" y="2185" fill="#6B5B4F" font-size="9">↑ ONLY place #00C2FF appears on the entire site</text>
+  <text x="60" y="2215" fill="#E8E4DC" font-size="14">Get new resources first.</text>
+  <rect x="60" y="2230" width="450" height="22" fill="none" stroke="#E8E4DC" stroke-width="1"></rect>
+  <text x="70" y="2246" fill="#6B5B4F" font-size="10">[ email ]</text>
+  <rect x="520" y="2230" width="100" height="22" fill="#00C2FF"></rect>
+  <text x="545" y="2246" fill="#050510" font-size="10">subscribe</text>
+
+  
+  <rect x="40" y="2300" width="720" height="80" fill="none" stroke="#6B5B4F" stroke-width="1"></rect>
+  <text x="60" y="2325" fill="#6B5B4F" font-size="14" font-weight="bold">8. FOOTER (quiet)</text>
+  <text x="60" y="2350" fill="#6B5B4F" font-size="10">YouTube · Email · X · © 2026 Taelo Kim</text>
+</svg>

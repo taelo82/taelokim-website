@@ -1,0 +1,12 @@
+# Track only the two project folders. Everything else in this dir is local scratch.
+/*
+!/.gitignore
+!/taelokim-site/
+!/taelo-content-system/
+
+# Common excludes inside tracked folders
+.DS_Store
+*.log
+node_modules/
+.env
+.env.local
