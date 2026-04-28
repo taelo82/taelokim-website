@@ -134,80 +134,124 @@
   .shelf__inner {
     width: 100%;
     height: 100%;
-    background-image: url("bookshelf-scene.jpg");
     background-repeat: no-repeat;
     background-size: cover;     /* image fills the fragment; bg-position chooses the crop */
     transform-origin: 0% 50%;
-    transform: rotateY(-6deg);  /* subtle — image has its own perspective baked in */
-    /* THE KEY CHANGE: screen blend so only the bright features of the photo
-       (candles, glowing book, moonlit window) lift the void color. The dark
-       wood and shadow disappear entirely — the fragment stops reading as a
-       clipped rectangle and starts reading as glow features floating in the
-       dark, with the architecture only hinted at. */
+    transform: rotateY(-6deg);  /* subtle — images have their own perspective baked in */
+    /* Screen blend so only the bright features of each photo (candles, glowing
+       book, portal glow, moonlit window) lift the void color. Dark wood/shadow
+       disappear entirely — fragments stop reading as rectangles, start reading
+       as glow constellations floating in the dark. */
     mix-blend-mode: screen;
-    /* Wide ellipse with long, gentle falloff — no visible boundary, just a
-       dissolving glow. Inner solid for a smaller fraction of the area; the
-       outer half fades smoothly to nothing. */
-    -webkit-mask-image: radial-gradient(
-      ellipse 110% 95% at 24% 50%,
-      black 0%,
-      black 22%,
-      rgba(0, 0, 0, 0.85) 50%,
-      rgba(0, 0, 0, 0.45) 75%,
-      rgba(0, 0, 0, 0.12) 92%,
-      transparent 100%
-    );
-            mask-image: radial-gradient(
-      ellipse 110% 95% at 24% 50%,
-      black 0%,
-      black 22%,
-      rgba(0, 0, 0, 0.85) 50%,
-      rgba(0, 0, 0, 0.45) 75%,
-      rgba(0, 0, 0, 0.12) 92%,
-      transparent 100%
-    );
-    /* Crank the highlights — with screen blend, brighter source = stronger
-       glow over the void. Saturation up so candles read warm, window cool. */
+    /* Crank the highlights so candles read warm, portal glow reads electric,
+       window glow reads cool over the void. Filter chain: SVG turbulence first
+       (warps the edge organically into torn-paper strands), then color tweaks. */
     opacity: 0.95;
-    filter: brightness(1.18) contrast(1.06) saturate(1.18);
+    filter: url(#dissolve) brightness(1.20) contrast(1.06) saturate(1.20);
+    /* Default mask — overridden per fragment below for unique shapes. */
+    -webkit-mask-image: radial-gradient(ellipse 110% 95% at 24% 50%,
+      black 0%, black 22%, rgba(0,0,0,0.85) 50%,
+      rgba(0,0,0,0.45) 75%, rgba(0,0,0,0.12) 92%, transparent 100%);
+            mask-image: radial-gradient(ellipse 110% 95% at 24% 50%,
+      black 0%, black 22%, rgba(0,0,0,0.85) 50%,
+      rgba(0,0,0,0.45) 75%, rgba(0,0,0,0.12) 92%, transparent 100%);
   }
 
-  /* Per-fragment crops + sizes. Bigger across the board (320–460 wide vs
-     170–220 before, 640–880 tall vs 380–540). Each crop chosen for a
-     different glow feature so scrolling reveals a different mood:
-       1. moonlit window + stairs (cool blue glow, upper-left of source)
-       2. glowing book (center, the hero feature)
-       3. wide center crop with the book + book glow bleeding right
-       4. candles (warm right side)
-       5. far right with deep candle warmth + zodiac wheel hint */
-  .shelf--1 { top: 95vh;   width: 380px; height: 720px; animation-delay: 0s; }
+  /* ── PER-FRAGMENT ART DIRECTION ──
+     Each fragment uses a DIFFERENT image (different mood/glow feature) AND
+     a DIFFERENT mask shape (different organic blob made by stacking 3-4
+     radial gradients). Goal: no two fragments look alike, none read as a
+     rectangle. The SVG #dissolve filter (applied via .shelf__inner filter
+     chain) warps the resulting edges into ragged torn-paper strands. */
+
+  /* Fragment 1: PORTAL ARCH — tall vertical with arched top. Uses the
+     ladder + glowing-doorway image. Shape: tall ellipse + extra bulb at
+     bottom-left for an organic asymmetric portal silhouette. */
+  .shelf--1 { top: 95vh;   width: 400px; height: 760px; animation-delay: 0s; }
   .shelf--1 .shelf__inner {
-    background-position: 0% center;
+    background-image: url("bookshelf-portal-arch.jpg");
+    background-position: 50% center;
     transform: rotateY(-5deg);
+    -webkit-mask-image:
+      radial-gradient(ellipse 65% 92% at 32% 48%, black 0%, black 22%, rgba(0,0,0,0.65) 60%, transparent 95%),
+      radial-gradient(ellipse 38% 32% at 18% 78%, black 30%, transparent 85%),
+      radial-gradient(ellipse 28% 22% at 50% 18%, black 35%, transparent 85%);
+            mask-image:
+      radial-gradient(ellipse 65% 92% at 32% 48%, black 0%, black 22%, rgba(0,0,0,0.65) 60%, transparent 95%),
+      radial-gradient(ellipse 38% 32% at 18% 78%, black 30%, transparent 85%),
+      radial-gradient(ellipse 28% 22% at 50% 18%, black 35%, transparent 85%);
   }
 
-  .shelf--2 { top: 200vh;  width: 320px; height: 640px; animation-delay: -3.5s; }
+  /* Fragment 2: GLOWING BOOK CLOSEUP — square-ish, intimate. The crisp
+     book detail. Shape: round-ish blob with a torn upper-right edge. */
+  .shelf--2 { top: 195vh;  width: 360px; height: 540px; animation-delay: -3.5s; }
   .shelf--2 .shelf__inner {
-    background-position: 32% center;
+    background-image: url("bookshelf-portal-closeup.jpg");
+    background-position: 35% center;
     transform: rotateY(-8deg);
+    -webkit-mask-image:
+      radial-gradient(ellipse 80% 78% at 38% 50%, black 0%, black 28%, rgba(0,0,0,0.7) 65%, transparent 95%),
+      radial-gradient(circle at 75% 28%, black 12%, transparent 38%),
+      radial-gradient(ellipse 30% 22% at 12% 72%, black 25%, transparent 85%);
+            mask-image:
+      radial-gradient(ellipse 80% 78% at 38% 50%, black 0%, black 28%, rgba(0,0,0,0.7) 65%, transparent 95%),
+      radial-gradient(circle at 75% 28%, black 12%, transparent 38%),
+      radial-gradient(ellipse 30% 22% at 12% 72%, black 25%, transparent 85%);
   }
 
-  .shelf--3 { top: 310vh;  width: 460px; height: 880px; animation-delay: -7s; }
+  /* Fragment 3: CATHEDRAL — the wide cinematic one with the tall arched
+     portal. Largest fragment. Shape: tall central pillar with feathered
+     top + bottom (like a column of light dissolving up and down). */
+  .shelf--3 { top: 305vh;  width: 480px; height: 920px; animation-delay: -7s; }
   .shelf--3 .shelf__inner {
+    background-image: url("bookshelf-cathedral.jpg");
     background-position: 50% center;
     transform: rotateY(-4deg);
+    -webkit-mask-image:
+      radial-gradient(ellipse 58% 100% at 36% 50%, black 0%, black 18%, rgba(0,0,0,0.7) 55%, transparent 95%),
+      radial-gradient(ellipse 42% 28% at 22% 22%, black 25%, transparent 80%),
+      radial-gradient(ellipse 38% 28% at 60% 78%, black 25%, transparent 80%);
+            mask-image:
+      radial-gradient(ellipse 58% 100% at 36% 50%, black 0%, black 18%, rgba(0,0,0,0.7) 55%, transparent 95%),
+      radial-gradient(ellipse 42% 28% at 22% 22%, black 25%, transparent 80%),
+      radial-gradient(ellipse 38% 28% at 60% 78%, black 25%, transparent 80%);
   }
 
-  .shelf--4 { top: 430vh;  width: 360px; height: 700px; animation-delay: -10s; }
+  /* Fragment 4: ROSE WINDOW — the rose-window scene with floating book.
+     Shape: torn shard (asymmetric, top-heavy with ragged trailing bottom). */
+  .shelf--4 { top: 425vh;  width: 380px; height: 720px; animation-delay: -10s; }
   .shelf--4 .shelf__inner {
-    background-position: 78% center;
+    background-image: url("bookshelf-rosewindow.jpg");
+    background-position: 35% center;
     transform: rotateY(-7deg);
+    -webkit-mask-image:
+      radial-gradient(ellipse 78% 60% at 38% 38%, black 0%, black 25%, rgba(0,0,0,0.7) 60%, transparent 95%),
+      radial-gradient(ellipse 32% 38% at 25% 72%, black 25%, transparent 80%),
+      radial-gradient(ellipse 22% 18% at 65% 78%, black 30%, transparent 78%),
+      radial-gradient(circle at 60% 12%, black 8%, transparent 32%);
+            mask-image:
+      radial-gradient(ellipse 78% 60% at 38% 38%, black 0%, black 25%, rgba(0,0,0,0.7) 60%, transparent 95%),
+      radial-gradient(ellipse 32% 38% at 25% 72%, black 25%, transparent 80%),
+      radial-gradient(ellipse 22% 18% at 65% 78%, black 30%, transparent 78%),
+      radial-gradient(circle at 60% 12%, black 8%, transparent 32%);
   }
 
-  .shelf--5 { top: 555vh;  width: 400px; height: 780px; animation-delay: -12.5s; }
+  /* Fragment 5: ORIGINAL LIBRARY — the first scene we used (the gothic
+     library with VERITAS ARCANA inscription). Shape: long horizontal
+     drift, like a smear of light across the void. */
+  .shelf--5 { top: 545vh;  width: 440px; height: 700px; animation-delay: -12.5s; }
   .shelf--5 .shelf__inner {
-    background-position: 100% center;
+    background-image: url("bookshelf-scene.jpg");
+    background-position: 55% center;
     transform: rotateY(-5deg);
+    -webkit-mask-image:
+      radial-gradient(ellipse 95% 70% at 32% 52%, black 0%, black 22%, rgba(0,0,0,0.7) 60%, transparent 95%),
+      radial-gradient(ellipse 28% 32% at 70% 28%, black 25%, transparent 78%),
+      radial-gradient(ellipse 22% 25% at 12% 22%, black 25%, transparent 75%);
+            mask-image:
+      radial-gradient(ellipse 95% 70% at 32% 52%, black 0%, black 22%, rgba(0,0,0,0.7) 60%, transparent 95%),
+      radial-gradient(ellipse 28% 32% at 70% 28%, black 25%, transparent 78%),
+      radial-gradient(ellipse 22% 25% at 12% 22%, black 25%, transparent 75%);
   }
 
   /* Slow zero-G drift. Subtle X+Y so fragments feel suspended in space, not
@@ -845,6 +889,15 @@
         0 1 0 0 0
         0 0 1 0 0
         0.299 0.587 0.114 0 -0.05"/>
+    </filter>
+
+    <!-- Bookshelf edge dissolve. feTurbulence makes a fractal-noise field;
+         feDisplacementMap warps the source image's pixels along that field.
+         Low scale (~22px) so the photo barely distorts but the mask edge
+         dissolves into ragged organic strands — torn-paper / portal-tear feel. -->
+    <filter id="dissolve" x="-15%" y="-15%" width="130%" height="130%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.014 0.018" numOctaves="2" seed="7" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="22" xChannelSelector="R" yChannelSelector="G"/>
     </filter>
   </defs>
 </svg>
