@@ -114,10 +114,10 @@
   #shelves {
     position: absolute;
     top: 0; bottom: 0; left: 0;
-    width: 320px;
+    width: 540px;              /* was 320; bigger so fragments can be larger + extend further */
     pointer-events: none;
     z-index: 0;                /* above body bg, below content (sections come later in DOM) */
-    perspective: 1200px;       /* parent perspective so children's rotateY actually renders 3D */
+    perspective: 1400px;       /* parent perspective so children's rotateY renders 3D */
     perspective-origin: 0% 50%;
     overflow: hidden;          /* clip anything that would peek past the right edge */
   }
@@ -136,80 +136,78 @@
     height: 100%;
     background-image: url("bookshelf-scene.jpg");
     background-repeat: no-repeat;
-    /* Image already has baked-in perspective + lighting + glow, so we don't
-       need aggressive 3D rotation. A subtle rotateY just adds the "glimpsed
-       through a dimensional crack" feel without distorting the photo. */
+    background-size: cover;     /* image fills the fragment; bg-position chooses the crop */
     transform-origin: 0% 50%;
-    transform: rotateY(-10deg);
-    /* Soft elliptical mask anchored at the inner-left so the fragment dissolves
-       into void at top, bottom, and right. Each fragment reads as a window
-       into the library, not a rectangular cutout. */
+    transform: rotateY(-6deg);  /* subtle — image has its own perspective baked in */
+    /* THE KEY CHANGE: screen blend so only the bright features of the photo
+       (candles, glowing book, moonlit window) lift the void color. The dark
+       wood and shadow disappear entirely — the fragment stops reading as a
+       clipped rectangle and starts reading as glow features floating in the
+       dark, with the architecture only hinted at. */
+    mix-blend-mode: screen;
+    /* Wide ellipse with long, gentle falloff — no visible boundary, just a
+       dissolving glow. Inner solid for a smaller fraction of the area; the
+       outer half fades smoothly to nothing. */
     -webkit-mask-image: radial-gradient(
-      ellipse 95% 78% at 28% 50%,
+      ellipse 110% 95% at 24% 50%,
       black 0%,
-      black 42%,
-      rgba(0, 0, 0, 0.88) 65%,
-      rgba(0, 0, 0, 0.40) 85%,
+      black 22%,
+      rgba(0, 0, 0, 0.85) 50%,
+      rgba(0, 0, 0, 0.45) 75%,
+      rgba(0, 0, 0, 0.12) 92%,
       transparent 100%
     );
             mask-image: radial-gradient(
-      ellipse 95% 78% at 28% 50%,
+      ellipse 110% 95% at 24% 50%,
       black 0%,
-      black 42%,
-      rgba(0, 0, 0, 0.88) 65%,
-      rgba(0, 0, 0, 0.40) 85%,
+      black 22%,
+      rgba(0, 0, 0, 0.85) 50%,
+      rgba(0, 0, 0, 0.45) 75%,
+      rgba(0, 0, 0, 0.12) 92%,
       transparent 100%
     );
-    /* Keep the image's own glow + warm/cool color story visible. Slight
-       brightness lift since we're masking with deep falloff. */
-    opacity: 0.88;
-    filter: brightness(1.05) contrast(1.05) saturate(1.0);
+    /* Crank the highlights — with screen blend, brighter source = stronger
+       glow over the void. Saturation up so candles read warm, window cool. */
+    opacity: 0.95;
+    filter: brightness(1.18) contrast(1.06) saturate(1.18);
   }
 
-  /* Per-fragment positioning + bg-position-x so each fragment shows a different
-     "crop" of the scene. Distributed deliberately so different glow features
-     appear at different scroll depths:
-       1. left side (moonlit window + stairs cool blue)
-       2. center (the glowing book — main hero feature)
-       3. right side (warm candle glow)
-       4. left-ish (gothic stairs)
-       5. center-right (glowing book bleeding into candles)
-     With background-size: auto 100% on a 1672×941 source, and a fragment
-     ~500px tall, the bg renders at ~888px wide. Position-x offsets up to
-     ~−688px slide across the whole library. */
-  .shelf--1 { top: 110vh;  width: 200px; height: 480px; animation-delay: 0s; }
+  /* Per-fragment crops + sizes. Bigger across the board (320–460 wide vs
+     170–220 before, 640–880 tall vs 380–540). Each crop chosen for a
+     different glow feature so scrolling reveals a different mood:
+       1. moonlit window + stairs (cool blue glow, upper-left of source)
+       2. glowing book (center, the hero feature)
+       3. wide center crop with the book + book glow bleeding right
+       4. candles (warm right side)
+       5. far right with deep candle warmth + zodiac wheel hint */
+  .shelf--1 { top: 95vh;   width: 380px; height: 720px; animation-delay: 0s; }
   .shelf--1 .shelf__inner {
-    background-size: auto 110%;
-    background-position: -40px center;
-    transform: rotateY(-9deg);
+    background-position: 0% center;
+    transform: rotateY(-5deg);
   }
 
-  .shelf--2 { top: 215vh;  width: 170px; height: 420px; animation-delay: -3.5s; }
+  .shelf--2 { top: 200vh;  width: 320px; height: 640px; animation-delay: -3.5s; }
   .shelf--2 .shelf__inner {
-    background-size: auto 105%;
-    background-position: -380px center;
-    transform: rotateY(-12deg);
-  }
-
-  .shelf--3 { top: 325vh;  width: 220px; height: 540px; animation-delay: -7s; }
-  .shelf--3 .shelf__inner {
-    background-size: auto 115%;
-    background-position: -620px center;
+    background-position: 32% center;
     transform: rotateY(-8deg);
   }
 
-  .shelf--4 { top: 445vh;  width: 180px; height: 440px; animation-delay: -10s; }
-  .shelf--4 .shelf__inner {
-    background-size: auto 100%;
-    background-position: -120px center;
-    transform: rotateY(-11deg);
+  .shelf--3 { top: 310vh;  width: 460px; height: 880px; animation-delay: -7s; }
+  .shelf--3 .shelf__inner {
+    background-position: 50% center;
+    transform: rotateY(-4deg);
   }
 
-  .shelf--5 { top: 560vh;  width: 200px; height: 500px; animation-delay: -12.5s; }
+  .shelf--4 { top: 430vh;  width: 360px; height: 700px; animation-delay: -10s; }
+  .shelf--4 .shelf__inner {
+    background-position: 78% center;
+    transform: rotateY(-7deg);
+  }
+
+  .shelf--5 { top: 555vh;  width: 400px; height: 780px; animation-delay: -12.5s; }
   .shelf--5 .shelf__inner {
-    background-size: auto 108%;
-    background-position: -480px center;
-    transform: rotateY(-9deg);
+    background-position: 100% center;
+    transform: rotateY(-5deg);
   }
 
   /* Slow zero-G drift. Subtle X+Y so fragments feel suspended in space, not
