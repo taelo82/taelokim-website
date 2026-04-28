@@ -10,3 +10,9 @@
 node_modules/
 .env
 .env.local
+
+# Claude Code local state — machine-specific paths, recreate per machine
+**/.claude/settings.local.json
+# Local launch configs / scratch servers — per-machine, not synced
+**/.claude/launch.json
+**/.claude/serve.py
