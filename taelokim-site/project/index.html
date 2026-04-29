@@ -330,18 +330,14 @@
     align-items: center;
   }
 
-  /* Tiny debug overlay — remove after layout is confirmed.
-     Tells us actual computed dimensions of #hero vs viewport. */
-  #__debug {
-    position: fixed;
-    bottom: 8px; left: 8px;
-    z-index: 9999;
-    font: 11px/1.2 monospace;
-    color: #FFB347;
-    background: rgba(0,0,0,0.7);
-    padding: 6px 10px;
-    pointer-events: none;
+  /* Email capture — success / error post-submit messages. */
+  .email-success, .email-error {
+    font-size: var(--type-small);
+    margin-top: var(--space-4);
+    line-height: 1.5;
   }
+  .email-success { color: var(--signal); }
+  .email-error   { color: var(--dust); }
 
   #hero-video {
     position: absolute;
@@ -1109,10 +1105,19 @@
     <div class="section-label" style="color: var(--signal); --dust: var(--signal);">The list</div>
     <h2 class="email-headline">Get new resources first.</h2>
     <p class="email-sub">Free packs and playbooks, sent only when something's actually ready. No weekly newsletter, no hype, no upsells. Unsubscribe in one click.</p>
-    <form class="email-form" onsubmit="return false;">
-      <input class="email-input" type="email" placeholder="your@email.com" autocomplete="email">
+    <!-- Formspree: sign up at https://formspree.io, create a new form,
+         then replace REPLACE_WITH_FORMSPREE_ID below with your form ID
+         (the part after /f/ in your endpoint URL). Free tier = 50 / month. -->
+    <form class="email-form" id="email-form"
+          action="https://formspree.io/f/REPLACE_WITH_FORMSPREE_ID"
+          method="POST">
+      <input class="email-input" type="email" name="email" placeholder="your@email.com" autocomplete="email" required>
+      <!-- Honeypot: bots fill it, humans don't see it. Formspree drops these. -->
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
       <button class="email-btn" type="submit">Subscribe</button>
     </form>
+    <p class="email-success" id="email-success" hidden>You're in. New resources hit your inbox first.</p>
+    <p class="email-error" id="email-error" hidden>Something went wrong — try again, or email Taelo directly.</p>
   </div>
 </div>
 
@@ -1129,23 +1134,7 @@
 </main>
 <!-- /.scenes -->
 
-<div id="__debug">init</div>
 <script>
-  // ── DEBUG OVERLAY ──
-  const __dbg = document.getElementById('__debug');
-  function __updateDebug() {
-    const hero = document.getElementById('hero');
-    if (!hero || !__dbg) return;
-    const r = hero.getBoundingClientRect();
-    const cs = getComputedStyle(hero);
-    __dbg.textContent =
-      `viewport ${window.innerWidth}×${window.innerHeight}  |  ` +
-      `hero ${Math.round(r.width)}×${Math.round(r.height)}  |  ` +
-      `max-w ${cs.maxWidth}  pad ${cs.padding}`;
-  }
-  window.addEventListener('resize', __updateDebug);
-  setTimeout(__updateDebug, 100);
-
   // ── SCROLL REVEAL ──
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
@@ -1493,6 +1482,37 @@
     requestAnimationFrame(frame);
   }
   frame();
+
+  // ── EMAIL CAPTURE ──
+  // Posts to Formspree as JSON so the page never reloads. On success the
+  // form is hidden and a confirmation message replaces it. The placeholder
+  // endpoint short-circuits with a friendly error until a real ID is set.
+  const emailForm    = document.getElementById('email-form');
+  const emailSuccess = document.getElementById('email-success');
+  const emailError   = document.getElementById('email-error');
+  emailForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    emailError.hidden = true;
+    const action = emailForm.getAttribute('action') || '';
+    if (action.includes('REPLACE_WITH_FORMSPREE_ID')) {
+      emailError.textContent = 'Email endpoint not configured yet. Sign up at formspree.io and paste your form ID into index.html.';
+      emailError.hidden = false;
+      return;
+    }
+    try {
+      const res = await fetch(action, {
+        method: 'POST',
+        body: new FormData(emailForm),
+        headers: { Accept: 'application/json' }
+      });
+      if (!res.ok) throw new Error('submit failed');
+      emailForm.hidden = true;
+      emailSuccess.hidden = false;
+    } catch (err) {
+      emailError.textContent = 'Something went wrong — try again, or email Taelo directly.';
+      emailError.hidden = false;
+    }
+  });
 </script>
 
 </body>
