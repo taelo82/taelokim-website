@@ -24,7 +24,7 @@
   --font-body:    "Inter Tight", system-ui, sans-serif;
   --font-mono:    "JetBrains Mono", monospace;
 
-  --type-hero:  clamp(56px, 8vw, 110px);
+  --type-hero:  clamp(42px, 8vw, 110px);
   --type-h1:    clamp(36px, 5vw, 64px);
   --type-h2:    clamp(26px, 3vw, 40px);
   --type-body:  17px;
@@ -336,6 +336,11 @@ main {
   font-style: italic;
   color: var(--thread);
   font-weight: 300;
+}
+/* Each line stays on one row — chars inside never break mid-word. */
+.hero-headline .line {
+  display: block;
+  white-space: nowrap;
 }
 /* Char-by-char hero */
 .hero-headline .char {
@@ -1020,12 +1025,22 @@ footer {
 @media (max-width: 768px) {
   nav { gap: 2px; padding: 8px 16px; }
   nav a { padding: 4px 7px; font-size: 10px; }
-  .hero-content { padding-left: 24px; padding-right: 24px; }
+  .hero-content { padding-left: 24px; padding-right: 24px; max-width: none; }
+  .hero-headline { margin-bottom: 24px; }
+  .hero-sub { margin-bottom: 32px; max-width: none; }
+  .hero-cta-wrap { flex-wrap: wrap; gap: 12px; }
   .scene { padding: 0 24px; }
   .panel-slot { padding: 80px 0; }
   footer { flex-direction: column; gap: 24px; }
   .resource-featured { padding: 28px 24px; }
   .community-card { padding: 28px 24px; }
+}
+/* Phone-sized: tighten further so the hero fits in 100vh without cropping the CTA. */
+@media (max-width: 480px) {
+  .hero-eyebrow { margin-bottom: 16px; font-size: 10px; letter-spacing: 0.18em; }
+  .hero-headline { margin-bottom: 18px; line-height: 1.05; }
+  .hero-sub { font-size: 14px; line-height: 1.55; margin-bottom: 22px; }
+  .cta-primary, .cta-secondary { padding: 12px 16px; font-size: 13px; }
 }
 
 /* ── TESSERACT PARTICLE FIELD (canvas bg overlay) ── */
@@ -1091,16 +1106,6 @@ body:not(:hover) #cursor-thread { opacity: 0; }
       <stop offset="65%"  stop-color="#7AB5B0" stop-opacity="0.25"/>
       <stop offset="100%" stop-color="#7AB5B0" stop-opacity="0"/>
     </linearGradient>
-    <linearGradient id="tg2" gradientUnits="userSpaceOnUse">
-      <stop offset="0%"   stop-color="#C5E8DE" stop-opacity="0.85"/>
-      <stop offset="55%"  stop-color="#7AB5B0" stop-opacity="0.2"/>
-      <stop offset="100%" stop-color="#7AB5B0" stop-opacity="0"/>
-    </linearGradient>
-    <linearGradient id="tg3" gradientUnits="userSpaceOnUse">
-      <stop offset="0%"   stop-color="#7AB5B0" stop-opacity="0.7"/>
-      <stop offset="60%"  stop-color="#7AB5B0" stop-opacity="0.12"/>
-      <stop offset="100%" stop-color="#7AB5B0" stop-opacity="0"/>
-    </linearGradient>
   </defs>
 </svg>
 
@@ -1112,11 +1117,11 @@ body:not(:hover) #cursor-thread { opacity: 0; }
 
 <!-- ── BG STAGE ── -->
 <div id="bg-stage" aria-hidden="true">
-  <video id="bg-video-1" autoplay muted loop playsinline>
-    <source src="https://raw.githubusercontent.com/taelo82/taelokim-website/main/taelokim-site/project/hero-loop.mp4" type="video/mp4">
+  <video id="bg-video-1" autoplay muted loop playsinline preload="auto">
+    <source src="hero-loop.mp4" type="video/mp4">
   </video>
-  <video id="bg-video-2" muted loop playsinline>
-    <source src="https://raw.githubusercontent.com/taelo82/taelokim-website/main/taelokim-site/project/hero-loop-2.mp4" type="video/mp4">
+  <video id="bg-video-2" muted loop playsinline preload="auto">
+    <source src="hero-loop-2.mp4" type="video/mp4">
   </video>
 </div>
 
@@ -1130,23 +1135,14 @@ body:not(:hover) #cursor-thread { opacity: 0; }
 </div>
 
 <!-- ── SPACEMAN ── -->
-<video id="spaceman" src="https://raw.githubusercontent.com/taelo82/taelokim-website/main/taelokim-site/project/spaceman.mp4" muted playsinline preload="auto"
+<video id="spaceman" src="spaceman.mp4" muted playsinline preload="auto"
   aria-label="Astronaut navigating the tesseract"></video>
 
-<!-- ── THREAD SVG ── -->
+<!-- ── THREAD SVG ── single thread (was 3 — too noisy) -->
 <svg id="thread-canvas" aria-hidden="true">
-  <!-- Glow paths (wide, blurred) -->
   <path id="t1-glow" d="" stroke="url(#tg1)" stroke-width="3.5" fill="none" filter="url(#thread-glow)" stroke-linecap="round" opacity="0.5"/>
-  <path id="t2-glow" d="" stroke="url(#tg2)" stroke-width="2.5" fill="none" filter="url(#thread-glow)" stroke-linecap="round" opacity="0.38"/>
-  <path id="t3-glow" d="" stroke="url(#tg3)" stroke-width="1.8" fill="none" filter="url(#thread-glow)" stroke-linecap="round" opacity="0.28"/>
-  <!-- Sharp filament paths -->
   <path id="t1" d="" stroke="#C5E8DE" stroke-width="1.1" fill="none" stroke-linecap="round" stroke-dasharray="24 7" opacity="0.65"/>
-  <path id="t2" d="" stroke="#7AB5B0" stroke-width="0.8" fill="none" stroke-linecap="round" stroke-dasharray="16 6" opacity="0.5"/>
-  <path id="t3" d="" stroke="#7AB5B0" stroke-width="0.55" fill="none" stroke-linecap="round" stroke-dasharray="10 7" opacity="0.38"/>
-  <!-- Hand glow halos -->
   <circle id="h1" cx="0" cy="0" r="20" fill="url(#hand-glow)" opacity="0"/>
-  <circle id="h2" cx="0" cy="0" r="16" fill="url(#hand-glow)" opacity="0"/>
-  <circle id="h3" cx="0" cy="0" r="12" fill="url(#hand-glow)" opacity="0"/>
 </svg>
 
 <!-- ── NAV ── -->
@@ -1166,13 +1162,13 @@ body:not(:hover) #cursor-thread { opacity: 0; }
 <section id="hero" data-screen-label="01 Hero">
   <div class="hero-content">
     <p class="hero-eyebrow">Taelo Kim · Seoul · 2026</p>
-    <h1 class="hero-headline" id="hero-hl" aria-label="Every thread you pull rewrites your future.">
+    <h1 class="hero-headline" id="hero-hl" aria-label="Pull the thread.">
     </h1>
     <p class="hero-sub" id="hero-sub">
       Playbooks, frameworks and prompt packs for operators shipping AI products across Korea, Japan and Southeast Asia. Real numbers. No cadence.
     </p>
     <div class="hero-cta-wrap" id="hero-cta">
-      <a href="#resources" class="cta-primary">Pull the thread →</a>
+      <a href="#resources" class="cta-primary">See what's inside →</a>
       <a href="#about" class="cta-secondary">Who's behind this</a>
     </div>
   </div>
@@ -1411,10 +1407,15 @@ body:not(:hover) #cursor-thread { opacity: 0; }
 // ── 1. HERO TEXT — char-by-char fade in ──
 (function initHeroText() {
   const hl = document.getElementById('hero-hl');
-  const lines = ['Every thread', 'you pull', '<em>rewrites</em>', 'your future.'];
+  // Each line wraps in a `.line` block so the inline-block chars never break
+  // mid-word on narrow viewports.
+  const lines = ['Pull the', '<em>thread</em>.'];
   let charDelay = 0;
 
-  lines.forEach((line, li) => {
+  lines.forEach((line) => {
+    const lineEl = document.createElement('span');
+    lineEl.className = 'line';
+
     const tmp = document.createElement('div');
     tmp.innerHTML = line;
 
@@ -1425,10 +1426,9 @@ body:not(:hover) #cursor-thread { opacity: 0; }
         const span = document.createElement('span');
         span.className = 'char';
         if (ch === ' ') {
-          // Use a real space inside the span but give it explicit display
           span.style.display = 'inline-block';
           span.style.width = '0.28em';
-          span.textContent = '\u00A0'; // non-breaking space preserves width
+          span.textContent = '\u00A0';
         } else {
           span.textContent = ch;
         }
@@ -1437,12 +1437,12 @@ body:not(:hover) #cursor-thread { opacity: 0; }
           span.style.fontStyle = 'italic';
         }
         span.style.transitionDelay = charDelay + 'ms';
-        hl.appendChild(span);
+        lineEl.appendChild(span);
         charDelay += ch === ' ' ? 18 : 38;
       });
     });
 
-    if (li < lines.length - 1) hl.appendChild(document.createElement('br'));
+    hl.appendChild(lineEl);
   });
 
   setTimeout(() => {
@@ -1596,10 +1596,16 @@ function updateSpaceman() {
   const opa = 1 - Math.max(0, (smSmooth - 0.85) / 0.15) * 0.35;
   spaceman.style.opacity = opa;
 
-  // Scrub video
+  // Scrub video — faster lerp catches up smoothly, snap at end so the final
+  // frames (the reach-out) actually play instead of asymptoting forever.
   if (spacemanReady && spaceman.duration) {
     const target = prog * spaceman.duration;
-    spaceman.currentTime += (target - spaceman.currentTime) * 0.18;
+    const diff = target - spaceman.currentTime;
+    if (prog > 0.97) {
+      spaceman.currentTime = target;
+    } else if (Math.abs(diff) > 0.015) {
+      spaceman.currentTime += diff * 0.30;
+    }
   }
 }
 
@@ -1659,14 +1665,10 @@ class VerletRope {
 }
 
 const rope1 = new VerletRope(16, { slack:1.012, gravity:0.012, damping:0.82, iter:9 });
-const rope2 = new VerletRope(14, { slack:1.022, gravity:0.022, damping:0.79, iter:7 });
-const rope3 = new VerletRope(12, { slack:1.035, gravity:0.034, damping:0.76, iter:6 });
 
 const t1=document.getElementById('t1'), t1g=document.getElementById('t1-glow');
-const t2=document.getElementById('t2'), t2g=document.getElementById('t2-glow');
-const t3=document.getElementById('t3'), t3g=document.getElementById('t3-glow');
-const h1=document.getElementById('h1'), h2=document.getElementById('h2'), h3=document.getElementById('h3');
-const tg1=document.getElementById('tg1'), tg2=document.getElementById('tg2'), tg3=document.getElementById('tg3');
+const h1=document.getElementById('h1');
+const tg1=document.getElementById('tg1');
 
 function setGrad(g, x1,y1,x2,y2) {
   g.setAttribute('x1',x1); g.setAttribute('y1',y1);
@@ -1757,17 +1759,15 @@ function getActiveSectionTarget() {
     const vis = Math.max(0, Math.min(r.bottom, window.innerHeight) - Math.max(r.top, 0));
     if (vis > bestVis) { bestVis = vis; best = sec; }
   });
-  if (!best) return { x: 0, y: window.innerHeight * 0.5 };
+  if (!best) return { x: 0, y1: window.innerHeight * 0.5 };
   const r = best.getBoundingClientRect();
   return {
     x: r.left + 20,
-    y1: r.top + r.height * 0.28,
-    y2: r.top + r.height * 0.5,
-    y3: r.top + r.height * 0.72,
+    y1: r.top + r.height * 0.42,
   };
 }
 
-let lx = 60, ly1 = 0.28, ly2 = 0.5, ly3 = 0.72;
+let lx = 60, ly1 = 0.42;
 
 // ── 10. MAIN RAF LOOP ──
 function raf() {
@@ -1775,36 +1775,22 @@ function raf() {
   updateBgVideos();
 
   const sm = spaceman.getBoundingClientRect();
-  // Hands are on the LEFT side (after scaleX flip) — roughly 30% from left
+  // Hand is on the LEFT side after scaleX flip — pick the upper outstretched hand.
   const handX  = sm.left + sm.width  * 0.28;
-  const hand1Y = sm.top  + sm.height * 0.38;
-  const hand2Y = sm.top  + sm.height * 0.45;
-  const hand3Y = sm.top  + sm.height * 0.52;
+  const hand1Y = sm.top  + sm.height * 0.42;
 
   // Get target from active section
   const tgt = getActiveSectionTarget();
   const tX  = tgt.x  !== undefined ? tgt.x  : 80;
-  const tY1 = tgt.y1 !== undefined ? tgt.y1 : window.innerHeight * 0.35;
-  const tY2 = tgt.y2 !== undefined ? tgt.y2 : window.innerHeight * 0.5;
-  const tY3 = tgt.y3 !== undefined ? tgt.y3 : window.innerHeight * 0.65;
+  const tY1 = tgt.y1 !== undefined ? tgt.y1 : window.innerHeight * 0.5;
 
   lx  += (tX  - lx)  * 0.06;
   ly1 += (tY1 - ly1) * 0.06;
-  ly2 += (tY2 - ly2) * 0.06;
-  ly3 += (tY3 - ly3) * 0.06;
 
   const opacity = sm.width > 0 ? 1 : 0;
   setCircle(h1, handX, hand1Y, 0.65 * opacity);
-  setCircle(h2, handX, hand2Y, 0.45 * opacity);
-  setCircle(h3, handX, hand3Y, 0.30 * opacity);
-
   setGrad(tg1, handX, hand1Y, lx, ly1);
-  setGrad(tg2, handX, hand2Y, lx, ly2);
-  setGrad(tg3, handX, hand3Y, lx, ly3);
-
   setPath(t1, t1g, rope1, handX, hand1Y, lx, ly1);
-  setPath(t2, t2g, rope2, handX, hand2Y, lx, ly2);
-  setPath(t3, t3g, rope3, handX, hand3Y, lx, ly3);
 
   requestAnimationFrame(raf);
 }

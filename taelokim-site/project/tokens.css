@@ -12,7 +12,7 @@
   --font-mono:    "JetBrains Mono", "Berkeley Mono", monospace;
 
   /* TYPE SCALE */
-  --type-hero:     clamp(64px, 9vw, 120px);
+  --type-hero:     clamp(44px, 9vw, 120px);
   --type-h1:       clamp(40px, 5vw, 64px);
   --type-h2:       clamp(28px, 3vw, 40px);
   --type-body:     17px;
