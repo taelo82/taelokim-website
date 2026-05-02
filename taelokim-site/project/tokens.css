@@ -2,9 +2,9 @@
   /* PALETTE — 5 colors max */
   --void:    #050510;        /* hero background, page bg */
   --paper:   #E8E4DC;        /* primary text on void */
-  --thread:  #FFB347;        /* signature warm amber, the light */
-  --dust:    #6B5B4F;        /* secondary text, muted UI */
-  --signal:  #00C2FF;        /* used ONCE — the email CTA only */
+  --thread:  #7AB5B0;        /* signature mint-teal, the accent */
+  --dust:    #FFFFFF;        /* secondary/nav text — white for now */
+  --signal:  #7AB5B0;        /* unified with --thread */
 
   /* TYPOGRAPHY — display serif + neo-grotesque body */
   --font-display: "Fraunces", "GT Sectra", Georgia, serif;

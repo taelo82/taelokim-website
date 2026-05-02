@@ -20,10 +20,6 @@
     font-size: var(--type-body);
     line-height: 1.5;
     overflow-x: hidden;
-    /* CRITICAL: makes body the containing block for #shelves so it stretches
-       the FULL document height instead of just 100vh. Without this, fragments
-       below the first viewport are positioned outside #shelves and clipped
-       by overflow:hidden — the shelves are invisible. */
     position: relative;
   }
 
@@ -91,188 +87,54 @@
     background: rgba(255, 255, 255, 0.045);
   }
 
-  /* ── BOOKSHELF FRAGMENTS ──
-     Sparse glimpses of the tesseract bookshelf, anchored on the LEFT edge of
-     the page, floating in void at irregular scroll depths. Each fragment is
-     angled in 3D (rotateY) so it recedes into space — like a shelf glimpsed
-     through a dimensional crack while drifting through the tesseract.
-
-     Architecture:
-       - #shelves: absolute container along left edge, full body height,
-         establishes its own perspective so the children's rotateY reads as 3D.
-       - .shelf:        outer wrapper. Handles position + slow drift animation
-                        (zero-G float). Drift uses translate so it composes
-                        cleanly with the inner's 3D rotation.
-       - .shelf__inner: inner. Renders the books (background-image from the
-                        bookshelf SVG), masks edges to nothing, applies the
-                        rotateY recede.
-
-     Each fragment uses a different background-position-x and background-size
-     so they show different "slices" of the same bookshelf SVG — no two
-     fragments look identical, no obvious repeat. */
-
-  #shelves {
-    position: absolute;
-    top: 0; bottom: 0; left: 0;
-    width: 540px;              /* was 320; bigger so fragments can be larger + extend further */
+  /* ── BG STAGE ──
+     Two looping background videos layered behind everything else. Both are
+     fixed full-bleed; scroll position drives a cross-fade between them
+     (video 1 dominates the upper page, video 2 takes over by the time the
+     reader is approaching the CTA). Sits BELOW threads (z=1), sections (z=2),
+     spaceman (z=50), pill-nav (z=100). */
+  .bg-stage {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
     pointer-events: none;
-    z-index: 0;                /* above body bg, below content (sections come later in DOM) */
-    perspective: 1400px;       /* parent perspective so children's rotateY renders 3D */
-    perspective-origin: 0% 50%;
-    overflow: hidden;          /* clip anything that would peek past the right edge */
+    overflow: hidden;
   }
-
-  .shelf {
+  .bg-video {
     position: absolute;
-    left: 0;
-    /* Outer handles slow zero-G drift — feels like floating, not pasted on.
-       Inner handles the 3D rotation (so they compose cleanly). */
-    animation: shelf-drift 14s ease-in-out infinite;
-    will-change: transform;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: brightness(0.78) saturate(0.9);
+    will-change: opacity;
+  }
+  /* Video 1 starts visible; JS dims it as the reader scrolls. */
+  #bg-video-1 { opacity: 0.55; }
+  /* Video 2 starts hidden; JS lifts it. Mirrored so its character sits on
+     the LEFT — video 1's character is on the right, so the crossfade isn't
+     two characters colliding center-frame. */
+  #bg-video-2 {
+    opacity: 0;
+    transform: scaleX(-1);
+  }
+  /* Mask the Veo / generator watermark baked into the bottom-right of
+     bg-video-1's source frame. Soft radial fade to void so the patch blends
+     into the video's dark border instead of reading as a hard rectangle. */
+  .bg-stage::after {
+    content: '';
+    position: absolute;
+    right: 0; bottom: 0;
+    width: clamp(180px, 20vw, 320px);
+    height: clamp(70px, 8vh, 120px);
+    background: radial-gradient(ellipse at bottom right,
+      rgba(5, 5, 16, 0.97) 0%,
+      rgba(5, 5, 16, 0.88) 30%,
+      rgba(5, 5, 16, 0.45) 65%,
+      transparent 100%);
+    pointer-events: none;
+    z-index: 2;
   }
 
-  .shelf__inner {
-    width: 100%;
-    height: 100%;
-    background-repeat: no-repeat;
-    background-size: cover;     /* image fills the fragment; bg-position chooses the crop */
-    transform-origin: 0% 50%;
-    transform: rotateY(-6deg);  /* subtle — images have their own perspective baked in */
-    /* Screen blend so only the bright features of each photo (candles, glowing
-       book, portal glow, moonlit window) lift the void color. Dark wood/shadow
-       disappear entirely — fragments stop reading as rectangles, start reading
-       as glow constellations floating in the dark. */
-    mix-blend-mode: screen;
-    /* Crank the highlights so candles read warm, portal glow reads electric,
-       window glow reads cool over the void. Filter chain: SVG turbulence first
-       (warps the edge organically into torn-paper strands), then color tweaks. */
-    opacity: 0.95;
-    filter: url(#dissolve) brightness(1.20) contrast(1.06) saturate(1.20);
-    /* Default mask — overridden per fragment below for unique shapes. */
-    -webkit-mask-image: radial-gradient(ellipse 110% 95% at 24% 50%,
-      black 0%, black 22%, rgba(0,0,0,0.85) 50%,
-      rgba(0,0,0,0.45) 75%, rgba(0,0,0,0.12) 92%, transparent 100%);
-            mask-image: radial-gradient(ellipse 110% 95% at 24% 50%,
-      black 0%, black 22%, rgba(0,0,0,0.85) 50%,
-      rgba(0,0,0,0.45) 75%, rgba(0,0,0,0.12) 92%, transparent 100%);
-  }
-
-  /* ── PER-FRAGMENT ART DIRECTION ──
-     Each fragment uses a DIFFERENT image (different mood/glow feature) AND
-     a DIFFERENT mask shape (different organic blob made by stacking 3-4
-     radial gradients). Goal: no two fragments look alike, none read as a
-     rectangle. The SVG #dissolve filter (applied via .shelf__inner filter
-     chain) warps the resulting edges into ragged torn-paper strands. */
-
-  /* Fragment 1: PORTAL ARCH — tall vertical with arched top. Uses the
-     ladder + glowing-doorway image. Shape: tall ellipse + extra bulb at
-     bottom-left for an organic asymmetric portal silhouette. */
-  .shelf--1 { top: 95vh;   width: 400px; height: 760px; animation-delay: 0s; }
-  .shelf--1 .shelf__inner {
-    background-image: url("bookshelf-portal-arch.jpg");
-    background-position: 50% center;
-    transform: rotateY(-5deg);
-    -webkit-mask-image:
-      radial-gradient(ellipse 65% 92% at 32% 48%, black 0%, black 22%, rgba(0,0,0,0.65) 60%, transparent 95%),
-      radial-gradient(ellipse 38% 32% at 18% 78%, black 30%, transparent 85%),
-      radial-gradient(ellipse 28% 22% at 50% 18%, black 35%, transparent 85%);
-            mask-image:
-      radial-gradient(ellipse 65% 92% at 32% 48%, black 0%, black 22%, rgba(0,0,0,0.65) 60%, transparent 95%),
-      radial-gradient(ellipse 38% 32% at 18% 78%, black 30%, transparent 85%),
-      radial-gradient(ellipse 28% 22% at 50% 18%, black 35%, transparent 85%);
-  }
-
-  /* Fragment 2: GLOWING BOOK CLOSEUP — square-ish, intimate. The crisp
-     book detail. Shape: round-ish blob with a torn upper-right edge. */
-  .shelf--2 { top: 195vh;  width: 360px; height: 540px; animation-delay: -3.5s; }
-  .shelf--2 .shelf__inner {
-    background-image: url("bookshelf-portal-closeup.jpg");
-    background-position: 35% center;
-    transform: rotateY(-8deg);
-    -webkit-mask-image:
-      radial-gradient(ellipse 80% 78% at 38% 50%, black 0%, black 28%, rgba(0,0,0,0.7) 65%, transparent 95%),
-      radial-gradient(circle at 75% 28%, black 12%, transparent 38%),
-      radial-gradient(ellipse 30% 22% at 12% 72%, black 25%, transparent 85%);
-            mask-image:
-      radial-gradient(ellipse 80% 78% at 38% 50%, black 0%, black 28%, rgba(0,0,0,0.7) 65%, transparent 95%),
-      radial-gradient(circle at 75% 28%, black 12%, transparent 38%),
-      radial-gradient(ellipse 30% 22% at 12% 72%, black 25%, transparent 85%);
-  }
-
-  /* Fragment 3: CATHEDRAL — the wide cinematic one with the tall arched
-     portal. Largest fragment. Shape: tall central pillar with feathered
-     top + bottom (like a column of light dissolving up and down). */
-  .shelf--3 { top: 305vh;  width: 480px; height: 920px; animation-delay: -7s; }
-  .shelf--3 .shelf__inner {
-    background-image: url("bookshelf-cathedral.jpg");
-    background-position: 50% center;
-    transform: rotateY(-4deg);
-    -webkit-mask-image:
-      radial-gradient(ellipse 58% 100% at 36% 50%, black 0%, black 18%, rgba(0,0,0,0.7) 55%, transparent 95%),
-      radial-gradient(ellipse 42% 28% at 22% 22%, black 25%, transparent 80%),
-      radial-gradient(ellipse 38% 28% at 60% 78%, black 25%, transparent 80%);
-            mask-image:
-      radial-gradient(ellipse 58% 100% at 36% 50%, black 0%, black 18%, rgba(0,0,0,0.7) 55%, transparent 95%),
-      radial-gradient(ellipse 42% 28% at 22% 22%, black 25%, transparent 80%),
-      radial-gradient(ellipse 38% 28% at 60% 78%, black 25%, transparent 80%);
-  }
-
-  /* Fragment 4: ROSE WINDOW — the rose-window scene with floating book.
-     Shape: torn shard (asymmetric, top-heavy with ragged trailing bottom). */
-  .shelf--4 { top: 425vh;  width: 380px; height: 720px; animation-delay: -10s; }
-  .shelf--4 .shelf__inner {
-    background-image: url("bookshelf-rosewindow.jpg");
-    background-position: 35% center;
-    transform: rotateY(-7deg);
-    -webkit-mask-image:
-      radial-gradient(ellipse 78% 60% at 38% 38%, black 0%, black 25%, rgba(0,0,0,0.7) 60%, transparent 95%),
-      radial-gradient(ellipse 32% 38% at 25% 72%, black 25%, transparent 80%),
-      radial-gradient(ellipse 22% 18% at 65% 78%, black 30%, transparent 78%),
-      radial-gradient(circle at 60% 12%, black 8%, transparent 32%);
-            mask-image:
-      radial-gradient(ellipse 78% 60% at 38% 38%, black 0%, black 25%, rgba(0,0,0,0.7) 60%, transparent 95%),
-      radial-gradient(ellipse 32% 38% at 25% 72%, black 25%, transparent 80%),
-      radial-gradient(ellipse 22% 18% at 65% 78%, black 30%, transparent 78%),
-      radial-gradient(circle at 60% 12%, black 8%, transparent 32%);
-  }
-
-  /* Fragment 5: ORIGINAL LIBRARY — the first scene we used (the gothic
-     library with VERITAS ARCANA inscription). Shape: long horizontal
-     drift, like a smear of light across the void. */
-  .shelf--5 { top: 545vh;  width: 440px; height: 700px; animation-delay: -12.5s; }
-  .shelf--5 .shelf__inner {
-    background-image: url("bookshelf-scene.jpg");
-    background-position: 55% center;
-    transform: rotateY(-5deg);
-    -webkit-mask-image:
-      radial-gradient(ellipse 95% 70% at 32% 52%, black 0%, black 22%, rgba(0,0,0,0.7) 60%, transparent 95%),
-      radial-gradient(ellipse 28% 32% at 70% 28%, black 25%, transparent 78%),
-      radial-gradient(ellipse 22% 25% at 12% 22%, black 25%, transparent 75%);
-            mask-image:
-      radial-gradient(ellipse 95% 70% at 32% 52%, black 0%, black 22%, rgba(0,0,0,0.7) 60%, transparent 95%),
-      radial-gradient(ellipse 28% 32% at 70% 28%, black 25%, transparent 78%),
-      radial-gradient(ellipse 22% 25% at 12% 22%, black 25%, transparent 75%);
-  }
-
-  /* Slow zero-G drift. Subtle X+Y so fragments feel suspended in space, not
-     just bobbing. Composes with inner's 3D rotation since that lives on a
-     separate element. */
-  @keyframes shelf-drift {
-    0%   { transform: translate3d(0, 0, 0); }
-    25%  { transform: translate3d(-3px, -8px, 0); }
-    50%  { transform: translate3d(0, -14px, 0); }
-    75%  { transform: translate3d(3px, -6px, 0); }
-    100% { transform: translate3d(0, 0, 0); }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .shelf { animation: none; }
-  }
-
-  /* On narrow viewports the shelves crowd content. Hide them under 760px. */
-  @media (max-width: 760px) {
-    #shelves { display: none; }
-  }
   /* Perspective moved off body so it doesn't create a containing block
      for fixed-positioned spaceman/threads. Apply only to a sections wrapper. */
   .scenes {
@@ -280,23 +142,34 @@
     perspective-origin: 50% 30%;
   }
 
-  /* ── NAV ── */
-  nav {
+  /* ── PILLNAV ──
+     Frosted glass pill at the top with individual pill-items. Each item has
+     a circle that scales from 0 → enough-to-fill-the-pill on hover, giving
+     the AIS-template hallmark "ink-fill" hover. The circle radius is set
+     per-item by JS on load (max(width, height) × 1.1) so geometry stays
+     correct across labels. Active pill (matches current scroll section)
+     gets a permanent paper-colored fill and dark text. */
+  .pill-nav {
     position: fixed;
     top: var(--space-5);
     left: 50%;
     transform: translateX(-50%);
     z-index: 100;
     display: flex;
-    gap: var(--space-4);
+    gap: 4px;
     align-items: center;
-    padding: var(--space-3) var(--space-5);
+    padding: 6px;
     border-radius: 999px;
   }
-  /* Nav becomes a frosted glass pill — the reference site's hallmark element.
-     Already has the .liquid-glass class on the element; this just sizes it. */
-
-  nav a {
+  .pill-item {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 18px;
+    border-radius: 999px;
     font-family: 'Inter Tight', sans-serif;
     font-size: var(--type-small);
     font-weight: 500;
@@ -306,13 +179,40 @@
     text-decoration: none;
     transition: color var(--duration-med) var(--ease-cinematic);
   }
-  nav a:hover { color: var(--paper); }
-  nav .nav-dot {
-    width: 3px; height: 3px;
+  .pill-item__label { position: relative; z-index: 2; }
+  /* Hover circle — sized by --pill-r CSS var (set by JS); positioned at the
+     pill's center, scales from 0 → 1 on hover. */
+  .pill-item::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: var(--pill-r, 120px);
+    height: var(--pill-r, 120px);
     border-radius: 50%;
-    background: var(--dust);
-    opacity: 0.4;
+    background: var(--paper);
+    transform: translate(-50%, -50%) scale(0);
+    transform-origin: center;
+    transition: transform 480ms var(--ease-cinematic);
+    z-index: 1;
+    pointer-events: none;
   }
+  .pill-item:hover { color: var(--void); }
+  .pill-item:hover::before { transform: translate(-50%, -50%) scale(1); }
+  /* CTA pill — pre-filled with thread color so it reads as the primary action. */
+  .pill-item--cta {
+    color: var(--void);
+    background: var(--thread);
+  }
+  .pill-item--cta::before { background: var(--paper); }
+  .pill-item--cta:hover { color: var(--void); }
+  /* Active section's pill stays lit — paper-fill, dark text. */
+  .pill-item.is-active {
+    color: var(--void);
+  }
+  .pill-item.is-active::before { transform: translate(-50%, -50%) scale(1); }
+  .pill-item--cta.is-active { color: var(--void); }
+  .pill-item--cta.is-active::before { background: var(--paper); }
 
   /* ── HERO ── */
   /* Full-bleed hero. NO transform here — that would create a containing block
@@ -338,26 +238,6 @@
   }
   .email-success { color: var(--signal); }
   .email-error   { color: var(--dust); }
-
-  #hero-video {
-    position: absolute;
-    inset: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-    opacity: 0.6;
-    filter: brightness(0.85) saturate(0.85) blur(0.5px);
-  }
-  /* Smooth fade-out at bottom of hero so the video dissolves into the void color
-     instead of an abrupt color edge between hero and the next section. */
-  #hero::after {
-    content: '';
-    position: absolute;
-    left: 0; right: 0; bottom: 0;
-    height: 30vh;
-    background: linear-gradient(to bottom, transparent 0%, var(--void) 100%);
-    pointer-events: none;
-    z-index: 5;
-  }
 
   #spaceman {
     position: fixed;
@@ -385,13 +265,24 @@
     will-change: transform, height, top, right, opacity;
   }
 
-  /* Thread SVG overlay — fixed so threads can extend across the whole page */
+  /* Thread SVG overlay — fixed so threads can extend across the whole page.
+     z-index 1 places threads ABOVE the bookshelf (z=0) but BEHIND section
+     content (z=2 — set on .scenes section below). Result: threads emerge
+     from spaceman's hand, curve down-left BEHIND each active section, and
+     re-emerge peeking out the LEFT edge — the visible "anchor point" tying
+     the section to the spaceman's pull. */
   #thread-canvas {
     position: fixed;
     inset: 0;
     width: 100vw; height: 100vh;
-    z-index: 3;
+    z-index: 1;
     pointer-events: none;
+  }
+  /* Sections sit ABOVE the thread layer so the thread passes behind them. */
+  .scenes section,
+  .scenes #email-capture {
+    position: relative;
+    z-index: 2;
   }
 
   .hero-content {
@@ -427,6 +318,27 @@
     color: var(--thread);
   }
 
+  /* ── SCROLLFLOAT — per-char fade-down on scroll ── */
+  .scroll-float__line {
+    display: block;
+    line-height: 1.02;
+  }
+  .scroll-float__line--em em {
+    /* Existing italic Instrument Serif applied via .hero-headline em above */
+  }
+  /* When JS has hydrated the lines, each char becomes a span. Default state
+     is fully visible — JS adjusts on scroll. Inline-block so transforms hold. */
+  .scroll-float .char {
+    display: inline-block;
+    will-change: transform, opacity, filter;
+    transform: translateY(0);
+    opacity: 1;
+  }
+  /* Preserve word-break behavior — spaces between words stay non-collapsible. */
+  .scroll-float .char--space {
+    width: 0.28em;
+  }
+
   .hero-sub {
     font-family: 'Inter Tight', sans-serif;
     font-size: var(--type-body);
@@ -458,24 +370,6 @@
   .hero-cta:hover { gap: var(--space-3); color: var(--thread); }
   .hero-cta::after { content: '→'; }
 
-  .scroll-hint {
-    position: absolute;
-    bottom: var(--space-5);
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: 'Inter Tight', sans-serif;
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--dust);
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    z-index: 5;
-    animation: bob 2s ease-in-out infinite;
-  }
-  @keyframes bob {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(6px); }
-  }
 
   /* ── SECTION SHARED ── */
   section {
@@ -497,9 +391,9 @@
     height: 1px;
     background: linear-gradient(90deg,
       transparent 0%,
-      rgba(255, 179, 71, 0) 20%,
-      rgba(255, 179, 71, 0.7) 50%,
-      rgba(255, 179, 71, 0) 80%,
+      rgba(122, 181, 176, 0) 20%,
+      rgba(122, 181, 176, 0.7) 50%,
+      rgba(122, 181, 176, 0) 80%,
       transparent 100%);
     opacity: 0;
     transform: scaleX(0.6);
@@ -516,8 +410,8 @@
   /* Subtle amber halo behind active section */
   section.active-section {
     box-shadow:
-      inset 0 60px 120px -60px rgba(255, 179, 71, 0.05),
-      inset 0 -60px 120px -60px rgba(255, 179, 71, 0.03);
+      inset 0 60px 120px -60px rgba(122, 181, 176, 0.05),
+      inset 0 -60px 120px -60px rgba(122, 181, 176, 0.03);
   }
 
   .section-label {
@@ -546,10 +440,10 @@
   /* Active-section label lights up amber — "the thread reached me" */
   section.active-section .section-label {
     color: var(--thread);
-    text-shadow: 0 0 24px rgba(255, 179, 71, 0.35);
+    text-shadow: 0 0 24px rgba(122, 181, 176, 0.35);
   }
   section.active-section .section-label::after {
-    background: linear-gradient(90deg, rgba(255,179,71,0.3), rgba(107,91,79,0.1));
+    background: linear-gradient(90deg, rgba(122,181,176,0.3), rgba(107,91,79,0.1));
   }
 
   /* Section reveal — section gets pulled forward as it enters view.
@@ -699,7 +593,7 @@
     border-bottom: 1px solid rgba(58,58,74,0.6);
     transition: background var(--duration-med);
   }
-  .builds-table tr:hover { background: rgba(255,179,71,0.04); }
+  .builds-table tr:hover { background: rgba(122,181,176,0.04); }
   .builds-table td {
     padding: var(--space-4) var(--space-3);
     font-size: var(--type-body);
@@ -858,21 +752,342 @@
   footer a:hover { color: var(--paper); }
 
   .wf-anno { display: none; }
+
+  /* ── INTERACTIVE LAYER ──
+     Adds AIS-class "alive" hover/move feedback while keeping the spec rule
+     of ONE primary signature interaction (the spaceman threads). These are
+     PASSIVE responses — cards/links/buttons react to cursor proximity, but
+     the page doesn't drive any new scroll-bound mechanic. Reduced-motion
+     users get all of this neutralized via the media query at the bottom. */
+
+  /* Section-content stagger — each direct child of a .reveal block enters
+     in cascade after the parent's reveal animation lands. The parent does
+     the dramatic lift + blur (already defined above); children do a small
+     translateY(10px → 0) so the effect reads as "the section settles, then
+     content arrives in layers." */
+  .reveal > * {
+    opacity: 0;
+    transform: translateY(10px);
+    transition:
+      opacity 700ms var(--ease-cinematic),
+      transform 700ms var(--ease-cinematic);
+  }
+  .reveal.visible > * {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal.visible > *:nth-child(1) { transition-delay: 80ms; }
+  .reveal.visible > *:nth-child(2) { transition-delay: 160ms; }
+  .reveal.visible > *:nth-child(3) { transition-delay: 240ms; }
+  .reveal.visible > *:nth-child(4) { transition-delay: 320ms; }
+  .reveal.visible > *:nth-child(5) { transition-delay: 400ms; }
+  .reveal.visible > *:nth-child(6) { transition-delay: 480ms; }
+  .reveal.visible > *:nth-child(n+7) { transition-delay: 560ms; }
+
+  /* ── CARD TREATMENT (resource-card + resource-featured) ──
+     Spec override on user request: subtle 3D tilt + stronger glass +
+     warm gradient overlay are all explicitly allowed.
+       - Glass: backdrop-filter blur(12px), bg bumped from .liquid-glass
+         baseline (0.012) to (0.025) so the surface actually reads as glass.
+       - Warm overlay: linear-gradient warm amber→transparent diagonally,
+         ~5% opacity. Adds the cinematic depth without breaking restraint.
+       - Tilt: rotateX/rotateY driven by --tx/--ty CSS vars (JS updates on
+         mousemove). Capped at ~5° — paper catching a draft, not a 3D toy.
+       - Lift: --lift CSS var pulled to -4px on hover.
+       - Spotlight: ::before paints amber radial-gradient at --mx/--my.
+     All transforms compose because they're all driven through CSS vars. */
+  .resource-card,
+  .resource-featured {
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    transform:
+      perspective(1000px)
+      translateY(var(--lift, 0px))
+      rotateX(var(--tx, 0deg))
+      rotateY(var(--ty, 0deg));
+    transition:
+      transform 500ms var(--ease-cinematic),
+      border-color var(--duration-med) var(--ease-cinematic),
+      box-shadow var(--duration-med) var(--ease-cinematic),
+      background-color var(--duration-med) var(--ease-cinematic);
+  }
+  .resource-card {
+    border: 1px solid rgba(232,228,220,0.08);
+    background-color: rgba(255,255,255,0.025);
+    background-image: linear-gradient(
+      135deg,
+      rgba(122,181,176,0.05) 0%,
+      transparent 45%,
+      rgba(197,232,222,0.03) 100%
+    );
+    -webkit-backdrop-filter: blur(12px) saturate(1.2);
+            backdrop-filter: blur(12px) saturate(1.2);
+  }
+  .resource-card::before,
+  .resource-featured::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: radial-gradient(
+      280px circle at var(--mx, 50%) var(--my, 50%),
+      rgba(122,181,176,0.18),
+      transparent 55%
+    );
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--duration-med) var(--ease-cinematic);
+    z-index: 0;
+  }
+  .resource-featured::before {
+    background: radial-gradient(
+      460px circle at var(--mx, 50%) var(--my, 50%),
+      rgba(122,181,176,0.14),
+      transparent 60%
+    );
+  }
+  .resource-card:hover {
+    --lift: -4px;
+    border-color: rgba(122,181,176,0.35);
+    background-color: rgba(255,255,255,0.04);
+    box-shadow:
+      0 18px 60px rgba(122,181,176,0.10),
+      0 4px 20px rgba(0,0,0,0.30);
+  }
+  .resource-featured:hover {
+    --lift: -2px;
+    box-shadow:
+      0 22px 90px rgba(122,181,176,0.14),
+      0 6px 30px rgba(0,0,0,0.35);
+  }
+  .resource-card:hover::before,
+  .resource-featured:hover::before { opacity: 1; }
+  /* Children get z-index above the spotlight pseudo. Use translateZ to
+     keep them on the same render layer as the card surface (so tilt
+     applies uniformly — no parallax-of-text-vs-card glitch). */
+  .resource-card > *,
+  .resource-featured > * {
+    position: relative;
+    z-index: 1;
+    transform: translateZ(0.1px);
+  }
+
+  /* Writing rows — amber line draws in left → right on hover, on top of
+     the existing color-change of the title. Date also lifts to paper. */
+  .writing-row { position: relative; }
+  .writing-row::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 0;
+    height: 1px;
+    background: var(--thread);
+    transition: width var(--duration-slow) var(--ease-cinematic);
+  }
+  .writing-row:hover::after { width: 100%; }
+  .writing-row:hover .writing-date { color: var(--paper); }
+
+  /* Magnetic-button base. JS layers on translate(); CSS handles the
+     bounce-back transition when the cursor leaves the radius. */
+  .magnet {
+    transition:
+      transform 600ms var(--ease-cinematic),
+      gap var(--duration-med) var(--ease-cinematic),
+      color var(--duration-med) var(--ease-cinematic),
+      opacity var(--duration-med) var(--ease-cinematic);
+    will-change: transform;
+  }
+
+  /* ── PANEL-SLOT + SECTION-PANEL (SlidePanel pattern) ──
+     Slot is full-viewport-tall flex container, content aligned to the
+     bottom — so the panel "slides up into view" as you scroll. The panel
+     itself is the existing <section>. JS drives:
+       --panel-y     → translateY (100% → 0%) based on the slot's scroll
+                       progress through the viewport
+       --panel-tx    → rotateX driven by mousemove (cursor in top half tilts
+                       the panel forward)
+       --panel-ty    → rotateY driven by mousemove (cursor right tilts
+                       to the right)
+     `transform-style: preserve-3d` + perspective on .scenes makes tilt 3D.
+     Cards inside still get their own tilt — the two compose. */
+  .panel-slot {
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    perspective: 1200px;
+    perspective-origin: 50% 30%;
+    overflow: visible;
+    position: relative;
+    z-index: 2;       /* keep above thread-canvas like sections */
+  }
+  .section-panel {
+    width: 100%;
+    transform-style: preserve-3d;
+    transform:
+      translateY(var(--panel-y, 0%))
+      rotateX(var(--panel-tx, 0deg))
+      rotateY(var(--panel-ty, 0deg));
+    transition:
+      transform 700ms var(--ease-cinematic);
+    will-change: transform;
+  }
+
+  /* ── STATS ── */
+  .section-stats {
+    padding: var(--space-7) var(--space-8);
+    max-width: 860px;
+    margin: 0 auto;
+    border-top: 1px solid rgba(107,91,79,0.2);
+  }
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+    text-align: center;
+  }
+  .stat-item {}
+  .stat-number {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 400;
+    color: var(--thread);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .stat-label {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--dust);
+    margin-top: var(--space-3);
+  }
+  @media (max-width: 720px) {
+    .stats-row { grid-template-columns: 1fr; gap: var(--space-5); }
+  }
+
+  /* ── FINAL CTA ──
+     Centered final block. Headline, sub, pill-shaped form (email + button
+     fused into one rounded surface). The pill is the visual climax — biggest
+     amber surface on the page. The bg-stage video underneath provides ambience.
+     Generous bottom padding extends the page so video 2 has room to fully
+     bookend the bottom after the crossfade — feels less rushed. */
+  .final-cta {
+    padding: var(--space-8) var(--space-8) 32vh;
+    max-width: 860px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .final-cta__headline {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 6vw, 80px);
+    font-weight: 400;
+    color: var(--paper);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin-bottom: var(--space-4);
+  }
+  .final-cta__sub {
+    font-size: var(--type-body);
+    color: var(--dust);
+    line-height: 1.6;
+    max-width: 560px;
+    margin: 0 auto var(--space-6);
+  }
+  .final-cta__form {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    max-width: 540px;
+    margin: 0 auto;
+    padding: 6px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.025);
+    border: 1px solid rgba(232,228,220,0.15);
+    -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+    transition: border-color var(--duration-med) var(--ease-cinematic);
+  }
+  .final-cta__form:focus-within {
+    border-color: var(--thread);
+  }
+  .final-cta__input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: var(--space-3) var(--space-5);
+    font-family: 'Inter Tight', sans-serif;
+    font-size: var(--type-small);
+    color: var(--paper);
+    outline: none;
+    border-radius: 999px;
+  }
+  .final-cta__input::placeholder { color: var(--dust); }
+  .final-cta__btn {
+    background: var(--thread);
+    color: var(--void);
+    border: none;
+    padding: var(--space-3) var(--space-6);
+    border-radius: 999px;
+    font-family: 'Inter Tight', sans-serif;
+    font-size: var(--type-small);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition:
+      background-color var(--duration-med) var(--ease-cinematic),
+      box-shadow var(--duration-med) var(--ease-cinematic);
+  }
+  .final-cta__btn:hover {
+    box-shadow: 0 12px 40px rgba(122,181,176,0.35);
+  }
+  @media (max-width: 560px) {
+    .final-cta__form { flex-direction: column; gap: 8px; padding: 8px; border-radius: 24px; }
+    .final-cta__input, .final-cta__btn { width: 100%; }
+  }
+
+  /* Reduced-motion: kill all stagger transforms + spotlights. Content
+     renders statically, hovers stay (color-only is fine for a11y). */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal > *,
+    .reveal.visible > * {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    .resource-card::before,
+    .resource-featured::before { display: none; }
+    .magnet { transition: color var(--duration-med); }
+    /* Slide panels render in place; chars render static. */
+    .section-panel {
+      transform: none !important;
+      transition: none !important;
+    }
+    .scroll-float .char {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+    .pill-item::before { transition: none; }
+  }
 </style>
 </head>
 <body>
 
-<!-- Bookshelf fragments. Sparse glimpses of the tesseract bookshelf, anchored
-     on the LEFT edge, floating in void at irregular scroll depths. Each is
-     angled in 3D and slowly drifts (zero-G). They're encountered as you scroll,
-     not pasted as wallpaper. See #shelves CSS for layering + per-fragment art
-     direction (different bg-slice per fragment so none look identical). -->
-<div id="shelves" aria-hidden="true">
-  <div class="shelf shelf--1"><div class="shelf__inner"></div></div>
-  <div class="shelf shelf--2"><div class="shelf__inner"></div></div>
-  <div class="shelf shelf--3"><div class="shelf__inner"></div></div>
-  <div class="shelf shelf--4"><div class="shelf__inner"></div></div>
-  <div class="shelf shelf--5"><div class="shelf__inner"></div></div>
+<!-- Background video stage. Two looping videos layered behind everything;
+     scroll position drives a cross-fade so video 1 dominates the upper page
+     and video 2 takes over by the time the reader reaches the CTA. -->
+<div class="bg-stage" aria-hidden="true">
+  <video id="bg-video-1" class="bg-video" autoplay muted loop playsinline preload="auto">
+    <source src="hero-loop.mp4" type="video/mp4">
+  </video>
+  <video id="bg-video-2" class="bg-video" autoplay muted loop playsinline preload="auto">
+    <source src="hero-loop-2.mp4" type="video/mp4">
+  </video>
 </div>
 
 <!-- Hidden SVG <defs> — the #luma-key filter is referenced by #spaceman's CSS.
@@ -885,15 +1100,6 @@
         0 1 0 0 0
         0 0 1 0 0
         0.299 0.587 0.114 0 -0.05"/>
-    </filter>
-
-    <!-- Bookshelf edge dissolve. feTurbulence makes a fractal-noise field;
-         feDisplacementMap warps the source image's pixels along that field.
-         Low scale (~22px) so the photo barely distorts but the mask edge
-         dissolves into ragged organic strands — torn-paper / portal-tear feel. -->
-    <filter id="dissolve" x="-15%" y="-15%" width="130%" height="130%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.014 0.018" numOctaves="2" seed="7" result="noise"/>
-      <feDisplacementMap in="SourceGraphic" in2="noise" scale="22" xChannelSelector="R" yChannelSelector="G"/>
     </filter>
   </defs>
 </svg>
@@ -916,25 +1122,25 @@
       </feMerge>
     </filter>
     <radialGradient id="origin-glow">
-      <stop offset="0%"   stop-color="#FFE0B0" stop-opacity="1"/>
-      <stop offset="35%"  stop-color="#FFB347" stop-opacity="0.6"/>
-      <stop offset="100%" stop-color="#FFB347" stop-opacity="0"/>
+      <stop offset="0%"   stop-color="#C5E8DE" stop-opacity="1"/>
+      <stop offset="35%"  stop-color="#7AB5B0" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#7AB5B0" stop-opacity="0"/>
     </radialGradient>
     <linearGradient id="thread-grad-1" gradientUnits="userSpaceOnUse">
-      <stop offset="0%"   stop-color="#FFE0B0" stop-opacity="1"/>
-      <stop offset="20%"  stop-color="#FFB347" stop-opacity="0.85"/>
-      <stop offset="60%"  stop-color="#FFB347" stop-opacity="0.35"/>
-      <stop offset="100%" stop-color="#FFB347" stop-opacity="0"/>
+      <stop offset="0%"   stop-color="#C5E8DE" stop-opacity="1"/>
+      <stop offset="20%"  stop-color="#7AB5B0" stop-opacity="0.85"/>
+      <stop offset="60%"  stop-color="#7AB5B0" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#7AB5B0" stop-opacity="0"/>
     </linearGradient>
     <linearGradient id="thread-grad-2" gradientUnits="userSpaceOnUse">
-      <stop offset="0%"   stop-color="#FFE0B0" stop-opacity="0.9"/>
-      <stop offset="60%"  stop-color="#FFB347" stop-opacity="0.25"/>
-      <stop offset="100%" stop-color="#FFB347" stop-opacity="0"/>
+      <stop offset="0%"   stop-color="#C5E8DE" stop-opacity="0.9"/>
+      <stop offset="60%"  stop-color="#7AB5B0" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#7AB5B0" stop-opacity="0"/>
     </linearGradient>
     <linearGradient id="thread-grad-3" gradientUnits="userSpaceOnUse">
-      <stop offset="0%"   stop-color="#FFE0B0" stop-opacity="0.75"/>
-      <stop offset="60%"  stop-color="#FFB347" stop-opacity="0.18"/>
-      <stop offset="100%" stop-color="#FFB347" stop-opacity="0"/>
+      <stop offset="0%"   stop-color="#C5E8DE" stop-opacity="0.75"/>
+      <stop offset="60%"  stop-color="#7AB5B0" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#7AB5B0" stop-opacity="0"/>
     </linearGradient>
   </defs>
 
@@ -945,17 +1151,17 @@
        Glow stroke widths halved + opacities dropped ~half across the board. -->
   <path id="thread-1-glow" d="M0 0" stroke="url(#thread-grad-1)" stroke-width="2"
         fill="none" filter="url(#glow)" stroke-linecap="round" opacity="0.40"/>
-  <path id="thread-1" d="M0 0" stroke="#FFE0B0" stroke-width="0.9"
+  <path id="thread-1" d="M0 0" stroke="#C5E8DE" stroke-width="0.9"
         fill="none" stroke-linecap="round" stroke-dasharray="20 6" opacity="0.55"/>
 
   <path id="thread-2-glow" d="M0 0" stroke="url(#thread-grad-2)" stroke-width="1.6"
         fill="none" filter="url(#glow)" stroke-linecap="round" opacity="0.32"/>
-  <path id="thread-2" d="M0 0" stroke="#FFB347" stroke-width="0.7"
+  <path id="thread-2" d="M0 0" stroke="#7AB5B0" stroke-width="0.7"
         fill="none" stroke-linecap="round" stroke-dasharray="14 5" opacity="0.45"/>
 
   <path id="thread-3-glow" d="M0 0" stroke="url(#thread-grad-3)" stroke-width="1.2"
         fill="none" filter="url(#glow)" stroke-linecap="round" opacity="0.22"/>
-  <path id="thread-3" d="M0 0" stroke="#FFB347" stroke-width="0.55"
+  <path id="thread-3" d="M0 0" stroke="#7AB5B0" stroke-width="0.55"
         fill="none" stroke-linecap="round" stroke-dasharray="10 6" opacity="0.35"/>
 
   <circle id="origin-1" cx="0" cy="0" r="18" fill="url(#origin-glow)" opacity="0"/>
@@ -966,155 +1172,182 @@
 <!-- ── NAV ──
      Glass-pill nav. .liquid-glass adds the frosted bg + rim highlight; the
      nav rule itself sizes it (border-radius: 999px → pill). -->
-<nav class="liquid-glass">
-  <a href="#hero">Home</a>
-  <div class="nav-dot"></div>
-  <a href="#value">What's inside</a>
-  <div class="nav-dot"></div>
-  <a href="#resources">Resources</a>
-  <div class="nav-dot"></div>
-  <a href="#writing">Reads</a>
-  <div class="nav-dot"></div>
-  <a href="#email-capture">Subscribe</a>
+<!-- PillNav — each <a> is a pill-item with a hover circle that "fills" the
+     pill from a precomputed radius (set via JS on load from each item's
+     bounding rect). Glass surface comes from .liquid-glass. Pattern from
+     the AIS template's PillNav component. -->
+<nav class="pill-nav liquid-glass" aria-label="Primary">
+  <a class="pill-item" href="#hero"><span class="pill-item__label">Home</span></a>
+  <a class="pill-item" href="#value"><span class="pill-item__label">Inside</span></a>
+  <a class="pill-item" href="#resources"><span class="pill-item__label">Resources</span></a>
+  <a class="pill-item" href="#writing"><span class="pill-item__label">Reads</span></a>
+  <a class="pill-item pill-item--cta" href="#email-capture"><span class="pill-item__label">Join</span></a>
 </nav>
 
 <!-- All sections wrapped so 3D perspective applies only to them, not the
      fixed-positioned spaceman/threads above. -->
 <main class="scenes">
 
-<!-- ── 1. HERO ── -->
+<!-- ── 1. HERO ──
+     Video bg lives in .bg-stage, not here — it's a fixed full-page layer
+     that cross-fades to the second video as the reader scrolls. -->
 <section id="hero" data-screen-label="01 Hero">
-
-  <video id="hero-video" autoplay muted loop playsinline>
-    <source src="hero-loop.mp4" type="video/mp4">
-  </video>
 
   <div class="hero-content reveal">
     <p class="hero-eyebrow">Taelo Kim · Seoul · 2026</p>
-    <h1 class="hero-headline">Pull the<br><em>thread.</em></h1>
+    <!-- ScrollFloat hero — JS splits the lines into per-character <span class="char">
+         on load. Scroll progress (0..1 over the first 1.0× viewport) drives each
+         char's opacity + translateY in stagger. Reduced-motion users see the
+         static rendering — no per-char fade. Pattern from AIS template. -->
+    <h1 class="hero-headline scroll-float" data-scroll-float>
+      <span class="scroll-float__line" data-text="Pull the">Pull the</span>
+      <span class="scroll-float__line scroll-float__line--em" data-text="thread."><em>thread.</em></span>
+    </h1>
     <p class="hero-sub">Operator playbooks, prompt packs, and frameworks for builders shipping AI products in Asia. Free. Direct. No cadence.</p>
-    <a href="#resources" class="hero-cta liquid-glass">See what's inside</a>
+    <a href="#resources" class="hero-cta liquid-glass magnet">See what's inside</a>
   </div>
 
-  <span class="scroll-hint">↓ scroll</span>
 </section>
 
-<!-- ── 2. VALUE — What's inside ── -->
-<section id="value" data-screen-label="02 What's inside">
+<!-- ── 2. SECTION ONE (was: VALUE) ──
+     SlidePanel: slides up from y:100% to y:0 driven by its own scroll-into-view
+     progress, plus mousemove 3D tilt at the panel level. Wrapped in
+     .panel-slot so the slot is full-viewport-height while the panel inside
+     can size to its content. -->
+<div class="panel-slot" data-screen-label="02 Section One">
+  <section id="value" class="section-panel">
+    <div class="reveal">
+      <div class="section-label">Section One</div>
+      <p class="intro-para">Section One headline goes here — set the frame for what readers will get below.</p>
+      <div class="value-row">
+        <div class="value-item">
+          <div class="value-label">First block.</div>
+          <p class="value-desc">Short body copy supporting the first idea. Two or three sentences is the right shape — long enough to carry weight, short enough to feel direct.</p>
+        </div>
+        <div class="value-item">
+          <div class="value-label">Second block.</div>
+          <p class="value-desc">Short body copy supporting the second idea. Same shape — keep it tight, keep it concrete.</p>
+        </div>
+        <div class="value-item">
+          <div class="value-label">Third block.</div>
+          <p class="value-desc">Short body copy supporting the third idea. Three blocks read as a triangle; it's a stable composition.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ── 3. SECTION TWO (was: RESOURCES) ── -->
+<div class="panel-slot" data-screen-label="03 Section Two">
+  <section id="resources" class="section-panel">
+    <div class="reveal">
+      <div class="section-label">Section Two</div>
+
+      <div class="resource-featured">
+        <div class="resource-featured-tag">Featured</div>
+        <div class="resource-featured-title">Featured Item Title</div>
+        <p class="resource-featured-desc">A short paragraph describing the featured resource. Replace with real copy and a real link to the asset, lead magnet, or detail page. Keep it specific — what they get, why it matters.</p>
+        <a href="#email-capture" class="resource-link magnet">Get it</a>
+      </div>
+
+      <div class="resource-grid">
+        <div class="resource-card liquid-glass">
+          <div class="resource-card-tag">Tag A</div>
+          <div class="resource-card-title">Card title one</div>
+          <p class="resource-card-desc">A short description of the first card. One or two sentences carries the weight.</p>
+        </div>
+        <div class="resource-card liquid-glass">
+          <div class="resource-card-tag">Tag B</div>
+          <div class="resource-card-title">Card title two</div>
+          <p class="resource-card-desc">A short description of the second card. One or two sentences carries the weight.</p>
+        </div>
+        <div class="resource-card liquid-glass">
+          <div class="resource-card-tag">Tag C</div>
+          <div class="resource-card-title">Card title three</div>
+          <p class="resource-card-desc">A short description of the third card. One or two sentences carries the weight.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ── 4. SECTION THREE (was: WRITING) ── -->
+<div class="panel-slot" data-screen-label="04 Section Three">
+  <section id="writing" class="section-panel">
+    <div class="reveal">
+      <div class="section-label">Section Three</div>
+      <a href="#" class="writing-row">
+        <div class="writing-left">
+          <div class="writing-title">First entry headline goes here</div>
+          <div class="writing-desc">Short subtitle or one-line summary.</div>
+        </div>
+        <div class="writing-date">2026-04-21</div>
+      </a>
+      <a href="#" class="writing-row">
+        <div class="writing-left">
+          <div class="writing-title">Second entry headline goes here</div>
+          <div class="writing-desc">Short subtitle or one-line summary.</div>
+        </div>
+        <div class="writing-date">2026-03-30</div>
+      </a>
+      <a href="#" class="writing-row">
+        <div class="writing-left">
+          <div class="writing-title">Third entry headline goes here</div>
+          <div class="writing-desc">Short subtitle or one-line summary.</div>
+        </div>
+        <div class="writing-date">2026-03-12</div>
+      </a>
+      <a href="#" class="writing-row">
+        <div class="writing-left">
+          <div class="writing-title">Fourth entry headline goes here</div>
+          <div class="writing-desc">Short subtitle or one-line summary.</div>
+        </div>
+        <div class="writing-date">2026-02-18</div>
+      </a>
+    </div>
+  </section>
+</div>
+
+<!-- ── 5. STATS ──
+     Three numbers + labels. Generic placeholder values; replace with real ones.
+     Stats sit OUTSIDE a panel-slot — they're a single horizontal band, not a
+     full-viewport sliding panel. -->
+<section id="stats" class="section-stats" data-screen-label="05 Stats">
   <div class="reveal">
-    <div class="section-label">What's inside</div>
-    <p class="intro-para">Three things you'll get if you stay. No filler.</p>
-    <div class="value-row">
-      <div class="value-item">
-        <div class="value-label">Prompt packs.</div>
-        <p class="value-desc">The exact prompts I use to ship faster. Banned defaults sheets, reference dictionaries, voice specs, design tokens. Steal them.</p>
+    <div class="stats-row">
+      <div class="stat-item">
+        <div class="stat-number">10K+</div>
+        <div class="stat-label">Users</div>
       </div>
-      <div class="value-item">
-        <div class="value-label">Operator playbooks.</div>
-        <p class="value-desc">How to enter Korea and Southeast Asia. What to validate. The failure modes I've seen across 150+ pitches and my own shipped products.</p>
+      <div class="stat-item">
+        <div class="stat-number">500+</div>
+        <div class="stat-label">Members</div>
       </div>
-      <div class="value-item">
-        <div class="value-label">Build logs.</div>
-        <p class="value-desc">Real numbers from real products. What's working, what isn't, what I'd do differently. No theory.</p>
+      <div class="stat-item">
+        <div class="stat-number">#1</div>
+        <div class="stat-label">Rank</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── 3. RESOURCES ── -->
-<section id="resources" data-screen-label="03 Resources">
+<!-- ── 6. FINAL CTA ──
+     Centered final-CTA block. The bg-stage video underneath has fully
+     cross-faded to video 2 by this point, so the CTA reads against the
+     bottom-bookend ambience. -->
+<div id="email-capture" class="final-cta" data-screen-label="06 Get Started">
   <div class="reveal">
-    <div class="section-label">Resources</div>
-
-    <div class="resource-featured">
-      <div class="resource-featured-tag">Featured — Free download</div>
-      <div class="resource-featured-title">The Claude Design Overrides Pack</div>
-      <p class="resource-featured-desc">The seven overrides I used to build this site so it doesn't look like every other AI tutorial output. Banned defaults sheet, reference dictionary template, voice spec, design tokens starter — every prompt I actually used. Drop into your own Claude Design session.</p>
-      <a href="#email-capture" class="resource-link">Get it free</a>
-    </div>
-
-    <div class="resource-grid">
-      <div class="resource-card liquid-glass">
-        <div class="resource-card-tag">Framework</div>
-        <div class="resource-card-title">KR / SEA Market Entry Checklist</div>
-        <p class="resource-card-desc">What to validate before launching across Korea, Japan, Vietnam, Indonesia. The questions I wish someone had handed me.</p>
-      </div>
-      <div class="resource-card liquid-glass">
-        <div class="resource-card-tag">Template</div>
-        <div class="resource-card-title">AI Product Spec Template</div>
-        <p class="resource-card-desc">How I spec products before writing code. The exact doc structure I used for the last five things I shipped.</p>
-      </div>
-      <div class="resource-card liquid-glass">
-        <div class="resource-card-tag">Playbook</div>
-        <div class="resource-card-title">Cross-Border Ops Playbook</div>
-        <p class="resource-card-desc">Logistics, partners, returns, taxes across 6 markets. The unglamorous stuff that decides whether your product survives.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── 4. FOR WHO + WHY LISTEN ── -->
-<section id="for-who" data-screen-label="04 For who">
-  <div class="reveal">
-    <div class="section-label">For</div>
-    <p class="intro-para">Builders shipping AI products. Operators running cross-border ecommerce. Anyone who'd rather see real numbers than another AI demo — especially if you're working between Korea, Japan, Southeast Asia, and Western markets.</p>
-
-    <div class="section-label" style="margin-top: var(--space-7);">Why listen</div>
-    <p class="about-text">Reviewed 150+ pitches as a VC. Then crossed the table and shipped products in K-beauty, AI tooling, and ecommerce across Korea, Japan, and Southeast Asia. Everything I write here is something I'm using, not something I think might work.</p>
-  </div>
-</section>
-
-<!-- ── 5. READS ── -->
-<section id="writing" data-screen-label="05 Reads">
-  <div class="reveal">
-    <div class="section-label">Deeper reads</div>
-    <a href="#" class="writing-row">
-      <div class="writing-left">
-        <div class="writing-title">Why most AI products die at distribution, not the model</div>
-        <div class="writing-desc">It's not the model. It's the motion.</div>
-      </div>
-      <div class="writing-date">2026-04-21</div>
-    </a>
-    <a href="#" class="writing-row">
-      <div class="writing-left">
-        <div class="writing-title">What 150 pitch decks taught me about narrative</div>
-        <div class="writing-desc">Pattern recognition from the other side of the table.</div>
-      </div>
-      <div class="writing-date">2026-03-30</div>
-    </a>
-    <a href="#" class="writing-row">
-      <div class="writing-left">
-        <div class="writing-title">Operating cross-border in KR and SEA, plainly</div>
-        <div class="writing-desc">The part no one writes about because it's unglamorous.</div>
-      </div>
-      <div class="writing-date">2026-03-12</div>
-    </a>
-    <a href="#" class="writing-row">
-      <div class="writing-left">
-        <div class="writing-title">How I think about e-commerce at scale</div>
-        <div class="writing-desc">Global logistics is a design problem, not a spreadsheet.</div>
-      </div>
-      <div class="writing-date">2026-02-18</div>
-    </a>
-  </div>
-</section>
-
-<!-- ── 6. EMAIL CAPTURE ── -->
-<div id="email-capture" data-screen-label="06 Subscribe">
-  <div class="reveal">
-    <div class="section-label" style="color: var(--signal); --dust: var(--signal);">The list</div>
-    <h2 class="email-headline">Get new resources first.</h2>
-    <p class="email-sub">Free packs and playbooks, sent only when something's actually ready. No weekly newsletter, no hype, no upsells. Unsubscribe in one click.</p>
+    <h2 class="final-cta__headline">Get Started</h2>
+    <p class="final-cta__sub">A short closing line goes here — one sentence, direct.</p>
     <!-- Formspree: sign up at https://formspree.io, create a new form,
-         then replace REPLACE_WITH_FORMSPREE_ID below with your form ID
-         (the part after /f/ in your endpoint URL). Free tier = 50 / month. -->
-    <form class="email-form" id="email-form"
+         then replace REPLACE_WITH_FORMSPREE_ID below with your form ID. -->
+    <form class="final-cta__form email-form" id="email-form"
           action="https://formspree.io/f/REPLACE_WITH_FORMSPREE_ID"
           method="POST">
-      <input class="email-input" type="email" name="email" placeholder="your@email.com" autocomplete="email" required>
-      <!-- Honeypot: bots fill it, humans don't see it. Formspree drops these. -->
+      <input class="final-cta__input email-input" type="email" name="email" placeholder="your@email.com" autocomplete="email" required>
+      <!-- Honeypot: bots fill it, humans don't see it. -->
       <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
-      <button class="email-btn" type="submit">Subscribe</button>
+      <button class="final-cta__btn email-btn magnet" type="submit"><span>Join</span></button>
     </form>
     <p class="email-success" id="email-success" hidden>You're in. New resources hit your inbox first.</p>
     <p class="email-error" id="email-error" hidden>Something went wrong — try again, or email Taelo directly.</p>
@@ -1149,6 +1382,129 @@
   // Fire hero reveal immediately
   document.querySelector('#hero .reveal').classList.add('visible');
 
+  // Cache reduced-motion preference once for all interactive layers below.
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ── PILLNAV — radius + active state ──
+  // Each pill's hover circle needs a radius big enough to fill the pill on
+  // scale(1). Set per-item from bounding box on load + on resize. Active
+  // state lit by matching the current activeSection id to data-target.
+  const pillItems = document.querySelectorAll('.pill-item');
+  function sizePills() {
+    pillItems.forEach(el => {
+      const r = el.getBoundingClientRect();
+      const radius = Math.max(r.width, r.height) * 1.15;
+      el.style.setProperty('--pill-r', radius.toFixed(0) + 'px');
+    });
+  }
+  sizePills();
+  window.addEventListener('resize', sizePills);
+
+  // Map href anchor → pill element so the active section can light its pill.
+  const pillByTarget = {};
+  pillItems.forEach(el => {
+    const href = el.getAttribute('href') || '';
+    if (href.startsWith('#')) pillByTarget[href.slice(1)] = el;
+  });
+  function setActivePill(id) {
+    pillItems.forEach(p => p.classList.remove('is-active'));
+    if (pillByTarget[id]) pillByTarget[id].classList.add('is-active');
+  }
+
+  // ── SCROLLFLOAT — split hero headline into per-char spans ──
+  // Each .scroll-float__line gets split. Spaces become .char--space (zero-width
+  // span with em-width) so word breaks survive. Each char's --i index drives a
+  // staggered scroll-scrubbed fade in the frame loop below.
+  function splitChars(line) {
+    const text = line.getAttribute('data-text') || line.textContent || '';
+    // Preserve <em> wrapping if present — clone with chars inside.
+    const hasEm = !!line.querySelector('em');
+    const wrap = (charText, idx) => {
+      if (charText === ' ') return `<span class="char char--space" style="--i:${idx}"> </span>`;
+      return `<span class="char" style="--i:${idx}">${charText}</span>`;
+    };
+    const inner = [...text].map((c, i) => wrap(c, i)).join('');
+    line.innerHTML = hasEm ? `<em>${inner}</em>` : inner;
+  }
+  const sfLines = document.querySelectorAll('.scroll-float__line');
+  if (!prefersReducedMotion) sfLines.forEach(splitChars);
+  const sfChars = document.querySelectorAll('.scroll-float .char');
+
+  // ── SLIDEPANEL — slide-up + mousemove tilt ──
+  // Each .panel-slot drives its inner .section-panel:
+  //   --panel-y     translateY 100% → 0% as the slot crosses the viewport
+  //                 (slot top hits viewport bottom = 100%, slot top hits
+  //                  viewport top = 0%)
+  //   --panel-tx/ty rotateX/Y on mousemove (panel-level tilt, capped 4°)
+  // Lerped each frame so motion is smooth and not jittery on fast scrolls.
+  const panelSlots = document.querySelectorAll('.panel-slot');
+  const panelState = new Map(); // el → { tx, ty, txTarget, tyTarget }
+  panelSlots.forEach(slot => {
+    panelState.set(slot, { tx: 0, ty: 0, txTarget: 0, tyTarget: 0 });
+    if (!prefersReducedMotion) {
+      slot.addEventListener('mousemove', (e) => {
+        const r = slot.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width;
+        const py = (e.clientY - r.top) / r.height;
+        const PANEL_TILT = 4;  // degrees (subtler than card tilt of 5°)
+        const s = panelState.get(slot);
+        s.txTarget = -(py - 0.5) * 2 * PANEL_TILT;
+        s.tyTarget =  (px - 0.5) * 2 * PANEL_TILT;
+      });
+      slot.addEventListener('mouseleave', () => {
+        const s = panelState.get(slot);
+        s.txTarget = 0;
+        s.tyTarget = 0;
+      });
+    }
+  });
+
+  // Per-frame updater for SlidePanel y + tilt + ScrollFloat chars.
+  // Called from the same RAF loop as the thread mechanic to avoid two loops.
+  function updatePanelsAndChars() {
+    const vh = window.innerHeight;
+
+    // Slide-up + tilt for each panel-slot
+    panelSlots.forEach(slot => {
+      const r = slot.getBoundingClientRect();
+      const panel = slot.querySelector('.section-panel');
+      if (!panel) return;
+      // Progress: 0 when slot top hits viewport bottom; 1 when slot top hits
+      // viewport top. Past 1 (slot scrolled past) → still 1 (panel stays at 0%).
+      const raw = 1 - r.top / vh;
+      const p = Math.max(0, Math.min(raw, 1));
+      // translateY: 100% (offstage below) → 0% (settled). Easing: cubic-out.
+      const ease = 1 - Math.pow(1 - p, 3);
+      const yPct = (1 - ease) * 100;
+      panel.style.setProperty('--panel-y', yPct.toFixed(2) + '%');
+
+      // Lerp tilt
+      const s = panelState.get(slot);
+      s.tx += (s.txTarget - s.tx) * 0.10;
+      s.ty += (s.tyTarget - s.ty) * 0.10;
+      panel.style.setProperty('--panel-tx', s.tx.toFixed(2) + 'deg');
+      panel.style.setProperty('--panel-ty', s.ty.toFixed(2) + 'deg');
+    });
+
+    // ScrollFloat hero chars — fade+slide as the user scrolls past hero.
+    // Each char's --i adds a small stagger (per-char delay in the curve).
+    if (!prefersReducedMotion && sfChars.length) {
+      const scrollPx = window.scrollY;
+      const total = vh * 0.9;          // fade complete by ~0.9 viewports
+      const baseT = Math.max(0, Math.min(scrollPx / total, 1));
+      const N = sfChars.length;
+      sfChars.forEach((ch, i) => {
+        // Staggered local progress: each char starts fading slightly after
+        // the previous. Spread = 25% of total range so the cascade is tight.
+        const start = (i / N) * 0.25;
+        const local = Math.max(0, Math.min((baseT - start) / (1 - 0.25), 1));
+        const ease = local * local;    // ease-in
+        ch.style.opacity = (1 - ease).toFixed(3);
+        ch.style.transform = `translateY(${(ease * 24).toFixed(1)}px)`;
+      });
+    }
+  }
+
   // ── THREAD MECHANIC ──
   // Spaceman is flipped (scaleX(-1)) so his outstretched arm points TOWARD content.
   // Hands therefore appear on the LEFT side of his bounding box.
@@ -1169,6 +1525,29 @@
   const g2 = document.getElementById('thread-grad-2');
   const g3 = document.getElementById('thread-grad-3');
   const spaceman = document.getElementById('spaceman');
+
+  // ── BG VIDEO CROSSFADE ──
+  // Two looping videos layered behind everything in .bg-stage. Scroll progress
+  // drives a cross-fade: video 1 dominates the upper page, video 2 fades in as
+  // the reader heads toward the bottom. Fully swapped well before the CTA so
+  // the bottom of the page reads as the second video's bookend.
+  const bgVideo1 = document.getElementById('bg-video-1');
+  const bgVideo2 = document.getElementById('bg-video-2');
+  const BG_MAX_OPACITY = 0.55;
+  const BG_FADE_START  = 0.55;   // scroll % where video 2 begins to appear
+  const BG_FADE_END    = 0.80;   // scroll % where video 2 has fully taken over
+  function smoothstep01(a, b, x) {
+    const t = Math.max(0, Math.min(1, (x - a) / (b - a)));
+    return t * t * (3 - 2 * t);
+  }
+  function updateBgCrossfade() {
+    if (!bgVideo1 || !bgVideo2) return;
+    const totalScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+    const p = Math.max(0, Math.min(window.scrollY / totalScroll, 1));
+    const t = smoothstep01(BG_FADE_START, BG_FADE_END, p);
+    bgVideo1.style.opacity = (BG_MAX_OPACITY * (1 - t)).toFixed(3);
+    bgVideo2.style.opacity = (BG_MAX_OPACITY * t).toFixed(3);
+  }
 
   // ── VERLET ROPE ──
   // Each thread is a chain of N points integrated with verlet physics. Endpoints
@@ -1312,13 +1691,18 @@
 
     const ease = t * t * (3 - 2 * t);  // smoothstep
 
-    // Gentler position change so the spaceman doesn't traverse half the viewport.
-    // Stays right of center vertically; just shrinks and drifts slightly upward.
-    const heightVh  = 62 - (62 - 36) * ease;   // 62vh → 36vh
-    const topPct    = 50 - (50 - 32) * ease;   // 50% → 32% (was 50→11; way less travel)
-    const rightPct  =  4;                       // no horizontal shift
-    const opacity   =  1 - (1 - 0.85) * ease;
+    // Stay BIG throughout. The spaceman is the signature interaction — it should
+    // dominate the frame at the top, and still feel large after the user scrolls
+    // past the hero. Shrinks gently (70 → 56vh) and drifts only a little upward.
+    const heightVh  = 70 - (70 - 56) * ease;   // 70vh → 56vh
+    const topPct    = 50 - (50 - 42) * ease;   // 50% → 42% (subtle upward drift)
+    const rightPct  =  4;                       // base anchor; horizontal drift handled in transform
+    const opacity   =  1 - (1 - 0.92) * ease;   // barely dims
     const yShiftPct = -50 * (1 - ease);
+    // Drift further right as scroll advances so the character clears the CTA's
+    // center column at the bottom. translateX is applied last in the transform
+    // so it operates in screen space (positive = right) regardless of the scaleX(-1) flip.
+    const xShiftPct = 18 * ease;                 // 0% → 18% of element width
 
     // Body tilt — leans into the pull at peak. After scaleX(-1), POSITIVE rotation
     // is visually CCW (head tilts left toward content). Falls back to scroll progress
@@ -1336,11 +1720,12 @@
     spaceman.style.right = rightPct + '%';
     spaceman.style.opacity = opacity;
     spaceman.style.transform =
-      `translateY(${yShiftPct}%) scaleX(-1) rotate(${tiltDeg}deg)`;
+      `translateX(${xShiftPct}%) translateY(${yShiftPct}%) scaleX(-1) rotate(${tiltDeg}deg)`;
   }
 
-  // Active-section tracking → drives glow band + label glow via CSS
-  const sectionIds = ['hero', 'value', 'resources', 'for-who', 'writing', 'email-capture'];
+  // Active-section tracking → drives glow band + label glow via CSS.
+  // for-who section was dropped during the template restructure; stats was added.
+  const sectionIds = ['hero', 'value', 'resources', 'writing', 'stats', 'email-capture'];
   const sectionEls = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
   let activeSection = heroEl;
   function updateActiveSection() {
@@ -1355,6 +1740,8 @@
       sectionEls.forEach(s => s.classList.remove('active-section'));
       best.classList.add('active-section');
       activeSection = best;
+      // Light the matching pill in the PillNav.
+      setActivePill(best.id);
     }
   }
 
@@ -1402,28 +1789,42 @@
       targets.e3.x = hands.h3.x - vw * 0.18 * progress;
       targets.e3.y = hands.h3.y + vh * 0.45 * progress;
     } else {
-      // Other sections: threads converge on active section's content
+      // Other sections: threads anchor BEHIND the active section, with
+      // endpoints peeking out from the LEFT edge — this is the visible
+      // "anchor" that ties the section to the spaceman's pull. Targets
+      // land in the section's left padding-gutter (empty space, no
+      // content), spread vertically across the visible portion. Section
+      // z-index is higher than #thread-canvas so the thread's middle
+      // section is occluded — only the start (at the spaceman's hand)
+      // and the end (at the left edge) are visible.
       const aRect = activeSection.getBoundingClientRect();
       const visTop = Math.max(aRect.top, 0);
       const visBottom = Math.min(aRect.bottom, vh);
-      const sectionLeft = Math.max(aRect.left + 40, vw * 0.05);
-      targets.e1.x = sectionLeft + 80;
-      targets.e1.y = visTop + Math.min(140, (visBottom - visTop) * 0.20);
-      targets.e2.x = sectionLeft;
-      targets.e2.y = visTop + (visBottom - visTop) * 0.45;
-      targets.e3.x = sectionLeft + 50;
-      targets.e3.y = visTop + (visBottom - visTop) * 0.78;
+      const sectionH = Math.max(visBottom - visTop, 1);
+      // Peek-out point: just inside the section's left edge, past any
+      // body padding. Stays within the empty left-padding gutter so the
+      // thread tip emerges from "behind" the content visually.
+      const peekX = Math.max(aRect.left + 36, vw * 0.04);
+      targets.e1.x = peekX + 8;
+      targets.e1.y = visTop + sectionH * 0.20;
+      targets.e2.x = peekX - 14;
+      targets.e2.y = visTop + sectionH * 0.50;
+      targets.e3.x = peekX + 2;
+      targets.e3.y = visTop + sectionH * 0.80;
       revealAmount = 0.85;
     }
   }
 
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Reuse the prefersReducedMotion constant defined earlier.
+  const reduceMotion = prefersReducedMotion;
   const SMOOTH = reduceMotion ? 1 : 0.10;
   let dashOffset = 0;
 
   function frame() {
     updateSpacemanLayout();
+    updateBgCrossfade();
     updateActiveSection();
+    updatePanelsAndChars();
     computeHandsAndTargets();
 
     if (!initialized) {
@@ -1490,6 +1891,64 @@
   const emailForm    = document.getElementById('email-form');
   const emailSuccess = document.getElementById('email-success');
   const emailError   = document.getElementById('email-error');
+  // ── INTERACTIVE LAYER (cursor spotlight + 3D tilt + magnetic CTAs) ──
+  // Cards get FOUR CSS vars updated on mousemove:
+  //   --mx, --my  → percentage cursor position within card (drives ::before
+  //                 amber spotlight gradient)
+  //   --tx, --ty  → rotateX / rotateY in degrees (drives 3D tilt; capped 5°)
+  // On mouseleave, tilt resets to 0 so the card settles flat with the
+  // CSS transition handling the spring-back.
+  const spotEls = document.querySelectorAll('.resource-card, .resource-featured');
+  const TILT_MAX = 5; // degrees
+  spotEls.forEach(el => {
+    el.addEventListener('mousemove', (e) => {
+      const r = el.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width;   // 0..1
+      const py = (e.clientY - r.top)  / r.height;  // 0..1
+      el.style.setProperty('--mx', (px * 100) + '%');
+      el.style.setProperty('--my', (py * 100) + '%');
+      if (!reduceMotion) {
+        // py < 0.5 → cursor in top half → card tilts FORWARD/UP (-rotateX positive in screen Y)
+        // px > 0.5 → cursor in right half → card tilts to RIGHT (+rotateY)
+        const tx = -(py - 0.5) * 2 * TILT_MAX; // -TILT_MAX..+TILT_MAX
+        const ty =  (px - 0.5) * 2 * TILT_MAX;
+        el.style.setProperty('--tx', tx.toFixed(2) + 'deg');
+        el.style.setProperty('--ty', ty.toFixed(2) + 'deg');
+      }
+    });
+    el.addEventListener('mouseleave', () => {
+      el.style.setProperty('--tx', '0deg');
+      el.style.setProperty('--ty', '0deg');
+    });
+  });
+
+  // Magnetic CTAs: when the cursor enters ~1.6× the button's bounding
+  // radius, the button translates 22% of the cursor-to-center vector
+  // toward the cursor. Reads as a soft pull, not a snap. Skipped for
+  // reduced-motion users entirely.
+  if (!reduceMotion) {
+    const magnets = document.querySelectorAll('.magnet');
+    magnets.forEach(el => {
+      el.addEventListener('mousemove', (e) => {
+        const r = el.getBoundingClientRect();
+        const cx = r.left + r.width / 2;
+        const cy = r.top + r.height / 2;
+        const dx = e.clientX - cx;
+        const dy = e.clientY - cy;
+        const radius = Math.max(r.width, r.height);
+        const dist = Math.hypot(dx, dy);
+        if (dist < radius * 1.6) {
+          el.style.transform = `translate(${dx * 0.22}px, ${dy * 0.22}px)`;
+        } else {
+          el.style.transform = '';
+        }
+      });
+      el.addEventListener('mouseleave', () => {
+        el.style.transform = '';
+      });
+    });
+  }
+
   emailForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
     emailError.hidden = true;
