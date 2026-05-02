@@ -4,1975 +4,1869 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Taelo Kim</title>
-<link rel="stylesheet" href="tokens.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ── TOKENS ── */
+:root {
+  --void:    #050510;
+  --paper:   #E8E4DC;
+  --thread:  #7AB5B0;
+  --thread-glow: #C5E8DE;
+  --dust:    rgba(232,228,220,0.45);
+  --signal:  #7AB5B0;
+  --amber:   #FFB347;
+  --amber-hi: #FFE0B0;
 
-  html { scroll-behavior: smooth; }
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body:    "Inter Tight", system-ui, sans-serif;
+  --font-mono:    "JetBrains Mono", monospace;
 
-  body {
-    background: var(--void);
-    color: var(--paper);
-    font-family: var(--font-body), 'Inter Tight', sans-serif;
-    font-size: var(--type-body);
-    line-height: 1.5;
-    overflow-x: hidden;
-    position: relative;
-  }
+  --type-hero:  clamp(56px, 8vw, 110px);
+  --type-h1:    clamp(36px, 5vw, 64px);
+  --type-h2:    clamp(26px, 3vw, 40px);
+  --type-body:  17px;
+  --type-small: 14px;
+  --type-mono:  13px;
 
-  /* Instrument Serif — used for vintage-italic emphasis on key words. Borrowed
-     from the reference site. Pairs with Fraunces; we keep Fraunces for display
-     headings and use Instrument Serif specifically for the <em> emphasis on
-     hero/intro words ("all", "thread", etc) where we want a more classical
-     typographic accent. */
-  .ital, em.ital, .hero-headline em, .intro-para em {
-    font-family: 'Instrument Serif', 'Fraunces', Georgia, serif;
-    font-style: italic;
-    font-weight: 400;
-    letter-spacing: 0;
-  }
+  --ease-cin: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-slow: 1200ms;
+  --dur-med:  600ms;
+  --dur-fast: 320ms;
+}
 
-  /* ── LIQUID GLASS ──
-     Reusable frosted-glass surface for nav, CTA buttons, cards. Pattern from
-     the reference site. Three things conspiring:
-       1. background: nearly transparent white (rgba 0.01) blended in luminosity
-          mode so it picks up brightness from what's behind without tinting.
-       2. backdrop-filter: blur 6px so the books/threads behind are visibly
-          frosted, not just dimmed.
-       3. ::before pseudo: a 1.4px gradient border (bright at top + bottom,
-          fading to nothing in the middle). Mask-composite punches out the
-          interior so only the rim shows — that's the "edge of glass" highlight.
-     Variant .liquid-glass--solid bumps the bg to 0.04 for stronger contrast on
-     primary CTAs (the email subscribe button etc). */
-  /* :where() keeps position-relative at zero specificity so nav's
-     position:fixed (and any future positioned glass element) still wins. */
-  :where(.liquid-glass) { position: relative; }
-  .liquid-glass {
-    background: rgba(255, 255, 255, 0.012);
-    background-blend-mode: luminosity;
-    -webkit-backdrop-filter: blur(6px) saturate(1.05);
-            backdrop-filter: blur(6px) saturate(1.05);
-    border: none;
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.10);
-    overflow: hidden;
-    isolation: isolate;
-  }
-  .liquid-glass::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1.4px;
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.45) 0%,
-      rgba(255, 255, 255, 0.15) 20%,
-      rgba(255, 255, 255, 0)    40%,
-      rgba(255, 255, 255, 0)    60%,
-      rgba(255, 255, 255, 0.15) 80%,
-      rgba(255, 255, 255, 0.45) 100%
-    );
-    -webkit-mask:
-      linear-gradient(#fff 0 0) content-box,
-      linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-            mask-composite: exclude;
-    pointer-events: none;
-    z-index: 1;
-  }
-  .liquid-glass--solid {
-    background: rgba(255, 255, 255, 0.045);
-  }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 
-  /* ── BG STAGE ──
-     Two looping background videos layered behind everything else. Both are
-     fixed full-bleed; scroll position drives a cross-fade between them
-     (video 1 dominates the upper page, video 2 takes over by the time the
-     reader is approaching the CTA). Sits BELOW threads (z=1), sections (z=2),
-     spaceman (z=50), pill-nav (z=100). */
-  .bg-stage {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    overflow: hidden;
-  }
-  .bg-video {
-    position: absolute;
-    inset: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-    filter: brightness(0.78) saturate(0.9);
-    will-change: opacity;
-  }
-  /* Video 1 starts visible; JS dims it as the reader scrolls. */
-  #bg-video-1 { opacity: 0.55; }
-  /* Video 2 starts hidden; JS lifts it. Mirrored so its character sits on
-     the LEFT — video 1's character is on the right, so the crossfade isn't
-     two characters colliding center-frame. */
-  #bg-video-2 {
-    opacity: 0;
-    transform: scaleX(-1);
-  }
-  /* Mask the Veo / generator watermark baked into the bottom-right of
-     bg-video-1's source frame. Soft radial fade to void so the patch blends
-     into the video's dark border instead of reading as a hard rectangle. */
-  .bg-stage::after {
-    content: '';
-    position: absolute;
-    right: 0; bottom: 0;
-    width: clamp(180px, 20vw, 320px);
-    height: clamp(70px, 8vh, 120px);
-    background: radial-gradient(ellipse at bottom right,
-      rgba(5, 5, 16, 0.97) 0%,
-      rgba(5, 5, 16, 0.88) 30%,
-      rgba(5, 5, 16, 0.45) 65%,
-      transparent 100%);
-    pointer-events: none;
-    z-index: 2;
-  }
+body {
+  background: var(--void);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-size: var(--type-body);
+  line-height: 1.5;
+  overflow-x: hidden;
+  position: relative;
+}
 
-  /* Perspective moved off body so it doesn't create a containing block
-     for fixed-positioned spaceman/threads. Apply only to a sections wrapper. */
-  .scenes {
-    perspective: 1400px;
-    perspective-origin: 50% 30%;
-  }
+/* ── LIQUID GLASS ── */
+:where(.glass) { position: relative; }
+.glass {
+  background: rgba(255,255,255,0.018);
+  backdrop-filter: blur(8px) saturate(1.1);
+  -webkit-backdrop-filter: blur(8px) saturate(1.1);
+  isolation: isolate;
+}
+.glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(160deg,
+    rgba(255,255,255,0.35) 0%,
+    rgba(255,255,255,0.08) 30%,
+    rgba(255,255,255,0) 55%,
+    rgba(255,255,255,0.12) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
+}
 
-  /* ── PILLNAV ──
-     Frosted glass pill at the top with individual pill-items. Each item has
-     a circle that scales from 0 → enough-to-fill-the-pill on hover, giving
-     the AIS-template hallmark "ink-fill" hover. The circle radius is set
-     per-item by JS on load (max(width, height) × 1.1) so geometry stays
-     correct across labels. Active pill (matches current scroll section)
-     gets a permanent paper-colored fill and dark text. */
-  .pill-nav {
-    position: fixed;
-    top: var(--space-5);
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 100;
-    display: flex;
-    gap: 4px;
-    align-items: center;
-    padding: 6px;
-    border-radius: 999px;
-  }
-  .pill-item {
-    position: relative;
-    overflow: hidden;
-    isolation: isolate;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 18px;
-    border-radius: 999px;
-    font-family: 'Inter Tight', sans-serif;
-    font-size: var(--type-small);
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--dust);
-    text-decoration: none;
-    transition: color var(--duration-med) var(--ease-cinematic);
-  }
-  .pill-item__label { position: relative; z-index: 2; }
-  /* Hover circle — sized by --pill-r CSS var (set by JS); positioned at the
-     pill's center, scales from 0 → 1 on hover. */
-  .pill-item::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: var(--pill-r, 120px);
-    height: var(--pill-r, 120px);
-    border-radius: 50%;
-    background: var(--paper);
-    transform: translate(-50%, -50%) scale(0);
-    transform-origin: center;
-    transition: transform 480ms var(--ease-cinematic);
-    z-index: 1;
-    pointer-events: none;
-  }
-  .pill-item:hover { color: var(--void); }
-  .pill-item:hover::before { transform: translate(-50%, -50%) scale(1); }
-  /* CTA pill — pre-filled with thread color so it reads as the primary action. */
-  .pill-item--cta {
-    color: var(--void);
-    background: var(--thread);
-  }
-  .pill-item--cta::before { background: var(--paper); }
-  .pill-item--cta:hover { color: var(--void); }
-  /* Active section's pill stays lit — paper-fill, dark text. */
-  .pill-item.is-active {
-    color: var(--void);
-  }
-  .pill-item.is-active::before { transform: translate(-50%, -50%) scale(1); }
-  .pill-item--cta.is-active { color: var(--void); }
-  .pill-item--cta.is-active::before { background: var(--paper); }
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  padding: 10px 24px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+nav a {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(232,228,220,0.6);
+  text-decoration: none;
+  padding: 4px 10px;
+  border-radius: 999px;
+  position: relative;
+  transition: color var(--dur-med) var(--ease-cin);
+  overflow: hidden;
+}
+nav a::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: var(--thread);
+  transform: scale(0);
+  transition: transform var(--dur-med) var(--ease-cin);
+  z-index: -1;
+}
+nav a:hover { color: var(--void); }
+nav a:hover::before { transform: scale(1); }
+nav a.active { color: var(--thread); }
 
-  /* ── HERO ── */
-  /* Full-bleed hero. NO transform here — that would create a containing block
-     and break position:fixed for the spaceman + threads. */
-  #hero {
-    position: relative !important;
-    width: 100vw !important;
-    max-width: none !important;
-    height: 100vh !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    left: 0 !important;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-  }
+/* ── BG STAGE — fixed, full bleed ── */
+#bg-stage {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+#bg-video-1, #bg-video-2 {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+#bg-video-1 {
+  opacity: 0.5;
+  filter: brightness(0.7) saturate(0.8);
+}
+#bg-video-2 {
+  opacity: 0;
+  transform: scaleX(-1);
+  filter: brightness(0.65) saturate(0.75);
+}
+/* Dark vignette overlay */
+#bg-stage::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 80% at 50% 50%, transparent 20%, rgba(5,5,16,0.5) 100%),
+    linear-gradient(to bottom, rgba(5,5,16,0.3) 0%, transparent 20%, transparent 80%, rgba(5,5,16,0.7) 100%);
+  pointer-events: none;
+}
 
-  /* Email capture — success / error post-submit messages. */
-  .email-success, .email-error {
-    font-size: var(--type-small);
-    margin-top: var(--space-4);
-    line-height: 1.5;
-  }
-  .email-success { color: var(--signal); }
-  .email-error   { color: var(--dust); }
+/* ── SPACEMAN — fixed, scroll-scrubbed ── */
+#spaceman {
+  position: fixed;
+  z-index: 50;
+  pointer-events: none;
+  width: auto;
+  right: 2%;
+  top: 50%;
+  height: 72vh;
+  transform: translateY(-50%) scaleX(-1);
+  filter: url(#luma-key) contrast(1.08) brightness(1.04);
+  clip-path: inset(3% 6% 10% 6%);
+  mask-image: radial-gradient(
+    ellipse 46% 64% at 50% 48%,
+    black 30%, rgba(0,0,0,0.88) 55%, rgba(0,0,0,0.4) 75%, transparent 92%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 46% 64% at 50% 48%,
+    black 30%, rgba(0,0,0,0.88) 55%, rgba(0,0,0,0.4) 75%, transparent 92%
+  );
+  will-change: transform, height, top, right, opacity;
+  transition: none;
+}
 
-  #spaceman {
-    position: fixed;
-    z-index: 50;
-    pointer-events: none;
-    width: auto;
-    filter: url(#luma-key) contrast(1.05) brightness(1.02);
-    /* Belt-and-suspenders watermark removal: clip-path crops 8% off each corner,
-       then radial mask feathers the remaining edges. */
-    clip-path: inset(4% 7% 12% 7%);
-    -webkit-mask-image: radial-gradient(
-      ellipse 44% 62% at 50% 50%,
-      black 32%,
-      rgba(0,0,0,0.92) 52%,
-      rgba(0,0,0,0.45) 74%,
-      transparent 90%
-    );
-            mask-image: radial-gradient(
-      ellipse 44% 62% at 50% 50%,
-      black 32%,
-      rgba(0,0,0,0.92) 52%,
-      rgba(0,0,0,0.45) 74%,
-      transparent 90%
-    );
-    will-change: transform, height, top, right, opacity;
-  }
+/* ── THREAD CANVAS ── */
+#thread-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw; height: 100vh;
+  z-index: 4;
+  pointer-events: none;
+}
 
-  /* Thread SVG overlay — fixed so threads can extend across the whole page.
-     z-index 1 places threads ABOVE the bookshelf (z=0) but BEHIND section
-     content (z=2 — set on .scenes section below). Result: threads emerge
-     from spaceman's hand, curve down-left BEHIND each active section, and
-     re-emerge peeking out the LEFT edge — the visible "anchor point" tying
-     the section to the spaceman's pull. */
-  #thread-canvas {
-    position: fixed;
-    inset: 0;
-    width: 100vw; height: 100vh;
-    z-index: 1;
-    pointer-events: none;
-  }
-  /* Sections sit ABOVE the thread layer so the thread passes behind them. */
-  .scenes section,
-  .scenes #email-capture {
-    position: relative;
-    z-index: 2;
-  }
+/* ── BOOKSHELF LAYERS ── */
+#shelves {
+  position: absolute;
+  top: 0; bottom: 0; left: 0;
+  width: 560px;
+  pointer-events: none;
+  z-index: 1;
+  perspective: 1600px;
+  perspective-origin: 0% 50%;
+  overflow: hidden;
+}
+.shelf {
+  position: absolute;
+  left: 0;
+  animation: shelf-drift 16s ease-in-out infinite;
+  will-change: transform;
+}
+.shelf__inner {
+  width: 100%; height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transform-origin: 0% 50%;
+  mix-blend-mode: screen;
+  opacity: 0.9;
+  filter: url(#dissolve) brightness(1.25) contrast(1.08) saturate(1.15);
+}
+@keyframes shelf-drift {
+  0%   { transform: translate3d(0,0,0); }
+  25%  { transform: translate3d(-4px,-10px,0); }
+  50%  { transform: translate3d(0,-18px,0); }
+  75%  { transform: translate3d(4px,-8px,0); }
+  100% { transform: translate3d(0,0,0); }
+}
 
-  .hero-content {
-    position: relative;
-    z-index: 4;
-    padding-left: var(--space-8);
-    max-width: 520px;
-  }
+/* Each shelf fragment: unique image, 3D angle, organic mask */
+.shelf--1 { top: 80vh;  width: 420px; height: 780px; animation-delay: 0s; }
+.shelf--1 .shelf__inner {
+  background-image: url('taelokim-site/project/bookshelf-portal-arch.jpg');
+  background-position: 50% center;
+  transform: rotateY(-6deg);
+  mask-image:
+    radial-gradient(ellipse 68% 94% at 30% 48%, black 0%, black 20%, rgba(0,0,0,0.6) 60%, transparent 95%),
+    radial-gradient(ellipse 40% 34% at 16% 76%, black 25%, transparent 82%),
+    radial-gradient(ellipse 30% 24% at 48% 16%, black 30%, transparent 82%);
+  -webkit-mask-image:
+    radial-gradient(ellipse 68% 94% at 30% 48%, black 0%, black 20%, rgba(0,0,0,0.6) 60%, transparent 95%),
+    radial-gradient(ellipse 40% 34% at 16% 76%, black 25%, transparent 82%),
+    radial-gradient(ellipse 30% 24% at 48% 16%, black 30%, transparent 82%);
+}
+.shelf--2 { top: 200vh; width: 380px; height: 560px; animation-delay: -4s; }
+.shelf--2 .shelf__inner {
+  background-image: url('taelokim-site/project/bookshelf-portal-closeup.jpg');
+  background-position: 35% center;
+  transform: rotateY(-9deg);
+  mask-image:
+    radial-gradient(ellipse 82% 80% at 36% 50%, black 0%, black 26%, rgba(0,0,0,0.65) 65%, transparent 95%),
+    radial-gradient(circle at 74% 26%, black 10%, transparent 36%),
+    radial-gradient(ellipse 32% 24% at 10% 70%, black 22%, transparent 82%);
+  -webkit-mask-image:
+    radial-gradient(ellipse 82% 80% at 36% 50%, black 0%, black 26%, rgba(0,0,0,0.65) 65%, transparent 95%),
+    radial-gradient(circle at 74% 26%, black 10%, transparent 36%),
+    radial-gradient(ellipse 32% 24% at 10% 70%, black 22%, transparent 82%);
+}
+.shelf--3 { top: 320vh; width: 500px; height: 960px; animation-delay: -8s; }
+.shelf--3 .shelf__inner {
+  background-image: url('taelokim-site/project/bookshelf-cathedral.jpg');
+  background-position: 50% center;
+  transform: rotateY(-4deg);
+  mask-image:
+    radial-gradient(ellipse 60% 100% at 34% 50%, black 0%, black 16%, rgba(0,0,0,0.65) 55%, transparent 94%),
+    radial-gradient(ellipse 44% 30% at 20% 20%, black 22%, transparent 78%),
+    radial-gradient(ellipse 40% 30% at 58% 78%, black 22%, transparent 78%);
+  -webkit-mask-image:
+    radial-gradient(ellipse 60% 100% at 34% 50%, black 0%, black 16%, rgba(0,0,0,0.65) 55%, transparent 94%),
+    radial-gradient(ellipse 44% 30% at 20% 20%, black 22%, transparent 78%),
+    radial-gradient(ellipse 40% 30% at 58% 78%, black 22%, transparent 78%);
+}
+.shelf--4 { top: 450vh; width: 400px; height: 740px; animation-delay: -11s; }
+.shelf--4 .shelf__inner {
+  background-image: url('taelokim-site/project/bookshelf-rosewindow.jpg');
+  background-position: 35% center;
+  transform: rotateY(-7deg);
+  mask-image:
+    radial-gradient(ellipse 80% 62% at 36% 36%, black 0%, black 22%, rgba(0,0,0,0.65) 60%, transparent 94%),
+    radial-gradient(ellipse 34% 40% at 23% 70%, black 22%, transparent 78%),
+    radial-gradient(circle at 62% 10%, black 6%, transparent 30%);
+  -webkit-mask-image:
+    radial-gradient(ellipse 80% 62% at 36% 36%, black 0%, black 22%, rgba(0,0,0,0.65) 60%, transparent 94%),
+    radial-gradient(ellipse 34% 40% at 23% 70%, black 22%, transparent 78%),
+    radial-gradient(circle at 62% 10%, black 6%, transparent 30%);
+}
+.shelf--5 { top: 580vh; width: 460px; height: 720px; animation-delay: -13.5s; }
+.shelf--5 .shelf__inner {
+  background-image: url('taelokim-site/project/bookshelf-scene.jpg');
+  background-position: 55% center;
+  transform: rotateY(-5deg);
+  mask-image:
+    radial-gradient(ellipse 98% 72% at 30% 50%, black 0%, black 20%, rgba(0,0,0,0.65) 60%, transparent 94%),
+    radial-gradient(ellipse 30% 34% at 68% 26%, black 22%, transparent 76%),
+    radial-gradient(ellipse 24% 28% at 10% 20%, black 22%, transparent 74%);
+  -webkit-mask-image:
+    radial-gradient(ellipse 98% 72% at 30% 50%, black 0%, black 20%, rgba(0,0,0,0.65) 60%, transparent 94%),
+    radial-gradient(ellipse 30% 34% at 68% 26%, black 22%, transparent 76%),
+    radial-gradient(ellipse 24% 28% at 10% 20%, black 22%, transparent 74%);
+}
+@media (prefers-reduced-motion: reduce) { .shelf { animation: none; } }
+@media (max-width: 768px) { #shelves { display: none; } }
 
-  .hero-eyebrow {
-    font-family: 'Inter Tight', sans-serif;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--thread);
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    margin-bottom: var(--space-3);
-    opacity: 0.85;
-  }
+/* ── MAIN SCROLL CONTAINER ── */
+main {
+  position: relative;
+  z-index: 10;
+}
 
-  .hero-headline {
-    font-family: var(--font-display);
-    font-size: var(--type-hero);
-    font-weight: 400;
-    line-height: 1.02;
-    color: var(--paper);
-    letter-spacing: -0.02em;
-    margin-bottom: var(--space-4);
-  }
+/* ── HERO ── */
+#hero {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.hero-content {
+  position: relative;
+  z-index: 6;
+  padding-left: clamp(32px, 8vw, 160px);
+  max-width: 560px;
+}
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--thread);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  opacity: 0.8;
+}
+.hero-headline {
+  font-family: var(--font-display);
+  font-size: var(--type-hero);
+  font-weight: 300;
+  line-height: 1.0;
+  color: var(--paper);
+  letter-spacing: -0.03em;
+  margin-bottom: 32px;
+}
+.hero-headline em {
+  font-style: italic;
+  color: var(--thread);
+  font-weight: 300;
+}
+/* Char-by-char hero */
+.hero-headline .char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s var(--ease-cin), transform 0.6s var(--ease-cin);
+  white-space: pre; /* preserve spaces */
+}
+.hero-headline .char.lit { opacity: 1; transform: translateY(0); }
+.hero-sub {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--dust);
+  line-height: 1.7;
+  max-width: 360px;
+  margin-bottom: 48px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s 0.9s var(--ease-cin), transform 0.8s 0.9s var(--ease-cin);
+}
+.hero-sub.lit { opacity: 1; transform: translateY(0); }
+.hero-cta-wrap {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.8s 1.1s var(--ease-cin), transform 0.8s 1.1s var(--ease-cin);
+}
+.hero-cta-wrap.lit { opacity: 1; transform: translateY(0); }
+.cta-primary {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--void);
+  background: var(--thread);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border-radius: 999px;
+  transition: background var(--dur-med) var(--ease-cin), gap var(--dur-med) var(--ease-cin);
+}
+.cta-primary:hover { background: var(--thread-glow); gap: 14px; }
+.cta-secondary {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(232,228,220,0.5);
+  text-decoration: none;
+  padding: 14px 4px;
+  border-bottom: 1px solid rgba(232,228,220,0.2);
+  transition: color var(--dur-med), border-color var(--dur-med);
+}
+.cta-secondary:hover { color: var(--paper); border-color: var(--paper); }
 
-  .hero-headline em {
-    font-style: italic;
-    color: var(--thread);
-  }
+/* Scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: clamp(32px, 8vw, 160px);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  z-index: 6;
+  opacity: 0;
+  animation: fadeIn 1s 1.8s forwards;
+}
+@keyframes fadeIn { to { opacity: 1; } }
+.scroll-line {
+  width: 48px;
+  height: 1px;
+  background: rgba(122,181,176,0.4);
+  position: relative;
+  overflow: hidden;
+}
+.scroll-line::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: var(--thread);
+  animation: scanline 2s ease-in-out infinite;
+}
+@keyframes scanline {
+  0%   { left: -100%; }
+  50%  { left: 100%; }
+  100% { left: 100%; }
+}
+.scroll-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: rgba(122,181,176,0.6);
+  text-transform: uppercase;
+}
 
-  /* ── SCROLLFLOAT — per-char fade-down on scroll ── */
-  .scroll-float__line {
-    display: block;
-    line-height: 1.02;
-  }
-  .scroll-float__line--em em {
-    /* Existing italic Instrument Serif applied via .hero-headline em above */
-  }
-  /* When JS has hydrated the lines, each char becomes a span. Default state
-     is fully visible — JS adjusts on scroll. Inline-block so transforms hold. */
-  .scroll-float .char {
-    display: inline-block;
-    will-change: transform, opacity, filter;
-    transform: translateY(0);
-    opacity: 1;
-  }
-  /* Preserve word-break behavior — spaces between words stay non-collapsible. */
-  .scroll-float .char--space {
-    width: 0.28em;
-  }
+/* ── DIMENSION DIVIDER — the "rift" between sections ── */
+.rift {
+  position: relative;
+  height: 2px;
+  margin: 0 0;
+  background: transparent;
+  overflow: visible;
+}
+.rift::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(122,181,176,0) 15%,
+    rgba(122,181,176,0.6) 50%,
+    rgba(122,181,176,0) 85%,
+    transparent 100%);
+  transform: scaleX(0);
+  transition: transform 1.4s var(--ease-cin);
+}
+.rift.crossed::before { transform: scaleX(1); }
 
-  .hero-sub {
-    font-family: 'Inter Tight', sans-serif;
-    font-size: var(--type-body);
-    font-weight: 300;
-    color: var(--dust);
-    line-height: 1.6;
-    max-width: 340px;
-    margin-bottom: var(--space-5);
-  }
+/* ── PANEL SLOT — slide-up sections ── */
+.panel-slot {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 0;
+}
 
-  /* Hero CTA: glass pill (the reference's signature button shape).
-     .liquid-glass class adds frosted bg + rim; this rule sizes the pill. */
-  .hero-cta {
-    font-family: 'Inter Tight', sans-serif;
-    font-size: var(--type-small);
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--paper);
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    padding: var(--space-3) var(--space-5);
-    border-radius: 999px;
-    transition: gap var(--duration-med) var(--ease-cinematic),
-                color var(--duration-med) var(--ease-cinematic);
-  }
-  .hero-cta:hover { gap: var(--space-3); color: var(--thread); }
-  .hero-cta::after { content: '→'; }
+/* ── SECTION BASE ── */
+.scene {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 6vw, 120px);
+}
 
+/* Reveal animation for scenes */
+.scene-reveal {
+  opacity: 0;
+  transform: translateY(70px) scale(0.97);
+  filter: blur(6px);
+  transition:
+    opacity var(--dur-slow) var(--ease-cin),
+    transform var(--dur-slow) var(--ease-cin),
+    filter var(--dur-slow) var(--ease-cin);
+  will-change: transform, opacity, filter;
+}
+.scene-reveal.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
 
-  /* ── SECTION SHARED ── */
-  section {
-    padding: var(--space-8) var(--space-8);
-    max-width: 860px;
-    margin: 0 auto;
-    position: relative;
-    transform-style: preserve-3d;
-  }
+/* ── SECTION LABEL ── */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(122,181,176,0.5);
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.section-label::after {
+  content: '';
+  display: block;
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(122,181,176,0.25), transparent);
+}
 
-  /* Glowing top bar appears when section becomes active.
-     Reads as "the thread connected — this section is now in focus." */
-  section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg,
-      transparent 0%,
-      rgba(122, 181, 176, 0) 20%,
-      rgba(122, 181, 176, 0.7) 50%,
-      rgba(122, 181, 176, 0) 80%,
-      transparent 100%);
-    opacity: 0;
-    transform: scaleX(0.6);
-    transition:
-      opacity var(--duration-slow) var(--ease-cinematic),
-      transform var(--duration-slow) var(--ease-cinematic);
-    pointer-events: none;
-  }
-  section.active-section::before {
-    opacity: 1;
-    transform: scaleX(1);
-  }
+/* Glowing top edge when active */
+.panel-slot.active-slot .section-label { color: var(--thread); }
+.panel-slot.active-slot .section-label::after {
+  background: linear-gradient(90deg, rgba(122,181,176,0.5), transparent);
+}
 
-  /* Subtle amber halo behind active section */
-  section.active-section {
-    box-shadow:
-      inset 0 60px 120px -60px rgba(122, 181, 176, 0.05),
-      inset 0 -60px 120px -60px rgba(122, 181, 176, 0.03);
-  }
+/* ── MURPHY DIMENSION — the "consequence" ghost panel ── */
+/* Appears on hover of certain cards as the "other dimension" visual */
+.murphy-echo {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(ellipse 80% 80% at 50% 50%,
+    rgba(122,181,176,0.06) 0%, transparent 70%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s var(--ease-cin);
+}
+.card-interactive:hover .murphy-echo { opacity: 1; }
 
-  .section-label {
-    font-family: 'Inter Tight', sans-serif;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--dust);
-    margin-bottom: var(--space-5);
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    transition:
-      color var(--duration-slow) var(--ease-cinematic),
-      text-shadow var(--duration-slow) var(--ease-cinematic);
-  }
-  .section-label::after {
-    content: '';
-    display: block;
-    flex: 1;
-    height: 1px;
-    background: rgba(107,91,79,0.25);
-    transition: background var(--duration-slow) var(--ease-cinematic);
-  }
-  /* Active-section label lights up amber — "the thread reached me" */
-  section.active-section .section-label {
-    color: var(--thread);
-    text-shadow: 0 0 24px rgba(122, 181, 176, 0.35);
-  }
-  section.active-section .section-label::after {
-    background: linear-gradient(90deg, rgba(122,181,176,0.3), rgba(107,91,79,0.1));
-  }
+/* Thread-pull class: when a card is "pulled" */
+.card-interactive {
+  position: relative;
+  cursor: pointer;
+  transition: transform var(--dur-med) var(--ease-cin);
+}
+.card-interactive::after {
+  content: '';
+  position: absolute;
+  left: -3px;
+  top: 50%;
+  transform: translateY(-50%) scaleY(0);
+  width: 2px;
+  height: 70%;
+  background: linear-gradient(to bottom, transparent, var(--thread), transparent);
+  transition: transform 0.6s var(--ease-cin);
+}
+.card-interactive:hover::after { transform: translateY(-50%) scaleY(1); }
+.card-interactive:hover { transform: translateX(6px); }
 
-  /* Section reveal — section gets pulled forward as it enters view.
-     Combines: translateY rise, translateZ forward push, slight scale, blur-to-focus.
-     Reads as "the spaceman is pulling this content toward the viewer." */
-  .reveal {
-    opacity: 0;
-    transform: translateY(60px) translateZ(-80px) scale(0.96);
-    filter: blur(4px);
-    transition:
-      opacity var(--duration-slow) var(--ease-cinematic),
-      transform var(--duration-slow) var(--ease-cinematic),
-      filter var(--duration-slow) var(--ease-cinematic);
-    transform-style: preserve-3d;
-    will-change: transform, filter, opacity;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0) translateZ(0) scale(1);
-    filter: blur(0);
-  }
+/* Pull ripple animation */
+@keyframes pull-ripple {
+  0%   { opacity: 0.8; transform: scale(0.8); }
+  100% { opacity: 0; transform: scale(2.2); }
+}
+.pull-ripple {
+  position: fixed;
+  border-radius: 50%;
+  border: 1px solid var(--thread);
+  width: 60px; height: 60px;
+  margin-left: -30px; margin-top: -30px;
+  pointer-events: none;
+  z-index: 1000;
+  animation: pull-ripple 0.7s var(--ease-cin) forwards;
+}
 
-  /* ── 2. VALUE — what's inside ── */
-  #value {
-    border-top: 1px solid rgba(107,91,79,0.2);
-    padding-top: var(--space-7);
-  }
+/* ── SECTION: WHAT YOU FEEL — opening value prop ── */
+#what-you-feel { }
+.feel-intro {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.5vw, 48px);
+  font-weight: 300;
+  line-height: 1.3;
+  color: var(--paper);
+  max-width: 680px;
+  margin-bottom: 64px;
+  font-style: italic;
+}
+.feel-intro strong {
+  font-style: normal;
+  font-weight: 400;
+  color: var(--thread);
+}
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  border: 1px solid rgba(122,181,176,0.12);
+  margin-top: 48px;
+}
+@media (max-width: 640px) {
+  .pillars { grid-template-columns: 1fr; }
+}
+.pillar {
+  padding: 40px 32px;
+  border-right: 1px solid rgba(122,181,176,0.12);
+  transition: background var(--dur-med) var(--ease-cin);
+}
+.pillar:last-child { border-right: none; }
+.pillar:hover { background: rgba(122,181,176,0.04); }
+.pillar-num {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: rgba(122,181,176,0.4);
+  letter-spacing: 0.2em;
+  margin-bottom: 24px;
+}
+.pillar-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(22px, 2vw, 28px);
+  color: var(--thread);
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+.pillar-desc {
+  font-size: 14px;
+  color: var(--dust);
+  line-height: 1.65;
+}
 
-  .intro-para {
-    font-family: var(--font-display);
-    font-size: var(--type-h2);
-    font-weight: 400;
-    line-height: 1.35;
-    color: var(--paper);
-    max-width: 720px;
-    margin-bottom: var(--space-7);
-    font-style: italic;
-  }
+/* ── SECTION: ABOUT ── */
+#about {}
+.about-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+@media (max-width: 720px) {
+  .about-split { grid-template-columns: 1fr; gap: 40px; }
+}
+.about-statement {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.8vw, 36px);
+  font-weight: 300;
+  line-height: 1.4;
+  color: var(--paper);
+}
+.about-statement em {
+  font-style: italic;
+  color: var(--thread);
+}
+.about-facts {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.fact-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid rgba(122,181,176,0.1);
+}
+.fact-row:last-child { border-bottom: none; padding-bottom: 0; }
+.fact-num {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 4vw, 52px);
+  font-weight: 300;
+  color: var(--paper);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.fact-num span {
+  font-size: 0.5em;
+  color: var(--thread);
+  vertical-align: super;
+  font-family: var(--font-mono);
+}
+.fact-label {
+  font-size: 13px;
+  color: var(--dust);
+  letter-spacing: 0.06em;
+}
 
-  .value-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    border-top: 1px solid rgba(107,91,79,0.25);
-    padding-top: var(--space-5);
-    gap: var(--space-6);
-  }
-  .value-item {}
-  .value-label {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: clamp(22px, 2.2vw, 28px);
-    color: var(--thread);
-    line-height: 1.1;
-    margin-bottom: var(--space-3);
-  }
-  .value-desc {
-    font-size: var(--type-small);
-    color: var(--dust);
-    line-height: 1.55;
-  }
+/* ── SECTION: RESOURCES ── */
+#resources {}
+.resource-featured {
+  position: relative;
+  border: 1px solid rgba(122,181,176,0.3);
+  padding: 48px;
+  margin-bottom: 40px;
+  overflow: hidden;
+  transition: border-color var(--dur-med) var(--ease-cin);
+}
+.resource-featured:hover { border-color: var(--thread); }
+.resource-featured::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg,
+    rgba(122,181,176,0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+.featured-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--thread);
+  margin-bottom: 20px;
+}
+.featured-title {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3vw, 38px);
+  font-weight: 300;
+  color: var(--paper);
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+.featured-desc {
+  font-size: 14px;
+  color: var(--dust);
+  line-height: 1.7;
+  max-width: 520px;
+  margin-bottom: 32px;
+}
+.resource-link {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--thread);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: gap var(--dur-med) var(--ease-cin), color var(--dur-med);
+}
+.resource-link::after { content: '→'; }
+.resource-link:hover { gap: 14px; color: var(--thread-glow); }
 
-  /* ── 3. RESOURCES ── */
-  #resources {
-    border-top: 1px solid rgba(107,91,79,0.2);
-  }
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(122,181,176,0.08);
+}
+@media (max-width: 640px) { .resource-grid { grid-template-columns: 1fr; } }
+.resource-card {
+  background: var(--void);
+  padding: 32px 28px;
+  transition: background var(--dur-med) var(--ease-cin), transform var(--dur-med) var(--ease-cin);
+}
+.resource-card:hover {
+  background: rgba(122,181,176,0.04);
+}
+.resource-card-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: rgba(122,181,176,0.45);
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+.resource-card-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--paper);
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+.resource-card-desc {
+  font-size: 13px;
+  color: var(--dust);
+  line-height: 1.6;
+}
 
-  .resource-featured {
-    border: 1px solid var(--thread);
-    padding: var(--space-5);
-    margin-bottom: var(--space-5);
-    position: relative;
-  }
-  .resource-featured-tag {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--thread);
-    margin-bottom: var(--space-3);
-  }
-  .resource-featured-title {
-    font-family: var(--font-display);
-    font-size: var(--type-h2);
-    color: var(--paper);
-    margin-bottom: var(--space-3);
-    line-height: 1.2;
-  }
-  .resource-featured-desc {
-    font-size: var(--type-small);
-    color: var(--dust);
-    margin-bottom: var(--space-4);
-    max-width: 480px;
-  }
-  .resource-link {
-    font-size: var(--type-small);
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--thread);
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-  }
-  .resource-link::after { content: '→'; }
+/* ── SECTION: COMMUNITY ── */
+#community {}
+.community-headline {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--paper);
+  max-width: 600px;
+  margin-bottom: 48px;
+}
+.community-headline em { font-style: italic; color: var(--thread); }
+.community-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+@media (max-width: 640px) { .community-grid { grid-template-columns: 1fr; } }
+.community-card {
+  padding: 40px 36px;
+  border: 1px solid rgba(122,181,176,0.1);
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--dur-med) var(--ease-cin);
+}
+.community-card:hover { border-color: rgba(122,181,176,0.35); }
+.community-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--thread), transparent);
+  transform: scaleX(0);
+  transition: transform 0.8s var(--ease-cin);
+}
+.community-card:hover::before { transform: scaleX(1); }
+.card-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--thread);
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+.card-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--paper);
+  margin-bottom: 12px;
+  line-height: 1.25;
+}
+.card-desc {
+  font-size: 13px;
+  color: var(--dust);
+  line-height: 1.65;
+  margin-bottom: 28px;
+}
+.card-action {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--thread);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: gap var(--dur-med);
+}
+.card-action::after { content: '→'; }
+.card-action:hover { gap: 14px; }
 
-  .resource-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-4);
-  }
-  /* Resource cards: glass surface (reference site's "card" treatment).
-     border removed; .liquid-glass class on the markup provides the rim. */
-  .resource-card {
-    padding: var(--space-5);
-    border-radius: var(--radius-lg);
-    transition: transform var(--duration-med) var(--ease-cinematic);
-  }
-  .resource-card:hover { transform: translateY(-2px); }
-  .resource-card-tag {
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--dust);
-    margin-bottom: var(--space-3);
-  }
-  .resource-card-title {
-    font-family: var(--font-display);
-    font-size: 18px;
-    color: var(--paper);
-    line-height: 1.3;
-    margin-bottom: var(--space-3);
-  }
-  .resource-card-desc {
-    font-size: var(--type-small);
-    color: var(--dust);
-    line-height: 1.5;
-  }
+/* ── SECTION: WRITING ── */
+#writing {}
+.writing-entries { margin-top: 8px; }
+.writing-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  padding: 28px 0;
+  border-bottom: 1px solid rgba(122,181,176,0.08);
+  text-decoration: none;
+  gap: 40px;
+  transition: all var(--dur-med) var(--ease-cin);
+  position: relative;
+}
+.writing-row::before {
+  content: '';
+  position: absolute;
+  left: -24px; top: 50%;
+  transform: translateY(-50%) scaleY(0);
+  width: 2px; height: 60%;
+  background: linear-gradient(to bottom, transparent, var(--thread), transparent);
+  transition: transform 0.5s var(--ease-cin);
+}
+.writing-row:hover::before { transform: translateY(-50%) scaleY(1); }
+.writing-row:hover { padding-left: 16px; }
+.writing-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--paper);
+  margin-bottom: 6px;
+  line-height: 1.3;
+  transition: color var(--dur-med);
+}
+.writing-row:hover .writing-title { color: var(--thread); }
+.writing-sub {
+  font-size: 13px;
+  color: var(--dust);
+}
+.writing-date {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: rgba(232,228,220,0.25);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
 
-  /* ── 4. BUILDS ── */
-  #builds {
-    border-top: 1px solid rgba(107,91,79,0.2);
-  }
+/* ── SECTION: JOIN / CTA ── */
+#join {
+  padding: 160px 0 200px;
+  position: relative;
+}
+.join-bg-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 50% 60%,
+    rgba(122,181,176,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.join-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.join-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  color: var(--thread);
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  opacity: 0.7;
+}
+.join-headline {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--paper);
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+.join-headline em { font-style: italic; color: var(--thread); }
+.join-sub {
+  font-size: 15px;
+  color: var(--dust);
+  line-height: 1.7;
+  margin-bottom: 56px;
+}
+.email-form {
+  display: flex;
+  max-width: 440px;
+  margin: 0 auto 24px;
+  border: 1px solid rgba(122,181,176,0.25);
+  transition: border-color var(--dur-med);
+}
+.email-form:focus-within { border-color: var(--thread); }
+.email-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 16px 20px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--paper);
+  outline: none;
+}
+.email-input::placeholder { color: rgba(232,228,220,0.25); }
+.email-btn {
+  background: var(--thread);
+  color: var(--void);
+  border: none;
+  padding: 16px 28px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background var(--dur-med);
+}
+.email-btn:hover { background: var(--thread-glow); }
+.join-note {
+  font-size: 12px;
+  color: rgba(232,228,220,0.2);
+  letter-spacing: 0.06em;
+}
 
-  .builds-table { width: 100%; border-collapse: collapse; }
-  .builds-table tr {
-    border-bottom: 1px solid rgba(58,58,74,0.6);
-    transition: background var(--duration-med);
-  }
-  .builds-table tr:hover { background: rgba(122,181,176,0.04); }
-  .builds-table td {
-    padding: var(--space-4) var(--space-3);
-    font-size: var(--type-body);
-    vertical-align: middle;
-  }
-  .build-name {
-    font-family: var(--font-display);
-    font-style: italic;
-    color: var(--paper);
-  }
-  .build-status {
-    font-size: var(--type-small);
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    text-align: right;
-  }
-  .build-status.working { color: var(--thread); }
-  .build-status.paused { color: var(--dust); }
-  .build-status.shipped { color: var(--paper); opacity: 0.5; }
-  .build-meta {
-    font-size: var(--type-small);
-    color: var(--dust);
-    text-align: right;
-    font-family: 'JetBrains Mono', monospace;
-  }
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid rgba(122,181,176,0.08);
+  padding: 48px clamp(24px, 6vw, 120px);
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+}
+.foot-copy {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: rgba(232,228,220,0.2);
+  letter-spacing: 0.08em;
+}
+.foot-links {
+  display: flex;
+  gap: 32px;
+}
+.foot-links a {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(232,228,220,0.25);
+  text-decoration: none;
+  transition: color var(--dur-med);
+}
+.foot-links a:hover { color: var(--thread); }
 
-  /* ── 5. WRITING ── */
-  #writing {
-    border-top: 1px solid rgba(107,91,79,0.2);
-  }
+/* ── MOBILE ADJUSTMENTS ── */
+@media (max-width: 768px) {
+  nav { gap: 2px; padding: 8px 16px; }
+  nav a { padding: 4px 7px; font-size: 10px; }
+  .hero-content { padding-left: 24px; padding-right: 24px; }
+  .scene { padding: 0 24px; }
+  .panel-slot { padding: 80px 0; }
+  footer { flex-direction: column; gap: 24px; }
+  .resource-featured { padding: 28px 24px; }
+  .community-card { padding: 28px 24px; }
+}
 
-  .writing-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: var(--space-4) 0;
-    border-bottom: 1px solid rgba(58,58,74,0.6);
-    text-decoration: none;
-    gap: var(--space-5);
-    transition: all var(--duration-med) var(--ease-cinematic);
-  }
-  .writing-row:hover .writing-title { color: var(--thread); }
-  .writing-left { flex: 1; }
-  .writing-title {
-    font-family: var(--font-display);
-    font-size: 20px;
-    color: var(--paper);
-    margin-bottom: var(--space-1);
-    transition: color var(--duration-med);
-  }
-  .writing-desc {
-    font-size: var(--type-small);
-    color: var(--dust);
-  }
-  .writing-date {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: var(--type-mono);
-    color: var(--dust);
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
+/* ── TESSERACT PARTICLE FIELD (canvas bg overlay) ── */
+#particle-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.35;
+}
 
-  /* ── 6. ABOUT ── */
-  #about {
-    border-top: 1px solid rgba(107,91,79,0.2);
-  }
+/* ── HOVER CURSOR THREAD indicator ── */
+#cursor-thread {
+  position: fixed;
+  top: 0; left: 0;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  border: 1px solid rgba(122,181,176,0.5);
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.15s ease, opacity 0.3s;
+  transform: translate(-50%, -50%) scale(1);
+  mix-blend-mode: screen;
+}
+body:not(:hover) #cursor-thread { opacity: 0; }
 
-  .about-text {
-    font-family: var(--font-display);
-    font-size: 20px;
-    color: var(--paper);
-    line-height: 1.6;
-    max-width: 640px;
-    font-weight: 400;
-  }
-
-  /* ── 7. EMAIL CAPTURE ── */
-  #email-capture {
-    border-top: 1px solid var(--signal);
-    padding: var(--space-7) var(--space-8);
-    max-width: 860px;
-    margin: 0 auto;
-  }
-
-  .email-headline {
-    font-family: var(--font-display);
-    font-size: var(--type-h2);
-    color: var(--paper);
-    margin-bottom: var(--space-3);
-  }
-  .email-sub {
-    font-size: var(--type-small);
-    color: var(--dust);
-    margin-bottom: var(--space-5);
-  }
-  .email-form {
-    display: flex;
-    gap: 0;
-    max-width: 520px;
-  }
-  .email-input {
-    flex: 1;
-    background: transparent;
-    border: 1px solid rgba(232,228,220,0.2);
-    border-right: none;
-    padding: var(--space-3) var(--space-4);
-    font-family: 'Inter Tight', sans-serif;
-    font-size: var(--type-small);
-    color: var(--paper);
-    outline: none;
-  }
-  .email-input::placeholder { color: var(--dust); }
-  .email-input:focus { border-color: var(--signal); }
-  .email-btn {
-    background: var(--signal);
-    color: var(--void);
-    border: none;
-    padding: var(--space-3) var(--space-5);
-    font-family: 'Inter Tight', sans-serif;
-    font-size: var(--type-small);
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: opacity var(--duration-med);
-  }
-  .email-btn:hover { opacity: 0.85; }
-
-  /* ── FOOTER ── */
-  footer {
-    border-top: 1px solid rgba(107,91,79,0.15);
-    padding: var(--space-6) var(--space-8);
-    max-width: 860px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  footer .foot-copy {
-    font-size: var(--type-small);
-    color: var(--dust);
-  }
-  footer .foot-links {
-    display: flex;
-    gap: var(--space-4);
-  }
-  footer a {
-    font-size: var(--type-small);
-    color: var(--dust);
-    text-decoration: none;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    transition: color var(--duration-med);
-  }
-  footer a:hover { color: var(--paper); }
-
-  .wf-anno { display: none; }
-
-  /* ── INTERACTIVE LAYER ──
-     Adds AIS-class "alive" hover/move feedback while keeping the spec rule
-     of ONE primary signature interaction (the spaceman threads). These are
-     PASSIVE responses — cards/links/buttons react to cursor proximity, but
-     the page doesn't drive any new scroll-bound mechanic. Reduced-motion
-     users get all of this neutralized via the media query at the bottom. */
-
-  /* Section-content stagger — each direct child of a .reveal block enters
-     in cascade after the parent's reveal animation lands. The parent does
-     the dramatic lift + blur (already defined above); children do a small
-     translateY(10px → 0) so the effect reads as "the section settles, then
-     content arrives in layers." */
-  .reveal > * {
-    opacity: 0;
-    transform: translateY(10px);
-    transition:
-      opacity 700ms var(--ease-cinematic),
-      transform 700ms var(--ease-cinematic);
-  }
-  .reveal.visible > * {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .reveal.visible > *:nth-child(1) { transition-delay: 80ms; }
-  .reveal.visible > *:nth-child(2) { transition-delay: 160ms; }
-  .reveal.visible > *:nth-child(3) { transition-delay: 240ms; }
-  .reveal.visible > *:nth-child(4) { transition-delay: 320ms; }
-  .reveal.visible > *:nth-child(5) { transition-delay: 400ms; }
-  .reveal.visible > *:nth-child(6) { transition-delay: 480ms; }
-  .reveal.visible > *:nth-child(n+7) { transition-delay: 560ms; }
-
-  /* ── CARD TREATMENT (resource-card + resource-featured) ──
-     Spec override on user request: subtle 3D tilt + stronger glass +
-     warm gradient overlay are all explicitly allowed.
-       - Glass: backdrop-filter blur(12px), bg bumped from .liquid-glass
-         baseline (0.012) to (0.025) so the surface actually reads as glass.
-       - Warm overlay: linear-gradient warm amber→transparent diagonally,
-         ~5% opacity. Adds the cinematic depth without breaking restraint.
-       - Tilt: rotateX/rotateY driven by --tx/--ty CSS vars (JS updates on
-         mousemove). Capped at ~5° — paper catching a draft, not a 3D toy.
-       - Lift: --lift CSS var pulled to -4px on hover.
-       - Spotlight: ::before paints amber radial-gradient at --mx/--my.
-     All transforms compose because they're all driven through CSS vars. */
-  .resource-card,
-  .resource-featured {
-    position: relative;
-    overflow: hidden;
-    transform-style: preserve-3d;
-    transform:
-      perspective(1000px)
-      translateY(var(--lift, 0px))
-      rotateX(var(--tx, 0deg))
-      rotateY(var(--ty, 0deg));
-    transition:
-      transform 500ms var(--ease-cinematic),
-      border-color var(--duration-med) var(--ease-cinematic),
-      box-shadow var(--duration-med) var(--ease-cinematic),
-      background-color var(--duration-med) var(--ease-cinematic);
-  }
-  .resource-card {
-    border: 1px solid rgba(232,228,220,0.08);
-    background-color: rgba(255,255,255,0.025);
-    background-image: linear-gradient(
-      135deg,
-      rgba(122,181,176,0.05) 0%,
-      transparent 45%,
-      rgba(197,232,222,0.03) 100%
-    );
-    -webkit-backdrop-filter: blur(12px) saturate(1.2);
-            backdrop-filter: blur(12px) saturate(1.2);
-  }
-  .resource-card::before,
-  .resource-featured::before {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    background: radial-gradient(
-      280px circle at var(--mx, 50%) var(--my, 50%),
-      rgba(122,181,176,0.18),
-      transparent 55%
-    );
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity var(--duration-med) var(--ease-cinematic);
-    z-index: 0;
-  }
-  .resource-featured::before {
-    background: radial-gradient(
-      460px circle at var(--mx, 50%) var(--my, 50%),
-      rgba(122,181,176,0.14),
-      transparent 60%
-    );
-  }
-  .resource-card:hover {
-    --lift: -4px;
-    border-color: rgba(122,181,176,0.35);
-    background-color: rgba(255,255,255,0.04);
-    box-shadow:
-      0 18px 60px rgba(122,181,176,0.10),
-      0 4px 20px rgba(0,0,0,0.30);
-  }
-  .resource-featured:hover {
-    --lift: -2px;
-    box-shadow:
-      0 22px 90px rgba(122,181,176,0.14),
-      0 6px 30px rgba(0,0,0,0.35);
-  }
-  .resource-card:hover::before,
-  .resource-featured:hover::before { opacity: 1; }
-  /* Children get z-index above the spotlight pseudo. Use translateZ to
-     keep them on the same render layer as the card surface (so tilt
-     applies uniformly — no parallax-of-text-vs-card glitch). */
-  .resource-card > *,
-  .resource-featured > * {
-    position: relative;
-    z-index: 1;
-    transform: translateZ(0.1px);
-  }
-
-  /* Writing rows — amber line draws in left → right on hover, on top of
-     the existing color-change of the title. Date also lifts to paper. */
-  .writing-row { position: relative; }
-  .writing-row::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -1px;
-    width: 0;
-    height: 1px;
-    background: var(--thread);
-    transition: width var(--duration-slow) var(--ease-cinematic);
-  }
-  .writing-row:hover::after { width: 100%; }
-  .writing-row:hover .writing-date { color: var(--paper); }
-
-  /* Magnetic-button base. JS layers on translate(); CSS handles the
-     bounce-back transition when the cursor leaves the radius. */
-  .magnet {
-    transition:
-      transform 600ms var(--ease-cinematic),
-      gap var(--duration-med) var(--ease-cinematic),
-      color var(--duration-med) var(--ease-cinematic),
-      opacity var(--duration-med) var(--ease-cinematic);
-    will-change: transform;
-  }
-
-  /* ── PANEL-SLOT + SECTION-PANEL (SlidePanel pattern) ──
-     Slot is full-viewport-tall flex container, content aligned to the
-     bottom — so the panel "slides up into view" as you scroll. The panel
-     itself is the existing <section>. JS drives:
-       --panel-y     → translateY (100% → 0%) based on the slot's scroll
-                       progress through the viewport
-       --panel-tx    → rotateX driven by mousemove (cursor in top half tilts
-                       the panel forward)
-       --panel-ty    → rotateY driven by mousemove (cursor right tilts
-                       to the right)
-     `transform-style: preserve-3d` + perspective on .scenes makes tilt 3D.
-     Cards inside still get their own tilt — the two compose. */
-  .panel-slot {
-    min-height: 100vh;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    perspective: 1200px;
-    perspective-origin: 50% 30%;
-    overflow: visible;
-    position: relative;
-    z-index: 2;       /* keep above thread-canvas like sections */
-  }
-  .section-panel {
-    width: 100%;
-    transform-style: preserve-3d;
-    transform:
-      translateY(var(--panel-y, 0%))
-      rotateX(var(--panel-tx, 0deg))
-      rotateY(var(--panel-ty, 0deg));
-    transition:
-      transform 700ms var(--ease-cinematic);
-    will-change: transform;
-  }
-
-  /* ── STATS ── */
-  .section-stats {
-    padding: var(--space-7) var(--space-8);
-    max-width: 860px;
-    margin: 0 auto;
-    border-top: 1px solid rgba(107,91,79,0.2);
-  }
-  .stats-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-6);
-    text-align: center;
-  }
-  .stat-item {}
-  .stat-number {
-    font-family: var(--font-display);
-    font-size: clamp(40px, 5vw, 64px);
-    font-weight: 400;
-    color: var(--thread);
-    line-height: 1;
-    letter-spacing: -0.02em;
-  }
-  .stat-label {
-    font-family: 'Inter Tight', sans-serif;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--dust);
-    margin-top: var(--space-3);
-  }
-  @media (max-width: 720px) {
-    .stats-row { grid-template-columns: 1fr; gap: var(--space-5); }
-  }
-
-  /* ── FINAL CTA ──
-     Centered final block. Headline, sub, pill-shaped form (email + button
-     fused into one rounded surface). The pill is the visual climax — biggest
-     amber surface on the page. The bg-stage video underneath provides ambience.
-     Generous bottom padding extends the page so video 2 has room to fully
-     bookend the bottom after the crossfade — feels less rushed. */
-  .final-cta {
-    padding: var(--space-8) var(--space-8) 32vh;
-    max-width: 860px;
-    margin: 0 auto;
-    text-align: center;
-  }
-  .final-cta__headline {
-    font-family: var(--font-display);
-    font-size: clamp(40px, 6vw, 80px);
-    font-weight: 400;
-    color: var(--paper);
-    letter-spacing: -0.02em;
-    line-height: 1.05;
-    margin-bottom: var(--space-4);
-  }
-  .final-cta__sub {
-    font-size: var(--type-body);
-    color: var(--dust);
-    line-height: 1.6;
-    max-width: 560px;
-    margin: 0 auto var(--space-6);
-  }
-  .final-cta__form {
-    display: flex;
-    align-items: center;
-    gap: 0;
-    max-width: 540px;
-    margin: 0 auto;
-    padding: 6px;
-    border-radius: 999px;
-    background: rgba(255,255,255,0.025);
-    border: 1px solid rgba(232,228,220,0.15);
-    -webkit-backdrop-filter: blur(12px);
-            backdrop-filter: blur(12px);
-    transition: border-color var(--duration-med) var(--ease-cinematic);
-  }
-  .final-cta__form:focus-within {
-    border-color: var(--thread);
-  }
-  .final-cta__input {
-    flex: 1;
-    background: transparent;
-    border: none;
-    padding: var(--space-3) var(--space-5);
-    font-family: 'Inter Tight', sans-serif;
-    font-size: var(--type-small);
-    color: var(--paper);
-    outline: none;
-    border-radius: 999px;
-  }
-  .final-cta__input::placeholder { color: var(--dust); }
-  .final-cta__btn {
-    background: var(--thread);
-    color: var(--void);
-    border: none;
-    padding: var(--space-3) var(--space-6);
-    border-radius: 999px;
-    font-family: 'Inter Tight', sans-serif;
-    font-size: var(--type-small);
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    cursor: pointer;
-    flex-shrink: 0;
-    transition:
-      background-color var(--duration-med) var(--ease-cinematic),
-      box-shadow var(--duration-med) var(--ease-cinematic);
-  }
-  .final-cta__btn:hover {
-    box-shadow: 0 12px 40px rgba(122,181,176,0.35);
-  }
-  @media (max-width: 560px) {
-    .final-cta__form { flex-direction: column; gap: 8px; padding: 8px; border-radius: 24px; }
-    .final-cta__input, .final-cta__btn { width: 100%; }
-  }
-
-  /* Reduced-motion: kill all stagger transforms + spotlights. Content
-     renders statically, hovers stay (color-only is fine for a11y). */
-  @media (prefers-reduced-motion: reduce) {
-    .reveal > *,
-    .reveal.visible > * {
-      opacity: 1;
-      transform: none;
-      transition: none;
-    }
-    .resource-card::before,
-    .resource-featured::before { display: none; }
-    .magnet { transition: color var(--duration-med); }
-    /* Slide panels render in place; chars render static. */
-    .section-panel {
-      transform: none !important;
-      transition: none !important;
-    }
-    .scroll-float .char {
-      opacity: 1 !important;
-      transform: none !important;
-    }
-    .pill-item::before { transition: none; }
-  }
 </style>
 </head>
 <body>
 
-<!-- Background video stage. Two looping videos layered behind everything;
-     scroll position drives a cross-fade so video 1 dominates the upper page
-     and video 2 takes over by the time the reader reaches the CTA. -->
-<div class="bg-stage" aria-hidden="true">
-  <video id="bg-video-1" class="bg-video" autoplay muted loop playsinline preload="auto">
-    <source src="hero-loop.mp4" type="video/mp4">
-  </video>
-  <video id="bg-video-2" class="bg-video" autoplay muted loop playsinline preload="auto">
-    <source src="hero-loop-2.mp4" type="video/mp4">
-  </video>
-</div>
-
-<!-- Hidden SVG <defs> — the #luma-key filter is referenced by #spaceman's CSS.
-     Maps each pixel's alpha to its luminance, turning dark backgrounds transparent. -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<!-- ── SVG FILTER DEFS ── -->
+<svg width="0" height="0" style="position:absolute;pointer-events:none" aria-hidden="true">
   <defs>
     <filter id="luma-key">
       <feColorMatrix type="matrix" values="
         1 0 0 0 0
         0 1 0 0 0
         0 0 1 0 0
-        0.299 0.587 0.114 0 -0.05"/>
+        0.299 0.587 0.114 0 -0.08"/>
     </filter>
-  </defs>
-</svg>
-
-<!-- Spaceman + threads are siblings of <main>, NOT inside any <section>.
-     This way position:fixed anchors to the viewport, not to a hero containing block,
-     so the spaceman persists throughout the scroll. -->
-<video id="spaceman" src="spaceman.mp4" muted playsinline preload="auto" aria-label="spaceman pulling threads"></video>
-
-<svg id="thread-canvas" aria-hidden="true">
-  <defs>
-    <!-- Tighter stacked-blur glow — visible halo, not washed out diffuse. -->
-    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="4" result="big"/>
-      <feGaussianBlur stdDeviation="1.5" result="mid" in="SourceGraphic"/>
+    <filter id="dissolve" x="-15%" y="-15%" width="130%" height="130%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.012 0.016" numOctaves="2" seed="9" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="26" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="thread-glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="5" result="blur1"/>
+      <feGaussianBlur stdDeviation="2" result="blur2" in="SourceGraphic"/>
       <feMerge>
-        <feMergeNode in="big"/>
-        <feMergeNode in="mid"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="blur2"/>
         <feMergeNode in="SourceGraphic"/>
       </feMerge>
     </filter>
-    <radialGradient id="origin-glow">
+    <!-- Gradient defs for threads -->
+    <radialGradient id="hand-glow">
       <stop offset="0%"   stop-color="#C5E8DE" stop-opacity="1"/>
-      <stop offset="35%"  stop-color="#7AB5B0" stop-opacity="0.6"/>
+      <stop offset="40%"  stop-color="#7AB5B0" stop-opacity="0.6"/>
       <stop offset="100%" stop-color="#7AB5B0" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="thread-grad-1" gradientUnits="userSpaceOnUse">
+    <linearGradient id="tg1" gradientUnits="userSpaceOnUse">
       <stop offset="0%"   stop-color="#C5E8DE" stop-opacity="1"/>
-      <stop offset="20%"  stop-color="#7AB5B0" stop-opacity="0.85"/>
-      <stop offset="60%"  stop-color="#7AB5B0" stop-opacity="0.35"/>
+      <stop offset="25%"  stop-color="#7AB5B0" stop-opacity="0.8"/>
+      <stop offset="65%"  stop-color="#7AB5B0" stop-opacity="0.25"/>
       <stop offset="100%" stop-color="#7AB5B0" stop-opacity="0"/>
     </linearGradient>
-    <linearGradient id="thread-grad-2" gradientUnits="userSpaceOnUse">
-      <stop offset="0%"   stop-color="#C5E8DE" stop-opacity="0.9"/>
-      <stop offset="60%"  stop-color="#7AB5B0" stop-opacity="0.25"/>
+    <linearGradient id="tg2" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#C5E8DE" stop-opacity="0.85"/>
+      <stop offset="55%"  stop-color="#7AB5B0" stop-opacity="0.2"/>
       <stop offset="100%" stop-color="#7AB5B0" stop-opacity="0"/>
     </linearGradient>
-    <linearGradient id="thread-grad-3" gradientUnits="userSpaceOnUse">
-      <stop offset="0%"   stop-color="#C5E8DE" stop-opacity="0.75"/>
-      <stop offset="60%"  stop-color="#7AB5B0" stop-opacity="0.18"/>
+    <linearGradient id="tg3" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#7AB5B0" stop-opacity="0.7"/>
+      <stop offset="60%"  stop-color="#7AB5B0" stop-opacity="0.12"/>
       <stop offset="100%" stop-color="#7AB5B0" stop-opacity="0"/>
     </linearGradient>
   </defs>
-
-  <!-- Threads are now <path> with quadratic Bezier curves — JS computes the 'd' attr.
-       Two strokes per thread: a thicker glowing core + a thinner bright filament. -->
-  <!-- Threads dimmed considerably — they were too loud and competed with the
-       library scene. Now read as faint silken filaments, not glowing wires.
-       Glow stroke widths halved + opacities dropped ~half across the board. -->
-  <path id="thread-1-glow" d="M0 0" stroke="url(#thread-grad-1)" stroke-width="2"
-        fill="none" filter="url(#glow)" stroke-linecap="round" opacity="0.40"/>
-  <path id="thread-1" d="M0 0" stroke="#C5E8DE" stroke-width="0.9"
-        fill="none" stroke-linecap="round" stroke-dasharray="20 6" opacity="0.55"/>
-
-  <path id="thread-2-glow" d="M0 0" stroke="url(#thread-grad-2)" stroke-width="1.6"
-        fill="none" filter="url(#glow)" stroke-linecap="round" opacity="0.32"/>
-  <path id="thread-2" d="M0 0" stroke="#7AB5B0" stroke-width="0.7"
-        fill="none" stroke-linecap="round" stroke-dasharray="14 5" opacity="0.45"/>
-
-  <path id="thread-3-glow" d="M0 0" stroke="url(#thread-grad-3)" stroke-width="1.2"
-        fill="none" filter="url(#glow)" stroke-linecap="round" opacity="0.22"/>
-  <path id="thread-3" d="M0 0" stroke="#7AB5B0" stroke-width="0.55"
-        fill="none" stroke-linecap="round" stroke-dasharray="10 6" opacity="0.35"/>
-
-  <circle id="origin-1" cx="0" cy="0" r="18" fill="url(#origin-glow)" opacity="0"/>
-  <circle id="origin-2" cx="0" cy="0" r="14" fill="url(#origin-glow)" opacity="0"/>
-  <circle id="origin-3" cx="0" cy="0" r="11" fill="url(#origin-glow)" opacity="0"/>
 </svg>
 
-<!-- ── NAV ──
-     Glass-pill nav. .liquid-glass adds the frosted bg + rim highlight; the
-     nav rule itself sizes it (border-radius: 999px → pill). -->
-<!-- PillNav — each <a> is a pill-item with a hover circle that "fills" the
-     pill from a precomputed radius (set via JS on load from each item's
-     bounding rect). Glass surface comes from .liquid-glass. Pattern from
-     the AIS template's PillNav component. -->
-<nav class="pill-nav liquid-glass" aria-label="Primary">
-  <a class="pill-item" href="#hero"><span class="pill-item__label">Home</span></a>
-  <a class="pill-item" href="#value"><span class="pill-item__label">Inside</span></a>
-  <a class="pill-item" href="#resources"><span class="pill-item__label">Resources</span></a>
-  <a class="pill-item" href="#writing"><span class="pill-item__label">Reads</span></a>
-  <a class="pill-item pill-item--cta" href="#email-capture"><span class="pill-item__label">Join</span></a>
+<!-- ── PARTICLE CANVAS (tesseract dust) ── -->
+<canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+<!-- ── CUSTOM CURSOR ── -->
+<div id="cursor-thread" aria-hidden="true"></div>
+
+<!-- ── BG STAGE ── -->
+<div id="bg-stage" aria-hidden="true">
+  <video id="bg-video-1" autoplay muted loop playsinline>
+    <source src="https://raw.githubusercontent.com/taelo82/taelokim-website/main/taelokim-site/project/hero-loop.mp4" type="video/mp4">
+  </video>
+  <video id="bg-video-2" muted loop playsinline>
+    <source src="https://raw.githubusercontent.com/taelo82/taelokim-website/main/taelokim-site/project/hero-loop.mp4" type="video/mp4">
+  </video>
+</div>
+
+<!-- ── BOOKSHELF FRAGMENTS ── -->
+<div id="shelves" aria-hidden="true">
+  <div class="shelf shelf--1"><div class="shelf__inner"></div></div>
+  <div class="shelf shelf--2"><div class="shelf__inner"></div></div>
+  <div class="shelf shelf--3"><div class="shelf__inner"></div></div>
+  <div class="shelf shelf--4"><div class="shelf__inner"></div></div>
+  <div class="shelf shelf--5"><div class="shelf__inner"></div></div>
+</div>
+
+<!-- ── SPACEMAN ── -->
+<video id="spaceman" src="https://raw.githubusercontent.com/taelo82/taelokim-website/main/taelokim-site/project/spaceman.mp4" muted playsinline preload="auto"
+  aria-label="Astronaut navigating the tesseract"></video>
+
+<!-- ── THREAD SVG ── -->
+<svg id="thread-canvas" aria-hidden="true">
+  <!-- Glow paths (wide, blurred) -->
+  <path id="t1-glow" d="" stroke="url(#tg1)" stroke-width="3.5" fill="none" filter="url(#thread-glow)" stroke-linecap="round" opacity="0.5"/>
+  <path id="t2-glow" d="" stroke="url(#tg2)" stroke-width="2.5" fill="none" filter="url(#thread-glow)" stroke-linecap="round" opacity="0.38"/>
+  <path id="t3-glow" d="" stroke="url(#tg3)" stroke-width="1.8" fill="none" filter="url(#thread-glow)" stroke-linecap="round" opacity="0.28"/>
+  <!-- Sharp filament paths -->
+  <path id="t1" d="" stroke="#C5E8DE" stroke-width="1.1" fill="none" stroke-linecap="round" stroke-dasharray="24 7" opacity="0.65"/>
+  <path id="t2" d="" stroke="#7AB5B0" stroke-width="0.8" fill="none" stroke-linecap="round" stroke-dasharray="16 6" opacity="0.5"/>
+  <path id="t3" d="" stroke="#7AB5B0" stroke-width="0.55" fill="none" stroke-linecap="round" stroke-dasharray="10 7" opacity="0.38"/>
+  <!-- Hand glow halos -->
+  <circle id="h1" cx="0" cy="0" r="20" fill="url(#hand-glow)" opacity="0"/>
+  <circle id="h2" cx="0" cy="0" r="16" fill="url(#hand-glow)" opacity="0"/>
+  <circle id="h3" cx="0" cy="0" r="12" fill="url(#hand-glow)" opacity="0"/>
+</svg>
+
+<!-- ── NAV ── -->
+<nav class="glass" role="navigation" aria-label="Main navigation">
+  <a href="#hero" data-section="hero">Home</a>
+  <a href="#about" data-section="about">About</a>
+  <a href="#resources" data-section="resources">Resources</a>
+  <a href="#community" data-section="community">Community</a>
+  <a href="#writing" data-section="writing">Writing</a>
+  <a href="#join" data-section="join">Join</a>
 </nav>
 
-<!-- All sections wrapped so 3D perspective applies only to them, not the
-     fixed-positioned spaceman/threads above. -->
-<main class="scenes">
+<!-- ── MAIN ── -->
+<main>
 
-<!-- ── 1. HERO ──
-     Video bg lives in .bg-stage, not here — it's a fixed full-page layer
-     that cross-fades to the second video as the reader scrolls. -->
+<!-- 01 HERO -->
 <section id="hero" data-screen-label="01 Hero">
-
-  <div class="hero-content reveal">
+  <div class="hero-content">
     <p class="hero-eyebrow">Taelo Kim · Seoul · 2026</p>
-    <!-- ScrollFloat hero — JS splits the lines into per-character <span class="char">
-         on load. Scroll progress (0..1 over the first 1.0× viewport) drives each
-         char's opacity + translateY in stagger. Reduced-motion users see the
-         static rendering — no per-char fade. Pattern from AIS template. -->
-    <h1 class="hero-headline scroll-float" data-scroll-float>
-      <span class="scroll-float__line" data-text="Pull the">Pull the</span>
-      <span class="scroll-float__line scroll-float__line--em" data-text="thread."><em>thread.</em></span>
+    <h1 class="hero-headline" id="hero-hl" aria-label="Every thread you pull rewrites your future.">
     </h1>
-    <p class="hero-sub">Operator playbooks, prompt packs, and frameworks for builders shipping AI products in Asia. Free. Direct. No cadence.</p>
-    <a href="#resources" class="hero-cta liquid-glass magnet">See what's inside</a>
+    <p class="hero-sub" id="hero-sub">
+      Playbooks, frameworks and prompt packs for operators shipping AI products across Korea, Japan and Southeast Asia. Real numbers. No cadence.
+    </p>
+    <div class="hero-cta-wrap" id="hero-cta">
+      <a href="#resources" class="cta-primary">Pull the thread →</a>
+      <a href="#about" class="cta-secondary">Who's behind this</a>
+    </div>
   </div>
-
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span class="scroll-label">Scroll to drift</span>
+  </div>
 </section>
 
-<!-- ── 2. SECTION ONE (was: VALUE) ──
-     SlidePanel: slides up from y:100% to y:0 driven by its own scroll-into-view
-     progress, plus mousemove 3D tilt at the panel level. Wrapped in
-     .panel-slot so the slot is full-viewport-height while the panel inside
-     can size to its content. -->
-<div class="panel-slot" data-screen-label="02 Section One">
-  <section id="value" class="section-panel">
-    <div class="reveal">
-      <div class="section-label">Section One</div>
-      <p class="intro-para">Section One headline goes here — set the frame for what readers will get below.</p>
-      <div class="value-row">
-        <div class="value-item">
-          <div class="value-label">First block.</div>
-          <p class="value-desc">Short body copy supporting the first idea. Two or three sentences is the right shape — long enough to carry weight, short enough to feel direct.</p>
+<!-- RIFT -->
+<div class="rift" id="rift-1" aria-hidden="true"></div>
+
+<!-- 02 WHAT YOU FEEL -->
+<div class="panel-slot" id="slot-what" data-section-id="what-you-feel">
+  <section id="what-you-feel" class="scene" data-screen-label="02 What You Feel">
+    <div class="scene-reveal">
+      <div class="section-label">The signal</div>
+      <p class="feel-intro">
+        You're <strong>already in the tesseract.</strong> Every decision
+        you make today — which market, which product, which bet — is a thread
+        reaching across time. You just can't see where it lands yet.
+      </p>
+      <div class="pillars">
+        <div class="pillar card-interactive" data-pull="1">
+          <div class="murphy-echo"></div>
+          <div class="pillar-num">01</div>
+          <div class="pillar-title">Operator playbooks.</div>
+          <p class="pillar-desc">How to enter Korea and Southeast Asia. What to validate. The failure modes I've seen across 150+ pitches and my own shipped products. Steal them.</p>
         </div>
-        <div class="value-item">
-          <div class="value-label">Second block.</div>
-          <p class="value-desc">Short body copy supporting the second idea. Same shape — keep it tight, keep it concrete.</p>
+        <div class="pillar card-interactive" data-pull="2">
+          <div class="murphy-echo"></div>
+          <div class="pillar-num">02</div>
+          <div class="pillar-title">Prompt packs.</div>
+          <p class="pillar-desc">The exact prompts I use to ship faster. Banned defaults sheets, reference dictionaries, voice specs, design tokens. No fluff, just the working ones.</p>
         </div>
-        <div class="value-item">
-          <div class="value-label">Third block.</div>
-          <p class="value-desc">Short body copy supporting the third idea. Three blocks read as a triangle; it's a stable composition.</p>
+        <div class="pillar card-interactive" data-pull="3">
+          <div class="murphy-echo"></div>
+          <div class="pillar-num">03</div>
+          <div class="pillar-title">Build logs.</div>
+          <p class="pillar-desc">Real numbers from real products. What's working, what isn't, what I'd do differently at every inflection. No theory. No case studies.</p>
         </div>
       </div>
     </div>
   </section>
 </div>
 
-<!-- ── 3. SECTION TWO (was: RESOURCES) ── -->
-<div class="panel-slot" data-screen-label="03 Section Two">
-  <section id="resources" class="section-panel">
-    <div class="reveal">
-      <div class="section-label">Section Two</div>
+<!-- RIFT -->
+<div class="rift" id="rift-2" aria-hidden="true"></div>
 
-      <div class="resource-featured">
-        <div class="resource-featured-tag">Featured</div>
-        <div class="resource-featured-title">Featured Item Title</div>
-        <p class="resource-featured-desc">A short paragraph describing the featured resource. Replace with real copy and a real link to the asset, lead magnet, or detail page. Keep it specific — what they get, why it matters.</p>
-        <a href="#email-capture" class="resource-link magnet">Get it</a>
+<!-- 03 ABOUT -->
+<div class="panel-slot" id="slot-about" data-section-id="about">
+  <section id="about" class="scene" data-screen-label="03 About">
+    <div class="scene-reveal">
+      <div class="section-label">Cooper on the other side</div>
+      <div class="about-split">
+        <div>
+          <p class="about-statement">
+            I reviewed <em>150+ pitches</em> as a VC. Then crossed the table
+            and shipped products across Korea, Japan and Southeast Asia.
+            Everything here is something I'm using — not something I think might work.
+          </p>
+        </div>
+        <div class="about-facts">
+          <div class="fact-row">
+            <div class="fact-num">150<span>+</span></div>
+            <div class="fact-label">Pitches reviewed as VC</div>
+          </div>
+          <div class="fact-row">
+            <div class="fact-num">6</div>
+            <div class="fact-label">Markets operated in — KR, JP, VN, ID, SG, US</div>
+          </div>
+          <div class="fact-row">
+            <div class="fact-num">5<span>+</span></div>
+            <div class="fact-label">AI products shipped and running</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- RIFT -->
+<div class="rift" id="rift-3" aria-hidden="true"></div>
+
+<!-- 04 RESOURCES -->
+<div class="panel-slot" id="slot-resources" data-section-id="resources">
+  <section id="resources" class="scene" data-screen-label="04 Resources">
+    <div class="scene-reveal">
+      <div class="section-label">Pull a thread</div>
+
+      <div class="resource-featured card-interactive" data-pull="featured">
+        <div class="murphy-echo"></div>
+        <div class="featured-tag">Featured · Free download</div>
+        <div class="featured-title">The Operator Override Pack</div>
+        <p class="featured-desc">Seven overrides that stop your AI products looking like every other tutorial output. Banned defaults sheet, reference dictionary, voice spec, design token starter. The complete prompt set I actually used to ship.</p>
+        <a href="#join" class="resource-link">Get it free</a>
       </div>
 
       <div class="resource-grid">
-        <div class="resource-card liquid-glass">
-          <div class="resource-card-tag">Tag A</div>
-          <div class="resource-card-title">Card title one</div>
-          <p class="resource-card-desc">A short description of the first card. One or two sentences carries the weight.</p>
+        <div class="resource-card card-interactive" data-pull="r1">
+          <div class="murphy-echo"></div>
+          <div class="resource-card-tag">Framework</div>
+          <div class="resource-card-title">KR / SEA Market Entry Checklist</div>
+          <p class="resource-card-desc">What to validate before launching across Korea, Japan, Vietnam, Indonesia.</p>
         </div>
-        <div class="resource-card liquid-glass">
-          <div class="resource-card-tag">Tag B</div>
-          <div class="resource-card-title">Card title two</div>
-          <p class="resource-card-desc">A short description of the second card. One or two sentences carries the weight.</p>
+        <div class="resource-card card-interactive" data-pull="r2">
+          <div class="murphy-echo"></div>
+          <div class="resource-card-tag">Template</div>
+          <div class="resource-card-title">AI Product Spec Template</div>
+          <p class="resource-card-desc">The exact doc structure I used for the last five products I shipped.</p>
         </div>
-        <div class="resource-card liquid-glass">
-          <div class="resource-card-tag">Tag C</div>
-          <div class="resource-card-title">Card title three</div>
-          <p class="resource-card-desc">A short description of the third card. One or two sentences carries the weight.</p>
+        <div class="resource-card card-interactive" data-pull="r3">
+          <div class="murphy-echo"></div>
+          <div class="resource-card-tag">Playbook</div>
+          <div class="resource-card-title">Cross-Border Ops Playbook</div>
+          <p class="resource-card-desc">Logistics, partners, returns, taxes across 6 markets. The unglamorous stuff that decides survival.</p>
         </div>
       </div>
     </div>
   </section>
 </div>
 
-<!-- ── 4. SECTION THREE (was: WRITING) ── -->
-<div class="panel-slot" data-screen-label="04 Section Three">
-  <section id="writing" class="section-panel">
-    <div class="reveal">
-      <div class="section-label">Section Three</div>
-      <a href="#" class="writing-row">
-        <div class="writing-left">
-          <div class="writing-title">First entry headline goes here</div>
-          <div class="writing-desc">Short subtitle or one-line summary.</div>
+<!-- RIFT -->
+<div class="rift" id="rift-4" aria-hidden="true"></div>
+
+<!-- 05 COMMUNITY -->
+<div class="panel-slot" id="slot-community" data-section-id="community">
+  <section id="community" class="scene" data-screen-label="05 Community">
+    <div class="scene-reveal">
+      <div class="section-label">Other hands on the threads</div>
+      <h2 class="community-headline">
+        You're not the only one<br><em>navigating this.</em>
+      </h2>
+      <div class="community-grid">
+        <div class="community-card card-interactive" data-pull="c1">
+          <div class="murphy-echo"></div>
+          <div class="card-label">Community</div>
+          <div class="card-title">Operators building in Asia</div>
+          <p class="card-desc">A small group of people shipping AI products across KR, JP and SEA. No hype, just real progress updates and shared resources.</p>
+          <a href="#join" class="card-action">Request access</a>
         </div>
-        <div class="writing-date">2026-04-21</div>
-      </a>
-      <a href="#" class="writing-row">
-        <div class="writing-left">
-          <div class="writing-title">Second entry headline goes here</div>
-          <div class="writing-desc">Short subtitle or one-line summary.</div>
+        <div class="community-card card-interactive" data-pull="c2">
+          <div class="murphy-echo"></div>
+          <div class="card-label">Office Hours</div>
+          <div class="card-title">30-min operator calls</div>
+          <p class="card-desc">Book a session. Bring your actual problem — market entry, product spec, distribution. I'll be direct.</p>
+          <a href="#join" class="card-action">Join the list</a>
         </div>
-        <div class="writing-date">2026-03-30</div>
-      </a>
-      <a href="#" class="writing-row">
-        <div class="writing-left">
-          <div class="writing-title">Third entry headline goes here</div>
-          <div class="writing-desc">Short subtitle or one-line summary.</div>
-        </div>
-        <div class="writing-date">2026-03-12</div>
-      </a>
-      <a href="#" class="writing-row">
-        <div class="writing-left">
-          <div class="writing-title">Fourth entry headline goes here</div>
-          <div class="writing-desc">Short subtitle or one-line summary.</div>
-        </div>
-        <div class="writing-date">2026-02-18</div>
-      </a>
+      </div>
     </div>
   </section>
 </div>
 
-<!-- ── 5. STATS ──
-     Three numbers + labels. Generic placeholder values; replace with real ones.
-     Stats sit OUTSIDE a panel-slot — they're a single horizontal band, not a
-     full-viewport sliding panel. -->
-<section id="stats" class="section-stats" data-screen-label="05 Stats">
-  <div class="reveal">
-    <div class="stats-row">
-      <div class="stat-item">
-        <div class="stat-number">10K+</div>
-        <div class="stat-label">Users</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">500+</div>
-        <div class="stat-label">Members</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">#1</div>
-        <div class="stat-label">Rank</div>
+<!-- RIFT -->
+<div class="rift" id="rift-5" aria-hidden="true"></div>
+
+<!-- 06 WRITING -->
+<div class="panel-slot" id="slot-writing" data-section-id="writing">
+  <section id="writing" class="scene" data-screen-label="06 Writing">
+    <div class="scene-reveal">
+      <div class="section-label">Field reports</div>
+      <div class="writing-entries">
+        <a href="#" class="writing-row card-interactive" data-pull="w1">
+          <div class="writing-left">
+            <div class="writing-title">Why most AI products die at distribution, not the model</div>
+            <div class="writing-sub">It's not the model. It's the motion.</div>
+          </div>
+          <div class="writing-date">2026-04-21</div>
+        </a>
+        <a href="#" class="writing-row card-interactive" data-pull="w2">
+          <div class="writing-left">
+            <div class="writing-title">What 150 pitch decks taught me about narrative</div>
+            <div class="writing-sub">Pattern recognition from the other side of the table.</div>
+          </div>
+          <div class="writing-date">2026-03-30</div>
+        </a>
+        <a href="#" class="writing-row card-interactive" data-pull="w3">
+          <div class="writing-left">
+            <div class="writing-title">Operating cross-border in KR and SEA, plainly</div>
+            <div class="writing-sub">The part no one writes about because it's unglamorous.</div>
+          </div>
+          <div class="writing-date">2026-03-12</div>
+        </a>
+        <a href="#" class="writing-row card-interactive" data-pull="w4">
+          <div class="writing-left">
+            <div class="writing-title">How I think about e-commerce logistics at scale</div>
+            <div class="writing-sub">Global logistics is a design problem, not a spreadsheet.</div>
+          </div>
+          <div class="writing-date">2026-02-18</div>
+        </a>
       </div>
     </div>
+  </section>
+</div>
+
+<!-- RIFT -->
+<div class="rift" id="rift-6" aria-hidden="true"></div>
+
+<!-- 07 JOIN / CTA -->
+<section id="join" class="scene" data-screen-label="07 Join" style="padding-top:0;max-width:100%;padding-left:0;padding-right:0;">
+  <div class="join-bg-glow"></div>
+  <div class="join-content scene-reveal">
+    <div class="join-eyebrow">The other dimension</div>
+    <h2 class="join-headline">
+      Get resources<br><em>before they're public.</em>
+    </h2>
+    <p class="join-sub">
+      Free packs and playbooks sent only when something's actually ready.
+      No weekly cadence. No hype. No upsells. Unsubscribe in one click.
+    </p>
+    <form class="email-form" onsubmit="handleJoin(event)">
+      <input class="email-input" type="email" id="email-in" placeholder="your@email.com" autocomplete="email" required>
+      <button class="email-btn" type="submit">Join</button>
+    </form>
+    <p class="join-note">One email per new resource. That's the deal.</p>
   </div>
 </section>
 
-<!-- ── 6. FINAL CTA ──
-     Centered final-CTA block. The bg-stage video underneath has fully
-     cross-faded to video 2 by this point, so the CTA reads against the
-     bottom-bookend ambience. -->
-<div id="email-capture" class="final-cta" data-screen-label="06 Get Started">
-  <div class="reveal">
-    <h2 class="final-cta__headline">Get Started</h2>
-    <p class="final-cta__sub">A short closing line goes here — one sentence, direct.</p>
-    <!-- Formspree: sign up at https://formspree.io, create a new form,
-         then replace REPLACE_WITH_FORMSPREE_ID below with your form ID. -->
-    <form class="final-cta__form email-form" id="email-form"
-          action="https://formspree.io/f/REPLACE_WITH_FORMSPREE_ID"
-          method="POST">
-      <input class="final-cta__input email-input" type="email" name="email" placeholder="your@email.com" autocomplete="email" required>
-      <!-- Honeypot: bots fill it, humans don't see it. -->
-      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
-      <button class="final-cta__btn email-btn magnet" type="submit"><span>Join</span></button>
-    </form>
-    <p class="email-success" id="email-success" hidden>You're in. New resources hit your inbox first.</p>
-    <p class="email-error" id="email-error" hidden>Something went wrong — try again, or email Taelo directly.</p>
-  </div>
-</div>
-
-<!-- ── FOOTER ── -->
+<!-- FOOTER -->
 <footer data-screen-label="08 Footer">
   <span class="foot-copy">© 2026 Taelo Kim</span>
   <div class="foot-links">
-    <a href="#">YouTube</a>
-    <a href="#">X</a>
-    <a href="#">Email</a>
+    <a href="#" aria-label="YouTube">YouTube</a>
+    <a href="#" aria-label="X / Twitter">X</a>
+    <a href="#" aria-label="Email">Email</a>
   </div>
 </footer>
 
 </main>
-<!-- /.scenes -->
 
 <script>
-  // ── SCROLL REVEAL ──
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.12 });
-  reveals.forEach(el => observer.observe(el));
+// ══════════════════════════════════════════════════════════════
+// TESSERACT SITE — INTERACTIVE MECHANICS
+// ══════════════════════════════════════════════════════════════
 
-  // Fire hero reveal immediately
-  document.querySelector('#hero .reveal').classList.add('visible');
+// ── 1. HERO TEXT — char-by-char fade in ──
+(function initHeroText() {
+  const hl = document.getElementById('hero-hl');
+  const lines = ['Every thread', 'you pull', '<em>rewrites</em>', 'your future.'];
+  let charDelay = 0;
 
-  // Cache reduced-motion preference once for all interactive layers below.
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  lines.forEach((line, li) => {
+    const tmp = document.createElement('div');
+    tmp.innerHTML = line;
 
-  // ── PILLNAV — radius + active state ──
-  // Each pill's hover circle needs a radius big enough to fill the pill on
-  // scale(1). Set per-item from bounding box on load + on resize. Active
-  // state lit by matching the current activeSection id to data-target.
-  const pillItems = document.querySelectorAll('.pill-item');
-  function sizePills() {
-    pillItems.forEach(el => {
-      const r = el.getBoundingClientRect();
-      const radius = Math.max(r.width, r.height) * 1.15;
-      el.style.setProperty('--pill-r', radius.toFixed(0) + 'px');
-    });
-  }
-  sizePills();
-  window.addEventListener('resize', sizePills);
-
-  // Map href anchor → pill element so the active section can light its pill.
-  const pillByTarget = {};
-  pillItems.forEach(el => {
-    const href = el.getAttribute('href') || '';
-    if (href.startsWith('#')) pillByTarget[href.slice(1)] = el;
-  });
-  function setActivePill(id) {
-    pillItems.forEach(p => p.classList.remove('is-active'));
-    if (pillByTarget[id]) pillByTarget[id].classList.add('is-active');
-  }
-
-  // ── SCROLLFLOAT — split hero headline into per-char spans ──
-  // Each .scroll-float__line gets split. Spaces become .char--space (zero-width
-  // span with em-width) so word breaks survive. Each char's --i index drives a
-  // staggered scroll-scrubbed fade in the frame loop below.
-  function splitChars(line) {
-    const text = line.getAttribute('data-text') || line.textContent || '';
-    // Preserve <em> wrapping if present — clone with chars inside.
-    const hasEm = !!line.querySelector('em');
-    const wrap = (charText, idx) => {
-      if (charText === ' ') return `<span class="char char--space" style="--i:${idx}"> </span>`;
-      return `<span class="char" style="--i:${idx}">${charText}</span>`;
-    };
-    const inner = [...text].map((c, i) => wrap(c, i)).join('');
-    line.innerHTML = hasEm ? `<em>${inner}</em>` : inner;
-  }
-  const sfLines = document.querySelectorAll('.scroll-float__line');
-  if (!prefersReducedMotion) sfLines.forEach(splitChars);
-  const sfChars = document.querySelectorAll('.scroll-float .char');
-
-  // ── SLIDEPANEL — slide-up + mousemove tilt ──
-  // Each .panel-slot drives its inner .section-panel:
-  //   --panel-y     translateY 100% → 0% as the slot crosses the viewport
-  //                 (slot top hits viewport bottom = 100%, slot top hits
-  //                  viewport top = 0%)
-  //   --panel-tx/ty rotateX/Y on mousemove (panel-level tilt, capped 4°)
-  // Lerped each frame so motion is smooth and not jittery on fast scrolls.
-  const panelSlots = document.querySelectorAll('.panel-slot');
-  const panelState = new Map(); // el → { tx, ty, txTarget, tyTarget }
-  panelSlots.forEach(slot => {
-    panelState.set(slot, { tx: 0, ty: 0, txTarget: 0, tyTarget: 0 });
-    if (!prefersReducedMotion) {
-      slot.addEventListener('mousemove', (e) => {
-        const r = slot.getBoundingClientRect();
-        const px = (e.clientX - r.left) / r.width;
-        const py = (e.clientY - r.top) / r.height;
-        const PANEL_TILT = 4;  // degrees (subtler than card tilt of 5°)
-        const s = panelState.get(slot);
-        s.txTarget = -(py - 0.5) * 2 * PANEL_TILT;
-        s.tyTarget =  (px - 0.5) * 2 * PANEL_TILT;
-      });
-      slot.addEventListener('mouseleave', () => {
-        const s = panelState.get(slot);
-        s.txTarget = 0;
-        s.tyTarget = 0;
-      });
-    }
-  });
-
-  // Per-frame updater for SlidePanel y + tilt + ScrollFloat chars.
-  // Called from the same RAF loop as the thread mechanic to avoid two loops.
-  function updatePanelsAndChars() {
-    const vh = window.innerHeight;
-
-    // Slide-up + tilt for each panel-slot
-    panelSlots.forEach(slot => {
-      const r = slot.getBoundingClientRect();
-      const panel = slot.querySelector('.section-panel');
-      if (!panel) return;
-      // Progress: 0 when slot top hits viewport bottom; 1 when slot top hits
-      // viewport top. Past 1 (slot scrolled past) → still 1 (panel stays at 0%).
-      const raw = 1 - r.top / vh;
-      const p = Math.max(0, Math.min(raw, 1));
-      // translateY: 100% (offstage below) → 0% (settled). Easing: cubic-out.
-      const ease = 1 - Math.pow(1 - p, 3);
-      const yPct = (1 - ease) * 100;
-      panel.style.setProperty('--panel-y', yPct.toFixed(2) + '%');
-
-      // Lerp tilt
-      const s = panelState.get(slot);
-      s.tx += (s.txTarget - s.tx) * 0.10;
-      s.ty += (s.tyTarget - s.ty) * 0.10;
-      panel.style.setProperty('--panel-tx', s.tx.toFixed(2) + 'deg');
-      panel.style.setProperty('--panel-ty', s.ty.toFixed(2) + 'deg');
-    });
-
-    // ScrollFloat hero chars — fade+slide as the user scrolls past hero.
-    // Each char's --i adds a small stagger (per-char delay in the curve).
-    if (!prefersReducedMotion && sfChars.length) {
-      const scrollPx = window.scrollY;
-      const total = vh * 0.9;          // fade complete by ~0.9 viewports
-      const baseT = Math.max(0, Math.min(scrollPx / total, 1));
-      const N = sfChars.length;
-      sfChars.forEach((ch, i) => {
-        // Staggered local progress: each char starts fading slightly after
-        // the previous. Spread = 25% of total range so the cascade is tight.
-        const start = (i / N) * 0.25;
-        const local = Math.max(0, Math.min((baseT - start) / (1 - 0.25), 1));
-        const ease = local * local;    // ease-in
-        ch.style.opacity = (1 - ease).toFixed(3);
-        ch.style.transform = `translateY(${(ease * 24).toFixed(1)}px)`;
-      });
-    }
-  }
-
-  // ── THREAD MECHANIC ──
-  // Spaceman is flipped (scaleX(-1)) so his outstretched arm points TOWARD content.
-  // Hands therefore appear on the LEFT side of his bounding box.
-  // - Thread endpoints lerp smoothly toward target (no snap between sections).
-  // - Spaceman receives a scroll-velocity-driven tug: pulls on scroll-down, recoils on scroll-up.
-  // - Active section gets .active-section class (drives glow + top bar from CSS).
-  // Threads are now PAIRS of paths: a wide blurred "glow" + a sharp filament on top.
-  const t1   = document.getElementById('thread-1');
-  const t1g  = document.getElementById('thread-1-glow');
-  const t2   = document.getElementById('thread-2');
-  const t2g  = document.getElementById('thread-2-glow');
-  const t3   = document.getElementById('thread-3');
-  const t3g  = document.getElementById('thread-3-glow');
-  const o1 = document.getElementById('origin-1');
-  const o2 = document.getElementById('origin-2');
-  const o3 = document.getElementById('origin-3');
-  const g1 = document.getElementById('thread-grad-1');
-  const g2 = document.getElementById('thread-grad-2');
-  const g3 = document.getElementById('thread-grad-3');
-  const spaceman = document.getElementById('spaceman');
-
-  // ── BG VIDEO CROSSFADE ──
-  // Two looping videos layered behind everything in .bg-stage. Scroll progress
-  // drives a cross-fade: video 1 dominates the upper page, video 2 fades in as
-  // the reader heads toward the bottom. Fully swapped well before the CTA so
-  // the bottom of the page reads as the second video's bookend.
-  const bgVideo1 = document.getElementById('bg-video-1');
-  const bgVideo2 = document.getElementById('bg-video-2');
-  const BG_MAX_OPACITY = 0.55;
-  const BG_FADE_START  = 0.55;   // scroll % where video 2 begins to appear
-  const BG_FADE_END    = 0.80;   // scroll % where video 2 has fully taken over
-  function smoothstep01(a, b, x) {
-    const t = Math.max(0, Math.min(1, (x - a) / (b - a)));
-    return t * t * (3 - 2 * t);
-  }
-  function updateBgCrossfade() {
-    if (!bgVideo1 || !bgVideo2) return;
-    const totalScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
-    const p = Math.max(0, Math.min(window.scrollY / totalScroll, 1));
-    const t = smoothstep01(BG_FADE_START, BG_FADE_END, p);
-    bgVideo1.style.opacity = (BG_MAX_OPACITY * (1 - t)).toFixed(3);
-    bgVideo2.style.opacity = (BG_MAX_OPACITY * t).toFixed(3);
-  }
-
-  // ── VERLET ROPE ──
-  // Each thread is a chain of N points integrated with verlet physics. Endpoints
-  // are pinned to (hand, target); interior points obey: inertia from prior frame,
-  // light gravity, then K passes of distance constraints to keep the chain at
-  // its rest length. Rest length is slightly longer than the straight-line span,
-  // so the rope has natural slack — it sags when still, whips when the spaceman
-  // moves, oscillates in damped harmonics. Reads as a real physical filament.
-  //
-  // Rendering: convert the point chain to a smooth cubic-Bezier path using the
-  // Catmull-Rom → Bezier identity. This is what gives the rope its silken
-  // continuity instead of a polyline kink at every node.
-  class VerletRope {
-    constructor(segments, opts) {
-      this.pts = new Array(segments);
-      for (let i = 0; i < segments; i++) {
-        this.pts[i] = { x: 0, y: 0, px: 0, py: 0 };
-      }
-      // Per-rope physics. Different values per thread give the three threads
-      // distinct personalities (tight upper / medium / draping lower).
-      this.slack    = opts.slack    ?? 1.07;   // rest length = span × slack
-      this.gravity  = opts.gravity  ?? 0.06;   // px / frame² — very light
-      this.damping  = opts.damping  ?? 0.985;  // velocity multiplier per frame
-      this.iter     = opts.iter     ?? 6;      // constraint passes (more = stiffer)
-      this.initialized = false;
-    }
-
-    seed(sx, sy, ex, ey) {
-      const n = this.pts.length;
-      for (let i = 0; i < n; i++) {
-        const t = i / (n - 1);
-        const x = sx + (ex - sx) * t;
-        const y = sy + (ey - sy) * t;
-        this.pts[i].x = this.pts[i].px = x;
-        this.pts[i].y = this.pts[i].py = y;
-      }
-      this.initialized = true;
-    }
-
-    step(sx, sy, ex, ey) {
-      if (!this.initialized) this.seed(sx, sy, ex, ey);
-      const pts = this.pts;
-      const n = pts.length;
-      const span = Math.hypot(ex - sx, ey - sy) || 1;
-      const restLen = (span * this.slack) / (n - 1);
-
-      // Verlet integration — position drifts forward by (current - previous) × damping,
-      // plus tiny gravity. No explicit velocity field; previous-position IS velocity.
-      for (let i = 0; i < n; i++) {
-        const p = pts[i];
-        const vx = (p.x - p.px) * this.damping;
-        const vy = (p.y - p.py) * this.damping;
-        p.px = p.x;
-        p.py = p.y;
-        p.x += vx;
-        p.y += vy + this.gravity;
-      }
-
-      // Distance constraints. K passes for stiffness — each pass tightens the
-      // chain a bit, so the rope settles to its rest length. Endpoints pinned
-      // to (sx,sy) and (ex,ey) every pass so they never drift.
-      const last = n - 1;
-      for (let it = 0; it < this.iter; it++) {
-        pts[0].x = sx;    pts[0].y = sy;
-        pts[last].x = ex; pts[last].y = ey;
-        for (let i = 0; i < last; i++) {
-          const a = pts[i], b = pts[i + 1];
-          const dx = b.x - a.x;
-          const dy = b.y - a.y;
-          const d = Math.hypot(dx, dy) || 0.001;
-          const k = (d - restLen) / d * 0.5;
-          const ox = dx * k;
-          const oy = dy * k;
-          a.x += ox; a.y += oy;
-          b.x -= ox; b.y -= oy;
-        }
-      }
-      // Final pin (last constraint pass moved them slightly).
-      pts[0].x = sx;    pts[0].y = sy;
-      pts[last].x = ex; pts[last].y = ey;
-    }
-
-    // Catmull-Rom → cubic Bezier. Smooth path through every point with no
-    // visible polyline joints. Tangents derived from neighbors give a natural
-    // silken curvature.
-    toPath() {
-      const pts = this.pts;
-      const n = pts.length;
-      if (n < 2) return 'M0 0';
-      let d = `M ${pts[0].x.toFixed(1)} ${pts[0].y.toFixed(1)}`;
-      for (let i = 0; i < n - 1; i++) {
-        const p0 = pts[Math.max(0, i - 1)];
-        const p1 = pts[i];
-        const p2 = pts[i + 1];
-        const p3 = pts[Math.min(n - 1, i + 2)];
-        const c1x = p1.x + (p2.x - p0.x) / 6;
-        const c1y = p1.y + (p2.y - p0.y) / 6;
-        const c2x = p2.x - (p3.x - p1.x) / 6;
-        const c2y = p2.y - (p3.y - p1.y) / 6;
-        d += ` C ${c1x.toFixed(1)} ${c1y.toFixed(1)} ${c2x.toFixed(1)} ${c2y.toFixed(1)} ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
-      }
-      return d;
-    }
-  }
-
-  // Three ropes — heavily damped now (was too whippy / shaky after scrolls).
-  // Lower damping value = velocity dies faster each frame = settles in 2-3
-  // frames instead of 30+. Slack and gravity also dialed down so threads sit
-  // closer to a straight line at rest, with just a hint of catenary.
-  const rope1 = new VerletRope(14, { slack: 1.015, gravity: 0.015, damping: 0.78, iter: 8 });
-  const rope2 = new VerletRope(14, { slack: 1.025, gravity: 0.025, damping: 0.76, iter: 7 });
-  const rope3 = new VerletRope(14, { slack: 1.035, gravity: 0.035, damping: 0.74, iter: 6 });
-
-  const setPathPair = (mainPath, glowPath, rope, sx, sy, ex, ey) => {
-    rope.step(sx, sy, ex, ey);
-    const d = rope.toPath();
-    mainPath.setAttribute('d', d);
-    glowPath.setAttribute('d', d);
-  };
-  const setGrad = (g, x1, y1, x2, y2) => {
-    g.setAttribute('x1', x1); g.setAttribute('y1', y1);
-    g.setAttribute('x2', x2); g.setAttribute('y2', y2);
-  };
-  const setOrigin = (c, cx, cy, opacity) => {
-    c.setAttribute('cx', cx); c.setAttribute('cy', cy);
-    c.setAttribute('opacity', opacity);
-  };
-
-  // Smooth scroll-progress sizing for the spaceman. The change is now gentler in
-  // absolute terms (less position movement) AND spread over a longer scroll zone,
-  // so it never feels snappy even on fast wheel pushes.
-  const heroEl = document.getElementById('hero');
-  let smoothT = 0;
-  function updateSpacemanLayout() {
-    const vh = window.innerHeight;
-    // Transition zone: 0.15vh → 1.65vh (1.5 viewports of scroll for the full change)
-    const raw = Math.min(Math.max((window.scrollY - vh * 0.15) / (vh * 1.50), 0), 1);
-    // Slower lerp — even buttery-er.
-    smoothT += (raw - smoothT) * 0.05;
-    const t = smoothT;
-
-    const ease = t * t * (3 - 2 * t);  // smoothstep
-
-    // Stay BIG throughout. The spaceman is the signature interaction — it should
-    // dominate the frame at the top, and still feel large after the user scrolls
-    // past the hero. Shrinks gently (70 → 56vh) and drifts only a little upward.
-    const heightVh  = 70 - (70 - 56) * ease;   // 70vh → 56vh
-    const topPct    = 50 - (50 - 42) * ease;   // 50% → 42% (subtle upward drift)
-    const rightPct  =  4;                       // base anchor; horizontal drift handled in transform
-    const opacity   =  1 - (1 - 0.92) * ease;   // barely dims
-    const yShiftPct = -50 * (1 - ease);
-    // Drift further right as scroll advances so the character clears the CTA's
-    // center column at the bottom. translateX is applied last in the transform
-    // so it operates in screen space (positive = right) regardless of the scaleX(-1) flip.
-    const xShiftPct = 18 * ease;                 // 0% → 18% of element width
-
-    // Body tilt — leans into the pull at peak. After scaleX(-1), POSITIVE rotation
-    // is visually CCW (head tilts left toward content). Falls back to scroll progress
-    // if the video's currentTime isn't reliable yet.
-    const totalScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
-    const scrollProg = Math.min(window.scrollY / totalScroll, 1);
-    let pullProg = scrollProg;
-    if (videoReady && spaceman.duration && spaceman.currentTime > 0) {
-      pullProg = (spaceman.currentTime || 0) / spaceman.duration;
-    }
-    const tiltDeg = Math.sin(pullProg * Math.PI) * 13;
-
-    spaceman.style.height = heightVh + 'vh';
-    spaceman.style.top = topPct + '%';
-    spaceman.style.right = rightPct + '%';
-    spaceman.style.opacity = opacity;
-    spaceman.style.transform =
-      `translateX(${xShiftPct}%) translateY(${yShiftPct}%) scaleX(-1) rotate(${tiltDeg}deg)`;
-  }
-
-  // Active-section tracking → drives glow band + label glow via CSS.
-  // for-who section was dropped during the template restructure; stats was added.
-  const sectionIds = ['hero', 'value', 'resources', 'writing', 'stats', 'email-capture'];
-  const sectionEls = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
-  let activeSection = heroEl;
-  function updateActiveSection() {
-    let best = activeSection;
-    let bestVisible = 0;
-    sectionEls.forEach(el => {
-      const r = el.getBoundingClientRect();
-      const visible = Math.max(0, Math.min(r.bottom, window.innerHeight) - Math.max(r.top, 0));
-      if (visible > bestVisible) { best = el; bestVisible = visible; }
-    });
-    if (best !== activeSection) {
-      sectionEls.forEach(s => s.classList.remove('active-section'));
-      best.classList.add('active-section');
-      activeSection = best;
-      // Light the matching pill in the PillNav.
-      setActivePill(best.id);
-    }
-  }
-
-  // Spaceman is now a <video>. Scroll position drives video.currentTime directly:
-  // scroll down → video plays forward (he pulls). Scroll up → video reverses (he releases).
-  // Page scroll mapped 0-1 to video duration 0 → duration.
-  let videoReady = false;
-  spaceman.addEventListener('loadedmetadata', () => {
-    videoReady = true;
-    spaceman.pause();
-    spaceman.currentTime = 0;
-  });
-  // Some browsers need a play attempt before currentTime can be set
-  spaceman.addEventListener('canplay', () => { videoReady = true; });
-
-  // Lerp targets — threads ease toward target instead of snapping on section change
-  const targets = { e1: {x:0,y:0}, e2: {x:0,y:0}, e3: {x:0,y:0} };
-  const current = { e1: {x:0,y:0}, e2: {x:0,y:0}, e3: {x:0,y:0} };
-  const hands   = { h1: {x:0,y:0}, h2: {x:0,y:0}, h3: {x:0,y:0} };
-  let initialized = false;
-  let revealAmount = 0.85;
-
-  function computeHandsAndTargets() {
-    const rect = spaceman.getBoundingClientRect();
-    // Flipped spaceman: hands now visually appear on LEFT side of bounding box.
-    hands.h1.x = rect.left + rect.width * 0.10;  // upper outstretched glove
-    hands.h1.y = rect.top  + rect.height * 0.38;
-    hands.h2.x = rect.left + rect.width * 0.16;  // lower reaching glove
-    hands.h2.y = rect.top  + rect.height * 0.52;
-    hands.h3.x = rect.left + rect.width * 0.26;  // chest/forearm
-    hands.h3.y = rect.top  + rect.height * 0.44;
-
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
-
-    if (activeSection === heroEl) {
-      // Hero: threads extend left+down as user scrolls within hero
-      const scrollPct = Math.min(window.scrollY / vh, 1);
-      const progress = Math.min(scrollPct * 3.5, 1);
-      revealAmount = Math.min(scrollPct * 6 + 0.15, 1);
-      targets.e1.x = hands.h1.x - vw * 0.30 * progress;
-      targets.e1.y = hands.h1.y + vh * 0.55 * progress;
-      targets.e2.x = hands.h2.x - vw * 0.22 * progress;
-      targets.e2.y = hands.h2.y + vh * 0.68 * progress;
-      targets.e3.x = hands.h3.x - vw * 0.18 * progress;
-      targets.e3.y = hands.h3.y + vh * 0.45 * progress;
-    } else {
-      // Other sections: threads anchor BEHIND the active section, with
-      // endpoints peeking out from the LEFT edge — this is the visible
-      // "anchor" that ties the section to the spaceman's pull. Targets
-      // land in the section's left padding-gutter (empty space, no
-      // content), spread vertically across the visible portion. Section
-      // z-index is higher than #thread-canvas so the thread's middle
-      // section is occluded — only the start (at the spaceman's hand)
-      // and the end (at the left edge) are visible.
-      const aRect = activeSection.getBoundingClientRect();
-      const visTop = Math.max(aRect.top, 0);
-      const visBottom = Math.min(aRect.bottom, vh);
-      const sectionH = Math.max(visBottom - visTop, 1);
-      // Peek-out point: just inside the section's left edge, past any
-      // body padding. Stays within the empty left-padding gutter so the
-      // thread tip emerges from "behind" the content visually.
-      const peekX = Math.max(aRect.left + 36, vw * 0.04);
-      targets.e1.x = peekX + 8;
-      targets.e1.y = visTop + sectionH * 0.20;
-      targets.e2.x = peekX - 14;
-      targets.e2.y = visTop + sectionH * 0.50;
-      targets.e3.x = peekX + 2;
-      targets.e3.y = visTop + sectionH * 0.80;
-      revealAmount = 0.85;
-    }
-  }
-
-  // Reuse the prefersReducedMotion constant defined earlier.
-  const reduceMotion = prefersReducedMotion;
-  const SMOOTH = reduceMotion ? 1 : 0.10;
-  let dashOffset = 0;
-
-  function frame() {
-    updateSpacemanLayout();
-    updateBgCrossfade();
-    updateActiveSection();
-    updatePanelsAndChars();
-    computeHandsAndTargets();
-
-    if (!initialized) {
-      Object.assign(current.e1, targets.e1);
-      Object.assign(current.e2, targets.e2);
-      Object.assign(current.e3, targets.e3);
-      initialized = true;
-    }
-    current.e1.x += (targets.e1.x - current.e1.x) * SMOOTH;
-    current.e1.y += (targets.e1.y - current.e1.y) * SMOOTH;
-    current.e2.x += (targets.e2.x - current.e2.x) * SMOOTH;
-    current.e2.y += (targets.e2.y - current.e2.y) * SMOOTH;
-    current.e3.x += (targets.e3.x - current.e3.x) * SMOOTH;
-    current.e3.y += (targets.e3.y - current.e3.y) * SMOOTH;
-
-    // Each thread is a verlet rope: stepped forward in physics, then rendered as
-    // a smooth Bezier path. Pinned to (hand, target) endpoints; interior points
-    // sag under gravity, oscillate when endpoints move, settle by damping.
-    // Reads as a real silk filament reacting to the spaceman's pull.
-    setPathPair(t1, t1g, rope1, hands.h1.x, hands.h1.y, current.e1.x, current.e1.y);
-    setPathPair(t2, t2g, rope2, hands.h2.x, hands.h2.y, current.e2.x, current.e2.y);
-    setPathPair(t3, t3g, rope3, hands.h3.x, hands.h3.y, current.e3.x, current.e3.y);
-
-    setGrad(g1, hands.h1.x, hands.h1.y, current.e1.x, current.e1.y);
-    setGrad(g2, hands.h2.x, hands.h2.y, current.e2.x, current.e2.y);
-    setGrad(g3, hands.h3.x, hands.h3.y, current.e3.x, current.e3.y);
-
-    // Origin halos at the spaceman's hands — dimmed roughly half so they're
-    // no longer the brightest thing on the page.
-    setOrigin(o1, hands.h1.x, hands.h1.y, revealAmount * 0.45);
-    setOrigin(o2, hands.h2.x, hands.h2.y, revealAmount * 0.35);
-    setOrigin(o3, hands.h3.x, hands.h3.y, revealAmount * 0.25);
-
-    // Spaceman: scrub video to match scroll position.
-    // Down → forward (pulls). Up → reverse (releases). Lerped so it doesn't jump.
-    if (videoReady && spaceman.duration) {
-      const totalScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
-      const scrollPct = Math.max(0, Math.min(window.scrollY / totalScroll, 1));
-      const targetTime = scrollPct * spaceman.duration;
-      const diff = targetTime - spaceman.currentTime;
-      // Only seek if the diff is meaningful — avoids constant micro-seeks that cause stutter
-      if (Math.abs(diff) > 0.02) {
-        spaceman.currentTime = spaceman.currentTime + diff * 0.20;
-      }
-    }
-
-    // Outward dash flow — slowed substantially (was too eye-catching).
-    // Reads as a slow drift of light along the silk now, not a marquee.
-    if (!reduceMotion) {
-      dashOffset = (dashOffset - 0.18) % 10000;
-      t1.style.strokeDashoffset = dashOffset;
-      t2.style.strokeDashoffset = dashOffset * 0.7;
-      t3.style.strokeDashoffset = dashOffset * 1.3;
-    }
-
-    requestAnimationFrame(frame);
-  }
-  frame();
-
-  // ── EMAIL CAPTURE ──
-  // Posts to Formspree as JSON so the page never reloads. On success the
-  // form is hidden and a confirmation message replaces it. The placeholder
-  // endpoint short-circuits with a friendly error until a real ID is set.
-  const emailForm    = document.getElementById('email-form');
-  const emailSuccess = document.getElementById('email-success');
-  const emailError   = document.getElementById('email-error');
-  // ── INTERACTIVE LAYER (cursor spotlight + 3D tilt + magnetic CTAs) ──
-  // Cards get FOUR CSS vars updated on mousemove:
-  //   --mx, --my  → percentage cursor position within card (drives ::before
-  //                 amber spotlight gradient)
-  //   --tx, --ty  → rotateX / rotateY in degrees (drives 3D tilt; capped 5°)
-  // On mouseleave, tilt resets to 0 so the card settles flat with the
-  // CSS transition handling the spring-back.
-  const spotEls = document.querySelectorAll('.resource-card, .resource-featured');
-  const TILT_MAX = 5; // degrees
-  spotEls.forEach(el => {
-    el.addEventListener('mousemove', (e) => {
-      const r = el.getBoundingClientRect();
-      const px = (e.clientX - r.left) / r.width;   // 0..1
-      const py = (e.clientY - r.top)  / r.height;  // 0..1
-      el.style.setProperty('--mx', (px * 100) + '%');
-      el.style.setProperty('--my', (py * 100) + '%');
-      if (!reduceMotion) {
-        // py < 0.5 → cursor in top half → card tilts FORWARD/UP (-rotateX positive in screen Y)
-        // px > 0.5 → cursor in right half → card tilts to RIGHT (+rotateY)
-        const tx = -(py - 0.5) * 2 * TILT_MAX; // -TILT_MAX..+TILT_MAX
-        const ty =  (px - 0.5) * 2 * TILT_MAX;
-        el.style.setProperty('--tx', tx.toFixed(2) + 'deg');
-        el.style.setProperty('--ty', ty.toFixed(2) + 'deg');
-      }
-    });
-    el.addEventListener('mouseleave', () => {
-      el.style.setProperty('--tx', '0deg');
-      el.style.setProperty('--ty', '0deg');
-    });
-  });
-
-  // Magnetic CTAs: when the cursor enters ~1.6× the button's bounding
-  // radius, the button translates 22% of the cursor-to-center vector
-  // toward the cursor. Reads as a soft pull, not a snap. Skipped for
-  // reduced-motion users entirely.
-  if (!reduceMotion) {
-    const magnets = document.querySelectorAll('.magnet');
-    magnets.forEach(el => {
-      el.addEventListener('mousemove', (e) => {
-        const r = el.getBoundingClientRect();
-        const cx = r.left + r.width / 2;
-        const cy = r.top + r.height / 2;
-        const dx = e.clientX - cx;
-        const dy = e.clientY - cy;
-        const radius = Math.max(r.width, r.height);
-        const dist = Math.hypot(dx, dy);
-        if (dist < radius * 1.6) {
-          el.style.transform = `translate(${dx * 0.22}px, ${dy * 0.22}px)`;
+    tmp.childNodes.forEach(node => {
+      const isEm = node.nodeName === 'EM';
+      const text = node.textContent;
+      [...text].forEach(ch => {
+        const span = document.createElement('span');
+        span.className = 'char';
+        if (ch === ' ') {
+          // Use a real space inside the span but give it explicit display
+          span.style.display = 'inline-block';
+          span.style.width = '0.28em';
+          span.textContent = '\u00A0'; // non-breaking space preserves width
         } else {
-          el.style.transform = '';
+          span.textContent = ch;
         }
+        if (isEm) {
+          span.style.color = 'var(--thread)';
+          span.style.fontStyle = 'italic';
+        }
+        span.style.transitionDelay = charDelay + 'ms';
+        hl.appendChild(span);
+        charDelay += ch === ' ' ? 18 : 38;
       });
-      el.addEventListener('mouseleave', () => {
-        el.style.transform = '';
-      });
+    });
+
+    if (li < lines.length - 1) hl.appendChild(document.createElement('br'));
+  });
+
+  setTimeout(() => {
+    document.querySelectorAll('#hero-hl .char').forEach(c => c.classList.add('lit'));
+    document.getElementById('hero-sub').classList.add('lit');
+    document.getElementById('hero-cta').classList.add('lit');
+  }, 120);
+})();
+
+// ── 2. CUSTOM CURSOR ──
+const cursor = document.getElementById('cursor-thread');
+let mx = -100, my = -100, cx = -100, cy = -100;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+(function animCursor() {
+  cx += (mx - cx) * 0.18;
+  cy += (my - cy) * 0.18;
+  cursor.style.left = cx + 'px';
+  cursor.style.top  = cy + 'px';
+  requestAnimationFrame(animCursor);
+})();
+
+// ── 3. PARTICLE CANVAS — tesseract dust ──
+(function initParticles() {
+  const canvas = document.getElementById('particle-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Sparse star-like particles with mint tint
+  for (let i = 0; i < 90; i++) {
+    particles.push({
+      x: Math.random() * 1,
+      y: Math.random() * 1,
+      vx: (Math.random() - 0.5) * 0.00012,
+      vy: (Math.random() - 0.5) * 0.00008,
+      r:  Math.random() * 1.4 + 0.3,
+      a:  Math.random() * 0.45 + 0.05,
+      // Slowly pulse
+      pa: Math.random() * Math.PI * 2,
+      ps: Math.random() * 0.008 + 0.003,
     });
   }
 
-  emailForm?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    emailError.hidden = true;
-    const action = emailForm.getAttribute('action') || '';
-    if (action.includes('REPLACE_WITH_FORMSPREE_ID')) {
-      emailError.textContent = 'Email endpoint not configured yet. Sign up at formspree.io and paste your form ID into index.html.';
-      emailError.hidden = false;
-      return;
+  // A few "thread wisps" — short glowing line segments
+  const wisps = [];
+  for (let i = 0; i < 18; i++) {
+    wisps.push({
+      x:  Math.random(),
+      y:  Math.random() * 1,
+      len: Math.random() * 0.05 + 0.02,
+      angle: Math.random() * Math.PI,
+      a:  Math.random() * 0.12 + 0.02,
+      va: (Math.random() - 0.5) * 0.004,
+      vy: (Math.random() - 0.5) * 0.0001,
+    });
+  }
+
+  let scrollFrac = 0;
+  window.addEventListener('scroll', () => {
+    scrollFrac = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+  });
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    // Draw wisps
+    wisps.forEach(w => {
+      w.y += w.vy;
+      w.angle += w.va;
+      if (w.y < -0.05) w.y = 1.05;
+      if (w.y > 1.05)  w.y = -0.05;
+      const px = w.x * W, py = w.y * H;
+      const ex = px + Math.cos(w.angle) * w.len * W;
+      const ey = py + Math.sin(w.angle) * w.len * H;
+      ctx.beginPath();
+      ctx.moveTo(px, py);
+      ctx.lineTo(ex, ey);
+      const grad = ctx.createLinearGradient(px, py, ex, ey);
+      grad.addColorStop(0, `rgba(122,181,176,0)`);
+      grad.addColorStop(0.5, `rgba(197,232,222,${w.a})`);
+      grad.addColorStop(1, `rgba(122,181,176,0)`);
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 0.8;
+      ctx.stroke();
+    });
+
+    // Draw particles
+    particles.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.pa += p.ps;
+      if (p.x < 0) p.x = 1; if (p.x > 1) p.x = 0;
+      if (p.y < 0) p.y = 1; if (p.y > 1) p.y = 0;
+      const pulse = 0.5 + Math.sin(p.pa) * 0.5;
+      const alpha = p.a * pulse;
+      ctx.beginPath();
+      ctx.arc(p.x * W, p.y * H, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(197,232,222,${alpha})`;
+      ctx.fill();
+    });
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── 4. SPACEMAN SCROLL SCRUB + LAYOUT ──
+const spaceman = document.getElementById('spaceman');
+let spacemanReady = false;
+spaceman.addEventListener('loadedmetadata', () => { spacemanReady = true; });
+spaceman.load();
+
+let scrollY_prev = 0, scrollVel = 0;
+let smSmooth = 0;
+
+function updateSpaceman() {
+  const sh = document.body.scrollHeight - window.innerHeight;
+  const prog = sh > 0 ? Math.min(Math.max(window.scrollY / sh, 0), 1) : 0;
+  scrollVel = window.scrollY - scrollY_prev;
+  scrollY_prev = window.scrollY;
+
+  smSmooth += (prog - smSmooth) * 0.08;
+
+  // Height: 72vh → 56vh
+  const h = 72 - smSmooth * 16;
+  spaceman.style.height = h + 'vh';
+
+  // Vertical position: 50% → 42%
+  const top = 50 - smSmooth * 8;
+
+  // Horizontal drift: shift right at bottom to clear CTA
+  const drift = smSmooth * smSmooth * 14;
+
+  // Body tilt: leans into the pull
+  const tilt = Math.sin(smSmooth * Math.PI) * 10;
+
+  // Scroll-velocity-driven lean
+  const velTilt = Math.max(-8, Math.min(8, scrollVel * 0.6));
+
+  spaceman.style.top   = top + '%';
+  spaceman.style.right = (2 - drift) + '%';
+  spaceman.style.transform = `translateY(-50%) scaleX(-1) rotate(${(tilt + velTilt) * 0.5}deg)`;
+
+  // Opacity: slight fade as we near the end
+  const opa = 1 - Math.max(0, (smSmooth - 0.85) / 0.15) * 0.35;
+  spaceman.style.opacity = opa;
+
+  // Scrub video
+  if (spacemanReady && spaceman.duration) {
+    const target = prog * spaceman.duration;
+    spaceman.currentTime += (target - spaceman.currentTime) * 0.18;
+  }
+}
+
+// ── 5. VERLET ROPE PHYSICS ──
+class VerletRope {
+  constructor(n, opts = {}) {
+    this.pts = Array.from({length: n}, () => ({x:0,y:0,px:0,py:0}));
+    this.slack   = opts.slack   ?? 1.02;
+    this.gravity = opts.gravity ?? 0.018;
+    this.damping = opts.damping ?? 0.80;
+    this.iter    = opts.iter    ?? 8;
+    this.seeded  = false;
+  }
+  seed(sx,sy,ex,ey) {
+    const n = this.pts.length;
+    this.pts.forEach((p,i) => {
+      const t = i/(n-1);
+      p.x = p.px = sx + (ex-sx)*t;
+      p.y = p.py = sy + (ey-sy)*t;
+    });
+    this.seeded = true;
+  }
+  step(sx,sy,ex,ey) {
+    if (!this.seeded) this.seed(sx,sy,ex,ey);
+    const pts = this.pts, n = pts.length;
+    const span = Math.hypot(ex-sx, ey-sy) || 1;
+    const rest = span * this.slack / (n-1);
+    pts.forEach(p => {
+      const vx = (p.x-p.px)*this.damping, vy = (p.y-p.py)*this.damping;
+      p.px = p.x; p.py = p.y;
+      p.x += vx; p.y += vy + this.gravity;
+    });
+    const L = n-1;
+    for (let it=0;it<this.iter;it++) {
+      pts[0].x=sx; pts[0].y=sy; pts[L].x=ex; pts[L].y=ey;
+      for (let i=0;i<L;i++) {
+        const a=pts[i], b=pts[i+1];
+        const dx=b.x-a.x, dy=b.y-a.y;
+        const d=Math.hypot(dx,dy)||0.001, k=(d-rest)/d*0.5;
+        a.x+=dx*k; a.y+=dy*k; b.x-=dx*k; b.y-=dy*k;
+      }
     }
-    try {
-      const res = await fetch(action, {
-        method: 'POST',
-        body: new FormData(emailForm),
-        headers: { Accept: 'application/json' }
+    pts[0].x=sx; pts[0].y=sy; pts[L].x=ex; pts[L].y=ey;
+  }
+  toPath() {
+    const p = this.pts, n = p.length;
+    if (n<2) return 'M0 0';
+    let d = `M${p[0].x.toFixed(1)} ${p[0].y.toFixed(1)}`;
+    for (let i=0;i<n-1;i++) {
+      const p0=p[Math.max(0,i-1)], p1=p[i], p2=p[i+1], p3=p[Math.min(n-1,i+2)];
+      const c1x=p1.x+(p2.x-p0.x)/6, c1y=p1.y+(p2.y-p0.y)/6;
+      const c2x=p2.x-(p3.x-p1.x)/6, c2y=p2.y-(p3.y-p1.y)/6;
+      d += ` C${c1x.toFixed(1)} ${c1y.toFixed(1)} ${c2x.toFixed(1)} ${c2y.toFixed(1)} ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
+    }
+    return d;
+  }
+}
+
+const rope1 = new VerletRope(16, { slack:1.012, gravity:0.012, damping:0.82, iter:9 });
+const rope2 = new VerletRope(14, { slack:1.022, gravity:0.022, damping:0.79, iter:7 });
+const rope3 = new VerletRope(12, { slack:1.035, gravity:0.034, damping:0.76, iter:6 });
+
+const t1=document.getElementById('t1'), t1g=document.getElementById('t1-glow');
+const t2=document.getElementById('t2'), t2g=document.getElementById('t2-glow');
+const t3=document.getElementById('t3'), t3g=document.getElementById('t3-glow');
+const h1=document.getElementById('h1'), h2=document.getElementById('h2'), h3=document.getElementById('h3');
+const tg1=document.getElementById('tg1'), tg2=document.getElementById('tg2'), tg3=document.getElementById('tg3');
+
+function setGrad(g, x1,y1,x2,y2) {
+  g.setAttribute('x1',x1); g.setAttribute('y1',y1);
+  g.setAttribute('x2',x2); g.setAttribute('y2',y2);
+}
+function setCircle(c, x,y,op) {
+  c.setAttribute('cx',x); c.setAttribute('cy',y); c.setAttribute('opacity',op);
+}
+function setPath(main, glow, rope, sx,sy,ex,ey) {
+  rope.step(sx,sy,ex,ey);
+  const d = rope.toPath();
+  main.setAttribute('d', d);
+  glow.setAttribute('d', d);
+}
+
+// ── 6. ACTIVE SECTION TRACKING ──
+const sections = document.querySelectorAll('[data-section-id]');
+const navLinks = document.querySelectorAll('nav a[data-section]');
+let activeSection = null;
+
+const sectionObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.dataset.sectionId;
+      activeSection = id;
+      // Activate nav
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.dataset.section === id);
       });
-      if (!res.ok) throw new Error('submit failed');
-      emailForm.hidden = true;
-      emailSuccess.hidden = false;
-    } catch (err) {
-      emailError.textContent = 'Something went wrong — try again, or email Taelo directly.';
-      emailError.hidden = false;
+      // Cross rifts
+      document.querySelectorAll('.rift').forEach(r => r.classList.add('crossed'));
     }
   });
-</script>
+}, { threshold: 0.35 });
+sections.forEach(s => sectionObserver.observe(s));
 
+// Also track hero
+const heroObserver = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting) {
+    navLinks.forEach(a => a.classList.toggle('active', a.dataset.section === 'hero'));
+  }
+}, { threshold: 0.5 });
+heroObserver.observe(document.getElementById('hero'));
+
+// ── 7. SCROLL REVEAL ──
+const revealEls = document.querySelectorAll('.scene-reveal');
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      // Cross adjacent rift
+      const slot = e.target.closest('.panel-slot');
+      if (slot) {
+        const prev = slot.previousElementSibling;
+        if (prev && prev.classList.contains('rift')) prev.classList.add('crossed');
+      }
+    }
+  });
+}, { threshold: 0.1 });
+revealEls.forEach(el => revealObserver.observe(el));
+
+// ── 8. BG VIDEO CROSSFADE ──
+const bgV1 = document.getElementById('bg-video-1');
+const bgV2 = document.getElementById('bg-video-2');
+const BG_START = 0.55, BG_END = 0.82, BG_MAX = 0.45;
+
+function smoothstep(e0, e1, x) {
+  const t = Math.max(0, Math.min(1, (x-e0)/(e1-e0)));
+  return t*t*(3-2*t);
+}
+
+function updateBgVideos() {
+  const prog = window.scrollY / (document.body.scrollHeight - window.innerHeight) || 0;
+  const v2op = smoothstep(BG_START, BG_END, prog) * BG_MAX;
+  bgV2.style.opacity = v2op;
+  // Start playing video 2 when it becomes visible
+  if (v2op > 0.01 && bgV2.paused) bgV2.play().catch(()=>{});
+}
+
+// ── 9. THREAD TARGETS — lerped per active section ──
+let threadTargetX = 0, threadTargetY1 = 0, threadTargetY2 = 0, threadTargetY3 = 0;
+
+function getActiveSectionTarget() {
+  // Find the most visible section
+  let best = null, bestVis = 0;
+  document.querySelectorAll('.scene').forEach(sec => {
+    const r = sec.getBoundingClientRect();
+    const vis = Math.max(0, Math.min(r.bottom, window.innerHeight) - Math.max(r.top, 0));
+    if (vis > bestVis) { bestVis = vis; best = sec; }
+  });
+  if (!best) return { x: 0, y: window.innerHeight * 0.5 };
+  const r = best.getBoundingClientRect();
+  return {
+    x: r.left + 20,
+    y1: r.top + r.height * 0.28,
+    y2: r.top + r.height * 0.5,
+    y3: r.top + r.height * 0.72,
+  };
+}
+
+let lx = 60, ly1 = 0.28, ly2 = 0.5, ly3 = 0.72;
+
+// ── 10. MAIN RAF LOOP ──
+function raf() {
+  updateSpaceman();
+  updateBgVideos();
+
+  const sm = spaceman.getBoundingClientRect();
+  // Hands are on the LEFT side (after scaleX flip) — roughly 30% from left
+  const handX  = sm.left + sm.width  * 0.28;
+  const hand1Y = sm.top  + sm.height * 0.38;
+  const hand2Y = sm.top  + sm.height * 0.45;
+  const hand3Y = sm.top  + sm.height * 0.52;
+
+  // Get target from active section
+  const tgt = getActiveSectionTarget();
+  const tX  = tgt.x  !== undefined ? tgt.x  : 80;
+  const tY1 = tgt.y1 !== undefined ? tgt.y1 : window.innerHeight * 0.35;
+  const tY2 = tgt.y2 !== undefined ? tgt.y2 : window.innerHeight * 0.5;
+  const tY3 = tgt.y3 !== undefined ? tgt.y3 : window.innerHeight * 0.65;
+
+  lx  += (tX  - lx)  * 0.06;
+  ly1 += (tY1 - ly1) * 0.06;
+  ly2 += (tY2 - ly2) * 0.06;
+  ly3 += (tY3 - ly3) * 0.06;
+
+  const opacity = sm.width > 0 ? 1 : 0;
+  setCircle(h1, handX, hand1Y, 0.65 * opacity);
+  setCircle(h2, handX, hand2Y, 0.45 * opacity);
+  setCircle(h3, handX, hand3Y, 0.30 * opacity);
+
+  setGrad(tg1, handX, hand1Y, lx, ly1);
+  setGrad(tg2, handX, hand2Y, lx, ly2);
+  setGrad(tg3, handX, hand3Y, lx, ly3);
+
+  setPath(t1, t1g, rope1, handX, hand1Y, lx, ly1);
+  setPath(t2, t2g, rope2, handX, hand2Y, lx, ly2);
+  setPath(t3, t3g, rope3, handX, hand3Y, lx, ly3);
+
+  requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
+
+// ── 11. CARD PULL INTERACTION (thread-pull click) ──
+document.querySelectorAll('.card-interactive').forEach(card => {
+  card.addEventListener('click', e => {
+    // Ripple at click point
+    const ripple = document.createElement('div');
+    ripple.className = 'pull-ripple';
+    ripple.style.left = e.clientX + 'px';
+    ripple.style.top  = e.clientY + 'px';
+    document.body.appendChild(ripple);
+    ripple.addEventListener('animationend', () => ripple.remove());
+
+    // Brief flash on thread canvas
+    [t1, t2, t3, t1g, t2g, t3g].forEach(el => {
+      el.style.transition = 'opacity 0.12s';
+      el.style.opacity = '1';
+      setTimeout(() => { el.style.opacity = ''; el.style.transition = ''; }, 400);
+    });
+  });
+});
+
+// ── 12. JOIN FORM ──
+function handleJoin(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.email-btn');
+  const input = document.getElementById('email-in');
+  btn.textContent = 'Sent ✓';
+  btn.style.background = 'var(--thread-glow)';
+  input.value = '';
+  setTimeout(() => {
+    btn.textContent = 'Join';
+    btn.style.background = '';
+  }, 3000);
+}
+
+// ── 13. CURSOR SCALE on hover ──
+document.querySelectorAll('a, button, .card-interactive').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.transform = 'translate(-50%,-50%) scale(2.5)';
+    cursor.style.borderColor = 'rgba(197,232,222,0.8)';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+    cursor.style.borderColor = 'rgba(122,181,176,0.5)';
+  });
+});
+
+// ── 14. REDUCED MOTION ──
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.querySelectorAll('.scene-reveal').forEach(el => {
+    el.style.transition = 'none';
+    el.classList.add('visible');
+  });
+}
+
+// ── 15. VIDEO BACKGROUND autoplay fallback ──
+bgV1.play().catch(() => {});
+
+</script>
 </body>
 </html>
