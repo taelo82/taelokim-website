@@ -140,14 +140,49 @@ nav a.active { color: var(--thread); }
   transform: scaleX(-1);
   filter: brightness(0.65) saturate(0.75);
 }
-/* Dark vignette overlay */
+/* Multi-layer scrim: heavy mask at the bottom-right (covers the Veo watermark
+   AND any other generator stamps baked into the source video), plus soft
+   edge fades on all four sides so the rectangular video frame dissolves
+   into the void instead of reading as a hard cut. */
 #bg-stage::after {
   content: '';
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 80% 80% at 50% 50%, transparent 20%, rgba(5,5,16,0.5) 100%),
-    linear-gradient(to bottom, rgba(5,5,16,0.3) 0%, transparent 20%, transparent 80%, rgba(5,5,16,0.7) 100%);
+    /* 1. Veo / generator watermark cover — bottom-right corner, large + soft */
+    radial-gradient(ellipse 380px 160px at 100% 100%,
+      rgba(5,5,16,0.99) 0%,
+      rgba(5,5,16,0.92) 28%,
+      rgba(5,5,16,0.6) 60%,
+      rgba(5,5,16,0.2) 85%,
+      transparent 100%),
+    /* 2. Bottom-edge cover — also catches any baked-in subtitles / scale stamps
+          that sit along the lower edge of the source video */
+    linear-gradient(to top,
+      rgba(5,5,16,0.92) 0%,
+      rgba(5,5,16,0.55) 6%,
+      rgba(5,5,16,0.2) 14%,
+      transparent 26%),
+    /* 3. Top-edge fade — soften where the video meets the top of the viewport */
+    linear-gradient(to bottom,
+      rgba(5,5,16,0.65) 0%,
+      rgba(5,5,16,0.25) 8%,
+      transparent 22%),
+    /* 4. Left-side fade — darken the column where hero text sits so contrast
+          stays clean and the hard vertical edge of the bright scene dissolves */
+    linear-gradient(to right,
+      rgba(5,5,16,0.7) 0%,
+      rgba(5,5,16,0.35) 22%,
+      rgba(5,5,16,0.1) 45%,
+      transparent 65%),
+    /* 5. Right-edge fade — small soften for symmetry */
+    linear-gradient(to left,
+      rgba(5,5,16,0.35) 0%,
+      transparent 18%),
+    /* 6. Overall soft vignette */
+    radial-gradient(ellipse 100% 100% at 50% 45%,
+      transparent 30%,
+      rgba(5,5,16,0.35) 100%);
   pointer-events: none;
 }
 
