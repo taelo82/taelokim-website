@@ -998,6 +998,66 @@ footer {
 }
 body:not(:hover) #cursor-thread { opacity: 0; }
 
+/* ── MOBILE OPTIMIZATIONS ──
+   The site has a lot of fixed-position, every-frame visual effects (verlet
+   threads, particle canvas, custom cursor, scroll-scrubbed video). On phones
+   most of these either don't apply (no mouse → no cursor follower) or burn
+   battery for diminishing visual return. These rules dial them down. */
+
+/* Touch / coarse pointer: cursor follower is pointless. */
+@media (hover: none), (pointer: coarse) {
+  #cursor-thread { display: none !important; }
+}
+
+/* Tablet & smaller: kill the particle field + its canvas (battery saver). */
+@media (max-width: 768px) {
+  #particle-canvas { display: none; }
+}
+
+/* Phone-sized: kill the thread canvas too — sections are stacked single-column,
+   threads don't have room to read as anchors. */
+@media (max-width: 640px) {
+  #thread-canvas { display: none; }
+}
+
+/* Mobile: scale the bg-stage scrim using viewport units so the corner mask
+   stays a corner (was 380×160 px which on a 375-wide phone covers half the
+   screen width). */
+@media (max-width: 768px) {
+  #bg-stage::after {
+    background:
+      radial-gradient(ellipse 56vw 22vh at 100% 100%,
+        rgba(5,5,16,0.99) 0%,
+        rgba(5,5,16,0.92) 28%,
+        rgba(5,5,16,0.6) 60%,
+        rgba(5,5,16,0.2) 85%,
+        transparent 100%),
+      linear-gradient(to top,
+        rgba(5,5,16,0.92) 0%,
+        rgba(5,5,16,0.5) 6%,
+        transparent 18%),
+      linear-gradient(to bottom,
+        rgba(5,5,16,0.65) 0%,
+        rgba(5,5,16,0.25) 8%,
+        transparent 22%),
+      linear-gradient(to right,
+        rgba(5,5,16,0.7) 0%,
+        rgba(5,5,16,0.35) 28%,
+        transparent 60%),
+      radial-gradient(ellipse 100% 100% at 50% 45%,
+        transparent 30%,
+        rgba(5,5,16,0.4) 100%);
+  }
+}
+
+/* Reduced motion: lock the spaceman where it is, hide all the every-frame
+   visual layers entirely. Page still scrolls and reveals; just stops moving
+   visually. */
+@media (prefers-reduced-motion: reduce) {
+  #thread-canvas, #particle-canvas, #cursor-thread { display: none !important; }
+  #spaceman { transition: none !important; }
+}
+
 </style>
 </head>
 <body>
@@ -1326,6 +1386,15 @@ body:not(:hover) #cursor-thread { opacity: 0; }
 // TESSERACT SITE — INTERACTIVE MECHANICS
 // ══════════════════════════════════════════════════════════════
 
+// ── 0. ENVIRONMENT FLAGS ──
+// Drive mobile-friendly fallbacks. The CSS handles display:none for the
+// pointer-only / battery-heavy layers; these flags short-circuit the JS so we
+// don't burn CPU running raf loops whose output is hidden.
+const IS_TOUCH    = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+const IS_MOBILE   = window.matchMedia('(max-width: 768px)').matches;
+const IS_PHONE    = window.matchMedia('(max-width: 640px)').matches;
+const REDUCED     = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 // ── 1. HERO TEXT — char-by-char fade in ──
 (function initHeroText() {
   const hl = document.getElementById('hero-hl');
@@ -1388,6 +1457,9 @@ document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; })
 
 // ── 3. PARTICLE CANVAS — tesseract dust ──
 (function initParticles() {
+  // Skip entirely on mobile / reduced-motion. CSS already hides the canvas;
+  // this short-circuit avoids the raf loop that would burn battery.
+  if (IS_MOBILE || REDUCED) return;
   const canvas = document.getElementById('particle-canvas');
   const ctx = canvas.getContext('2d');
   let W, H, particles = [];
@@ -1494,12 +1566,18 @@ function updateSpaceman() {
 
   smSmooth += (prog - smSmooth) * 0.08;
 
-  // Height: 72vh → 56vh
-  const h = 72 - smSmooth * 16;
+  // Height + position scale to viewport size.
+  // Phones: smaller, pushed further off-screen right so it's an ambient
+  // companion not a content-eating element.
+  const h = IS_PHONE ? (44 - smSmooth * 6)
+          : IS_MOBILE ? (52 - smSmooth * 8)
+          :              (72 - smSmooth * 16);
   spaceman.style.height = h + 'vh';
 
-  // Vertical position: 50% → 42%
-  const top = 50 - smSmooth * 8;
+  // Vertical position
+  const top = IS_PHONE ? (60 - smSmooth * 4)
+            : IS_MOBILE ? (54 - smSmooth * 6)
+            :              (50 - smSmooth * 8);
 
   // Horizontal drift: shift right at bottom to clear CTA
   const drift = smSmooth * smSmooth * 14;
@@ -1511,7 +1589,9 @@ function updateSpaceman() {
   const velTilt = Math.max(-8, Math.min(8, scrollVel * 0.6));
 
   spaceman.style.top   = top + '%';
-  spaceman.style.right = (2 - drift) + '%';
+  // Phones: anchor further off-screen right so the figure doesn't crowd content.
+  const baseRight = IS_PHONE ? -16 : IS_MOBILE ? -8 : 2;
+  spaceman.style.right = (baseRight - drift) + '%';
   spaceman.style.transform = `translateY(-50%) scaleX(-1) rotate(${(tilt + velTilt) * 0.5}deg)`;
 
   // Opacity: slight fade as we near the end
@@ -1519,8 +1599,8 @@ function updateSpaceman() {
   spaceman.style.opacity = opa;
 
   // Scrub video — faster lerp catches up smoothly, snap at end so the final
-  // frames (the reach-out) actually play instead of asymptoting forever.
-  if (spacemanReady && spaceman.duration) {
+  // frames (the reach-out) actually play. Reduced-motion: lock at frame 0.
+  if (!REDUCED && spacemanReady && spaceman.duration) {
     const target = prog * spaceman.duration;
     const diff = target - spaceman.currentTime;
     if (prog > 0.97) {
@@ -1655,6 +1735,20 @@ revealEls.forEach(el => revealObserver.observe(el));
 // ── 8. BG VIDEO CROSSFADE ──
 const bgV1 = document.getElementById('bg-video-1');
 const bgV2 = document.getElementById('bg-video-2');
+// Mobile: defer the second video so first paint isn't fighting two HD downloads.
+// JS lifts it to 'auto' once the user has scrolled past the first viewport.
+if (IS_MOBILE) {
+  bgV2.preload = 'none';
+  let lifted = false;
+  window.addEventListener('scroll', () => {
+    if (lifted) return;
+    if (window.scrollY > window.innerHeight * 0.8) {
+      bgV2.preload = 'auto';
+      bgV2.load();
+      lifted = true;
+    }
+  }, { passive: true });
+}
 const BG_START = 0.55, BG_END = 0.82, BG_MAX = 0.45;
 
 function smoothstep(e0, e1, x) {
@@ -1692,27 +1786,33 @@ function getActiveSectionTarget() {
 let lx = 60, ly1 = 0.42;
 
 // ── 10. MAIN RAF LOOP ──
+// Phones: thread canvas is hidden via CSS — skip the per-frame work entirely.
+// Reduced motion: same.
+const SKIP_THREADS = IS_PHONE || REDUCED;
+
 function raf() {
   updateSpaceman();
   updateBgVideos();
 
-  const sm = spaceman.getBoundingClientRect();
-  // Hand is on the LEFT side after scaleX flip — pick the upper outstretched hand.
-  const handX  = sm.left + sm.width  * 0.28;
-  const hand1Y = sm.top  + sm.height * 0.42;
+  if (!SKIP_THREADS) {
+    const sm = spaceman.getBoundingClientRect();
+    // Hand is on the LEFT side after scaleX flip — pick the upper outstretched hand.
+    const handX  = sm.left + sm.width  * 0.28;
+    const hand1Y = sm.top  + sm.height * 0.42;
 
-  // Get target from active section
-  const tgt = getActiveSectionTarget();
-  const tX  = tgt.x  !== undefined ? tgt.x  : 80;
-  const tY1 = tgt.y1 !== undefined ? tgt.y1 : window.innerHeight * 0.5;
+    // Get target from active section
+    const tgt = getActiveSectionTarget();
+    const tX  = tgt.x  !== undefined ? tgt.x  : 80;
+    const tY1 = tgt.y1 !== undefined ? tgt.y1 : window.innerHeight * 0.5;
 
-  lx  += (tX  - lx)  * 0.06;
-  ly1 += (tY1 - ly1) * 0.06;
+    lx  += (tX  - lx)  * 0.06;
+    ly1 += (tY1 - ly1) * 0.06;
 
-  const opacity = sm.width > 0 ? 1 : 0;
-  setCircle(h1, handX, hand1Y, 0.65 * opacity);
-  setGrad(tg1, handX, hand1Y, lx, ly1);
-  setPath(t1, t1g, rope1, handX, hand1Y, lx, ly1);
+    const opacity = sm.width > 0 ? 1 : 0;
+    setCircle(h1, handX, hand1Y, 0.65 * opacity);
+    setGrad(tg1, handX, hand1Y, lx, ly1);
+    setPath(t1, t1g, rope1, handX, hand1Y, lx, ly1);
+  }
 
   requestAnimationFrame(raf);
 }
