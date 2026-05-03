@@ -1,6 +1,6 @@
 # Taelo Kim Website
 
-Single-page personal site at `taelokim.com` (not yet deployed). Built by Taelo Kim (@taelo82) — VC-turned-operator, ships AI products across Korea, Japan, Southeast Asia.
+Single-page personal site at `taelokim.com` (deployed at `taelokim.vercel.app`). Built by Taelo Kim (X: @taelo_kim, YouTube: @TaeloKim, GitHub: taelo82) — VC-turned-operator, ships AI products across Korea, Japan, Southeast Asia.
 
 ## Architecture — read this first
 

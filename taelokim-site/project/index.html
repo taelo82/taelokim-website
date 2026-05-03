@@ -1389,9 +1389,9 @@ body:not(:hover) #cursor-thread { opacity: 0; }
 <footer data-screen-label="08 Footer">
   <span class="foot-copy">© 2026 Taelo Kim</span>
   <div class="foot-links">
-    <a href="#" aria-label="YouTube">YouTube</a>
-    <a href="#" aria-label="X / Twitter">X</a>
-    <a href="#" aria-label="Email">Email</a>
+    <a href="https://www.youtube.com/@TaeloKim/videos" target="_blank" rel="noopener noreferrer" aria-label="YouTube">YouTube</a>
+    <a href="https://x.com/taelo_kim" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter">X</a>
+    <a href="#join" aria-label="Subscribe">Email</a>
   </div>
 </footer>
 
@@ -1870,7 +1870,7 @@ async function handleJoin(e) {
 
   // Formspree not yet wired — surface that instead of a silent failure.
   if (action.includes('REPLACE_WITH_FORMSPREE_ID') || !action) {
-    msg.textContent = 'Form is being set up — DM @taelo82 on X to join early.';
+    msg.textContent = 'Form is being set up — DM @taelo_kim on X to join early.';
     msg.style.color = 'var(--dust)';
     msg.hidden = false;
     return;
@@ -1895,7 +1895,7 @@ async function handleJoin(e) {
     msg.hidden = false;
   } catch (err) {
     btn.textContent = 'Try again';
-    msg.textContent = 'Something went wrong. Try again, or DM @taelo82 on X.';
+    msg.textContent = 'Something went wrong. Try again, or DM @taelo_kim on X.';
     msg.style.color = 'var(--dust)';
     msg.hidden = false;
   } finally {
