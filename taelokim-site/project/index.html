@@ -918,6 +918,13 @@ main {
   color: rgba(232,228,220,0.2);
   letter-spacing: 0.06em;
 }
+.join-msg {
+  font-size: 14px;
+  margin-top: 12px;
+  margin-bottom: 8px;
+  line-height: 1.5;
+  transition: opacity 0.4s var(--ease-cin);
+}
 
 /* ── FOOTER ── */
 footer {
@@ -1150,7 +1157,7 @@ body:not(:hover) #cursor-thread { opacity: 0; }
       Playbooks, frameworks and prompt packs for operators shipping AI products across Korea, Japan and Southeast Asia. Real numbers. No cadence.
     </p>
     <div class="hero-cta-wrap" id="hero-cta">
-      <a href="#resources" class="cta-primary">See what's inside →</a>
+      <a href="#join" class="cta-primary">Connect with Taelo →</a>
       <a href="#about" class="cta-secondary">Who's behind this</a>
     </div>
   </div>
@@ -1361,10 +1368,20 @@ body:not(:hover) #cursor-thread { opacity: 0; }
       Free packs and playbooks sent only when something's actually ready.
       No weekly cadence. No hype. No upsells. Unsubscribe in one click.
     </p>
-    <form class="email-form" onsubmit="handleJoin(event)">
-      <input class="email-input" type="email" id="email-in" placeholder="your@email.com" autocomplete="email" required>
-      <button class="email-btn" type="submit">Join</button>
+    <!-- ACTION below: replace REPLACE_WITH_FORMSPREE_ID with your real ID
+         from https://formspree.io once you've signed up + created a form. -->
+    <form class="email-form" id="join-form"
+          action="https://formspree.io/f/REPLACE_WITH_FORMSPREE_ID"
+          method="POST"
+          onsubmit="handleJoin(event)">
+      <input class="email-input" type="email" name="email" id="email-in"
+             placeholder="your@email.com" autocomplete="email" required>
+      <!-- Honeypot: bots fill it, humans don't see it. -->
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"
+             aria-hidden="true" style="position:absolute;left:-9999px">
+      <button class="email-btn" type="submit">Join the list</button>
     </form>
+    <p class="join-msg" id="join-msg" hidden></p>
     <p class="join-note">One email per new resource. That's the deal.</p>
   </div>
 </section>
@@ -1839,17 +1856,56 @@ document.querySelectorAll('.card-interactive').forEach(card => {
 });
 
 // ── 12. JOIN FORM ──
-function handleJoin(e) {
+// POSTs to Formspree (https://formspree.io). On success the email lands in
+// Taelo's inbox; on failure we show a clear error so visitors aren't silently
+// dropped. The form action carries the Formspree form ID — until that's set,
+// the form falls back to an instructional message instead of pretending to send.
+async function handleJoin(e) {
   e.preventDefault();
-  const btn = e.target.querySelector('.email-btn');
+  const form = e.target;
+  const btn = form.querySelector('.email-btn');
   const input = document.getElementById('email-in');
-  btn.textContent = 'Sent ✓';
-  btn.style.background = 'var(--thread-glow)';
-  input.value = '';
-  setTimeout(() => {
-    btn.textContent = 'Join';
-    btn.style.background = '';
-  }, 3000);
+  const msg = document.getElementById('join-msg');
+  const originalLabel = btn.textContent;
+  const action = form.getAttribute('action') || '';
+
+  // Formspree not yet wired — surface that instead of a silent failure.
+  if (action.includes('REPLACE_WITH_FORMSPREE_ID') || !action) {
+    msg.textContent = 'Form is being set up — DM @taelo82 on X to join early.';
+    msg.style.color = 'var(--dust)';
+    msg.hidden = false;
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+  msg.hidden = true;
+
+  try {
+    const res = await fetch(action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { Accept: 'application/json' }
+    });
+    if (!res.ok) throw new Error('submit failed');
+    form.reset();
+    btn.textContent = 'Sent ✓';
+    btn.style.background = 'var(--thread-glow)';
+    msg.textContent = "You're in. Resources land in your inbox first.";
+    msg.style.color = 'var(--thread)';
+    msg.hidden = false;
+  } catch (err) {
+    btn.textContent = 'Try again';
+    msg.textContent = 'Something went wrong. Try again, or DM @taelo82 on X.';
+    msg.style.color = 'var(--dust)';
+    msg.hidden = false;
+  } finally {
+    setTimeout(() => {
+      btn.disabled = false;
+      btn.textContent = originalLabel;
+      btn.style.background = '';
+    }, 3500);
+  }
 }
 
 // ── 13. CURSOR SCALE on hover ──
