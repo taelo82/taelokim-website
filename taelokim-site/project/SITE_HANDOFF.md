@@ -3,9 +3,9 @@
 **One-file import for any cloud design tool, AI project, or human collaborator.**
 Drop this into Claude Projects, Notion, a Framer brief, a Figma cover doc — it is self-contained.
 
-- **Owner:** Taelo Kim (@taelo82) — VC-turned-operator, ships AI products across Korea, Japan, Southeast Asia
-- **Domain:** `taelokim.com` (not yet pointed at deploy)
-- **Status:** Layout + interactions complete. Awaiting real copy, real links, deploy.
+- **Owner:** Taelo Kim (X: @taelo_kim, YouTube: @TaeloKim, GitHub: taelo82) — VC-turned-operator, ships AI products across Korea, Japan, Southeast Asia
+- **Domain:** `taelokim.com` (deployed at `taelokim.vercel.app`; custom domain not yet pointed)
+- **Status:** Live. Email capture wired (Formspree `xzdoepzz`). Awaiting real copy + custom domain.
 - **Repo:** `https://github.com/taelo82/taelokim-website`
 
 ---
