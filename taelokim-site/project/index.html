@@ -219,113 +219,9 @@ nav a.active { color: var(--thread); }
   pointer-events: none;
 }
 
-/* ── BOOKSHELF LAYERS ── */
-#shelves {
-  position: absolute;
-  top: 0; bottom: 0; left: 0;
-  width: 560px;
-  pointer-events: none;
-  z-index: 1;
-  perspective: 1600px;
-  perspective-origin: 0% 50%;
-  overflow: hidden;
-}
-.shelf {
-  position: absolute;
-  left: 0;
-  animation: shelf-drift 16s ease-in-out infinite;
-  will-change: transform;
-}
-.shelf__inner {
-  width: 100%; height: 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  transform-origin: 0% 50%;
-  mix-blend-mode: screen;
-  opacity: 0.9;
-  filter: url(#dissolve) brightness(1.25) contrast(1.08) saturate(1.15);
-}
-@keyframes shelf-drift {
-  0%   { transform: translate3d(0,0,0); }
-  25%  { transform: translate3d(-4px,-10px,0); }
-  50%  { transform: translate3d(0,-18px,0); }
-  75%  { transform: translate3d(4px,-8px,0); }
-  100% { transform: translate3d(0,0,0); }
-}
-
-/* Each shelf fragment: unique image, 3D angle, organic mask */
-.shelf--1 { top: 80vh;  width: 420px; height: 780px; animation-delay: 0s; }
-.shelf--1 .shelf__inner {
-  background-image: url('taelokim-site/project/bookshelf-portal-arch.jpg');
-  background-position: 50% center;
-  transform: rotateY(-6deg);
-  mask-image:
-    radial-gradient(ellipse 68% 94% at 30% 48%, black 0%, black 20%, rgba(0,0,0,0.6) 60%, transparent 95%),
-    radial-gradient(ellipse 40% 34% at 16% 76%, black 25%, transparent 82%),
-    radial-gradient(ellipse 30% 24% at 48% 16%, black 30%, transparent 82%);
-  -webkit-mask-image:
-    radial-gradient(ellipse 68% 94% at 30% 48%, black 0%, black 20%, rgba(0,0,0,0.6) 60%, transparent 95%),
-    radial-gradient(ellipse 40% 34% at 16% 76%, black 25%, transparent 82%),
-    radial-gradient(ellipse 30% 24% at 48% 16%, black 30%, transparent 82%);
-}
-.shelf--2 { top: 200vh; width: 380px; height: 560px; animation-delay: -4s; }
-.shelf--2 .shelf__inner {
-  background-image: url('taelokim-site/project/bookshelf-portal-closeup.jpg');
-  background-position: 35% center;
-  transform: rotateY(-9deg);
-  mask-image:
-    radial-gradient(ellipse 82% 80% at 36% 50%, black 0%, black 26%, rgba(0,0,0,0.65) 65%, transparent 95%),
-    radial-gradient(circle at 74% 26%, black 10%, transparent 36%),
-    radial-gradient(ellipse 32% 24% at 10% 70%, black 22%, transparent 82%);
-  -webkit-mask-image:
-    radial-gradient(ellipse 82% 80% at 36% 50%, black 0%, black 26%, rgba(0,0,0,0.65) 65%, transparent 95%),
-    radial-gradient(circle at 74% 26%, black 10%, transparent 36%),
-    radial-gradient(ellipse 32% 24% at 10% 70%, black 22%, transparent 82%);
-}
-.shelf--3 { top: 320vh; width: 500px; height: 960px; animation-delay: -8s; }
-.shelf--3 .shelf__inner {
-  background-image: url('taelokim-site/project/bookshelf-cathedral.jpg');
-  background-position: 50% center;
-  transform: rotateY(-4deg);
-  mask-image:
-    radial-gradient(ellipse 60% 100% at 34% 50%, black 0%, black 16%, rgba(0,0,0,0.65) 55%, transparent 94%),
-    radial-gradient(ellipse 44% 30% at 20% 20%, black 22%, transparent 78%),
-    radial-gradient(ellipse 40% 30% at 58% 78%, black 22%, transparent 78%);
-  -webkit-mask-image:
-    radial-gradient(ellipse 60% 100% at 34% 50%, black 0%, black 16%, rgba(0,0,0,0.65) 55%, transparent 94%),
-    radial-gradient(ellipse 44% 30% at 20% 20%, black 22%, transparent 78%),
-    radial-gradient(ellipse 40% 30% at 58% 78%, black 22%, transparent 78%);
-}
-.shelf--4 { top: 450vh; width: 400px; height: 740px; animation-delay: -11s; }
-.shelf--4 .shelf__inner {
-  background-image: url('taelokim-site/project/bookshelf-rosewindow.jpg');
-  background-position: 35% center;
-  transform: rotateY(-7deg);
-  mask-image:
-    radial-gradient(ellipse 80% 62% at 36% 36%, black 0%, black 22%, rgba(0,0,0,0.65) 60%, transparent 94%),
-    radial-gradient(ellipse 34% 40% at 23% 70%, black 22%, transparent 78%),
-    radial-gradient(circle at 62% 10%, black 6%, transparent 30%);
-  -webkit-mask-image:
-    radial-gradient(ellipse 80% 62% at 36% 36%, black 0%, black 22%, rgba(0,0,0,0.65) 60%, transparent 94%),
-    radial-gradient(ellipse 34% 40% at 23% 70%, black 22%, transparent 78%),
-    radial-gradient(circle at 62% 10%, black 6%, transparent 30%);
-}
-.shelf--5 { top: 580vh; width: 460px; height: 720px; animation-delay: -13.5s; }
-.shelf--5 .shelf__inner {
-  background-image: url('taelokim-site/project/bookshelf-scene.jpg');
-  background-position: 55% center;
-  transform: rotateY(-5deg);
-  mask-image:
-    radial-gradient(ellipse 98% 72% at 30% 50%, black 0%, black 20%, rgba(0,0,0,0.65) 60%, transparent 94%),
-    radial-gradient(ellipse 30% 34% at 68% 26%, black 22%, transparent 76%),
-    radial-gradient(ellipse 24% 28% at 10% 20%, black 22%, transparent 74%);
-  -webkit-mask-image:
-    radial-gradient(ellipse 98% 72% at 30% 50%, black 0%, black 20%, rgba(0,0,0,0.65) 60%, transparent 94%),
-    radial-gradient(ellipse 30% 34% at 68% 26%, black 22%, transparent 76%),
-    radial-gradient(ellipse 24% 28% at 10% 20%, black 22%, transparent 74%);
-}
-@media (prefers-reduced-motion: reduce) { .shelf { animation: none; } }
-@media (max-width: 768px) { #shelves { display: none; } }
+/* Bookshelf layers removed — bg videos cover the bookshelf visual role,
+   per the user's "once and for all" decision. The 5 JPGs in the project
+   folder are unused. */
 
 /* ── MAIN SCROLL CONTAINER ── */
 main {
@@ -1158,15 +1054,6 @@ body:not(:hover) #cursor-thread { opacity: 0; }
   <video id="bg-video-2" muted loop playsinline preload="auto">
     <source src="hero-loop-2.mp4" type="video/mp4">
   </video>
-</div>
-
-<!-- ── BOOKSHELF FRAGMENTS ── -->
-<div id="shelves" aria-hidden="true">
-  <div class="shelf shelf--1"><div class="shelf__inner"></div></div>
-  <div class="shelf shelf--2"><div class="shelf__inner"></div></div>
-  <div class="shelf shelf--3"><div class="shelf__inner"></div></div>
-  <div class="shelf shelf--4"><div class="shelf__inner"></div></div>
-  <div class="shelf shelf--5"><div class="shelf__inner"></div></div>
 </div>
 
 <!-- ── SPACEMAN ── -->
