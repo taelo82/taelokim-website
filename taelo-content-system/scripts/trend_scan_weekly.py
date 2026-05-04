@@ -163,9 +163,17 @@ def main():
     ap.add_argument("--top", type=int, default=25)
     ap.add_argument("--limit", type=int, default=25)
     ap.add_argument("--include-shorts", action="store_true")
+    ap.add_argument("--rows", default=None,
+                    help="Filter to a 1-indexed row range from competitors.md, e.g. 14-24")
     args = ap.parse_args()
 
     channels = parse_competitors()
+    if args.rows:
+        m = re.match(r"(\d+)-(\d+)$", args.rows)
+        if not m:
+            sys.exit(f"--rows must look like 14-24 (got {args.rows!r})")
+        lo, hi = int(m.group(1)), int(m.group(2))
+        channels = channels[lo - 1: hi]
     print(f"Scanning {len(channels)} channels (last {args.days} days)...", file=sys.stderr)
 
     cutoff = datetime.now(timezone.utc) - timedelta(days=args.days)
