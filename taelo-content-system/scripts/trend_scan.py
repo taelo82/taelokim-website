@@ -18,7 +18,7 @@ import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-YTDLP = "/Users/gimeunjong/Library/Python/3.9/bin/yt-dlp"
+YTDLP = "/Users/ek/Library/Python/3.9/bin/yt-dlp"
 ROOT = Path(__file__).resolve().parent.parent
 COMPETITORS_MD = ROOT / "brand" / "competitors.md"
 
