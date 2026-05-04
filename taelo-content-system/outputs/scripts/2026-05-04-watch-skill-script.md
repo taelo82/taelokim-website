@@ -1,13 +1,16 @@
-# Script — 2026-05-04 — Brad's `/watch` skill (Taelo edition)
+# Script — 2026-05-04 — `/watch` skill (Taelo edition)
+
+> Narrative rule: No direct mentions of the skill's creator inside the body of the video. Shoutout lands at the very end of the outro. Install commands keep the real GitHub path because the audience needs to be able to copy them.
 
 ## Topic
-React + replicate Brad Bonanno's "My Claude Code Can INSTANTLY Watch Any Video." Install the skill, frame it for Taelo's audience (creators / AI learners / builders), then go beyond Brad by showing the Trend Scout × `/watch` operator pipeline he doesn't have.
+Install the free Claude Code `/watch` skill. Frame it for the audience (creators / AI learners / builders). Demo it on a video everyone is already covering. Go beyond the original by showing the Trend Scout × `/watch` operator pipeline.
 
 ## Source / Why this exists
 - Trend report: [outputs/trends/2026-05-04-trend-report.md](../trends/2026-05-04-trend-report.md). Top pick of the week — 3.83x outlier on a 6,740-sub channel. First video to cross the strong-outlier threshold.
-- Brad's video: https://youtu.be/QZMljuD10sU
-- Brad's repo: https://github.com/bradautomates/claude-video
-- Brad's transcript: [transcripts/QZMljuD10sU-brad-bonanno-pick.txt](../trends/transcripts/QZMljuD10sU-brad-bonanno-pick.txt)
+- Original skill video (private reference, not mentioned on-camera): https://youtu.be/QZMljuD10sU
+- Skill repo: https://github.com/bradautomates/claude-video
+- Original transcript (private reference): [transcripts/QZMljuD10sU-brad-bonanno-pick.txt](../trends/transcripts/QZMljuD10sU-brad-bonanno-pick.txt)
+- **Demo target**: Gary Tan / Y Combinator — *"How to Make Claude Code Your AI Engineering Team"* (GStack walkthrough). https://www.youtube.com/watch?v=wkv2ifxPpF8 — 137K views, 21:49, posted 2026-04-23. Pre-pulled transcript: [transcripts/wkv2ifxPpF8-demo-target.txt](../trends/transcripts/wkv2ifxPpF8-demo-target.txt)
 
 ## Format Note
 VO/SCREEN block format. Record OBS for demo + setup beats, voiceover the rest. Aim 8-10 minutes total — 70% talking, 30% screen capture.
@@ -77,36 +80,33 @@ Split screen. Left: stacked grid of 6-8 YouTube thumbnails greyed out with red X
 
 ## Beat 3 — Live demo (the moment that earns the video)
 
-> **Recommended demo target — pick one before recording:**
-> - **Hermes Agent (Alex Finn or David Ondrej version)** — covered by 3 creators in last 7 days, perfect "every YouTuber covered this new tool" frame. **Recommended.**
-> - **Karpathy's Skills (Jack Roberts version)** — Claude Code-adjacent, fits the "new Claude skill" beat.
-> - **Brad's own video** — self-referential, validates the whole skill works on the source.
+> **Demo target locked**: Gary Tan's *"How to Make Claude Code Your AI Engineering Team"* (Y Combinator) — the GStack walkthrough. 137K views in 11 days, every Claude Code creator is reacting to it, and at 21:49 it's exactly the kind of video nobody has time to actually sit through. Confirmed `/watch` runs on it end-to-end (60 frames + full transcript pulled in under 2 min).
 
 🎙️ **VO**:
 
-> Let me show you what this looks like in real life. Right now I'm pulling up a video that's been blowing up — [DEMO TARGET]. Half a dozen creators have already covered it. I don't have time to watch them all and figure out which one has the best take.
+> Let me show you what this looks like in real life. Right now I'm pulling up the Y Combinator video everyone has been reacting to — Gary Tan walking through GStack, his open-source skill stack for Claude Code. It's twenty-two minutes long. Six different creators have already reacted to it this week. Honestly, I don't have time to watch all of them and figure out who has the best take.
 >
-> So I'm going to do this. Type `/watch`, paste the URL, and ask Claude one question: "What's the actual workflow? What's the part the creator glossed over? And what's the one thing you'd warn me about before I try it myself?"
+> So I'm going to do this instead. Type `/watch`, paste the URL, and ask Claude one question: *"What's the actual workflow? What's the part Gary glossed over? And what's the one thing you'd warn me about before I try GStack on my own codebase?"*
 >
-> Watch this happen.
+> Watch what happens.
 
-🖥️ **SCREEN**: Live screen recording. Type the command. Hit enter. Jump cut to the structured response from Claude. Highlight: workflow steps, gloss-over flag, warning. Side panel showing the source video.
+🖥️ **SCREEN**: Live screen recording. Type the command. Hit enter. Time-lapse the frame-extraction + transcript pull (it really does finish in under 2 min). Jump cut to the structured response from Claude. Highlight: actual workflow steps, the glossed-over part, the warning. Side panel showing the source video timeline.
 
 🎙️ **VO** (over the output):
 
-> Two minutes. I now know more about that tool than I would after watching the video myself, because Claude pulled the on-screen demo, the audio explanation, and the timestamps where the interesting stuff happens. I can use this output as the source for my own video. I can use it to decide if the tool is even worth installing. I can save it. I can search it. I can reference it next month.
+> Two minutes. I now know more about GStack than I would after watching the full video, because Claude pulled the on-screen demo, the spoken explanation, and the timestamps where Gary's setup actually mattered. I can use this output as the source for my own GStack video. I can decide if it's worth installing. I can save it. I can search it. I can reference it next month when somebody asks me about it.
 
-⏱️ ~75s including demo runtime
+⏱️ ~90s including demo runtime
 
 ---
 
-## Beat 4 — Setup (with the SABR caveat — Taelo's killer differentiator)
+## Beat 4 — Setup (with the SABR caveat — the killer differentiator)
 
 🎙️ **VO**:
 
-> Now let me get you set up. Brad makes the install look easy in his video. Five minutes, two commands, done. And it is — most of the time.
+> Now let me get you set up. The original demo makes the install look easy. Five minutes, two commands, done. And it is — most of the time.
 >
-> But here's what no other reaction video to Brad will tell you. The day I installed it, YouTube was actively fighting yt-dlp on every download. 403 errors, blocked fragments, the whole mess. Brad's demo doesn't show that part. So I'm showing you both.
+> But here's what no other reaction video is going to tell you. The day I installed this skill, YouTube was actively fighting yt-dlp on every download. 403 errors. Blocked fragments. The whole mess. The original demo doesn't show that part. So I'm showing you both — the clean path and the messy one I had to actually live through.
 
 🖥️ **SCREEN**: Terminal split-screen. Left side: clean install. Right side: SABR errors flying.
 
@@ -117,17 +117,19 @@ Split screen. Left: stacked grid of 6-8 YouTube thumbnails greyed out with red X
 > `/plugin marketplace add bradautomates/claude-video`
 > `/plugin install watch@claude-video`
 >
-> Restart Claude Code. You're done. Point `/watch` at any video. The skill auto-installs ffmpeg and yt-dlp the first time you run it on macOS. On Linux or Windows, it tells you the exact install command. Get a Groq API key — it's free at console.groq.com — for the videos that don't have captions. That's it.
+> Restart Claude Code. You're done. Point `/watch` at any video. The skill auto-installs FFmpeg and yt-dlp the first time it runs on macOS. On Linux or Windows, it tells you the exact install command for your system. Then grab a free Groq API key from console.groq.com — that handles the videos that don't have captions. That's the whole install.
 
-🖥️ **SCREEN**: Show the install commands typing live. Cut to the Groq dashboard.
+🖥️ **SCREEN**: Show the install commands typing live. Cut to the Groq dashboard signup.
 
 🎙️ **VO**:
 
-> Messy path, when YouTube blocks the download. You need three things: cookies from your browser, a player client override, and `curl_cffi` for impersonation. I'll drop the exact patch in the description so you can copy-paste it. Save this video. You'll need it.
+> Messy path — when YouTube actually blocks the download. You'll need four things. Python 3.11 or higher, because the older Python that ships with macOS doesn't run the latest yt-dlp. The latest yt-dlp itself, installed through `uv`. Deno, because the new YouTube SABR streaming protocol needs a JavaScript runtime to solve a challenge. And browser cookies, because YouTube wants to verify you're a real person.
+>
+> I'll drop the exact copy-paste install in the description. Five commands, fifteen minutes, fixes everything. Save this video. You'll need it the day YouTube decides to fight you.
 
-🖥️ **SCREEN**: Show the patched download.py snippet. Show the `WATCH_COOKIES_BROWSER=chrome` env var being set. Show the install succeeding after the patch.
+🖥️ **SCREEN**: Show the patched download.py snippet. Show `uv tool install --pre yt-dlp[default]` running. Show Deno installing. Show `/watch` running successfully on a YouTube video right after.
 
-⏱️ ~90s
+⏱️ ~110s
 
 ---
 
@@ -161,11 +163,11 @@ Split screen. Left: stacked grid of 6-8 YouTube thumbnails greyed out with red X
 
 ---
 
-## Beat 7 — Use case 1: Trend Scout × `/watch` (Taelo's unique operator angle)
+## Beat 7 — Use case 1: Trend Scout × `/watch` (the unique operator angle)
 
 🎙️ **VO**:
 
-> Here's where it gets interesting for me, and this is the part Brad's video doesn't cover.
+> Here's where it gets interesting for me. This is the part no other tutorial about this skill is going to show you.
 >
 > I already run a system I call Trend Scout. Every Monday, it scans 24 AI YouTubers, ranks the videos that broke at least double their channel's average views, and tells me which one is worth my attention this week.
 >
@@ -199,19 +201,21 @@ Split screen. Left: stacked grid of 6-8 YouTube thumbnails greyed out with red X
 
 ---
 
-## Beat 9 — Outro
+## Beat 9 — Outro (with shoutout)
 
 🎙️ **VO**:
 
-> That's the playbook. Brad gave the skill away free. His GitHub link is in the description, along with my install patch for when YouTube decides to fight you.
+> That's the playbook. The skill is free, the repo is in the description, and my install patch for when YouTube decides to fight you is right under it.
+>
+> One last thing. I would not be running this video today if it weren't for Brad Bonanno — he built and gave away this `/watch` skill for free, and his original walkthrough is what got me to install it in the first place. Big shoutout. His video is linked first in the description. Go subscribe to him too.
 >
 > If you build the Trend Scout side — the recurring scanner that feeds `/watch` — show me. I'll run yours through `/watch` and put the breakdown in next week's video.
 >
 > Subscribe if you want the next operator playbook. See you in the next one.
 
-🖥️ **SCREEN**: GitHub link card. End card with subscribe + next video preview.
+🖥️ **SCREEN**: GitHub link card. Brad's video thumbnail with arrow. End card with subscribe + next video preview.
 
-⏱️ ~20s
+⏱️ ~30s
 
 ---
 
@@ -222,8 +226,20 @@ Split screen. Left: stacked grid of 6-8 YouTube thumbnails greyed out with red X
 
 ---
 
+## Install state (validated 2026-05-04)
+
+- ✅ Python 3.11.15 installed via `uv`
+- ✅ yt-dlp 2026.05.03 nightly + EJS plugin installed
+- ✅ Deno 2.7.14 installed (JS runtime for SABR challenge solver)
+- ✅ FFmpeg 6.0 already present
+- ✅ curl_cffi installed for YouTube impersonation
+- ✅ Groq API key configured at `~/.config/watch/.env`
+- ✅ `download.py` patched with `WATCH_COOKIES_BROWSER` env var + player_client override
+- ✅ End-to-end test on Gary Tan's GStack video: **PASSED** — 60 frames + transcript pulled in under 2 min
+
 ## Open questions for Taelo
 
-1. **Live demo target (Beat 3)** — confirm one of: Hermes Agent (Alex Finn or Ondrej version), Karpathy's Skills (Jack Roberts), or Brad's own video. My pick: **Hermes Agent (Alex Finn version)** — covered by 3 creators this week, fits the "new tool everyone's covering" frame perfectly, and you haven't shipped a Hermes take yet.
-2. **Real numbers in Beat 6** — the "$1/video, 10 videos/week" numbers are illustrative. Want me to pull your actual Anthropic dashboard data before recording, or keep them as estimates?
-3. **Beat 4 "messy path" patch** — want me to write the description-ready copy-paste version of the patch (with Brad's repo path + the exact env var) as a separate doc you can paste into the video description?
+1. **Real numbers in Beat 6** — the "$1/video, 10 videos/week" numbers are illustrative. Want me to pull your actual Anthropic dashboard data before recording, or keep them as estimates?
+2. **Description copy-paste install doc** — want me to write the 5-command "messy path" install as a separate file ready to paste into the video description?
+3. **Brad shoutout placement** — current draft puts it in the outro (Beat 9). Want it moved earlier or kept where it is?
+4. **Run `/watch` on the GStack video now** — since the skill is fully working, do you want me to invoke it and produce a real structured breakdown of Gary Tan's video that you can use as the demo material in Beat 3? I can save the output so you can use it directly while recording.
