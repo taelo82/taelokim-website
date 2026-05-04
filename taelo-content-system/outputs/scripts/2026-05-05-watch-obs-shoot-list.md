@@ -59,8 +59,8 @@ VS Code with the `taelokim-website` repo open. Dark theme, sidebar visible.
 | C2 | Beat 4 | The patched `~/.claude/skills/watch/scripts/download.py` opened in VS Code. Highlight the `WATCH_COOKIES_BROWSER` and player_client lines. | 15s |
 | C3 | Beat 7 | The week's trend report markdown ([2026-05-04-trend-report.md](../trends/2026-05-04-trend-report.md)) scrolling. Highlight the top-pick row. | 20s |
 | C4 | Beat 7 | File-tree pan: `outputs/trends/` → click into the saved `/watch` summary file. Show it. | 15s |
-| C5 | Beat 8 | Markdown competitive-intel library file growing — entries with topic tags, source links, summaries. **You'll need to actually have this file built before you can shoot it** — see "Things to build first" below. | 30s |
-| C6 | Beat 8 | VS Code search (⌘⇧F) finding a specific competitor's hook breakdown from 3 weeks ago. Type the search, watch results populate, click into one. | 20s |
+| C5 | Beat 8 | "Stale Obsidian-style vault" — open any folder of competitor MDs and let the `Last Modified` column show weeks-old dates. If you don't have one, fake it: build a throwaway folder of stub MDs with backdated `mtime` (`touch -t 202604010000 file.md`). | 20s |
+| C6 | Beat 8 | Fresh on-demand `/watch` run with today's date prominently visible (menu bar clock, terminal `date` output, or a calendar widget). Runs to completion. This is the **right side** of the split-screen contrast. | 60s |
 
 ### Session D — Stock / overlay captures
 
@@ -84,6 +84,7 @@ These don't exist yet — design them in Figma / Keynote / After Effects (whiche
 | X2 | Beat 8.5 | "Two parts left" whiteboard animation | Three columns: **Filming** (locked, human icon), **Editing** (locked, scissors/taste icon), **Research/Scripting** (unlocking, `/watch` logo punching through). Hand-drawn aesthetic > polished. |
 | X3 | Beat 4 | Split-screen "clean install vs SABR errors" overlay frame | Just a 50/50 vertical split graphic with labels. Composite over A3 + a screen recording of failed yt-dlp output. |
 | X4 | Beat 1 | "5–10 minutes wasted" overlay text + progress bar | Lower-third style. Use over a sped-up YouTube video timeline. |
+| X5 | Beat 8 | "Scheduled vs. on-demand" split-screen frame + caption | 50/50 vertical split graphic. Left label: "scheduled" (with a faded cron icon / clock). Right label: "on-demand" (with a play-arrow / today's date). Composite over C5 + C6. |
 
 ---
 
@@ -101,8 +102,7 @@ Don't re-shoot these — they're cached in `/tmp/`:
 
 | # | What | Why blocking | Effort |
 |---|---|---|---|
-| P1 | The Beat 8 markdown competitive-intel library file (the searchable archive of every `/watch` output, tagged by topic) | Beat 8's whole visual story is "look at this growing library." If it doesn't exist, you can't shoot C5 or C6. | 30–60 min — set up `outputs/intel/` directory, drop the 3 existing `/watch` runs as entries with frontmatter (topic, source URL, date, summary), commit. |
-| P2 | Beat 6 numbers re-verified day-of-shoot | Your `$0.00 / $0.02` numbers are accurate as of today (2026-05-05) but may drift if you run `/watch` heavily before recording. | 2 min — re-check both dashboards on shoot day, update Beat 6 line if needed. |
+| P1 | Beat 6 numbers re-verified day-of-shoot | Your `$0.00 / $0.02` numbers are accurate as of today (2026-05-05) but may drift if you run `/watch` heavily before recording. | 2 min — re-check both dashboards on shoot day, update Beat 6 line if needed. |
 
 ---
 

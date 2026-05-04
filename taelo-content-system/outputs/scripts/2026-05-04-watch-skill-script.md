@@ -179,7 +179,7 @@ Split screen. Left: stacked grid of 6-8 YouTube thumbnails greyed out with red X
 
 > Here's where it gets interesting for me. This is the part no other tutorial about this skill is going to show you.
 >
-> I already run a system I call Trend Scout. Every Monday, it scans 24 AI YouTubers, ranks the videos that broke at least double their channel's average views, and tells me which one is worth my attention this week.
+> I already run a system I call Trend Scout. The day I'm hunting for a new video, I fire it. It scans 24 AI YouTubers, ranks the ones that broke at least double their channel's average views, and tells me which one is worth my attention right now.
 >
 > Until now I'd have to actually sit down and watch the winner. Twenty, thirty minutes per video. Now I don't. Trend Scout picks the video. `/watch` ingests it. Claude gives me back a structured breakdown — what's the hook, what's the visual setup, where's the surprise, what's the punchline.
 >
@@ -193,21 +193,25 @@ Split screen. Left: stacked grid of 6-8 YouTube thumbnails greyed out with red X
 
 ---
 
-## Beat 8 — Use case 2: Solo operator competitive intelligence
+## Beat 8 — Use case 2: Skip the cron-job theater
 
 🎙️ **VO**:
 
-> The second use case is where the leverage really compounds.
+> Here's where I'm going to disagree with almost every other creator running a stack like this.
 >
-> I'm building in public, alone, against teams that have copywriters, editors, researchers on payroll. I don't have a 40-person team. I have one Claude Code subscription and this `/watch` skill.
+> A lot of people are stockpiling. Obsidian vaults full of competitor breakdowns. Cron jobs scraping every channel they care about every six hours. Daily digests. Weekly intelligence reports. "Compounding library" this, "second brain" that.
 >
-> Here's what I'm doing. Every video that scores above a 2x outlier in my Trend Scout, `/watch` grabs the structured summary and saves it into a single file. Searchable. Tagged by topic. Linked back to the source. After a month I have a competitive intelligence layer that took the agencies a whole department to build.
+> I think most of it is waste.
 >
-> The leverage isn't the skill. The leverage is the skill stacked into a recurring pipeline that runs every week without me touching it.
+> In AI, a video about a tool from three days ago is already half-stale. A breakdown of last month's hot launch? Dead weight. The cron jobs and routines creators set up to "compound their intelligence" — by the time you actually need any of it, the answer has changed.
+>
+> So I don't compound. I run `/watch` and Trend Scout the moment I'm hunting for a video. Not before. Not on a schedule. The day I sit down to ship something, I do the scan fresh, I `/watch` the top three, I pull what's true *right now*, and then I move.
+>
+> The leverage isn't in the library. The leverage is in the skill being fast enough that you don't *need* a library.
 
-🖥️ **SCREEN**: Show the markdown library file growing — entries with topic tags, source links, summaries. Scroll through. Pull up search. Show how fast you can find a specific competitor's hook breakdown from three weeks ago.
+🖥️ **SCREEN**: Split-screen contrast. Left: a stale-looking Obsidian-style vault — file tree of competitor MDs, last-modified dates from weeks ago, faded/greyed. Right: a fresh terminal, today's date showing prominently, `/watch` kicking off live and the structured output landing in under two minutes. Caption tag: **"scheduled vs. on-demand."**
 
-⏱️ ~55s
+⏱️ ~70s
 
 ---
 
