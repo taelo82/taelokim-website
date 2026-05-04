@@ -1,9 +1,9 @@
-# Beat 3 — Editor cut guide
+# Beat 3 — Cut & shoot guide
 
 > Source footage: `recording 2026-05-04 19-20-24.mov` (4:07 raw, face-cam only).
 > Applies on top of the locked script's Beat 3 — see [2026-05-04-watch-skill-script.md](2026-05-04-watch-skill-script.md).
 > Source review this is built from: [2026-05-04-watch-take-review.md](2026-05-04-watch-take-review.md).
-> Goal: keep the unrehearsed live-reaction quality, cut dead lines, slot in 4 short VO pickups, layer screen recording underneath face-cam.
+> Goal (for you, when you sit down to edit): keep the unrehearsed live-reaction quality, cut dead lines, slot in 4 short VO pickups, layer screen recording underneath face-cam.
 
 ---
 
@@ -75,9 +75,9 @@ Read in your normal voice. Clean room tone. These slot in over screen recordings
 
 ---
 
-## Editor's note (carried from take review)
+## Note to self (carried from take review)
 
-> This recording **is** Beat 3. Don't reshoot polished. The unrehearsed live-reaction quality — Taelo actually processing the `/watch` output for the first time — is the part no other reaction video has. Cut dead lines, keep rough energy, splice screen recording underneath face-cam.
+> This recording **is** Beat 3. Don't reshoot polished. The unrehearsed live-reaction quality — you actually processing the `/watch` output for the first time — is the part no other reaction video has. Cut dead lines, keep rough energy, splice screen recording underneath face-cam.
 
 ---
 
