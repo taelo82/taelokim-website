@@ -151,15 +151,25 @@ Split screen. Left: stacked grid of 6-8 YouTube thumbnails greyed out with red X
 
 🎙️ **VO**:
 
-> The real numbers, since I always promise that. Per video, around one dollar in Claude tokens. I watch about ten competitor videos a week — that's ten dollars. I was paying more than that for AI newsletters that gave me less.
+> And the most beautiful part of all of this — it's almost completely free.
 >
-> Whisper on Groq's free tier covers basically every video without captions. I haven't been charged for transcription once.
+> Assume you already pay for Claude. Twenty bucks a month for Pro, which is what I'm on. Even if you don't, the graph I'm about to show you is going to convince you.
 >
-> Most weeks, this whole pipeline costs me less than a coffee.
+> My Anthropic dashboard for this month: zero. Zero dollars. Because `/watch` runs inside the Claude Code subscription you're already paying for. There's no extra API bill on top.
+>
+> The only thing that costs anything is transcription, and only when the video has no captions. I've run this on three videos so far. Two had captions: free. One didn't: two cents on Groq. Not two dollars. Two cents.
+>
+> Unless you're feeding it an endless stack of documentaries with no subtitles, the free tier covers you. Most weeks this whole pipeline costs me less than a coffee.
 
-🖥️ **SCREEN**: Anthropic dashboard usage screenshot. Highlight the per-video cost. Cut to Groq dashboard showing free-tier remaining.
+🖥️ **SCREEN**: Anthropic console screenshot — zoom on `USD 0.00` and "No data" panels. Cut to Groq dashboard zoom on `$0.02 USD` total spend. Cut to the 2-line Groq Logs view showing the single 247-second Whisper run.
 
-⏱️ ~25s
+⏱️ ~50s
+
+### Real numbers (validated 2026-05-05)
+- Anthropic API cost (Month-to-date): **$0.00** — `/watch` runs inside Claude Code Pro subscription, never hits the API directly.
+- Groq Whisper cost (Month-to-date): **$0.02** — one transcription job (Taelo's local face-cam take, 247 audio-sec).
+- Verified `/watch` runs this session: 3 (Brad source, Gary Tan GStack, local face-cam take). 2 used captions → $0; 1 used Whisper → $0.02.
+- Groq free-tier still active.
 
 ---
 
@@ -201,6 +211,28 @@ Split screen. Left: stacked grid of 6-8 YouTube thumbnails greyed out with red X
 
 ---
 
+## Beat 8.5 — Why this is a breakpoint (zoom-out before the outro)
+
+> Placement note: lands here on purpose. The viewer just absorbed the use cases — now zoom out to "what this actually means in the AI content landscape." Keeps the demo→install momentum from Beats 3–4 unbroken, gives the video a thesis-grade capstone before the CTA.
+
+🎙️ **VO**:
+
+> Step back for a second. There are two big parts left in AI content right now.
+>
+> First one: scripting and filming. You can't fully delegate this — and honestly you shouldn't want to. You have your own voice. You like a certain way of saying things. AI would need a mountain of your existing content to mimic that exactly, and even then you'd want to fix it. So filming, the human side, that's not going anywhere.
+>
+> Second one: editing. Taste lives there. You're choosing between takes. You're deciding the structure. Motion graphics, b-roll, captions popping out — every AI editing tool I've tried still needs a human sitting on top of it. That part isn't solved.
+>
+> But this — `/watch` — is one of the breakpoints. Claude Code can now make Claude Code actually watch videos. Not just read transcripts, not just listen — watch. You just gave your senior editor or your producer the ability to see, when before they could only read or hear.
+>
+> It doesn't write the script for you word-for-word. But it eats almost all the research time. Where are the trends going? How are the best videos structured? What's working this week? That pattern recognition — Claude can now do it for you. So the scripting half just got solved. Or at minimum, we're in the middle of solving it.
+
+🖥️ **SCREEN**: Whiteboard-style animation. Two columns locked: "Filming" (human icon) and "Editing" (taste/scissors icon). Third column: "Research / Scripting" with `/watch` logo punching through, unlocking it. Cut to a fast montage of Trend Scout report → `/watch` summary → script doc.
+
+⏱️ ~85s
+
+---
+
 ## Beat 9 — Outro (with shoutout)
 
 🎙️ **VO**:
@@ -220,9 +252,9 @@ Split screen. Left: stacked grid of 6-8 YouTube thumbnails greyed out with red X
 ---
 
 ## Total runtime estimate
-- Voiceover: ~7m 35s
+- Voiceover: ~9m 25s (added Beat 8.5 ~85s + Beat 6 cost expansion ~25s)
 - Demo + screen capture filler: 1-2m
-- **Target final length: 8-10 minutes** ✅ (matches your 8-12 sweet spot in voice.md)
+- **Target final length: 10-12 minutes** ✅ (still inside the 8-12 sweet spot in voice.md, lands at the upper end)
 
 ---
 
