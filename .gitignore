@@ -11,6 +11,12 @@ node_modules/
 .env
 .env.local
 
+# Raw video takes — too heavy for git, kept local-only
+taelo-content-system/raw-takes/*.mov
+taelo-content-system/raw-takes/*.mp4
+taelo-content-system/raw-takes/*.mkv
+taelo-content-system/raw-takes/*.webm
+
 # Claude Code local state — machine-specific paths, recreate per machine
 **/.claude/settings.local.json
 # Local launch configs / scratch servers — per-machine, not synced

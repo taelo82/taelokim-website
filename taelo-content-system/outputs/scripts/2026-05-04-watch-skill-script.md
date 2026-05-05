@@ -171,7 +171,9 @@ Split screen. Left: stacked grid of 6-8 YouTube thumbnails greyed out with red X
 >
 > My Anthropic dashboard for this month: zero. Zero dollars. Because `/watch` runs inside the Claude Code subscription you're already paying for. There's no extra API bill on top.
 >
-> The only thing that costs anything is transcription, and only when the video has no captions. I've run this on three videos so far. Two had captions: free. One didn't: two cents on Groq. Not two dollars. Two cents.
+> The only thing that costs anything is transcription, and only when the video has no captions. I've run this on many videos so far. Most had captions: free. One didn't: two cents on Groq. Not two dollars. Two cents.
+>
+> And the funny thing is: you don't pay Groq the subscription until you hit the limit. So you're essentially using it for free until you use it too much that they ask you to pay.
 >
 > Unless you're feeding it an endless stack of documentaries with no subtitles, the free tier covers you. Most weeks this whole pipeline costs me less than a coffee.
 
@@ -179,11 +181,11 @@ Split screen. Left: stacked grid of 6-8 YouTube thumbnails greyed out with red X
 
 ⏱️ ~50s
 
-### Real numbers (validated 2026-05-05)
+### Real numbers (validated 2026-05-06)
 - Anthropic API cost (Month-to-date): **$0.00** — `/watch` runs inside Claude Code Pro subscription, never hits the API directly.
-- Groq Whisper cost (Month-to-date): **$0.02** — one transcription job (Taelo's local face-cam take, 247 audio-sec).
-- Verified `/watch` runs this session: 3 (Brad source, Gary Tan GStack, local face-cam take). 2 used captions → $0; 1 used Whisper → $0.02.
-- Groq free-tier still active.
+- Groq Whisper cost (Month-to-date): **~$0.07** — five Whisper transcription jobs (your three face-cam takes from 2026-05-04 + the Beat 1 take + the long master take from 2026-05-06).
+- Verified `/watch` runs across the project: 7 (Brad source, Gary Tan GStack, three face-cam recursive takes, Beat 1 take, master take). 2 used captions → $0; 5 used Whisper → ~$0.07.
+- Groq free-tier still active (you don't actually get billed until you upgrade — they let you accumulate "projected cost" until you opt in).
 
 ---
 

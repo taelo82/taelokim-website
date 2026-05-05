@@ -35,6 +35,9 @@ Run individual agents as needed:
 - `outputs/reports/` — Reporter summaries
 - `outputs/trends/` — Trend scout findings
 
+## Raw takes (gitignored)
+- `raw-takes/` — drop folder for raw `.mov` / `.mp4` recordings (OBS, QuickTime, Opus Clip exports). Files here are excluded from git via root `.gitignore`. When asked to "review the latest takes", `ls -lt raw-takes/` and pick by recency.
+
 ## Rules
 - Skip script if no outliers found
 - Skip thumbnails if no script produced
