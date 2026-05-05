@@ -36,29 +36,43 @@ Split screen. Left: stacked grid of 6-8 YouTube thumbnails greyed out with red X
 
 ---
 
-## Beat 1 — Intro (polished from Taelo draft 1)
+## Beat 1 — Intro (combined: Taelo revised draft 2026-05-05 + take-1 polish)
 
 🎙️ **VO**:
 
 > It is just physically impossible to consume every AI video on YouTube. It's just impossible.
 >
-> Honestly, this is the part that broke me. Every time I drop a URL into Claude and ask for a summary, it tells me, "Sorry, I can't watch the video — but based on the title and caption, let me guess." That happens to me all the time. And it kills me, because I just wanted Claude to watch the damn video and give me a summary.
+> So we all try the same thing. We tell Claude — or whatever agent we're using — "hey, watch this video for me." We drop a URL and we wait, hoping it spits out a summary. And what you get back, every single time, is: *"Sorry, I can't watch the video. But based on the title and caption, let me guess. Or, if you give me the transcript, maybe I can extract something."* That happens to me all the time. And it kills me — because I just wanted Claude to actually watch the damn video.
 >
-> Here's what's worse. In Claude Code, when I'm building anything — even my own website or my own video — I end up screenshotting frame by frame. Different sections of the screen. Paste, paste, paste, until Claude finally has enough context to actually be useful. Audio and transcript alone don't cut it. There's always more happening on screen than what the words tell you.
+> Here's the thing. Having a transcript and guessing from a still frame is vastly different from actually *watching* the video and seeing what's on the screen. The full context only shows up when Claude can see the demo, the visual, the moment the screen actually changes — not just read the words floating around it.
 >
-> I've tried a lot of tools to fix this. Most of them are bad.
+> And here's what's worse. Inside Claude Code, when I'm building anything — even my own website, my own video — I end up screenshotting frame by frame. Different sections of the screen. Paste, paste, paste, until Claude finally has enough context to be useful. Audio and transcript alone don't cut it. There's always more happening on screen than what the words tell you.
 >
-> So if you're a creator, someone learning AI, or someone building with AI — by the end of this video I'll show you the free Claude skill I'm now using every single day. You give it any URL. You get a real structured summary you can use for your next video, use to learn faster, or use to skip 90% of the content firehose. This is one of those skills that quietly changes how you work.
+> Every creator, every builder, every learner has this exact problem. Claude Code can't watch video. And video is *exactly* where the demos, the news, the long-form instruction lives — because the best AI content right now is being shipped as video, long and in depth.
+>
+> So we're going to fix that. By the end of this video, you're going to have the same thing I've been using every single day for the past few days — a free Claude skill that watches any URL you give it, gives you back a real structured summary, and saves you ninety percent of the content firehose. This might be one of the most beneficial skills I've ever incorporated. It quietly changes how you work.
+>
+> Here's how I'm going to take you through it. Three parts:
+>
+> 1. **How it works.**
+> 2. **How to set it up — with a live demo.**
+> 3. **What to actually do with it once you have it.**
+>
+> Let's get straight in.
 
-🖥️ **SCREEN**: Cold open on Taelo. Cut to a montage of YouTube AI-tool thumbnails flying past too fast to read. Cut to Claude Code terminal showing the "Sorry, I can't watch the video" response. Cut to old screen recording of Taelo screenshotting frames into Claude one at a time (real footage if you have it).
+🖥️ **SCREEN**: Cold open on Taelo. Cut to a montage of YouTube AI-tool thumbnails flying past too fast to read. Cut to Claude Code terminal showing the "Sorry, I can't watch the video" response. Cut to old screen recording of Taelo screenshotting frames into Claude one at a time (real footage if you have it). End on a clean lower-third "1. How it works · 2. How to set it up · 3. What to do with it" graphic.
 
-⏱️ ~80s
+⏱️ ~100-110s
 
-### Applied changes (Taelo's notes)
-- ✅ "Just another revolution of surpassing" → swapped for "This is one of those skills that quietly changes how you work."
-- ✅ Screenshot frame-by-frame story moved up — now sits right after the "watch the damn video" line. It's the strongest credibility beat in the intro and lands harder there.
-- ✅ Cleaned to native-English cadence while keeping the direct, raw, conversational tone (per voice.md).
-- ✅ Removed forbidden phrases (no "in today's video", "without further ado", etc.).
+### Applied changes (combined intro 2026-05-05)
+- ✅ Universal "we all try the same thing" framing replaces solo "me" framing — broader entry point.
+- ✅ New diagnostic line: "transcript and guessing from a still frame is vastly different from actually *watching*" — sharper articulation of the pain.
+- ✅ "Every creator, every builder, every learner has this exact problem" — universal pain elevation; explains why video-as-medium matters.
+- ✅ **New three-part roadmap at the end** (How it works / How to do it / What to do with it) — explicit retention scaffold.
+- ✅ Kept the screenshot-frame-by-frame story (your unique credibility moment from take-1).
+- ✅ Kept "quietly changes how you work" closer.
+- ✅ Removed redundant restatement of "Sorry, I can't watch" — said cleanly once.
+- ✅ Removed the "I've tried a lot of tools to fix this. Most of them are bad" hedge — pace straight through to the promise instead.
 
 ---
 
