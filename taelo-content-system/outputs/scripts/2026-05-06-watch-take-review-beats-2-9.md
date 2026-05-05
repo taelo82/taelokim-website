@@ -50,7 +50,7 @@
 |---|---|---|
 | 01:29–01:54 | "Now let me get you set up. The original demo makes the install look easy. Five minutes, two commands, done. And it is most of the time. But here's what no other reaction video is going to tell you. The day I installed this skill, YouTube was actively fighting yt-dlp on every download. 4-0-3 errors. Blocked fragments. The whole mess." | Script. "Two commands" misread as "two comments" — minor; cuttable noise or live with it. |
 | 01:54–02:11 | "The original demo doesn't show that part, so I'm showing you both. The clean path and the messy one I had to actually live through, so you don't have to worry about any of this." | **AD-LIB ADD**: "so you don't have to" — caring framing. KEEP. |
-| 02:11–02:34 | Easy path commands — but **read carefully**: at 02:20 you said "slash plugin marketplace at **tello** automates" instead of "**brad** automates". **HARD CUT** that line. Use the 02:15 "bread automates" version (which Whisper heard as "bread" but you're saying "brad"). | The wrong-name flub is dangerous because viewers will copy-paste a wrong path. |
+| 02:11–02:34 | Easy path commands. **Note**: at 02:20 you said "slash plugin marketplace at **taelo** automates" — this is **intentional**, you're forking Brad's skill into your own GitHub at `taeloautomates/claude-video` so viewers install your version. The 02:15 "bradautomates" line was the script's old name. **Use 02:20 (taeloautomates) — drop 02:15.** ⚠️ Blocking dependency: the `taeloautomates/claude-video` repo must exist and be published before this video ships. | This swaps the script's repo name to your fork. |
 | 02:34–02:47 | "Restart Claude Code. You're done. Point slash-watch at any video. The skill auto-installs FFmpeg and yt-dlp the first time it runs on macOS." | Lots of stutter retakes 02:34–02:41 ("Restart. Re… That's it. Restart. That's it. Restart. Restart Claude Code") — pick **one** clean "Restart Claude Code. You're done" delivery. |
 | 02:47–03:04 | "On Linux or Windows it tells you the exact install command for your system. Then grab a free Groq API key from console dot groq dot com — that handles the videos that don't have captions. That's the whole install." | Clean. |
 | 03:04–03:12 | **AD-LIB**: "And don't worry, it's a free tool. We're going to go over it. It's very easy and straightforward and very fast." | Soft reassurance. Optional — if pacing is tight, cut. If keeping the friendly tone, keep. |
@@ -59,12 +59,12 @@
 | 04:08–04:25 | "I drop exact copy-paste install in the description. Five commands, fifteen minutes, fixes everything. Save this video. You will need it the day YouTube decides to fight you." | Closing CTA for Beat 4. |
 
 ## ✂️ Cut
-- **02:20** the "tello automates" wrong-name line. Critical cut.
+- **02:15** the old "bradautomates" line — superseded by 02:20 "taeloautomates" (your fork).
 - 02:34–02:41 the multiple "Restart" retakes — keep one.
 - 04:08 the "real real person" duplicate "real" — light edit.
 
 ## 🪒 Polish
-- The slash commands at 02:15: Whisper transcribed "bread automates" but the actual command is `bradautomates`. If your audio also said "bread" (unlikely) or "tello" (the 02:20 version), you'll need a dub. Worth re-listening to 02:15 and 02:20 carefully.
+- Whisper heard "bread automates" at 02:15 (your audio says "brad") and "tello automates" at 02:20 (your audio says "taelo"). Both are Whisper artifacts on brand names. Real audio is correct. Use 02:20.
 
 ## 🎬 Pick: full Beat 4 segment with the wrong-name line cut.
 

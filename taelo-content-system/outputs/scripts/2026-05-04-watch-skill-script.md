@@ -128,8 +128,10 @@ Split screen. Left: stacked grid of 6-8 YouTube thumbnails greyed out with red X
 
 > Easy path first. In Claude Code, run these two commands:
 >
-> `/plugin marketplace add bradautomates/claude-video`
+> `/plugin marketplace add taeloautomates/claude-video`
 > `/plugin install watch@claude-video`
+>
+> *(Fork of bradautomates/claude-video — Brad's original is shouted out in the outro and linked in the description. This version bundles the SABR install patches and any future Taelo customizations.)*
 >
 > Restart Claude Code. You're done. Point `/watch` at any video. The skill auto-installs FFmpeg and yt-dlp the first time it runs on macOS. On Linux or Windows, it tells you the exact install command for your system. Then grab a free Groq API key from console.groq.com — that handles the videos that don't have captions. That's the whole install.
 

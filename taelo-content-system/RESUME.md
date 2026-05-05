@@ -1,76 +1,125 @@
 # Resume — handoff for next session
 
-> Last session: 2026-05-04. Stopped because of weekly token limits, not because anything was broken.
+> Last updated: **2026-05-06**. Project is past script + face-cam shooting. Now in **edit + fork-publish + OBS-capture** phase.
+> To prime fast in a new session: *"Read RESUME.md and resume the /watch reaction video."*
+
+---
 
 ## What we're shipping
-A YouTube reaction/replication video about the **`/watch` Claude Code skill** (free skill that lets Claude analyze any video). Modeled on the structure of the original walkthrough at https://youtu.be/QZMljuD10sU, but with Taelo's unique angles: the YouTube SABR install caveat, Trend Scout × `/watch` operator pipeline, and solo-operator competitive intelligence framing.
+A YouTube reaction/replication video about the **`/watch` Claude Code skill** (originally Brad Bonanno's free skill). Taelo is forking it into `taeloautomates/claude-video` so viewers download his version (with bundled SABR install patches) — Brad gets shoutout in Beat 9 outro. Final target runtime: 12–14 min.
 
-## Done
+---
 
-| Status | Item |
+## Status (one-line)
+
+| Phase | Status |
 |---|---|
-| ✅ | Trend Scout expanded from 13 → 24 channels ([brand/competitors.md](brand/competitors.md)) |
-| ✅ | Weekly scan run + ranked report ([outputs/trends/2026-05-04-trend-report.md](outputs/trends/2026-05-04-trend-report.md)) |
-| ✅ | Top pick locked: Brad Bonanno's `/watch` video, 3.83x outlier on a 6,740-sub channel |
-| ✅ | Brad's `/watch` skill installed at `~/.claude/skills/watch/` and validated end-to-end |
-| ✅ | YouTube SABR block worked around: Python 3.11 + uv + yt-dlp nightly + Deno + curl_cffi + cookies — copy-paste install at [outputs/scripts/2026-05-04-watch-install-description.md](outputs/scripts/2026-05-04-watch-install-description.md) |
-| ✅ | Demo target locked: Gary Tan's GStack video (https://www.youtube.com/watch?v=wkv2ifxPpF8). Pre-pulled transcript + 60 frames |
-| ✅ | Live `/watch` output produced for Beat 3 ([outputs/scripts/2026-05-04-watch-demo-output-gstack.md](outputs/scripts/2026-05-04-watch-demo-output-gstack.md)) |
-| ✅ | Full polished script drafted, de-Bradified, demo target locked ([outputs/scripts/2026-05-04-watch-skill-script.md](outputs/scripts/2026-05-04-watch-skill-script.md)) |
-| ✅ | Beat 3 face-cam take recorded by Taelo, processed via `/watch`, review notes written ([outputs/scripts/2026-05-04-watch-take-review.md](outputs/scripts/2026-05-04-watch-take-review.md)) |
+| Script + teleprompter | ✅ Locked, 9 beats + Beat 8.5 |
+| Face-cam takes | ✅ All beats shot (across 5 files in `raw-takes/` + `~/Movies/`) |
+| Take reviews | ✅ Per-beat keep/cut/polish for every beat |
+| Final assembly guide | ✅ Editor's punch list ready |
+| Beat 3 cut & shoot guide | ✅ Editor cuts mapped, 4 VO pickups defined |
+| OBS / B-roll captures | 🔲 Not started — 4 batched sessions per `obs-shoot-list.md` |
+| `taeloautomates/claude-video` GitHub fork | 🔲 **BLOCKING publish** — must exist before video goes live |
+| Animations (Beat 5 pipeline diagram, Beat 8 split-screen, optional Beat 8.5 whiteboard) | 🔲 Need design |
+| Editor pass (Premiere) | 🔲 Awaiting raw assembly |
 
-## Open / next session
+---
 
-1. **Apply cuts + polish to Beat 3 take** per the take review (cut "May 5th today", "AI 3.0", and the Gary criticism; polish the `/review`/`/QA` rambling and the skills-repo line; add the meta-callout line before CTA)
-2. **Record Beats 1, 2, 4-9** — script is locked, just need to shoot
-3. **Pull Beat 6 real numbers** — the "$1/video, 10 videos/week" figures are placeholders; pull from Taelo's actual Anthropic dashboard before recording
-4. **B-roll capture list** for editing:
-   - Beat 4 split-screen: clean install vs. SABR errors flying
-   - Beat 4 patch sequence: `uv tool install`, Deno install, `/watch` succeeding after patch
-   - Beat 7: trend report MD scrolling, `/watch` running on top pick, structured output
-   - Beat 8: markdown library file growing with topic tags + search
-5. **Optional** — draft a tighter 60-second Beat 3 voiceover splicing the 5 best moments from the recorded take with screen-recording cues marked
-6. **YouTube SABR fix** — yt-dlp ships a stable patch within days/weeks. When it does, the workaround patches in `~/.claude/skills/watch/scripts/download.py` may be removable. Re-test then.
+## Open work for next session (priority order)
 
-## Pipeline state
+1. **🚨 Decide & execute the GitHub fork** (`taeloautomates/claude-video`)
+   - Confirm GitHub username/org (`taeloautomates`? `taelo82`? new org?)
+   - Fork or re-create from `bradautomates/claude-video` upstream
+   - Bundle the SABR patches Taelo applied locally (in `~/.claude/skills/watch/scripts/download.py`)
+   - Update `marketplace.json` + `plugin.json` with the new repo URL
+   - Add README attribution to Brad
+   - Test: `/plugin marketplace add taeloautomates/claude-video` + `/plugin install watch@claude-video` in a clean Claude Code instance
+   - **Blocks**: video can't publish until this works
+2. **Beat 8.5 path decision** — three options laid out in [final-assembly.md](outputs/scripts/2026-05-06-watch-final-assembly.md). Recommendation: **Path A** (polished take from F2 + executive-producer splice from F4 19-32-59).
+3. **Trim plan** — current estimated final is ~14–15 min, target is 10–12. Options: drop Groq-subscription paragraph (Beat 6), drop agent-fooled-by-views paragraph (Beat 8), or drop Beat 5 entirely.
+4. **OBS shoot day** — face-cam-first done, OBS still pending. 4 batched sessions, ~85 min total. Critical: capture the actual `/watch` install live for Beat 4 B-roll, including the new `taeloautomates/claude-video` invocation (depends on fork existing first).
+5. **Animations** to design before final cut: Beat 5 pipeline diagram, Beat 8 split-screen "scheduled vs on-demand" overlay.
+6. **YouTube SABR fix watch** — yt-dlp ships a stable patch within days/weeks. When it does, the workaround patches in `download.py` may be removable. Re-test then.
 
-- **Trend Scout**: [scripts/trend_scan_weekly.py](scripts/trend_scan_weekly.py) — supports `--rows N-N` flag for partial scans. Run with `python3 scripts/trend_scan_weekly.py --days 7 --top 30 --limit 25`.
-- **Transcript fetcher**: [scripts/fetch_transcript.py](scripts/fetch_transcript.py) — uses youtube-transcript-api, no PO token needed for transcripts.
-- **`/watch`** — installed at `~/.claude/skills/watch/`. Local patches in `download.py` are NOT in upstream — see memory `reference_watch_skill_install.md`. Invoke with `WATCH_COOKIES_BROWSER=chrome` env var for YouTube.
-- **Groq API key** at `~/.config/watch/.env` — was pasted in chat, should be rotated when convenient (https://console.groq.com/keys).
+---
 
 ## Files dashboard
 
-### Script + scripts pipeline
-- [outputs/scripts/2026-05-04-watch-skill-script.md](outputs/scripts/2026-05-04-watch-skill-script.md) — locked script (intro + 9 beats)
-- [outputs/scripts/2026-05-04-watch-install-description.md](outputs/scripts/2026-05-04-watch-install-description.md) — copy-paste install for video description
-- [outputs/scripts/2026-05-04-watch-demo-output-gstack.md](outputs/scripts/2026-05-04-watch-demo-output-gstack.md) — Beat 3 on-screen demo material
-- [outputs/scripts/2026-05-04-watch-take-review.md](outputs/scripts/2026-05-04-watch-take-review.md) — Beat 3 face-cam take review (cuts/polish)
+### Script + script artifacts
+- [outputs/scripts/2026-05-04-watch-skill-script.md](outputs/scripts/2026-05-04-watch-skill-script.md) — locked canonical script (intro + 9 beats + 8.5)
+- [outputs/scripts/2026-05-05-watch-teleprompter.md](outputs/scripts/2026-05-05-watch-teleprompter.md) — clean read-aloud copy of the script
+- [outputs/scripts/2026-05-04-watch-install-description.md](outputs/scripts/2026-05-04-watch-install-description.md) — copy-paste install for video description (⚠️ still references `bradautomates` — update once fork exists)
 
-### Trend reports + raw scan data
+### Take reviews + assembly
+- [outputs/scripts/2026-05-04-watch-take-review.md](outputs/scripts/2026-05-04-watch-take-review.md) — Beat 3 take-1 review
+- [outputs/scripts/2026-05-05-watch-take2-review.md](outputs/scripts/2026-05-05-watch-take2-review.md) — Beat 3 recursive takes review
+- [outputs/scripts/2026-05-05-watch-beat3-editor-cut.md](outputs/scripts/2026-05-05-watch-beat3-editor-cut.md) — Beat 3 cut & shoot guide
+- [outputs/scripts/2026-05-06-watch-take-review-beat-1.md](outputs/scripts/2026-05-06-watch-take-review-beat-1.md) — Beat 1 take review (from F1)
+- [outputs/scripts/2026-05-06-watch-take-review-beats-2-9.md](outputs/scripts/2026-05-06-watch-take-review-beats-2-9.md) — Beats 2 + 4 + 5 + 6 + 7 + 8 + 8.5 + 9 (from F2)
+- [outputs/scripts/2026-05-06-watch-final-assembly.md](outputs/scripts/2026-05-06-watch-final-assembly.md) — **the editor's punch list — open this when starting Premiere**
+
+### Production guides
+- [outputs/scripts/2026-05-05-watch-obs-shoot-list.md](outputs/scripts/2026-05-05-watch-obs-shoot-list.md) — OBS B-roll capture list, 4 batched sessions
+
+### Source material (gitignored)
+- `raw-takes/AI Can't Watch Videos_ Our Solution Revealed!.mp4` (F1) — Beat 1 face-cam, 3:37
+- `raw-takes/Cloud Code Watches Videos_ Revolutionize Your Research!.mp4` (F2) — Beats 2–9 + 8.5 face-cam, 17:09
+- `~/Movies/2026-05-04 19-20-24.mov` (F3) — Beat 3 original demo take, 4:07
+- `~/Movies/2026-05-04 19-32-59.mov` (F4) — Beat 8.5 alt + Beat 3 meta-callout, 6:17
+- `~/Movies/2026-05-04 19-40-13.mov` (F5) — Beat 9 sign-off tag, 0:37
+
+### Trend reports + transcripts (reference only, not changing)
 - [outputs/trends/2026-05-04-trend-report.md](outputs/trends/2026-05-04-trend-report.md) — full ranked report
-- [outputs/trends/2026-05-04-scan-results.json](outputs/trends/2026-05-04-scan-results.json) — rows 1-13 raw
-- [outputs/trends/2026-05-04-scan-rows-14-24.json](outputs/trends/2026-05-04-scan-rows-14-24.json) — rows 14-24 raw
+- Transcripts in `outputs/trends/transcripts/`
 
-### Transcripts
-- [outputs/trends/transcripts/QZMljuD10sU-brad-bonanno-pick.txt](outputs/trends/transcripts/QZMljuD10sU-brad-bonanno-pick.txt) — Brad's source video (private reference, not on-camera)
-- [outputs/trends/transcripts/wkv2ifxPpF8-demo-target.txt](outputs/trends/transcripts/wkv2ifxPpF8-demo-target.txt) — Gary Tan GStack (Beat 3 demo source)
-- [outputs/trends/transcripts/tn7zXRv3Xmo-jack-roberts-deepseek.txt](outputs/trends/transcripts/tn7zXRv3Xmo-jack-roberts-deepseek.txt) — runner-up
-- [outputs/trends/transcripts/jQO9RAmy5lk-jason-lee-seedance.txt](outputs/trends/transcripts/jQO9RAmy5lk-jason-lee-seedance.txt) — earlier top pick (replaced by Brad)
+---
 
-### Brand + agent prompts
-- [brand/competitors.md](brand/competitors.md) — 24 channels
-- [brand/voice.md](brand/voice.md) — voice anchor (direct, raw, conversational, skeptical of hype)
-- [agents/02-trend-scout.md](agents/02-trend-scout.md) — Trend Scout playbook
+## Conventions established this project
 
-## Memory anchors (auto-loaded next session)
+- **Path-sharing**: drop new takes into `taelo-content-system/raw-takes/`. Files are gitignored. In chat just say "the latest two" or "the May 6 ones" — the next session does `ls -lt raw-takes/` to pick by recency.
+- **Auto-push**: every batch of file edits gets committed and pushed to `taelo82/taelokim-website` automatically (per memory).
+- **Solo operator**: Taelo edits his own videos. Address shot lists / cut guides to him directly, never to a hypothetical "editor."
+- **On-demand, not compounding**: never propose cron jobs / scheduled scrapers / "second brain library" patterns. Run agents fresh when hunting.
+- **Reaction-video etiquette**: never name the source creator (Brad Bonanno) in script body. Shoutout lands in Beat 9 outro only.
+- **Voice polish**: clean script drafts to native English; preserve face-cam roughness in actual takes.
 
-- `reference_watch_skill_install.md` — local install state + patches at risk
+---
+
+## Memory anchors (auto-loaded if cwd = `~/Desktop/Content-engine`)
+
+If the next session opens with `~/Desktop/Content-engine` as cwd, these auto-load:
+- `feedback_taelokim_auto_push.md` — push after every batch
+- `feedback_taelokim_dashboard.md` — render asset dashboard at session start + after major changes
 - `feedback_taelo_script_voice_polish.md` — clean to native English; preserve face-cam roughness
-- `feedback_taelo_creator_mentions_in_reactions.md` — shoutout in outro, not body
-- `feedback_taelokim_auto_push.md` — auto-push after batches of edits
-- `feedback_taelokim_dashboard.md` — render asset dashboard at start + after big changes
+- `feedback_taelo_creator_mentions_in_reactions.md` — shoutout in outro only
+- `feedback_taelo_solo_editor.md` — Taelo edits his own videos
+- `feedback_taelo_on_demand_not_compounding.md` — never propose cron jobs / compounding library patterns
+- `reference_watch_skill_install.md` — local install state + patches at risk
 
-## How to resume in a new session
+If the next session opens with `~/Desktop/taelokim-website` as cwd (or anywhere else), the memories DO NOT auto-load. The new session needs to explicitly read them from `~/.claude/projects/-Users-ek-Desktop-Content-engine/memory/MEMORY.md`.
 
-Just open Claude Code with the `taelokim-website` repo open. The new session will load these memories automatically and read this RESUME.md if pointed at it. To prime fast: *"Resume the /watch reaction video. Read RESUME.md."*
+---
+
+## Pipeline state (technical)
+
+- **`/watch`** — installed at `~/.claude/skills/watch/`. Local patches in `download.py` (cookies + player_client override) are NOT in upstream — see `reference_watch_skill_install.md`. These need to migrate into the `taeloautomates/claude-video` fork.
+- **Trend Scout** — [scripts/trend_scan_weekly.py](scripts/trend_scan_weekly.py) — supports `--rows N-N` flag for partial scans. Run with `python3 scripts/trend_scan_weekly.py --days 7 --top 30 --limit 25`.
+- **Transcript fetcher** — [scripts/fetch_transcript.py](scripts/fetch_transcript.py) — uses youtube-transcript-api, no PO token needed.
+- **Groq API key** at `~/.config/watch/.env` — was pasted in chat early on; rotate when convenient (https://console.groq.com/keys).
+
+---
+
+## Cost note
+
+Across 7 verified `/watch` runs in this project: **Anthropic API $0.00 / Groq Whisper ~$0.07** (well under free tier). Beat 6 in the script reflects current numbers as of 2026-05-06. Re-pull both dashboards on shoot day if recording new costs into the cut.
+
+---
+
+## How to resume in a new session (lowest friction)
+
+1. Open Claude Code with `~/Desktop/Content-engine` as cwd (so memories auto-load).
+2. First message: *"Read RESUME.md at ~/Desktop/taelokim-website/taelo-content-system/RESUME.md and resume the /watch reaction video. Start with the open work in priority order."*
+3. New session reads this file once → has full state. Keep new turns focused on one open-work item at a time so token bloat stays low.
+
+If cwd is `~/Desktop/taelokim-website` instead, append to step 2: *"Also read MEMORY.md at ~/.claude/projects/-Users-ek-Desktop-Content-engine/memory/MEMORY.md to load the workflow memories."*

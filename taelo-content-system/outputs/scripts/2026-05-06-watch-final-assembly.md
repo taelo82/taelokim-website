@@ -23,7 +23,7 @@
 | **1** | F1 | 00:06–03:36 (with internal cuts per [take-review-beat-1](2026-05-06-watch-take-review-beat-1.md)) | Apply 14 internal cuts (retake duplicates, false starts). Keep 3 ad-libs: producer analogy, "Cloud talking by the way," small-window urgency. | ~2:00–2:30 |
 | **2** | F2 | 00:00–01:28 | Use limitless-pill cold open. Keep recursive callback ("even this recording"). Cut "for now" duplicate at 01:19. | ~50s |
 | **3** | F3 | per [beat3-editor-cut.md](2026-05-05-watch-beat3-editor-cut.md) | Original demo take + 4 VO pickups. Layer screen-recording B-roll. | ~110s |
-| **4** | F2 | 01:29–04:25 | **CRITICAL CUT**: drop the "tello automates" wrong-name line at 02:20 — viewers will copy-paste a broken command otherwise. Use 02:15 "bradautomates" version. Keep "I didn't even know what this was either" ad-lib (humanizes). | ~120s |
+| **4** | F2 | 01:29–04:25 | **Use 02:20 "taeloautomates" version, drop 02:15 "bradautomates"** — Taelo is forking Brad's skill into his own GitHub repo so viewers install his version (Brad credit preserved in Beat 9 outro). ⚠️ `taeloautomates/claude-video` must exist on GitHub before publishing. Keep "I didn't even know what this was either" ad-lib (humanizes). | ~120s |
 | **5** | F2 | 04:25–05:05 | Clean. Use as-is. | ~35s |
 | **6** | F2 | 05:06–06:38 | Keep Groq-subscription ad-lib (06:11–06:27) — strongest proof of "actually free." Use "many videos" framing (06:03), no need to update count separately. Trim 3 stutters. | ~60s |
 | **7** | F2 | 06:38–08:42 | Use **40+ YouTubers** (07:11) version, drop 24 version (06:56). Keep descending team-size pattern (40 → 20 → 5). End on "watches the videos for you" — drop trailing 08:33–08:42 incomplete sentence. | ~75s |
@@ -61,9 +61,9 @@
 
 ## Critical edit gotchas
 
-1. **02:20 in F2** — "slash plugin marketplace at **tello** automates slash cloud video" is the wrong command. **Hard cut**. Use 02:15 with `bradautomates`.
+1. **🚨 PUBLISHING DEPENDENCY** — Beat 4 install commands name `taeloautomates/claude-video` (your fork of Brad's skill). The fork must exist on GitHub *before* this video publishes, otherwise viewers copy-paste a 404. Status of fork: **TBD** (see "Open work" in [RESUME.md](../RESUME.md)).
 2. **F2 frame coverage is sparse** — 80 frames over 17 minutes means I sampled every ~13 seconds. Specific visual moments aren't validated. If you remember anything visually weird mid-take, scrub it manually.
-3. **Whisper transcript artifact** — "Cloud" = Claude, "Grok" = Groq throughout. Your audio is correct.
+3. **Whisper transcript artifact** — "Cloud" = Claude, "Grok" = Groq, "bread/tello" = brad/taelo throughout. Your audio is correct.
 4. **Beat 1 is in F1, not F2** — they're separate files. F2 starts at Beat 2 with the limitless-pill ad-lib.
 
 ---
