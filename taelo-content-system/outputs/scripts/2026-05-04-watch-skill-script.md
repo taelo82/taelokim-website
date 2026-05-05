@@ -261,6 +261,8 @@ Split screen. Left: stacked grid of 6-8 YouTube thumbnails greyed out with red X
 >
 > If you build the Trend Scout side — the recurring scanner that feeds `/watch` — show me. I'll run yours through `/watch` and put the breakdown in next week's video.
 >
+> And before you go — if you want to see how I pull thirty grand doing marketing for small brands and companies, or how I'm building more cinematic websites with Claude Code and Claude design, that video is right here. Hit it.
+>
 > Subscribe if you want the next operator playbook. See you in the next one.
 
 🖥️ **SCREEN**: GitHub link card. Brad's video thumbnail with arrow. End card with subscribe + next video preview.
