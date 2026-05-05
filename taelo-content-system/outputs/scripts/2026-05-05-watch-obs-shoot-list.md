@@ -5,6 +5,29 @@
 
 ---
 
+## Shoot order — face-cam first, OBS second
+
+**Face-cam VO first (one session, all beats), then OBS captures (4 batched sessions).** Saves ~50 min vs. doing them in parallel and is easier on performance energy. None of the face-cam VO actually depends on seeing OBS output first — the overlays get timed to your VO in editing.
+
+Suggested face-cam order in one sitting (skip beats already shot):
+
+1. Beat 1 (intro, ~110s) — freshest voice
+2. Beat 2 (~25s)
+3. Beat 4 (~110s) — longest, get it in while warm
+4. Beat 5 (~25s)
+5. Beat 6 (~50s)
+6. Beat 7 (~60s)
+7. Beat 8 (~70s) — contrarian, needs conviction
+8. Beat 8.5 (~85s) — **skip if going with the live-take splice** ([see take-2 review](2026-05-05-watch-take2-review.md))
+9. Beat 9 (~30s) — easy closer
+
+Already shot, don't re-record:
+- Beat 3 face-cam — original take 19-20-24 + recursive takes 19-32-59 + 19-40-13
+
+After face-cam wraps: tear down lights/mic, switch to OBS workstation, run Sessions A–D below.
+
+---
+
 ## OBS quick setup
 
 - **Resolution**: 2560×1440 (or 1920×1080 if your machine struggles). Terminal text needs the headroom — you'll zoom into specific lines in post.
