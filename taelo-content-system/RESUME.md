@@ -20,7 +20,7 @@ A YouTube reaction/replication video about the **`/watch` Claude Code skill** (o
 | Final assembly guide | ✅ Editor's punch list ready |
 | Beat 3 cut & shoot guide | ✅ Editor cuts mapped, 4 VO pickups defined |
 | OBS / B-roll captures | 🔲 Not started — 4 batched sessions per `obs-shoot-list.md` |
-| `taeloautomates/claude-video` GitHub fork | ✅ Forked, SABR patches synced, metadata + README attribution updated, pushed. Clean-room `/plugin marketplace add` test pending. |
+| `taeloautomates/claude-video` GitHub fork | ✅ Forked, patches synced + verified via clean-room `/plugin marketplace add` install. A3 hero shot unblocked. |
 | Animations (Beat 5 pipeline diagram, Beat 8 split-screen, optional Beat 8.5 whiteboard) | 🔲 Need design |
 | Editor pass (Premiere) | 🔲 Awaiting raw assembly |
 
@@ -28,7 +28,7 @@ A YouTube reaction/replication video about the **`/watch` Claude Code skill** (o
 
 ## Open work for next session (priority order)
 
-1. **GitHub fork** (`taeloautomates/claude-video`) — ✅ org created, fork pushed at https://github.com/taeloautomates/claude-video, SABR patches in `scripts/download.py`, metadata retargeted, README attribution to Brad. Working clone at `~/code/claude-video`. **Remaining**: clean-room `/plugin marketplace add taeloautomates/claude-video` + `/plugin install watch@claude-video` test in a fresh Claude Code session. Run that before treating the fork as fully unblocked for OBS A3.
+1. **GitHub fork** (`taeloautomates/claude-video`) — ✅ DONE. Fork live at https://github.com/taeloautomates/claude-video, SABR patches verified via clean-room `/plugin marketplace add` install (all 3 patches present in installed `download.py`). Working clone at `~/code/claude-video` for future updates.
 2. **Beat 8.5 path decision** — three options laid out in [final-assembly.md](outputs/scripts/2026-05-06-watch-final-assembly.md). Recommendation: **Path A** (polished take from F2 + executive-producer splice from F4 19-32-59).
 3. **Trim plan** — current estimated final is ~14–15 min, target is 10–12. Options: drop Groq-subscription paragraph (Beat 6), drop agent-fooled-by-views paragraph (Beat 8), or drop Beat 5 entirely.
 4. **OBS shoot day** — face-cam-first done, OBS still pending. 4 batched sessions, ~85 min total. Critical: capture the actual `/watch` install live for Beat 4 B-roll, including the new `taeloautomates/claude-video` invocation (depends on fork existing first).
