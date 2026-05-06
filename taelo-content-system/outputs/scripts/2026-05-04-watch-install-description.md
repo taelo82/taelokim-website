@@ -5,7 +5,7 @@
 In Claude Code, run:
 
 ```
-/plugin marketplace add bradautomates/claude-video
+/plugin marketplace add taeloautomates/claude-video
 /plugin install watch@claude-video
 ```
 
@@ -27,8 +27,9 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 curl -fsSL https://deno.land/install.sh | sh
 ln -sf ~/.deno/bin/deno ~/.local/bin/deno
 
-# 4. Patch the skill to use cookies + player_client override
-# Open ~/.claude/skills/watch/scripts/download.py and add this near the top:
+# 4. (Skip this if you installed from taeloautomates/claude-video — the patches are pre-baked.)
+# If you installed from upstream bradautomates, open ~/.claude/skills/watch/scripts/download.py
+# and add this near the top:
 #   import os
 # Then in the cmd list add:
 #   "--extractor-args", "youtube:player_client=tv,web_safari,mweb",

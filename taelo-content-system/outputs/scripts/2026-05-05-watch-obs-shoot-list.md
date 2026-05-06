@@ -52,7 +52,7 @@ Open a fresh Claude Code session, dark theme, font ~16pt. Have the URLs and demo
 |---|---|---|---|---|
 | A1 | Beat 2 | `/watch` typed clean | Type `/watch https://www.youtube.com/watch?v=wkv2ifxPpF8` slowly. Hit enter. Let it run all the way through. **This is the hero shot.** Wall-clock visible somehow (menu-bar clock works). | 90s raw |
 | A2 | Beat 2 | "Sorry, I can't watch the video" baseline | Open a *different* Claude (claude.ai or a base model in Claude Code without the skill installed). Ask: "summarize this video https://www.youtube.com/watch?v=wkv2ifxPpF8". Capture the refusal. | 15s |
-| A3 | Beat 4 (easy path) | `/plugin marketplace add bradautomates/claude-video` typed live, then `/plugin install watch@claude-video`, then a restart. | 30s |
+| A3 | Beat 4 (easy path) | `/plugin marketplace add taeloautomates/claude-video` typed live, then `/plugin install watch@claude-video`, then a restart. | 30s |
 | A4 | Beat 4 (messy path) | `uv tool install --pre 'yt-dlp[default]'` running. Then `deno --version` to prove Deno is installed. | 20s |
 | A5 | Beat 4 (proof) | `/watch` running on a YouTube video successfully **after** the patch. Just need 5 seconds of "it works". | 10s |
 | A6 | Beat 7 | `/watch` running on the current week's Trend Scout top pick. Live. | 60s |
