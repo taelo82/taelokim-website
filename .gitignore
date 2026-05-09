@@ -17,6 +17,12 @@ taelo-content-system/raw-takes/*.mp4
 taelo-content-system/raw-takes/*.mkv
 taelo-content-system/raw-takes/*.webm
 
+# Draft assemblies — also kept local-only
+taelo-content-system/1st draft video/
+taelo-content-system/2nd draft video/
+taelo-content-system/3rd draft video/
+taelo-content-system/final video/
+
 # Claude Code local state — machine-specific paths, recreate per machine
 **/.claude/settings.local.json
 # Local launch configs / scratch servers — per-machine, not synced
