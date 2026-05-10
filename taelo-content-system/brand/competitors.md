@@ -1,7 +1,7 @@
 # Competitor Tracker — Taelo Kim
 
 > Curated by Taelo. Focus: recently risen creators (small-to-mid) in AI / automation / building-in-public — better signal than mega-channels.
-> Last updated: 2026-05-04
+> Last updated: 2026-05-11
 
 ## Selection Logic
 - Prioritize creators who have **recently risen** rather than established mega-channels
@@ -36,6 +36,11 @@
 | 22 | Indy Dev Dan | Claude Code / AI dev workflows | https://www.youtube.com/@indydevdan |
 | 23 | Sabrina Ramonov | AI prompts / automation for solopreneurs | https://www.youtube.com/@sabrina_ramonov |
 | 24 | Mervin Praison | Multi-agent frameworks (PraisonAI) | https://www.youtube.com/@MervinPraison |
+| 25 | AI Luke | Daily Claude Code / vibe-coding builds | https://www.youtube.com/@AILuke |
+| 26 | Volo Builds | Indie SaaS in public (vibescan.io) + Claude Code tutorials | https://www.youtube.com/@VoloBuilds |
+| 27 | Corey Ganim | Operator + live build-along podcast format | https://www.youtube.com/@coreyganim |
+| 28 | Tyler AI (Tyler Reed) | OpenAI Agents SDK / AutoGen — code-first agent builds | https://www.youtube.com/@TylerReedAI |
+| 29 | AI Foundations (Drake Surach) | Vibe-coding for creators/entrepreneurs | https://www.youtube.com/@AIFoundationsHQ |
 
 ## Notes
 - All 24 channels are AI/automation/MMO-adjacent — strong overlap with Taelo's pillars
