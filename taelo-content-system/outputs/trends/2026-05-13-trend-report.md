@@ -5,7 +5,7 @@
 **Channels scanned:** 29 (rows 1–29 of `brand/competitors.md`)
 **Scoring:** size-adjusted outlier (raw × log size factor)
 
-> ⏳ The video scan is still running at the time of this report (yt-dlp is slow this run — first two channels were @sandyleeai and @jasonleefinance). The scan JSON will land at `outputs/trends/2026-05-13-scan-results.json` and the log at `outputs/trends/2026-05-13-scan.log`. **Per Taelo's brief — short lead time, news/tweets included, not just videos — the report below leans on news + manual creator metadata; the video scan adds confirmation but is not the deciding signal.** Updated scan numbers will be appended once the run finishes.
+**Recent videos in window:** 23 · **Strong outliers (≥2.0x):** 0 · **Above 1.0x:** 1 (David Ondrej, off-pillar uncensored-model demo) · See "Video scan results" section below for the full ranked list. The video signal is **soft on outliers but loud on the trend** — three separate channels shipped Agent View / `/goal` explainers in the same 3-day window. **The trend is confirmed; the operator-test lane is still empty.**
 
 ---
 
@@ -107,19 +107,56 @@ Ranked by SEO durability × freshness × Taelo-pillar fit.
 
 ---
 
-## 📊 Video scan (pending — yt-dlp run in progress)
+## 📊 Video scan results
 
-The 3-day video scan is running across 29 channels (added rows 25–29 from May 11 expansion). Expected behavior based on May 11 trends:
-- "Agentic OS" wave likely continued — Chase AI's video should be at or past 100K views by now
-- Hermes Agent likely cooled further
-- New Codex / Claude Code parity videos expected after the v2.1.139 drop
+**29 channels scanned · 23 recent videos in the 3-day window · 0 strong outliers (≥2.0x) · 1 video above 1.0x raw.** Scan completed.
 
-**Outlier expectations:** With Agent View shipping mid-window, expect 1–3 fresh reaction videos in the scan. Whoever shipped fastest may already be 1.5–2x outliering. Once results land, update this section and re-check the top pick.
+The signal isn't an outlier — it's a **cluster**. Three separate creators shipped Agent View / `/goal` explainers inside the 3-day window. None of them broke their channel average yet, but the topic-density confirms the trend is real and is being chased *right now*. The lane is heating up by the hour — the differentiator window for Taelo (operator test, not explainer) closes fast.
 
-When the scan completes:
-1. Open `outputs/trends/2026-05-13-scan-results.json`
-2. Filter by `adjusted >= 1.0` and `posted_at >= 2026-05-10`
-3. If a stronger outlier exists in Taelo's pillar, swap the top pick. Otherwise lock Agent View.
+### Top 10 by adjusted score
+
+| # | Title | Channel | Subs | Views | Raw | Adj | Date | Dur | URL |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | **Claude Code Just Got a Dashboard** | Chase AI | 124K | 47,995 | 0.89 | **0.81** | 2026-05-13 | 3:24 | [yt](https://youtu.be/7zxIeRWasbc) |
+| 2 | This 100% uncensored AI model is insane… let's run it | David Ondrej | — | 63,124 | **1.19** | 0.50 | 2026-05-12 | 22:53 | — |
+| 3 | Claude Code Agentic OS… It self improves | Jack Roberts | — | 29,891 | 0.56 | 0.38 | 2026-05-11 | 14:45 | — |
+| 4 | Engineers, DELETE the BASH Tool: Agentic Security For… | IndyDevDan | 132K | 17,217 | 0.41 | 0.36 | 2026-05-13 | 31:09 | — |
+| 5 | Hermes Agent is blowing me away... | Alex Finn | — | 46,424 | 0.51 | 0.36 | 2026-05-11 | 18:51 | — |
+| 6 | 13 Ways to Give Claude Cowork Superpowers | Brock Mesarich | — | 16,360 | 0.28 | 0.27 | 2026-05-12 | 33:52 | — |
+| 7 | Codex Just Became THE BEST Long Running Agentic Harness | Chase AI | 124K | 15,272 | 0.28 | 0.26 | 2026-05-11 | 17:15 | — |
+| 8 | Is HTML the New Markdown? (Claude Code) | Jay E (RoboNuggets) | — | 7,521 | 0.29 | 0.24 | 2026-05-11 | 12:06 | — |
+| 9 | Automate Your Life with Claude Code in 40 Minutes | Peter Yang | — | 11,176 | 0.19 | 0.20 | 2026-05-11 | 42:35 | — |
+| 10 | Ralph-loop 2.0? The real autonomous coder is coming... | AI Jason | — | 14,771 | 0.22 | 0.15 | 2026-05-11 | 12:17 | — |
+
+### Agent View / `/goal` topic cluster (the real signal in this scan)
+
+| Title | Channel | Views | Date | Note |
+|---|---|---|---|---|
+| **Claude Code Just Got a Dashboard** | Chase AI | 47,995 | 2026-05-13 | **Same-day same as scan**. 3:24 short, explainer-only. Best-performing Agent View video so far. |
+| Claude Code Just Got an Agent Dashboard | Nate Herk | 53,293 | 2026-05-12 | 736K-sub channel, 7:36 explainer. Highest absolute views, but 0.44x — well below his average. |
+| The Future of AI Agents Just Arrived (`/goal` for Claude…) | Jay E (RoboNuggets) | 333 | 2026-05-13 | Just dropped, no data yet, 13:45 deeper-dive. Wait 24h to see trajectory. |
+| (Plus WorldofAI 18K@1d from external check) | WorldofAI | 18,097 | 2026-05-12 | 217K-sub channel, not in roster. 10:49 explainer. |
+
+**Three explainers in 3 days from three different channels.** Confirms the topic is being chased by the mid-tier creators in Taelo's exact roster. None has the 24-hour operator-test angle yet. **The differentiator hasn't been taken.**
+
+### Honorable mentions (sub-1.0x, surfaced for context)
+
+- **IndyDevDan "DELETE the BASH Tool: Agentic Security"** (May 13, 17K views, 0.36 adj) — fresh same-day, agent-security angle. Interesting but specialist.
+- **Jack Roberts "Claude Code Agentic OS… It self improves"** (May 11, 30K views) — extends the "Agentic OS" thread from the May 11 report. Topic still has legs.
+- **Greg Isenberg "$1M+ Solo AI Agent Business (Full Course)"** (May 12, 36K views) — MMO-monetization framing. Skip per pillar rules.
+
+### What changed since the May 11 scan
+
+- **Hermes Agent slowed further** — Alex Finn's 0.51x is well below his average; the Hermes wave is over.
+- **Codex/Claude parity videos cooled** — Chase AI's Codex piece (May 11) underperformed at 0.28x.
+- **"Agentic OS" is bifurcating** — Chase AI didn't ship a follow-up to his big May 6 win; Jack Roberts picked up the thread but only at 0.56x.
+- **The new signal IS Agent View** — and the explainer slot is already crowded.
+
+### Decision against the video scan
+
+**Keep the top pick: Agent View 24h operator test.** Three explainers exist in 3 days from creators larger than Taelo. The operator-test differentiator is still empty. Speed matters — ship by 2026-05-15 or the lane closes.
+
+**If you wanted to fully avoid the Agent View crowd**, the only above-1.0x outlier in the scan (David Ondrej's uncensored-AI video) is off-pillar; everything else is well below average. Pillar fit beats running away from competition.
 
 ---
 
@@ -174,7 +211,7 @@ The May 11 report covered the core 2026 plays (Shorts hand-off, playlist re-arch
 - ✅ **Fits content pillars:** Claude Code, operator-POV, AI tools — center of plate.
 - ✅ **Short lead time:** 1-day operator test, ship by 2026-05-15.
 - ✅ **Lasting SEO:** Net-new search terms ("agent view", "/goal").
-- ⏳ **Video scan in progress:** Numerical confirmation pending, but news/release dating gives high confidence.
+- ✅ **Video scan confirms the trend:** Three Agent View explainers in 3 days from creators larger than Taelo (Chase AI 124K@48K, Nate Herk 736K@53K, WorldofAI 217K@18K). Operator-test slot still empty. **Pick is reinforced, urgency is higher.**
 - ✅ **No weak picks forced:** When the video scan is soft, we lead with news per the standing brief.
 
 ---
@@ -189,6 +226,6 @@ The May 11 report covered the core 2026 plays (Shorts hand-off, playlist re-arch
 
 - This report: `outputs/trends/2026-05-13-trend-report.md`
 - Intro draft: `outputs/trends/2026-05-13-intro-draft.md` (sibling, ready to write from)
-- Raw scan (pending): `outputs/trends/2026-05-13-scan-results.json`
+- Raw scan: `outputs/trends/2026-05-13-scan-results.json` (23 entries, 29 channels scanned)
 - Scan log: `outputs/trends/2026-05-13-scan.log`
 - Reference: previous report [2026-05-11-trend-report.md](2026-05-11-trend-report.md)
