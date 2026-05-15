@@ -1,30 +1,30 @@
-# Full Script — Anthropic's June 15 Credit Pool: The Operator Playbook (2026-05-15)
+# Full Script v2 — Anthropic's Same-Day Switch: 50% Increase Headline + 20x Agent SDK Cut (2026-05-15)
 
 **Format:** Full ready-to-film script. Every line in **bold quotes** is exactly what you say to camera. Brackets are b-roll / screen direction.
-**Target length:** 8:30–9:30 · **Voice:** direct, raw, no fluff, real numbers, no hype
-**Lead:** Matt Pocock proved the math. Theo gave the verdict. You ship the **operator playbook** neither did.
+**Target length:** 13:00–14:00 (full v2 cut, 2,199 words) · or 9:00–10:00 if you trim Beats 2-recap, 5-framing, and 8-timeline · **Voice:** direct, raw, controversial-without-being-conspiratorial, numbers-first
+**Lead thesis:** On May 13th, Anthropic did two opposite things in the same press cycle. Matt Pocock saw it ("a bonus that's not a bonus"). Theo saw it ("feels like the finger"). Neither said it as plainly as you're about to.
 
 ## Working titles (pick one, A/B the thumbnail)
 
-1. *"Anthropic's June 15 Change: Who Actually Gets Hit (And the 30-Day Playbook)"*
-2. *"Matt Pocock Proved the Cut. Theo Called It Quits. Here's What to Actually Do."*
-3. *"5 Claude Code Personas. 1 Deadline. Here's Your Move."*
-4. *"Anthropic Just Cut Your Claude Code Usage 10x — Read This Before June 15"*
+1. *"Anthropic's Same-Day Switch: A 50% Increase Headline + A 20x Cut Buried in the Help Center"*
+2. *"Matt Pocock Said It Sounds Like a Bonus. Here's Why It Isn't."*
+3. *"Anthropic Announced a 50% Increase the Same Day They Cut Your Agents 20x"*
+4. *"The Anthropic Switch Nobody Is Putting Side-by-Side"*
 
-**My pick:** #1 — durable SEO, says exactly what's inside.
+**My pick:** #1 — durable SEO ("same day Anthropic announcement"), describes the contradiction in the title.
 
-## Voice rules
+## Voice rules (active for this script)
 
-- Polish to clean native cadence — face-cam can stay rough where energy beats grammar
-- ❌ No "in today's video", "smash that like", "game-changer", "without further ado", "you NEED to see this NOW"
-- ✅ "Here's what actually happened", "The real numbers", "Let me show you", "No BS", "I ran the math"
-- Numbers first, hype never
-- You did NOT invent the math (Matt did) — credit him in Beat 4 outro, don't bury it
-- Hold a clear take in Beat 9. "Inevitable, but the 30-day deadline is punitive." Don't fence-sit.
+- ❌ No "today's video", "smash that like", "game-changer", "without further ado", "you NEED to see this NOW", conspiracy talk
+- ✅ "Here's what actually happened", "The real numbers", "I ran the math", "No BS"
+- **Controversial without conspiratorial.** Describe the *strategy*, not motive or malice. The take is about *observable corporate communications timing*, not hidden agendas.
+- **Lean on Matt's + Theo's quotes** — they conceded the framing first. You are not the first person calling this. You are the one finally saying it plainly.
+- Matt + Theo named **in the outro only** (per the standing reaction-creator-mentions rule). In Beats 2–3 you say their quotes, not their channel names.
+- Korea/SEA Persona 5 stays — your unique field advantage Matt + Theo cannot speak to.
 
 ## 2026 algorithm rule active
 
-First 30 seconds is a hard ranking checkpoint. Cold open delivers **news + number + stakes** in 8 seconds. No setup. No "hey what's up guys."
+First 30 seconds is a hard ranking checkpoint. Cold open delivers the **contradiction** in 10 seconds. No setup. No greeting. Show both announcement screenshots within the first 30 seconds.
 
 ---
 
@@ -32,186 +32,180 @@ First 30 seconds is a hard ranking checkpoint. Cold open delivers **news + numbe
 
 ---
 
-## 0:00–0:08 — COLD OPEN (face cam, direct, no smile)
+## 0:00–0:10 — COLD OPEN (face cam, level voice, no smile)
 
-**"On June 15th, Anthropic puts every Claude Code agent on a meter."**
-**"Pro plan: twenty dollars a month."**
-**"Max plan: a hundred."**
-**"After that, you're paying full API rates. I ran the math on five real operators — three of them are about to lose ten times their Claude Code usage. Here's who, by how much, and the three things you do this week."**
+**"May 13th. Anthropic posts two announcements. One — for the press. One — for the help center. The press one says fifty percent more Claude. The help center one quietly cuts agent usage by up to twenty times. Same day. Same audience. Opposite directions. Let me show you exactly what they did."**
 
-*[B-roll: full-screen text card flashes each number — `$20` → `$100` → `$200` → calendar showing June 15 with red ring → cut to your face for "five real operators"]*
+*[B-roll: 0:00–0:03 face cam. 0:03–0:10 — split screen. LEFT: anthropic.com/news/higher-limits-spacex headline "Higher usage limits for Claude" with date "May 13" highlighted. RIGHT: support.claude.com help-center URL with "May 13" highlighted and the credit-tier table visible. A red caret arrow points from LEFT to RIGHT.]*
 
-**Retention check:** 8 seconds. Three concrete numbers. A specific date. A specific pain. A specific promise. No filler.
+**Retention check:** 10 seconds. Two screenshots. One date on both. The viewer's brain locks on "same day."
 
 ---
 
-## 0:08–0:35 — HOOK (face cam → screen share of Anthropic Help Center)
+## 0:10–1:20 — BEAT 2: THE TWO ANNOUNCEMENTS, SIDE BY SIDE
 
-**"Two days ago Anthropic shipped one of the biggest pricing changes they've ever made to Claude Code. They didn't tweet a big announcement. They quietly updated a help page. Matt Pocock did the math — it's a five-to-twenty-times cut for anyone running agents in the background. Theo at t3.gg posted a forty-five minute video literally called 'I'm done.'"**
+**"Here's announcement one. May 13th. Anthropic's official news page. The headline — 'Higher usage limits for Claude.' Claude Code weekly limits up fifty percent through July 13th. They cite the new SpaceX compute deal. Three hundred megawatts of new GPUs. The story gets picked up by 9to5Google, Business Standard, AndroidHeadlines, Pulse2 — all positive coverage. 'Anthropic doubles usage limits.' 'More Claude for everyone.' This is the announcement everyone saw."**
 
-**"And here's the thing. Both of them are right. But neither of them answered the question my DMs blew up with this week: am I one of the people getting hit, and what do I actually do about it?"**
+*[B-roll: scroll through the anthropic.com/news/higher-limits-spacex page. Highlight "50%" and "July 13" with yellow underlines. Cut to a grid of headlines from the major tech press — 9to5Google, Business Standard, AndroidHeadlines, Knightli — all positive. Each headline highlighted as it appears.]*
 
-*[B-roll: split screen — Matt's video thumbnail left, Theo's "I'm done." right, both ticking through with view counts. Then cut to the Anthropic Help Center page — highlight the credit-tier table with a yellow underline]*
+**"And here's announcement two. Same day. Anthropic's help center. Not the news page. The support page. Posted by an account called ClaudeDevs, not the main Anthropic handle. Title — 'Use the Claude Agent SDK with your Claude plan.' The opening line reads — 'paid Claude plans can claim a dedicated monthly credit for programmatic usage.' Sounds like a gift, right? It is not. Starting June 15th, every programmatic Claude usage — every Agent SDK call, every `claude dash p` script, every Claude Code GitHub Action, every third-party tool like OpenClaw or T3 code or Conductor — gets capped at twenty dollars a month on Pro. A hundred on Max 5x. Two hundred on Max 20x. No rollover."**
 
-**Retention check:** by 0:35 viewer knows (1) the change is real, (2) it's worse than the headline, (3) you have something the bigger videos didn't.
+*[B-roll: scroll through support.claude.com Agent SDK page. Highlight the credit-tier table. Then a screenshot of the ClaudeDevs tweet at x.com/ClaudeDevs. Then — crucial — search the @AnthropicAI main timeline for May 13 and show that the official handle never tweeted the credit change. Annotate: "Main handle never tweeted this."]*
 
----
+**"So — same day. Same company. One announcement makes the headlines. The other gets a help-center URL. And the second one is the one that actually changes how much Claude you can run."**
 
-## 0:35–0:55 — THE CONTRACT (face cam, slower)
-
-**"Next eight minutes I'm doing four things. One — I show you exactly what changes and what doesn't, because half the coverage I've read this week gets it wrong. Two — the real math. What twenty bucks actually buys you in Claude tokens, and the hidden number that turns this from a small cut into a ten-x cut. Three — five real operator personas. I'll tell you which one you are and what your number looks like. Four — the three moves I'm making before June 15th."**
-
-**"No fluff. Let's go."**
-
-*[B-roll: four cards stack on screen as you list — "What changes" / "The math" / "Who gets hit" / "Three moves" — each card numbered]*
+*[B-roll: final cut — both announcement screenshots side-by-side again, with the date "May 13" circled red on both.]*
 
 ---
 
-## 0:55–2:00 — BEAT 1: WHAT'S COVERED VS WHAT'S NOT
+## 1:20–2:30 — BEAT 3: TWO BIG CREATORS ALREADY SAID IT (JUST NOT PLAINLY)
 
-**"First the clean line, because everyone's confusing this."**
+**"I'm not the first person to notice this. Two of the bigger Claude Code creators on YouTube already broke the math on it. Their words, not mine."**
 
-**"On June 15th, your Claude subscription splits into two buckets. Bucket one — interactive. That means anything you type into Claude.ai, anything you do inside Claude Cowork, and any time you sit in your terminal with Claude Code open and a real human conversation happening. That bucket is untouched. Same as today."**
+**"Quote — 'a thing that sounds like a bonus, why it might not actually be a bonus.' Second quote — 'this almost feels like it's a double subsidy. How interesting. But that's not quite right.' Third quote — 'this feels more like a five-x or a ten-x cut.' Fourth quote — 'this is a massive massive cut.' Those are all from the same ten-minute video by a TypeScript educator with two hundred and nineteen thousand subscribers. He said all of that — and then he also said, quote, 'I am a teacher, I am not a pundit, it's not my job to say whether Anthropic has done a good or a bad thing here.' He saw the framing. He laid out the math. And then he stepped back from calling it what it is."**
 
-**"Bucket two — programmatic. That means four things specifically. The Claude Agent SDK. The `claude -p` flag — print mode, the headless one you use in scripts. Claude Code GitHub Actions, the one that auto-reviews your PRs. And any third-party tool built on the Agent SDK — OpenClaw, automation pipelines, anything chaining Claude in the background."**
+*[B-roll: each quote types out on screen as you read it, in quote-format with a subtle citation badge "— Matt Pocock, YouTube". The last quote — "I am a teacher, I am not a pundit" — sits on screen alone for two beats.]*
 
-**"That second bucket gets its own monthly credit. Pro: twenty dollars. Max 5x: a hundred. Max 20x: two hundred. The credit does not roll over. When you run out, you stop — unless you've toggled 'extra usage,' which charges you full API rates."**
+**"The other big creator on this, five hundred thousand subscribers, posted a forty-five minute video titled 'I'm done.' His exact words about the announcement — quote — 'the answer kind of feels like the finger.' Same conclusion. Different volume. He spent forty-five minutes on it. Neither of them put the two May 13th announcements side-by-side and named what that pairing actually is."**
 
-*[B-roll: two-column table builds on screen.
-LEFT column "✅ UNTOUCHED": Claude.ai chat / Claude Cowork / Interactive Claude Code in terminal.
-RIGHT column "💸 METERED FROM JUNE 15": Claude Agent SDK / `claude -p` / Claude Code GitHub Actions / Third-party Agent-SDK apps (OpenClaw etc.).
-Each line appears as you say it.]*
+*[B-roll: pull-quote card "— the answer kind of feels like the finger" with channel attribution. Then a cut to the Theo video thumbnail "I'm done." next to the Matt Pocock thumbnail. The viewer should recognize at least one of these.]*
 
-**Pace note:** this is the explainer beat. Slower. Teacher voice. No sarcasm yet.
+**"So I'm going to. Because I think when two big creators see something this clearly and step back from saying it out loud, somebody has to. Here is what actually got cut."**
 
 ---
 
-## 2:00–3:30 — BEAT 2: THE REAL MATH (and the hidden metric)
+## 2:30–4:00 — BEAT 4: THE REAL MATH (THE NUMBERS THE HEADLINE HID)
 
-**"Okay. The math. Here's where it gets ugly."**
+**"Right. The math. Strap in."**
 
-**"Twenty dollars sounds fine until you actually translate it into tokens. At standard API rates, twenty dollars of mixed agentic work — roughly 70% input, 30% output — buys you about one-point-three million tokens of Sonnet usage."**
+**"Twenty dollars on a Pro plan. Sounds reasonable. Translate it to tokens — at standard API rates, twenty dollars of mixed agentic work, roughly seventy percent input thirty percent output, buys you about one-point-three million Sonnet tokens. A real Claude Code session — one feature, one agent, one hour — burns between a hundred thousand and five hundred thousand tokens. So twenty dollars a month is three to fourteen full sessions. Per month."**
 
-**"That sounds like a lot. It is not. A real Claude Code session — one task, one feature, one agent running for an hour — burns between a hundred thousand and five hundred thousand tokens. So your twenty dollar credit buys you somewhere between three and fourteen full sessions a month. Per month."**
-
-*[B-roll: calculator graphic on screen.
+*[B-roll: calculator overlay.
 Line 1: "$20 ÷ avg $0.014/1K tokens ≈ 1.43M tokens"
 Line 2: "1 Claude Code session ≈ 100K–500K tokens"
-Line 3 (lands with a thud): **"≈ 3 to 14 sessions / month"**]*
+Line 3 (lands hard): **"≈ 3 to 14 sessions / month"**]*
 
-**"Now here's the hidden metric nobody is talking about."**
+**"That's Pro. Here's where it gets ugly. The Max 20x plan — the two hundred dollar a month plan — that one has been quoted, the educator I mentioned cited this directly, as delivering up to five thousand dollars of effective API value every single month. Five thousand dollars. That's the value people have been pulling out of a two hundred dollar subscription using the Agent SDK and OpenClaw and `claude dash p` for the last year. Starting June 15th, that exact same Max 20x plan caps your programmatic usage at two hundred dollars of API value. Five grand to two hundred. That is not a fifty percent change. That is a twenty-five times cut."**
 
-**"Right now, with a twenty dollar Pro plan and a tool like OpenClaw, indie hackers have been squeezing about two hundred dollars worth of effective API usage out of that twenty dollar sub. Some people more. That's the arbitrage that's about to die. So when Matt Pocock says 'five to twenty x cut,' that twenty x at the upper end? That's not a worst-case exaggeration. That's the OpenClaw operator. That's a real person. Probably someone watching this right now."**
+*[B-roll: bar chart with two columns.
+Before bar: $5,000 effective value on Max 20x (tall green bar, labeled "Max 20x — old effective ceiling").
+After bar: $200 hard cap (short red bar).
+A diagonal slash labeled "−25x" cuts the green bar down to the red one.]*
 
-*[B-roll: a "before / after" bar chart.
-Before: $200 of effective monthly Claude value on a $20 Pro plan (tall green bar, "OpenClaw arbitrage").
-After: $20 of metered value on the same plan (short red bar).
-The cut is visualized as a 90% slash across the bar.]*
+**"On Pro, the OpenClaw operator who's been squeezing about two hundred dollars of API value out of a twenty dollar plan — that ratio dies. Two hundred down to twenty. Ten times cut. Same hardware. Same plan. Different month."**
 
-**"And the second hidden thing — the 'extra usage' toggle that lets you keep going past your credit? It is off by default. Which means a lot of people are about to hit the wall mid-job and not realize it until their agent silently dies on a Tuesday at 2am."**
+*[B-roll: second smaller bar chart, "Pro plan — OpenClaw operator" with $200 → $20 collapse, labeled "−10x".]*
 
-*[B-roll: screen-record of your own Anthropic console with the "Extra Usage" toggle highlighted, currently OFF, with a red arrow]*
+**"And one more thing the headlines missed. The 'Extra Usage' toggle — the thing that lets your subscription keep running past the credit cap by spilling into pay-as-you-go API rates — it is off by default. So a lot of people are going to hit the wall in late June without realizing it. Their agent will silently die mid-job at 2 a.m. on the eighteenth, and they'll find out the next morning."**
 
-**Pace note:** Beat 2 is the spike beat. Slow down on the OpenClaw number. Let "ten x cut" hit.
+*[B-roll: screen-record of the Anthropic console, zoom in on the "Extra Usage" toggle showing OFF, with a red arrow.]*
 
 ---
 
-## 3:30–5:30 — BEAT 3: THE 5 OPERATOR PERSONAS
+## 4:00–5:00 — BEAT 5: WHY THE FRAMING WORKED
+
+**"Now — and this is the part nobody on YouTube has named yet — the *framing* of the second announcement is doing actual work."**
+
+**"Read the ClaudeDevs tweet again. 'We have heard your questions about SDK and `claude dash p` usage sharing your subscription rate limits.' That phrasing — 'we heard your questions' — is the same language you use when you're delivering a customer-requested feature. Then — 'paid Claude plans can claim a dedicated monthly credit.' Claim. Dedicated. Credit. Three words that frame this as something you're being *given*. Not something being *capped*."**
+
+*[B-roll: the @ClaudeDevs tweet on screen, highlighted phrase by phrase as you read it. "We have heard your questions" — yellow underline. "claim a dedicated monthly credit" — yellow underline.]*
+
+**"Then notice where it was posted. The credit change went out from @ClaudeDevs. The fifty-percent-increase announcement went out from the main @AnthropicAI account and got blasted by the company's PR machine. Same day. Different channels. Different audiences. The press never saw the help-center page. The headline writers wrote what they were handed."**
+
+*[B-roll: side-by-side of two X profiles — @AnthropicAI with the 50% increase tweet, vs @ClaudeDevs with the credit-pool tweet. Follower counts visible on both — Anthropic main account 800K+, ClaudeDevs much smaller. Annotation: "Different audience. Same day."]*
+
+**"This is not a leak. This is not a stumble. This is the standard playbook every API-priced company runs when they need to take something away — you headline the gift, you footnote the cost. Anthropic just did both on May 13th. In the same press cycle. That choice is deliberate. Whether you think it's fair is up to you. But pretend it wasn't intentional and you'll get hit by the next one too."**
+
+---
+
+## 5:00–6:30 — BEAT 6: 5 OPERATOR PERSONAS — WHO ACTUALLY GOT HIT
 
 **"Right. Now the part Matt and Theo didn't do. Which one of these are you."**
 
-**[Face cam, then cut to a 5-card layout that builds as you go]**
+*[B-roll: 5-card layout builds as you go]*
 
-**"Persona one. The OpenClaw operator. You're on a twenty dollar Pro plan, you've got OpenClaw or a similar tool wrapped around Claude Code, and you've been quietly running production agents on what should be a personal plan. Your old effective ceiling: about two hundred bucks a month of API value. Your new hard ceiling on June 15th: twenty dollars. **That's the ten-x cut.** You are the persona hit hardest. By a wide margin."**
+**"Persona one. The OpenClaw operator. You're on a twenty dollar Pro plan, you've got OpenClaw or a similar tool wrapped around Claude Code, and you've been running production agents on what was technically a personal plan. Old effective ceiling — about two hundred dollars a month of API value. New hard ceiling on June 15th — twenty dollars. That's the ten-x cut. You are the persona hit hardest on Pro. By a wide margin."**
 
-*[B-roll: persona card "OpenClaw Operator" — old: $200 effective, new: $20 hard cap, label "10x cut", red]*
+*[Persona card 1: "OpenClaw operator" — $200 → $20, "−10x", red]*
 
-**"Persona two. The `claude -p` scripter. You have cron jobs. You have content pipelines. You have a couple of bash scripts that pipe `claude -p` to do things while you sleep. Your usage is moderate but constant. You're looking at a five to ten x cut depending on volume. The fix is mostly painless — but only if you measure it before June 15th."**
+**"Persona two. The `claude dash p` scripter. You have cron jobs. You have content pipelines. You have a couple of bash scripts that pipe `claude dash p` while you sleep. Moderate usage but constant. Five to ten x cut depending on volume. Fix is mostly painless — but only if you measure before June 15th."**
 
-*[B-roll: persona card "claude -p scripter" — terminal with cron icon, label "5-10x cut", orange]*
+*[Persona card 2: "claude -p scripter" — "5-10x cut", orange]*
 
-**"Persona three. The GitHub Actions PR reviewer. You set up Claude Code Actions to review every PR in your repo. Real number — a Claude PR review averages somewhere between one and three dollars of token spend depending on diff size. Your twenty dollar credit covers seven to twenty PRs a month. If you ship more than that and you're on Pro, your PR bot stops reviewing on the eighteenth of the month. Quietly."**
+**"Persona three. The GitHub Actions PR reviewer. You set up Claude Code Actions to review every PR in your repo. Real number — a Claude PR review averages between one and three dollars of token spend depending on diff size. Twenty dollar credit covers seven to twenty PRs a month. If your team ships more than that and you're on Pro, your PR bot stops reviewing on the eighteenth of the month. Quietly."**
 
-*[B-roll: persona card "GitHub Actions PR reviewer" — GitHub Actions logo, label "7-20 PRs / month", yellow]*
+*[Persona card 3: "GitHub Actions PR reviewer" — "7-20 PRs/month cap", yellow]*
 
-**"Persona four. The agentic SaaS founder. You built a small app on the Agent SDK. Your users are hitting your Claude account, not theirs. You now have one of three choices. Eat the cost — keep eating margin. Pass through — make your users plug in their own API key. Or — and this is the move I think most people will land on — gate the agent behind a separate paid tier."**
+**"Persona four. The agentic SaaS founder. You built a small app on the Agent SDK. Your users hit your Claude account, not theirs. You now have three choices. Eat the cost — keep eating margin. Pass through — make your users plug in their own API key. Or — and this is where most people will land — gate the agent behind a separate paid tier."**
 
-*[B-roll: persona card "Agentic SaaS founder" — 3-option fork: Eat / Pass / Gate, label "Architecture decision required by Jun 15", purple]*
+*[Persona card 4: "Agentic SaaS founder" — 3-option fork: Eat / Pass / Gate, purple]*
 
-**"Persona five. And this one is mine. The international operator. If you're like me, running Claude Code-powered client work out of Korea, Singapore, anywhere outside the US, your hourly margin lives in the gap between subscription cost and the value you deliver. June 15th compresses that gap. If you're billing clients for agentic workflows on a Pro plan, you are not on a Pro plan anymore. Move to API key with budget alerts before someone else's bill becomes your problem."**
+**"Persona five. This one is mine. The international operator. If you're like me, running Claude Code-powered client work out of Korea, Singapore, anywhere outside the US, your hourly margin lives in the gap between subscription cost and the value you deliver to clients. June 15th compresses that gap. If you're billing clients for agentic workflows on a Pro plan today, you are not on a Pro plan anymore. Move to API key with budget alerts before someone else's bill becomes your problem."**
 
-*[B-roll: persona card "International / client-work operator" — Korea/SEA map highlight, label "Margin compression", blue]*
-
-**Pace note:** this is the cluster beat. Each persona is ~25 seconds. Drop the voice on the number. Use the persona cards as visual anchors for thumbnail screenshots later.
+*[Persona card 5: "International / client-work operator" — Korea/SEA map highlight, "Margin compression", blue]*
 
 ---
 
-## 5:30–7:00 — BEAT 4: THE THREE MOVES BEFORE JUNE 15
+## 6:30–7:50 — BEAT 7: THREE MOVES BEFORE JUNE 15
 
 **"Three moves. In order. Don't skip ahead."**
 
-**"Move one. Measure. Don't react yet. From today until June 1st you do one thing — you log your actual programmatic token spend. Open the Anthropic console, go to Usage, filter by API key, separate interactive from programmatic. If you've got `claude -p` in scripts, check your shell history. If you're on a third-party tool like OpenClaw, check that dashboard. **You cannot make a decision without your number.** Most people will guess. Be the operator who doesn't."**
+**"Move one. Measure. Don't react yet. From today until June 1st you do one thing — you log your actual programmatic token spend. And start it today, not tomorrow — right now, before you close this video, open the Anthropic console, click Usage, and bookmark the page. That single bookmark is the difference between the operator who plans and the operator who panics on June 14th at midnight. Filter by API key, separate interactive from programmatic. If you've got `claude dash p` in scripts, check your shell history. If you're on a third-party tool like OpenClaw, check that dashboard. You cannot make a decision without your number. Most people will guess. Be the operator who doesn't."**
 
-*[B-roll: screen record of your own Anthropic console → Usage → filter dropdown highlighted → numbers visible. Annotated callout: "Your real programmatic spend (last 30 days)".]*
+*[B-roll: screen-record of your own Anthropic console → Usage → filter dropdown highlighted → real numbers visible. Annotated callout: "Your actual programmatic spend (last 30 days)".]*
 
-**"Move two. Sort each workflow into one of three buckets. Bucket A — keep on credit. Anything you actually use in interactive mode, plus light-use programmatic stuff that fits under twenty bucks. Bucket B — move to API key. Production workflows, anything chained, anything that runs while you sleep, anything that bills a client. Get the API key today, set a budget alert, route the workflow over. Bucket C — kill it. There is always at least one Claude script you wrote three months ago that nobody is using. Find it. Stop paying for it."**
+**"Move two. Sort every workflow into one of three buckets. Bucket A — keep on credit. Anything interactive, plus light-use programmatic that fits under twenty bucks. Bucket B — move to API key. Production workflows, anything chained, anything that runs while you sleep, anything that bills a client. Get the API key today, set a budget alert, route the workflow over. Bucket C — kill it. There is always at least one Claude script you wrote three months ago that nobody is using. Find it. Stop paying for it."**
 
-*[B-roll: three buckets animation —
-Bucket A "Keep on credit" → green check, light-use stuff.
-Bucket B "API key + budget alert" → orange wrench, production stuff.
-Bucket C "Kill" → red trash, dead stuff.
-Each fills as you list it.]*
+*[B-roll: three-bucket animation.
+A: "Keep on credit" — green check.
+B: "API key + budget alert" — orange wrench.
+C: "Kill" — red trash.
+Each fills as you list.]*
 
-**"Move three. If you use any third-party tool built on the Agent SDK — OpenClaw, automation tools, agentic plugins, anything — send the vendor one email today. Ask one question. **'What is your pricing model post-June 15th — are you eating the cost, passing it through, or moving to a metered tier?'** Some will eat it. Some will pass through. The ones that don't reply within seven days — that's your signal. Migrate off."**
+**"Move three. If you use any third-party tool built on the Agent SDK — OpenClaw, Conductor, T3 code, automation tools, anything — send the vendor one email today. Ask one question. 'What is your pricing model post-June 15th — are you eating the cost, passing it through, or moving to a metered tier?' Some will eat it. Some will pass through. The ones that don't reply within seven days — that's your signal. Migrate off."**
 
-*[B-roll: a sample one-line email template on screen, ready to copy.
+*[B-roll: one-line email template on screen, copy-able.
 "Hi [vendor] — quick one. With Anthropic's June 15 programmatic credit change, what is your pricing model going forward? Are you eating the cost, passing it through, or moving to a metered tier? Thanks."]*
-
-**Pace note:** Beat 4 is the deliverable. Slow, prescriptive, no hedging. This is the beat that gets the video shared.
 
 ---
 
-## 7:00–8:00 — BEAT 5: THE PATTERN — THIRD CHANGE IN SIX WEEKS
+## 7:50–8:30 — BEAT 8: THE PATTERN — THREE CHANGES IN SIX WEEKS
 
-**"Last thing. I want to zoom out for one minute, because this is not a one-off."**
+**"Zoom out for thirty seconds, because this is not a one-off."**
 
-**"Six weeks ago — April 4th — Anthropic banned third-party agents from subscriptions. Two weeks later, April 21st, they briefly removed Claude Code from the Pro plan entirely. They walked it back in 48 hours after the developer outrage. And now, May 14th, the credit split. **Three subscription changes in six weeks.**"**
-
-**"This isn't malice. It's a company that priced subscriptions when Claude Code was a typing assistant, and now that it's running autonomous agents on someone's laptop while they sleep, the unit economics broke. They're rebuilding the meter to match the new workload. That part is inevitable. Every API-priced AI company is going to do this. OpenAI already did it with Workspace Agents — the free preview ended May 6th."**
+**"April 4th — Anthropic bans third-party agents from subscriptions. April 21st — they briefly remove Claude Code from the Pro plan entirely, walk it back inside 48 hours after developer outrage. May 13th — the credit split, dressed up next to a fifty percent increase. Three subscription changes in six weeks. Each one took something away from the power-user lane and pointed users at a different tier or pricing model. The pattern is consistent. The 'same-day switch' just made the playbook visible."**
 
 *[B-roll: timeline graphic builds left-to-right.
 Tick 1: "Apr 4 — third-party ban"
-Tick 2: "Apr 21 — Pro/Code removal (reversed)"
-Tick 3 (lands red): **"May 14 — credit split (live June 15)"**
-At the end, an arrow extends past May 14 with "??? next" in gray.]*
+Tick 2: "Apr 21 — Pro/Code removal (reversed in 48h)"
+Tick 3 (lands red): **"May 13 — credit split + 50% increase headline"**
+Arrow extends past May 13 with "??? next" in gray.]*
 
 ---
 
-## 8:00–8:50 — BEAT 6: THE HONEST TAKE
+## 8:30–9:20 — BEAT 9: THE VERDICT (SHARPENED)
 
-**[Face cam. No b-roll. Just you.]**
+**[Face cam. No b-roll. Just you. Slowest beat in the video.]**
 
-**"My honest take. Two parts."**
+**"My take, two parts."**
 
-**"One — the change itself is fair. The era of squeezing two hundred bucks of API value out of a twenty dollar plan was always going to end. That was arbitrage, not pricing. Anyone running production agents on a personal plan was borrowing trouble. Anthropic's not wrong to fix it."**
+**"Part one. The cut itself is defensible. The era of squeezing five thousand dollars of API value out of a two hundred dollar plan was always going to end. That was arbitrage. It was never going to last. Anthropic isn't wrong to fix it."**
 
-**"Two — the rollout is punitive. Thirty days is not enough. No rollover on unused credit is a punitive design choice — it tells me they want you to overspend, not budget honestly. They should have given ninety days, doubled the credit for early users for the first three months, and let it roll over for the first quarter. Instead it's twenty bucks, hard wall, the eighteenth of June at 2am, agent dead."**
+**"Part two. The way they fixed it is not defensible. This is the standard API-company playbook — headline the gift, footnote the cost. Bury the bad news on a help page on the same day the good news hits the press. Frame the cut as a credit. Use 'we heard your questions' language for a change that takes something away. This isn't a billing change. This is a marketing strategy. And the novelty here isn't the cut. It's that Anthropic ran both halves of the playbook on the same day in the same press cycle and almost nobody put them side-by-side."**
 
-**"So — inevitable but punitive. Budget like a grown-up starting today. And don't get caught with a script running in the dark on June 16th."**
+**"So no — this isn't malicious. This is just corporate communications doing what corporate communications does. But pretend it wasn't deliberate and you will get hit by the next one too. They bet you'd see the headline and miss the help page. Don't."**
 
-*[B-roll: a single static slate at the end — the June 15 date, big and red, no animation. Hold for 2 seconds.]*
-
-**Pace note:** Beat 6 is the verdict. Slower than anywhere else in the video. Don't rush. The take has to land.
+*[B-roll: single static slate at the end — the date "MAY 13" with the two announcement screenshots underneath, both equally sized for the first time in the video. Hold 2 seconds.]*
 
 ---
 
-## 8:50–9:30 — OUTRO + BEAT 9 SHOUTOUT + CTA
+## 9:20–9:50 — BEAT 10: OUTRO + SHOUTOUTS + CTA
 
-**"That's the playbook. If this helped, the like and the sub help me ship the next one faster — I've got the new Claude for Small Business plugin queued up for next week, and that one's going to surprise you in a different direction."**
+**"That's the playbook. If this helped you see the same-day pairing, the like and the sub help me ship the next one faster — I've got the new Claude for Small Business plugin queued for next week, and that one's going to surprise you in a different direction."**
 
-**"Real shoutouts this round. Matt Pocock — go watch his ten-minute breakdown, that's where the five-to-twenty-x math is properly derived. Theo at t3.gg — the long-form verdict for anyone who wants the cathartic version. And Anthropic — credit where it's due, the help center docs on this are actually clear, which is more than I can say for most pricing announcements."**
+**"Real shoutouts this round. Matt Pocock — the ten-minute breakdown where the five-to-twenty-x math gets properly derived. Go watch it. Theo at t3.gg — the forty-five-minute verdict for anyone who wants the longer crash-out. And Anthropic — credit where it's due, the help center docs on this are actually clear once you find them, which is more than I can say for most pricing pages. I just wish the page itself had been the announcement."**
 
-**"Drop me one thing in the comments — which persona are you? OpenClaw operator? Scripter? Founder? I read them. The top-voted persona becomes the deep-dive video next month."**
+**"Drop one thing in the comments — which of the five personas are you? OpenClaw operator? Scripter? Founder? International? I read them. The top-voted persona becomes the deep-dive video next month."**
 
 **"See you in the next one."**
 
@@ -222,37 +216,42 @@ At the end, an arrow extends past May 14 with "??? next" in gray.]*
 # 📌 SEO checklist
 
 **Primary keywords (must appear in title, description, first 3 lines, pinned comment):**
+- `anthropic same day announcement`
+- `anthropic 50% increase agent sdk cut`
 - `anthropic programmatic credit pool`
 - `claude agent sdk billing`
 - `claude code june 15`
-- `claude $20 credit`
 
 **Secondary keywords (description + tags):**
 - `claude agent sdk credit pool`
-- `anthropic agents billing`
-- `claude -p billing`
+- `anthropic 5000 dollar value max 20x`
+- `claude $20 credit cut`
+- `claude code subscription change`
 - `openclaw billing change`
 - `claude code github actions billing`
 - `matt pocock anthropic`
 - `theo t3.gg claude`
+- `claude code 50 percent increase`
 
 **Description first 150 words (front-load — this is what YouTube reads):**
 
-> On June 15, 2026, Anthropic splits Claude Code billing in two. Programmatic usage — Claude Agent SDK, `claude -p`, Claude Code GitHub Actions, and third-party tools like OpenClaw — moves into a separate monthly credit pool. Pro gets $20. Max 5x gets $100. Max 20x gets $200. No rollover. After that, you pay standard API rates. Interactive Claude Code, Claude Cowork, and Claude.ai chat are unchanged. Matt Pocock did the math: it's a 5–20x cut for AFK Claude usage. Theo at t3.gg gave the verdict. This video is the operator playbook neither of them shipped — 5 real personas with real numbers, the hidden metrics nobody is talking about (including the "Extra Usage" toggle that's off by default), and the 3 specific moves to make before the deadline.
+> On May 13, 2026, Anthropic ran two announcements on the same day. The press got "Higher usage limits for Claude" — a 50% Claude Code weekly limit increase through July 13. The help center got a new page quietly capping Agent SDK, `claude -p`, GitHub Actions, and third-party tool usage (OpenClaw, T3 code, Conductor) at $20/mo on Pro, $100 on Max 5x, $200 on Max 20x — no rollover, takes effect June 15. Matt Pocock did the math: it's a 5–20x cut for AFK Claude usage, and Max 20x users have been pulling up to $5,000/mo of effective API value out of that plan. Theo at t3.gg called it "the finger." Neither put the two announcements side-by-side. This video does. Plus: the hidden "Extra Usage" toggle off by default, 5 real operator personas with real numbers, and the 3 specific moves to make before June 15.
 
 **Pinned comment template:**
 
 > Timestamps:
-> 0:00 — The news in 8 seconds
-> 0:35 — What Matt and Theo missed
-> 0:55 — Covered vs not covered
-> 2:00 — The real math + the hidden metric
-> 3:30 — 5 operator personas
-> 5:30 — 3 moves before June 15
-> 7:00 — The pattern: 3 changes in 6 weeks
-> 8:00 — My honest take
+> 0:00 — Same day. Two announcements. Opposite directions.
+> 0:10 — The two announcements, side by side
+> 1:20 — Two big creators saw it (just didn't say it plainly)
+> 2:30 — The real math: $5,000 → $200, the −25x cut nobody headlined
+> 4:00 — Why the framing worked (read the @ClaudeDevs tweet carefully)
+> 5:00 — 5 operator personas — which one are you?
+> 6:30 — 3 moves before June 15
+> 7:50 — The pattern: 3 changes in 6 weeks
+> 8:30 — My verdict
 >
-> Official source: https://support.claude.com/en/articles/15036540-use-the-claude-agent-sdk-with-your-claude-plan
+> Official source (the page Anthropic didn't tweet): https://support.claude.com/en/articles/15036540-use-the-claude-agent-sdk-with-your-claude-plan
+> Official source (the page they did tweet): https://www.anthropic.com/news/higher-limits-spacex
 > Matt Pocock's math breakdown: https://www.youtube.com/watch?v=lNOQaakmyDU
 > Theo's full verdict: https://www.youtube.com/watch?v=131yAOjxHHQ
 >
@@ -262,30 +261,35 @@ At the end, an arrow extends past May 14 with "??? next" in gray.]*
 
 # 🎨 Claude Design intro brief (paste into Claude Design)
 
-> **Brief:** Build an intro graphic + animated lower-third for a YouTube video titled *"Anthropic's June 15 Change: Who Actually Gets Hit (And the 30-Day Playbook)"*. Solo creator Taelo Kim — operator's POV breakdown of Anthropic's Programmatic Credit Pool announcement.
+> **Brief:** Build an intro graphic + animated lower-third for a YouTube video titled *"Anthropic's Same-Day Switch: A 50% Increase Headline + A 20x Cut Buried in the Help Center"*. Solo creator Taelo Kim — operator's POV exposé of Anthropic's same-day double announcement on May 13, 2026.
 >
 > **Visual identity:**
-> - Palette: terminal aesthetic — deep slate (#0E1116) bg, Anthropic coral (#D97757) accent, soft cream (#F5F1EB) body, deep red (#E04848) ONLY for "metered" + June 15 deadline
-> - Foreground: 3 stacked digital odometers reading `$20.00 / $100.00 / $200.00`, labeled `PRO / MAX 5x / MAX 20x` in monospace
-> - Right side: vertical "JUNE 15" deadline stripe, deep red, with `30 DAYS` countdown
-> - Below odometers: typewriter line `claude -p "build a feature" --metered`
-> - Above: muted gray chyron "PROGRAMMATIC CREDIT POOL"
+> - Palette: deep slate (#0E1116) bg, Anthropic coral (#D97757) accent, soft cream (#F5F1EB) body, deep red (#E04848) ONLY for the "−20x cut" callout and the help-center stripe
+> - Foreground: a **split-screen** composition.
+>   - LEFT panel ~60%: a mock browser address bar reading "anthropic.com/news/higher-limits-spacex" with the headline "Higher usage limits for Claude" and "+50% weekly limits through July 13" pull-quoted underneath. Bright, optimistic green tint.
+>   - RIGHT panel ~40%: a mock browser address bar reading "support.claude.com/...agent-sdk-with-your-claude-plan" with the headline "Use the Claude Agent SDK with your plan" and "−20x cut on programmatic usage" stamped in red diagonal across it. Dark red tint.
+>   - Between the two panels: a vertical date stripe reading "MAY 13" running top-to-bottom, with a red caret arrow pointing left-to-right.
+> - Below the whole composition: thin monospace chyron reading `same day · opposite directions`
 >
 > **Animations:**
-> 1. 0–2s: bg fades up → 3 odometers spin from blank to their values (digital flip)
-> 2. 2–4s: JUNE 15 stripe slides in → countdown ticks `30 → 29 DAYS` and holds
-> 3. 4–5s: `claude -p` line types → `--metered` flag flashes red
-> 4. Lower-third (reusable): slate bar + coral underline, monospace "Taelo Kim · The June 15 Playbook"
+> 1. 0–2s: bg fades up → left panel slides in from left → "+50%" lands in green
+> 2. 2–4s: right panel slides in from right → "−20x" lands in red → date stripe fades in between them
+> 3. 4–5s: caret arrow pulses left-to-right one time
+> 4. Lower-third (reusable): thin slate bar with coral underline, monospace text "Taelo Kim · The Same-Day Switch"
 >
-> **Style:** cinematic terminal-meets-odometer. NOT corporate finance dashboard. JetBrains Mono / Fira Code. Saturate the red. No Anthropic logos.
+> **Style notes:**
+> - Cinematic split-screen newspaper-front-page aesthetic. NOT corporate finance dashboard.
+> - JetBrains Mono / Fira Code for the URL bars.
+> - The contrast between the green left and the red right is the **memorable visual** — exaggerate the chromatic split.
+> - No Anthropic logos. No mock-tweet UI in the intro card (save those for in-body b-roll).
 >
 > **Output formats:**
-> - 16:9 intro card (3840×2160 PNG)
+> - 16:9 intro card (3840×2160 PNG static "title frame" — the moment the caret arrow lands)
 > - Animated MP4 (5 sec, 4K, 60fps, transparent BG)
 > - Reusable lower-third PNG sequence (1080p, transparent)
 > - Two 1280×720 thumbnails:
->   - **A:** giant `$20` red-stamped center, JUNE 15 stripe right, face-cam expression bottom-left
->   - **B:** 3-meter stack center, diagonal "10x CUT" stamp across, no face-cam
+>   - **A:** the split-screen with "MAY 13" stripe centered, "+50%" green left and "−20x" red right, face-cam expression bottom-left small
+>   - **B:** giant "−20x" red stamp center, smaller "+50%" green ghosted behind it, "SAME DAY" caption top, no face-cam (test the no-face-cam variant)
 
 ---
 
@@ -293,55 +297,57 @@ At the end, an arrow extends past May 14 with "??? next" in gray.]*
 
 | # | Shot | Setup | Take notes |
 |---|---|---|---|
-| 1 | **Cold open** (0:00–0:08) | Face cam, direct, no smile, news-anchor energy | Land all 3 numbers. Re-do until the "ten times their Claude Code usage" lands without rushing. |
-| 2 | **Hook** (0:08–0:35) | Face cam + screen of Anthropic Help Center | One take face-cam → cut to screen recording. The "my DMs blew up" line needs energy. |
-| 3 | **Contract** (0:35–0:55) | Face cam | Slower than the hook. Sets up the structure. |
-| 4 | **Beat 1 — covered vs not** (0:55–2:00) | Screen share heavy. Build the two-column table live. | Voiceover. No face-cam needed. |
-| 5 | **Beat 2 — math + hidden metric** (2:00–3:30) | Calculator overlay + bar chart + console screen-record | The OpenClaw $200 → $20 reveal needs a pause. Don't talk over the bar chart. |
-| 6 | **Beat 3 — 5 personas** (3:30–5:30) | Face cam intros + persona card cuts | Each persona ~25s. Voice drop on the number. Cleanest if you record all 5 intros back-to-back. |
-| 7 | **Beat 4 — 3 moves** (5:30–7:00) | Face cam intro + screen recordings of console / buckets / email template | Prescriptive tone. No hedging. The deliverable beat. |
-| 8 | **Beat 5 — timeline pattern** (7:00–8:00) | Voiceover only over timeline graphic | Tick 3 lands red. Don't rush the "??? next" beat. |
-| 9 | **Beat 6 — verdict** (8:00–8:50) | Face cam only. No b-roll. | Slowest beat in the video. The take has to land. Multiple takes. |
-| 10 | **Outro + Beat 9 shoutouts + CTA** (8:50–9:30) | Face cam → end card | Genuine shoutouts to Matt + Theo + Anthropic. CTA is the persona question. |
+| 1 | **Cold open** (0:00–0:10) | Face cam, level voice, no smile | Three sentences. Don't rush. Pause before "Opposite directions." Re-do until the contrast lands without theatricality. |
+| 2 | **Beat 2 — two announcements** (0:10–1:20) | Pure screen-share. Both Anthropic pages. The major-press headlines. The @ClaudeDevs tweet. The @AnthropicAI main timeline search result showing no tweet. | Voiceover only. The visuals do the heavy lifting. Don't talk over the screenshots — let them breathe. |
+| 3 | **Beat 3 — Matt + Theo quotes** (1:20–2:30) | Voiceover + on-screen quote cards | Read each quote at quote-reading pace. The "I am a teacher, I am not a pundit" line gets the longest beat — let it hang. |
+| 4 | **Beat 4 — the math** (2:30–4:00) | Calculator overlay + bar charts + Extra Usage toggle screen-record | The $5,000 → $200 reveal needs a 2-second pause after "twenty-five times cut." Don't talk over the bar chart. |
+| 5 | **Beat 5 — the framing** (4:00–5:00) | Annotated screenshots of the @ClaudeDevs tweet + @AnthropicAI timeline comparison | Slowest pace in the first half. Each phrase you highlight needs to land before you move on. |
+| 6 | **Beat 6 — 5 personas** (5:00–6:30) | Face cam intros + persona-card cuts | Same as v1 rhythm — each persona ~18s, voice drops on the cut number. |
+| 7 | **Beat 7 — 3 moves** (6:30–7:50) | Face cam intros + screen recordings of console / bucket animation / email template | Prescriptive. No hedging. This is the shareable beat. |
+| 8 | **Beat 8 — timeline** (7:50–8:30) | Voiceover only over timeline graphic | Tick 3 lands red. Half the length of v1. Don't dwell. |
+| 9 | **Beat 9 — verdict** (8:30–9:20) | Face cam only. Nothing else. | Slowest beat in the video. "This isn't a billing change. This is a marketing strategy." has to land as a complete sentence. Multiple takes. |
+| 10 | **Beat 10 — outro** (9:20–9:50) | Face cam → end card | Genuine shoutouts to Matt + Theo + Anthropic. The Anthropic shoutout ("the page itself should have been the announcement") is intentional — operator-honest, not bitter. |
 
-**Energy map:** Beats 1–3 tight & fast → Beats 4–5 teacher pace → Beat 6 prescriptive-confident → Beat 7 narrator-zoom-out → Beat 8 slow-opinionated → Beat 9 sincere-warm.
+**Energy map:** Beats 1–2 tight, controlled, almost news-anchor → Beat 3 quote-card pacing → Beat 4 explainer-with-spike → Beat 5 deliberate-revealing → Beat 6 teacher-fast → Beat 7 prescriptive-confident → Beat 8 narrator-zoom-out → Beat 9 slow-opinionated → Beat 10 sincere-warm.
 
 ---
 
 # 🪒 Shorts cuts (4 vertical Shorts, native 9:16)
 
-1. **"The 10x cut nobody warned you about" (Beat 2 highlight)** — the bar chart reveal + the OpenClaw $200 → $20 number. 45 sec.
-2. **"Which Claude Code persona are you?" (Beat 3 highlight)** — quick-fire 5 personas, name-only. 55 sec.
-3. **"3 moves before June 15" (Beat 4 highlight)** — checklist format, captions burned in. 55 sec.
-4. **"Anthropic's third pricing change in 6 weeks" (Beat 5 highlight)** — timeline ticks, drum-hit cuts. 40 sec.
+1. **"Same day. Two announcements. Opposite directions." (Beat 1–2 highlight)** — the split-screen reveal in 40 sec. **This is the lead Short.**
+2. **"The $5,000 → $200 cut nobody headlined" (Beat 4 highlight)** — bar chart drop, Matt's Max 20x number, the $5K → $200 reveal. 50 sec.
+3. **"3 moves before June 15" (Beat 7 highlight)** — bucket checklist, captions burned in. 55 sec.
+4. **"Anthropic's third pricing change in 6 weeks" (Beat 8 highlight)** — timeline ticks, drum-hit cuts. 40 sec.
 
-Cross-post #1 and #3 to TikTok with keyword-loaded captions: "anthropic agent sdk billing", "claude code june 15", "claude $20 credit explained".
+Cross-post #1 and #2 to TikTok with keyword captions: "anthropic same day announcement", "claude code june 15", "anthropic 50% increase agent sdk cut".
 
 ---
 
 # 📝 LinkedIn Newsletter companion (write same day as edit)
 
-**Title:** *Operator's Brief #001 — The Anthropic June 15 Change and What 5 Real Operators Should Actually Do*
-**Length:** 700–800 words
-**Structure:** Mirror the video — what changed / the math / 5 personas / 3 moves / take. Drop the timeline section (LinkedIn audience doesn't need it). Link the YouTube video + Matt's video at the bottom. Send Sunday 2026-05-17 at 8am KST.
+**Title:** *Operator's Brief #001 — Anthropic's Same-Day Switch: How a 50% Increase Headline Covered a 20x Agent SDK Cut*
+**Length:** 800–1000 words.
+**Structure:** Mirror the video — the two announcements / Matt's quotes / the real math / 5 personas / 3 moves / verdict. Skip the timeline (LinkedIn doesn't need it). Link the YouTube video + Matt's video + Theo's video at the bottom. Send Sunday 2026-05-17 8am KST.
 
 ---
 
 # 🔗 Sources (description + first-comment)
 
-- [Anthropic Help Center — Agent SDK with your plan](https://support.claude.com/en/articles/15036540-use-the-claude-agent-sdk-with-your-claude-plan)
-- [Matt Pocock — Anthropic's dedicated monthly credit is actually a huge cut](https://www.youtube.com/watch?v=lNOQaakmyDU)
+- [Anthropic — Higher usage limits for Claude (May 13, public-facing)](https://www.anthropic.com/news/higher-limits-spacex)
+- [Anthropic Help Center — Use the Claude Agent SDK with your plan (May 13, buried)](https://support.claude.com/en/articles/15036540-use-the-claude-agent-sdk-with-your-claude-plan)
+- [Anthropic @ClaudeDevs original tweet](https://x.com/ClaudeDevs/status/2054610152817619388)
+- [Matt Pocock — Anthropic's "dedicated monthly credit" is actually a huge cut](https://www.youtube.com/watch?v=lNOQaakmyDU)
 - [Theo - t3.gg — "I'm done."](https://www.youtube.com/watch?v=131yAOjxHHQ)
-- [Anthropic @ClaudeDevs original post](https://x.com/ClaudeDevs/status/2054610152817619388)
+- [9to5Google — Claude Code higher usage limits doubled](https://9to5google.com/2026/05/06/claude-code-is-getting-higher-usage-limits-doubled-for-most-users/)
+- [Business Standard — Anthropic hikes Claude usage limits post SpaceX deal](https://www.business-standard.com/technology/tech-news/anthropic-claude-usage-rate-limit-increased-paid-users-spacex-compute-deal-new-limits-126050700994_1.html)
 - [The New Stack — Anthropic splits billing again](https://thenewstack.io/anthropic-agent-sdk-credits/)
-- [The Register — agents into the API billing pool](https://www.theregister.com/ai-ml/2026/05/14/anthropic-tosses-agents-into-the-api-billing-pool/5240748)
+- [The Register — Anthropic tosses agents into the API billing pool](https://www.theregister.com/ai-ml/2026/05/14/anthropic-tosses-agents-into-the-api-billing-pool/5240748)
 - [VentureBeat — OpenClaw reinstated with a catch](https://venturebeat.com/technology/anthropic-reinstates-openclaw-and-third-party-agent-usage-on-claude-subscriptions-with-a-catch)
-- [InfoWorld — agents on a meter](https://www.infoworld.com/article/4171274/anthropic-puts-claude-agents-on-a-meter-across-its-subscriptions.html)
+- [Axios — Anthropic tightens limits on Claude subscriptions](https://www.axios.com/2026/05/14/anthropic-claude-price-openai-tokens)
 - [XDA Developers — what subscriptions lose](https://www.xda-developers.com/anthropics-claude-subscriptions-no-longer-include-agent-sdk-and-claude-p-usage/)
-- [DevToolPicks — Indie Hacker breakdown](https://devtoolpicks.com/blog/anthropic-splits-claude-subscriptions-agent-sdk-credit-june-2026)
 
 ---
 
 # Ready to film
 
-Every line you say is in **bold quotes**. Every b-roll cue is in brackets. Read it once aloud before you hit record to make sure the rhythm is yours. Adjust the persona-5 (international operator) section if you want to lean harder into Korea/SEA specifics — that's your unique angle in the field and Matt/Theo can't touch it.
+Every line you say is in **bold quotes**. Every b-roll cue is in brackets. The teleprompter file at `2026-05-15-teleprompter.md` is the clean prose version — paste that into your teleprompter, no formatting to clean up. Read it once aloud before recording to lock the rhythm. Adjust Persona 5 (international operator) to lean harder into Korea/SEA specifics if you want — that's your unique angle Matt and Theo cannot speak to.
