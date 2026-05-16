@@ -28,7 +28,7 @@ from playwright.async_api import async_playwright
 HERE = Path(__file__).parent
 FPS = 30
 WIDTH, HEIGHT = 1920, 1080
-SKIP_PREFIXES = {"06"}  # Community Note — user is providing a real screenshot
+SKIP_STEMS = {"06-community-note"}  # User is providing a real screenshot for this one
 
 # CSS injected for the transparent pass — kills the paper background + grain
 # overlay + vignette so the recording captures only the foreground elements
@@ -43,12 +43,14 @@ def find_html_files(filter_prefixes=None):
     files = sorted(p for p in HERE.glob("*.html"))
     out = []
     for p in files:
-        prefix = p.name.split("-", 1)[0]
-        if prefix in SKIP_PREFIXES:
+        stem = p.stem
+        if stem in SKIP_STEMS:
             print(f"  · skip {p.name} (in SKIP list)")
             continue
-        if filter_prefixes and prefix not in filter_prefixes:
-            continue
+        if filter_prefixes:
+            prefix = p.name.split("-", 1)[0]
+            if prefix not in filter_prefixes and stem not in filter_prefixes:
+                continue
         out.append(p)
     return out
 

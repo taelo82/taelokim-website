@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>06 — Lydia diagram annotated (real tweet + red callouts)</title>
+<!--
+  Use: Beat 4 framing section (~5:08 in cut) when Taelo says "Lydia Hallie posted a tweet trying to clarify..."
+  Style: paper-texture / 2-color / red annotation callouts.
+  Source asset: rebuild of the actual @lydiahallie tweet with the official Anthropic
+  "two pools" diagram. Red overlays appear on the dishonest framing as Taelo names it.
+  Text on screen = annotations only (NEW info, not duplicated from script).
+
+  data-duration = 12500
+-->
+<style>
+  :root {
+    --paper: #F1E9D6;
+    --ink: #1E2832;
+    --ink-soft: #7A8590;
+    --red: #C8463C;
+    --highlight: #F4E04D;
+    --tweet-bg: #0F1419;
+    --tweet-text: #E7E9EA;
+    --tweet-muted: #71767B;
+    --tweet-border: #2F3336;
+    --tweet-blue: #1D9BF0;
+    --tweet-green: #00BA7C;
+    --diagram-orange: #D97757;
+    --diagram-orange-bg: rgba(217, 119, 87, 0.12);
+    --diagram-blue: #1D9BF0;
+    --diagram-blue-bg: rgba(29, 155, 240, 0.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100vw; height: 100vh; overflow: hidden; background: var(--paper); font-family: "Inter", "Helvetica Neue", Arial, sans-serif; color: var(--ink); }
+  body { display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; padding: 4vh 4vw; }
+
+  body::before {
+    content: "";
+    position: fixed; inset: -20px;
+    pointer-events: none;
+    z-index: 1;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.118  0 0 0 0 0.157  0 0 0 0 0.196  0 0 0 0.28 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity: 0.55;
+    mix-blend-mode: multiply;
+    animation: drift 14s ease-in-out infinite;
+  }
+  @keyframes drift {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(3px, -5px); }
+  }
+
+  .stage { position: relative; z-index: 10; width: 100%; max-width: 1400px; }
+
+  /* The real tweet — rebuilt to look like an X.com post */
+  .tweet { background: var(--tweet-bg); border: 1px solid var(--tweet-border); border-radius: 16px; padding: 2.2vh 1.8vw; position: relative; opacity: 0; transform: translateY(20px) rotate(-0.6deg); transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.2,0.7,0.3,1.1); box-shadow: 0 12px 40px rgba(0,0,0,0.18); }
+  .tweet.show { opacity: 1; transform: translateY(0) rotate(-0.6deg); }
+
+  .tweet-head { display: flex; align-items: flex-start; gap: 0.8vw; margin-bottom: 1.4vh; }
+  .avatar { width: 2.8vw; height: 2.8vw; border-radius: 50%; background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%); flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 1.3vw; }
+  .name-row { flex: 1; }
+  .name { display: flex; align-items: center; gap: 0.3vw; font-size: 1.05vw; font-weight: 800; color: var(--tweet-text); }
+  .name .verified { color: var(--tweet-blue); font-size: 1.05vw; }
+  .name .badge { background: #ffffff; color: #000; font-size: 0.7vw; padding: 0.1vh 0.4vw; border-radius: 4px; font-weight: 800; letter-spacing: 0.05em; }
+  .handle { font-size: 0.9vw; color: var(--tweet-muted); margin-top: 0.1vh; }
+  .menu { color: var(--tweet-muted); font-size: 1.2vw; padding: 0 0.4vw; }
+
+  .tweet-body { font-size: 1.05vw; color: var(--tweet-text); line-height: 1.55; }
+  .tweet-body p { margin-bottom: 1vh; }
+  .tweet-body .arrow { color: var(--tweet-muted); }
+
+  /* The official Anthropic two-pool diagram */
+  .diagram { background: #181C1F; border: 1px solid var(--tweet-border); border-radius: 12px; padding: 1.6vh 1.4vw; margin-top: 1.5vh; }
+  .diagram-title { text-align: center; font-size: 0.9vw; font-weight: 700; color: var(--tweet-text); margin-bottom: 0.4vh; }
+  .diagram-sub { text-align: center; font-size: 0.72vw; color: var(--tweet-muted); margin-bottom: 1.4vh; }
+
+  .pools { display: flex; gap: 1vw; }
+  .pool { flex: 1; border-radius: 10px; padding: 1.2vh 1vw; position: relative; }
+  .pool.left { background: var(--diagram-orange-bg); border: 1.5px solid var(--diagram-orange); }
+  .pool.right { background: var(--diagram-blue-bg); border: 1.5px solid var(--diagram-blue); }
+  .pool .pool-title { font-size: 0.9vw; font-weight: 800; margin-bottom: 0.4vh; }
+  .pool.left .pool-title { color: var(--diagram-orange); }
+  .pool.right .pool-title { color: var(--diagram-blue); }
+  .pool .pool-detail { font-size: 0.78vw; color: var(--tweet-text); opacity: 0.85; line-height: 1.4; margin-bottom: 0.8vh; }
+  .pool .new-tag { position: absolute; top: -0.6vh; right: 0.4vw; background: var(--tweet-green); color: white; font-size: 0.65vw; padding: 0.15vh 0.4vw; border-radius: 4px; font-weight: 700; letter-spacing: 0.05em; }
+  .pool .sub-box { background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 0.6vh 0.8vw; }
+  .pool .sub-box .sub-h { font-size: 0.8vw; font-weight: 700; color: var(--tweet-text); }
+  .pool .sub-box .sub-d { font-size: 0.7vw; color: var(--tweet-muted); margin-top: 0.2vh; }
+
+  /* The "only if you run out → extra usage" callout */
+  .extra { margin-top: 1.4vh; display: flex; flex-direction: column; align-items: center; gap: 0.4vh; font-size: 0.72vw; color: var(--tweet-muted); }
+  .extra .arrows { display: flex; gap: 8vw; }
+  .extra .arrows .a { color: var(--tweet-muted); }
+  .extra .pill { border: 1px dashed var(--tweet-muted); border-radius: 6px; padding: 0.5vh 0.8vw; text-align: center; font-size: 0.7vw; }
+
+  /* Red callout overlays — appear as Taelo names each */
+  .callout { position: absolute; pointer-events: none; opacity: 0; transition: opacity 0.5s ease-out; z-index: 20; }
+  .callout.show { opacity: 1; }
+  .callout .stroke-box { border: 2.5px solid var(--red); border-radius: 8px; box-shadow: 0 0 0 5px rgba(200, 70, 60, 0.15); position: absolute; inset: 0; }
+  .callout .label { position: absolute; background: var(--red); color: white; font-family: "JetBrains Mono", monospace; font-size: 0.78vw; font-weight: 700; padding: 0.4vh 0.7vw; border-radius: 4px; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; }
+
+  /* Callout 1 — "no extra cost" lie */
+  .callout-1 { left: 64%; top: 56%; width: 18%; height: 4%; }
+  .callout-1 .label { right: -2vw; top: 50%; transform: translate(100%, -50%); }
+  .callout-1 .label::before { content: ""; position: absolute; left: -0.6vw; top: 50%; transform: translateY(-50%); border: 0.3vw solid transparent; border-right-color: var(--red); }
+
+  /* Callout 2 — "subscription limits unchanged" lie (since old programmatic shared the same bucket) */
+  .callout-2 { left: 7%; top: 62%; width: 26%; height: 12%; }
+  .callout-2 .label { left: -1vw; bottom: -3.2vh; }
+  .callout-2 .label::before { content: ""; position: absolute; left: 2vw; top: -0.5vw; border: 0.3vw solid transparent; border-bottom-color: var(--red); }
+
+  /* Callout 3 — "metered at API token rates" buried fine print */
+  .callout-3 { left: 65%; top: 73%; width: 26%; height: 4%; }
+  .callout-3 .label { right: -1vw; bottom: -3.2vh; }
+  .callout-3 .label::before { content: ""; position: absolute; right: 1.5vw; top: -0.5vw; border: 0.3vw solid transparent; border-bottom-color: var(--red); }
+
+  /* Community Note bar that slides in at the end */
+  .note-bar { margin-top: 2vh; background: #F7F9F9; border: 1px solid #E0E5E8; border-radius: 12px; padding: 1.2vh 1.4vw; opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; display: flex; align-items: center; gap: 0.8vw; }
+  .note-bar.show { opacity: 1; transform: translateY(0); }
+  .note-bar .ico { width: 1.6vw; height: 1.6vw; border-radius: 50%; background: var(--red); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.95vw; flex-shrink: 0; }
+  .note-bar .txt { font-family: "Inter", sans-serif; }
+  .note-bar .txt .h { font-size: 0.85vw; font-weight: 800; color: #16181C; letter-spacing: 0.04em; }
+  .note-bar .txt .s { font-size: 0.78vw; color: #536471; }
+
+  /* Floating timestamp date stamp */
+  .stamp { position: absolute; top: 6vh; right: 5vw; font-family: "JetBrains Mono", monospace; font-size: 0.85vw; color: var(--ink-soft); letter-spacing: 0.2em; text-transform: uppercase; opacity: 0; transition: opacity 0.5s ease-out; transform: rotate(2deg); }
+  .stamp.show { opacity: 1; }
+  .stamp .who { color: var(--red); font-weight: 700; }
+</style>
+</head>
+<body data-duration="12500">
+<div class="stage">
+  <div class="stamp" id="stamp">@lydiahallie · <span class="who">Anthropic / Claude Code</span> · May 13</div>
+
+  <div class="tweet" id="tweet">
+    <div class="tweet-head">
+      <div class="avatar">L</div>
+      <div class="name-row">
+        <div class="name">Lydia Hallie ✨ <span class="verified">✓</span> <span class="badge">AI</span></div>
+        <div class="handle">@lydiahallie</div>
+      </div>
+      <div class="menu">···</div>
+    </div>
+    <div class="tweet-body">
+      <p>To add some clarity: <span class="arrow">you don't pay extra. It's the same subscription, same price per month.</span></p>
+      <p>What's new our sub now covers two separate pools:</p>
+      <p style="margin-left:1vw;">· Interactive → sub limits, unchanged<br/>· Programmatic → new $20–$200 included(!!) credit, metered at API rates</p>
+
+      <div class="diagram">
+        <div class="diagram-title">Your Claude plan</div>
+        <div class="diagram-sub">same price as today · nothing added to your bill</div>
+        <div class="pools">
+          <div class="pool left">
+            <div class="pool-title">Interactive use</div>
+            <div class="pool-detail">Claude Code (terminal, IDE)<br/>Claude chat · Claude Cowork</div>
+            <div class="sub-box"><div class="sub-h">Subscription limits</div><div class="sub-d">unchanged</div></div>
+          </div>
+          <div class="pool right">
+            <span class="new-tag">new</span>
+            <div class="pool-title">Programmatic use</div>
+            <div class="pool-detail">Agent SDK · claude -p<br/>GitHub Actions · third-party apps</div>
+            <div class="sub-box"><div class="sub-h">$20–$200/mo included credit</div><div class="sub-d">no extra cost<br/>metered at API token rates</div></div>
+          </div>
+        </div>
+        <div class="extra">
+          <div class="arrows"><span class="a">↘</span><span class="a">only if you run out</span><span class="a">↙</span></div>
+          <div class="pill"><strong>Extra usage</strong><br/><span style="opacity:0.7;">optional · API rates · only if enabled</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Red callouts overlaid on the diagram -->
+    <div class="callout callout-1" id="c1">
+      <div class="stroke-box"></div>
+      <div class="label">there IS a cost</div>
+    </div>
+    <div class="callout callout-2" id="c2">
+      <div class="stroke-box"></div>
+      <div class="label">old: programmatic shared this bucket</div>
+    </div>
+    <div class="callout callout-3" id="c3">
+      <div class="stroke-box"></div>
+      <div class="label">$5K of value → $200 cap</div>
+    </div>
+  </div>
+
+  <div class="note-bar" id="note">
+    <div class="ico">!</div>
+    <div class="txt">
+      <div class="h">Readers added context</div>
+      <div class="s">Programmatic use previously drew from subsidized subscription limits. The new $20–$200 credit is metered at full API rates — a 25–40× effective reduction for AFK workloads.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function play() {
+    document.querySelectorAll('.show').forEach(el => el.classList.remove('show'));
+    setTimeout(() => document.getElementById('stamp').classList.add('show'), 200);
+    setTimeout(() => document.getElementById('tweet').classList.add('show'), 700);
+    setTimeout(() => document.getElementById('c1').classList.add('show'), 4200);
+    setTimeout(() => document.getElementById('c2').classList.add('show'), 6000);
+    setTimeout(() => document.getElementById('c3').classList.add('show'), 7800);
+    setTimeout(() => document.getElementById('note').classList.add('show'), 10000);
+  }
+  document.addEventListener('DOMContentLoaded', () => setTimeout(play, 500));
+  document.addEventListener('keydown', (e) => { if (e.key === 'r' || e.key === 'R') play(); });
+</script>
+</body>
+</html>

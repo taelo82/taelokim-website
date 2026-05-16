@@ -108,11 +108,10 @@
   .sig.show { opacity: 0.55; }
 </style>
 </head>
-<body data-duration="7800">
+<body data-duration="6000">
 <div class="stage">
   <div class="header" id="hdr">
-    <div class="eyebrow">If this is you</div>
-    <h1>Your bill is <span class="marker">about to change</span>.</h1>
+    <div class="eyebrow">All draw from <span style="color:var(--red);">one bucket</span> · until June 15</div>
   </div>
 
   <div class="grid">
@@ -206,10 +205,7 @@
     </div>
   </div>
 
-  <div class="caption" id="cap">After June 15th, each one needs its own credit — or its own bill.</div>
 </div>
-
-<div class="sig" id="sig">Taelo Kim · The May 13 switch</div>
 
 <script>
   function play() {
@@ -217,8 +213,6 @@
     setTimeout(() => document.getElementById('hdr').classList.add('show'), 200);
     [['c1', 1100],['c2', 2100],['c3', 3100],['c4', 4100]].forEach(([id,t]) => setTimeout(() => document.getElementById(id).classList.add('show'), t));
     setTimeout(() => document.getElementById('funnel').classList.add('show'), 5200);
-    setTimeout(() => document.getElementById('cap').classList.add('show'), 7000);
-    setTimeout(() => document.getElementById('sig').classList.add('show'), 7800);
   }
   document.addEventListener('DOMContentLoaded', () => setTimeout(play, 500));
   document.addEventListener('keydown', (e) => { if (e.key === 'r' || e.key === 'R') play(); });

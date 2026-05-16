@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>10 — Spectrum Grid · which tool draws from which pool</title>
+<!--
+  Use: Beat 3 (~3:00) right before the $5K→$200 drop, OR anywhere Taelo needs
+  to answer Matt Pocock's "the rules aren't clear" complaint with the actual
+  map. Source phrasing is verbatim from
+  support.claude.com/en/articles/15036540-use-the-claude-agent-sdk-with-your-claude-plan
+  Total animation: ~9 sec
+-->
+<style>
+  :root {
+    --paper: #F1E9D6;
+    --paper-shadow: #E2D6BB;
+    --ink: #1E2832;
+    --ink-mid: #4A5660;
+    --ink-soft: #7A8590;
+    --red: #C8463C;
+    --highlight: #F4E04D;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100vw; height: 100vh; overflow: hidden; background: var(--paper); font-family: "Inter", "Helvetica Neue", Arial, sans-serif; color: var(--ink); }
+  body { display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; padding: 4vh 4vw; }
+
+  body::before {
+    content: ""; position: fixed; inset: -20px; pointer-events: none; z-index: 1;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.118  0 0 0 0 0.157  0 0 0 0 0.196  0 0 0 0.28 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity: 0.6; mix-blend-mode: multiply; animation: drift 14s ease-in-out infinite;
+  }
+  body::after {
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 2;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(60, 40, 20, 0.18) 100%);
+  }
+  @keyframes drift {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(-6px, 3px); }
+    50% { transform: translate(3px, -5px); }
+    75% { transform: translate(-3px, 6px); }
+  }
+
+  .stage { position: relative; z-index: 10; width: 100%; max-width: 1700px; display: flex; flex-direction: column; align-items: center; gap: 3vh; }
+
+  .header { text-align: center; opacity: 0; transform: translateY(-12px) rotate(-0.4deg); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
+  .header.show { opacity: 1; transform: translateY(0) rotate(-0.4deg); }
+  .header .eyebrow { font-family: "JetBrains Mono", monospace; font-size: 0.9vw; color: var(--red); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 1.2vh; }
+  .header h1 { font-size: 3vw; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
+  .header h1 .marker { background: linear-gradient(120deg, transparent 0%, var(--highlight) 30%, var(--highlight) 70%, transparent 100%); padding: 0 0.4vw; }
+
+  .tiers { display: grid; grid-template-columns: 1fr 1fr; gap: 2.4vw; width: 100%; align-items: stretch; }
+
+  .tier { padding: 3vh 1.8vw 2.4vh; border: 1.5px dashed var(--ink-soft); position: relative; background: rgba(255, 252, 244, 0.4); opacity: 0; transform: translateY(20px) rotate(0deg); transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.2, 0.8, 0.3, 1.1); }
+  .tier.left { transform: translateY(20px) rotate(-0.8deg); }
+  .tier.left.show { transform: translateY(0) rotate(-0.8deg); opacity: 1; }
+  .tier.right { transform: translateY(20px) rotate(0.8deg); }
+  .tier.right.show { transform: translateY(0) rotate(0.8deg); opacity: 1; }
+
+  .tier .n { position: absolute; top: -1.4vh; left: 1.2vw; font-family: "JetBrains Mono", monospace; font-size: 0.85vw; color: var(--ink-soft); background: var(--paper); padding: 0 0.5vw; letter-spacing: 0.18em; }
+  .tier .pool { font-family: "JetBrains Mono", monospace; font-size: 0.85vw; color: var(--ink-soft); letter-spacing: 0.18em; text-transform: uppercase; text-align: center; margin-bottom: 0.6vh; }
+  .tier h2 { font-size: 1.9vw; font-weight: 800; text-align: center; letter-spacing: -0.015em; margin-bottom: 0.6vh; line-height: 1.1; }
+  .tier.right h2 { color: var(--red); }
+  .tier .sub { font-family: "Source Serif Pro", "Georgia", serif; font-style: italic; font-size: 1vw; color: var(--ink-mid); text-align: center; margin-bottom: 2.2vh; }
+
+  .row { display: flex; flex-direction: column; gap: 0.9vh; }
+  .item { display: flex; align-items: center; gap: 0.9vw; font-family: "JetBrains Mono", monospace; font-size: 1.05vw; font-weight: 600; color: var(--ink); padding: 0.8vh 1vw; border: 1.2px dashed var(--ink-soft); background: rgba(255, 252, 244, 0.5); opacity: 0; transform: translateX(-12px); transition: opacity 0.4s ease-out, transform 0.4s ease-out; }
+  .tier.right .item { transform: translateX(12px); }
+  .item.show { opacity: 1; transform: translateX(0); }
+  .item .bullet { width: 0.7vw; height: 0.7vw; border-radius: 50%; flex-shrink: 0; border: 1.4px solid var(--ink); }
+  .tier.right .item .bullet { background: var(--red); border-color: var(--red); }
+  .item .lbl { flex: 1; }
+  .item .tag { font-size: 0.78vw; color: var(--ink-soft); font-weight: 500; letter-spacing: 0.05em; }
+
+  .sublist { margin-top: 1vh; padding: 1.2vh 1.2vw; border-left: 2px solid var(--red); margin-left: 1.2vw; opacity: 0; transition: opacity 0.5s ease-out; }
+  .sublist.show { opacity: 1; }
+  .sublist .h { font-family: "JetBrains Mono", monospace; font-size: 0.78vw; color: var(--ink-soft); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.6vh; }
+  .sublist .chips { display: flex; flex-wrap: wrap; gap: 0.5vw; }
+  .sublist .chip { font-family: "JetBrains Mono", monospace; font-size: 0.82vw; padding: 0.3vh 0.6vw; border: 1.2px dashed var(--ink-mid); color: var(--ink); }
+
+  .pullquote { width: 100%; max-width: 1700px; text-align: center; margin-top: 0.5vh; opacity: 0; transition: opacity 0.6s ease-out; }
+  .pullquote.show { opacity: 1; }
+  .pullquote .q { font-family: "Source Serif Pro", "Georgia", serif; font-style: italic; font-size: 1.25vw; color: var(--ink-mid); line-height: 1.45; }
+  .pullquote .q .marker { background: linear-gradient(120deg, transparent 0%, var(--highlight) 25%, var(--highlight) 75%, transparent 100%); padding: 0 0.3vw; color: var(--ink); font-weight: 600; font-style: normal; font-family: "Inter", sans-serif; }
+  .pullquote .src { font-family: "JetBrains Mono", monospace; font-size: 0.78vw; color: var(--ink-soft); letter-spacing: 0.15em; margin-top: 0.8vh; text-transform: uppercase; }
+
+  .footer-note { font-family: "JetBrains Mono", monospace; font-size: 0.85vw; color: var(--ink-mid); text-align: center; margin-top: 0.5vh; opacity: 0; transition: opacity 0.5s ease-out; }
+  .footer-note.show { opacity: 1; }
+  .footer-note strong { color: var(--red); }
+</style>
+</head>
+<body data-duration="9000">
+<div class="stage">
+  <div class="header" id="hdr">
+    <div class="eyebrow">The rule sheet · in one image</div>
+    <h1>Which tools draw from <span class="marker">which pool</span>?</h1>
+  </div>
+
+  <div class="tiers">
+
+    <div class="tier left" id="t1">
+      <div class="n">POOL · 01</div>
+      <div class="pool">Your monthly subscription</div>
+      <h2>Sub is okay</h2>
+      <div class="sub">Interactive use — same as it's been.</div>
+      <div class="row">
+        <div class="item" id="i1a"><span class="bullet"></span><span class="lbl">claude.ai chat</span><span class="tag">web · desktop · mobile</span></div>
+        <div class="item" id="i1b"><span class="bullet"></span><span class="lbl">Claude Code · interactive</span><span class="tag">terminal · IDE</span></div>
+        <div class="item" id="i1c"><span class="bullet"></span><span class="lbl">Claude Cowork</span><span class="tag">extra usage</span></div>
+      </div>
+    </div>
+
+    <div class="tier right" id="t2">
+      <div class="n">POOL · 02</div>
+      <div class="pool">Dedicated Agent SDK credit</div>
+      <h2>Claim &amp; meter</h2>
+      <div class="sub">$20 Pro · $100 Max 5× · $200 Max 20× · no rollover.</div>
+      <div class="row">
+        <div class="item" id="i2a"><span class="bullet"></span><span class="lbl">claude -p</span><span class="tag">non-interactive</span></div>
+        <div class="item" id="i2b"><span class="bullet"></span><span class="lbl">Claude Agent SDK</span><span class="tag">python · typescript</span></div>
+        <div class="item" id="i2c"><span class="bullet"></span><span class="lbl">Claude Code · GitHub Actions</span><span class="tag">CI</span></div>
+        <div class="item" id="i2d"><span class="bullet"></span><span class="lbl">3rd-party apps</span><span class="tag">via your Claude sub</span></div>
+      </div>
+      <div class="sublist" id="sublist">
+        <div class="h">Apps that auth through your sub:</div>
+        <div class="chips">
+          <span class="chip">Zed</span>
+          <span class="chip">Jean</span>
+          <span class="chip">T3 Code</span>
+          <span class="chip">Opencode</span>
+          <span class="chip">Openclaw</span>
+          <span class="chip">Hermes</span>
+          <span class="chip">CI integrations</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="pullquote" id="pq">
+    <div class="q">"Paid Claude plans can <span class="marker">claim a dedicated monthly credit</span> for <span class="marker">programmatic usage</span>."</div>
+    <div class="src">support.claude.com · article 15036540</div>
+  </div>
+
+  <div class="footer-note" id="fn">
+    Overflow → <strong>full API rates</strong> · "Extra Usage" toggle off by default
+  </div>
+</div>
+
+<script>
+  function play() {
+    document.querySelectorAll('.show').forEach(el => el.classList.remove('show'));
+    setTimeout(() => document.getElementById('hdr').classList.add('show'), 200);
+    setTimeout(() => document.getElementById('t1').classList.add('show'), 1000);
+    [['i1a',1400],['i1b',1700],['i1c',2000]].forEach(([id,t]) => setTimeout(() => document.getElementById(id).classList.add('show'), t));
+    setTimeout(() => document.getElementById('t2').classList.add('show'), 2800);
+    [['i2a',3200],['i2b',3500],['i2c',3800],['i2d',4100]].forEach(([id,t]) => setTimeout(() => document.getElementById(id).classList.add('show'), t));
+    setTimeout(() => document.getElementById('sublist').classList.add('show'), 4900);
+    setTimeout(() => document.getElementById('pq').classList.add('show'), 6200);
+    setTimeout(() => document.getElementById('fn').classList.add('show'), 7400);
+  }
+  document.addEventListener('DOMContentLoaded', () => setTimeout(play, 500));
+  document.addEventListener('keydown', (e) => { if (e.key === 'r' || e.key === 'R') play(); });
+</script>
+</body>
+</html>

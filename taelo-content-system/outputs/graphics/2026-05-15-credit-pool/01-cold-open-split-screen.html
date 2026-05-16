@@ -119,7 +119,6 @@
     </div>
   </div>
 
-  <div class="chyron" id="chyron">SAME DAY · OPPOSITE DIRECTIONS</div>
 </div>
 
 <script>
@@ -129,7 +128,6 @@
     [['p1', 1100],['p2',1300],['p3',1500],['p4',1700]].forEach(([id,t]) => setTimeout(() => document.getElementById(id).classList.add('show'), t));
     setTimeout(() => document.getElementById('stripe').classList.add('show'), 2700);
     setTimeout(() => document.getElementById('right').classList.add('show'), 3400);
-    setTimeout(() => document.getElementById('chyron').classList.add('show'), 4000);
   }
   document.addEventListener('DOMContentLoaded', () => setTimeout(play, 500));
   document.addEventListener('keydown', (e) => { if (e.key === 'r' || e.key === 'R') play(); });

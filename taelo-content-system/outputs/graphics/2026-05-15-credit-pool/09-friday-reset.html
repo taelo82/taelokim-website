@@ -92,53 +92,44 @@
   .verdict .red { color: var(--red); font-style: normal; font-weight: 800; }
 </style>
 </head>
-<body data-duration="11000">
+<body data-duration="7500">
 <div class="stage">
-  <div class="header" id="hdr">
-    <div class="eyebrow">Two days later · Friday May 15</div>
-    <h1>Anthropic <span class="marker">felt the sentiment</span> — and blinked.</h1>
-  </div>
-
   <div class="timeline" id="tl">
-    <span class="tt cut">May 13 · the credit cut</span>
+    <span class="tt cut">May 13 · cut announced</span>
     <span class="arr">→</span>
-    <span class="tt">May 14 · the backlash</span>
+    <span class="tt">May 14 · backlash</span>
     <span class="arr">→</span>
-    <span class="tt reset">May 15 · full quotas reset for everyone</span>
+    <span class="tt reset">May 15 · quotas reset</span>
   </div>
 
   <div class="reset-card" id="reset">
-    <div class="reset-head">@ClaudeDevs · Friday afternoon</div>
-    <div class="reset-title">"Just reset everyone's 5-hour and weekly counters. Enjoy the weekend."</div>
-    <div class="reset-from">a one-off goodwill gesture · <span class="who">restored full quotas across Pro / Max / Team / Enterprise</span></div>
+    <div class="reset-head">@ClaudeDevs · Friday May 15 · 1:47 PM</div>
+    <div class="reset-title">"Happy Friday! We've reset everyone's 5-hour and weekly rate limits."</div>
+    <div class="reset-from">1.5K replies · 2.1K reposts · 28K likes · 1.7M views</div>
   </div>
 
   <div class="evidence" id="ev">
     <div class="ev-card a">
-      <div class="ev-corner">EVIDENCE 01</div>
-      <div class="ev-title">Anthropic's own Claude Code PM replies</div>
-      <div class="ev-quote">Noah Zweben's tweet thread received <span class="red">"gaslighting"</span> replies and open threats to <span class="red">switch to Codex</span>.</div>
-      <div class="ev-source">source: dev community thread · May 14</div>
+      <div class="ev-corner">SIGNAL 01</div>
+      <div class="ev-title">Noah Zweben thread · May 14</div>
+      <div class="ev-quote">Claude Code PM. Top replies: <span class="red">"gaslighting"</span> · <span class="red">"switching to Codex"</span> · <span class="red">"cancelled my Max plan"</span></div>
+      <div class="ev-source">x.com/ClaudeDevs · 1.2K replies / 10M views</div>
     </div>
     <div class="ev-card b">
-      <div class="ev-corner">EVIDENCE 02</div>
-      <div class="ev-title">Mainstream press picks the framing</div>
-      <div class="ev-quote">Axios headline: <span class="red">"Anthropic tightens Claude limits as OpenAI courts agent users."</span></div>
-      <div class="ev-source">source: axios.com/2026/05/14 · same week</div>
+      <div class="ev-corner">SIGNAL 02</div>
+      <div class="ev-title">Axios · May 14</div>
+      <div class="ev-quote"><span class="red">"Anthropic tightens Claude limits as OpenAI courts agent users."</span></div>
+      <div class="ev-source">axios.com/2026/05/14 · ~24h after the help-center post</div>
     </div>
   </div>
-
-  <div class="verdict" id="v">That's not a coincidence. <span class="red">That's the market correcting in real time.</span></div>
 </div>
 
 <script>
   function play() {
     document.querySelectorAll('.show').forEach(el => el.classList.remove('show'));
-    setTimeout(() => document.getElementById('hdr').classList.add('show'), 200);
-    setTimeout(() => document.getElementById('tl').classList.add('show'), 1000);
-    setTimeout(() => document.getElementById('reset').classList.add('show'), 2400);
-    setTimeout(() => document.getElementById('ev').classList.add('show'), 4400);
-    setTimeout(() => document.getElementById('v').classList.add('show'), 7000);
+    setTimeout(() => document.getElementById('tl').classList.add('show'), 200);
+    setTimeout(() => document.getElementById('reset').classList.add('show'), 1600);
+    setTimeout(() => document.getElementById('ev').classList.add('show'), 3800);
   }
   document.addEventListener('DOMContentLoaded', () => setTimeout(play, 500));
   document.addEventListener('keydown', (e) => { if (e.key === 'r' || e.key === 'R') play(); });

@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>07 — Five Personas (paper-texture rebuild)</title>
+<title>07 — Four Personas (paper-texture · text-stripped)</title>
 <!--
-  Use: Beat 5 (4:50 — 6:10).
-  Keys: press 1-5 to reveal personas on Taelo's cue. Press 0 or Space for footer. R to reset.
+  Use: Beat 5 (~6:11 in cut). Persona 5 (international/Korea) was dropped in delivery.
+  Keys: press 1-4 to reveal personas on Taelo's cue. R to reset.
+  Text rule: no duplicate of script. Cards are visual reference only; he names each.
 -->
 <style>
   :root {
@@ -53,7 +54,7 @@
   .header h1 .marker { background: linear-gradient(120deg, transparent 0%, var(--highlight) 30%, var(--highlight) 70%, transparent 100%); padding: 0 0.4vw; }
 
   /* Index-card grid */
-  .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.2vw; width: 100%; max-width: 1700px; align-items: stretch; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.6vw; width: 100%; max-width: 1500px; align-items: stretch; }
 
   .card { background: rgba(255, 252, 244, 0.45); border: 1.5px dashed var(--ink-soft); padding: 2.5vh 1.2vw 2vh; display: flex; flex-direction: column; align-items: center; gap: 1.6vh; min-height: 50vh; position: relative; opacity: 0.2; filter: grayscale(0.7); transition: opacity 0.45s ease-out, filter 0.45s ease-out, transform 0.45s cubic-bezier(0.2, 0.7, 0.3, 1.1); }
   .card.show { opacity: 1; filter: grayscale(0); }
@@ -95,11 +96,10 @@
   .footer .b { font-style: normal; color: var(--red); font-weight: 800; }
 </style>
 </head>
-<body data-duration="18000">
+<body data-duration="14000">
 <div class="stage">
   <div class="header" id="hdr">
-    <div class="eyebrow">5 personas · 1 deadline</div>
-    <h1>Which one of these is <span class="marker">you</span>?</h1>
+    <div class="eyebrow">4 operator types · 1 deadline · <span style="color:var(--red);">June 15</span></div>
   </div>
 
   <div class="grid">
@@ -182,27 +182,7 @@
       <div class="move-hint">pick pricing model now</div>
     </div>
 
-    <!-- 05 International -->
-    <div class="card" id="c5">
-      <div class="corner">05</div>
-      <div class="icon">
-        <svg viewBox="0 0 64 64">
-          <circle cx="32" cy="32" r="22"/>
-          <ellipse cx="32" cy="32" rx="10" ry="22"/>
-          <line x1="10" y1="32" x2="54" y2="32"/>
-          <circle cx="42" cy="22" r="2" class="accent"/>
-          <circle cx="44" cy="38" r="2" class="accent"/>
-          <circle cx="18" cy="40" r="1.5" class="accent"/>
-        </svg>
-      </div>
-      <div class="role">International / client-work operator</div>
-      <div class="cut">margin squeeze<span class="lbl">korea · sg · sea</span></div>
-      <div class="detail">Billing clients on Pro? — <span class="strong">move now</span></div>
-      <div class="move-hint">renegotiate by June 15</div>
-    </div>
   </div>
-
-  <div class="footer" id="ftr">Pick yours <span class="b">→</span> comment below for the deep-dive next month</div>
 </div>
 
 <script>
@@ -217,17 +197,15 @@
     document.querySelectorAll('.show, .active').forEach(el => { el.classList.remove('show'); el.classList.remove('active'); });
     active = null;
     setTimeout(() => document.getElementById('hdr').classList.add('show'), 200);
-    [1,2,3,4,5].forEach((n,i) => setTimeout(() => show(n), 1200 + i * 2900));
-    setTimeout(() => document.getElementById('ftr').classList.add('show'), 1200 + 5 * 2900);
+    [1,2,3,4].forEach((n,i) => setTimeout(() => show(n), 1200 + i * 2900));
   }
   document.addEventListener('DOMContentLoaded', () => setTimeout(autoPlay, 500));
   document.addEventListener('keydown', (e) => {
     if (e.key === 'r' || e.key === 'R') autoPlay();
-    if (['1','2','3','4','5'].includes(e.key)) {
+    if (['1','2','3','4'].includes(e.key)) {
       if (!document.getElementById('hdr').classList.contains('show')) document.getElementById('hdr').classList.add('show');
       show(parseInt(e.key));
     }
-    if (e.key === '0' || e.key === ' ') document.getElementById('ftr').classList.add('show');
   });
 </script>
 </body>
