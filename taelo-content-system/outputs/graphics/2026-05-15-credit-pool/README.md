@@ -15,6 +15,10 @@ Animated B-roll for the **Anthropic Same-Day Switch** video (2026-05-15 / 2026-0
 | 5 · 4:50–6:10 — 5 personas | `07-five-personas.html` | `.mp4` | `.mov` |
 | 6 · 6:10–7:40 — 3 moves | `08-three-moves.html` | `.mp4` | `.mov` |
 | 9 · 9:10–10:30 — Friday reset closer | `09-friday-reset.html` | `.mp4` | `.mov` |
+| 2 · ~2:00 — help-center receipt (covered vs not) | `12-covered-vs-not.html` | `.mp4` | `.mov` |
+| 1B · ~0:50 — June 15 banner + branding clause | `13-june15-banner.html` | `.mp4` | `.mov` |
+| 3 · ~3:00 — spectrum grid (which tool, which pool) | `10-spectrum-grid.html` | `.mp4` | `.mov` |
+| 4 · ~4:10 — Matt Pocock "frustrating lack of clarity" | `11-pocock-tweet.html` | `.mp4` | `.mov` |
 
 **Pick the right format:**
 - `.mp4` (opaque, cream paper bg) → drop in as full-screen B-roll cut. Cut from face-cam to graphic and back.
