@@ -1,7 +1,7 @@
 # Full Script v3 — Anthropic's Same-Day Switch (hook-forward rewrite, 2026-05-16)
 
 **Format:** Full ready-to-film script. Every line in **bold quotes** is exactly what you say to camera. Brackets are b-roll / screen direction.
-**Target length:** 15:00–16:00 at 150 wpm (2,358 words) · **Voice:** direct, raw, personal disbelief at the top, numbers-first
+**Target length:** 16:00–17:00 at 150 wpm (2,538 words) · **Voice:** direct, raw, personal disbelief at the top, numbers-first · **v3.1:** Taelo's own intro + "why the hell do you care" rewrite integrated
 **Lead thesis:** "I could not believe what I was witnessing." Anthropic announced a 50% Claude increase to the press the same day they buried a 25-to-175x Agent SDK cut in the help center. Matt Pocock saw it. Theo Browne *canceled his plan*. Even Anthropic's own dev-rel person got Community Noted for trying to spin it. Here's the math, the deception, and the three moves you make this week.
 
 ## What changed in v3 (from v2)
@@ -40,37 +40,45 @@ First 30 seconds is a hard ranking checkpoint. Cold open delivers the **contradi
 
 ---
 
-## 0:00–0:10 — COLD OPEN (face cam, personal disbelief, no smile)
+## 0:00–0:25 — BEAT 1A: COLD OPEN — THE SETUP, THE DISBELIEF, THE REVEAL (face cam, no smile)
 
-**"I could not believe what I was witnessing. Last Tuesday, Anthropic walked out in front of every tech reporter in the world and announced — fifty percent more Claude for you. Headlines wrote themselves. SpaceX compute deal. Free upgrade. Anthropic is doing you a favor."**
+**"Last Tuesday, Anthropic walked out in front of every tech reporter in the world and announced — fifty percent more Claude for you. Headlines wrote themselves. SpaceX compute deal. Free upgrade. Anthropic is doing you a favor. I could not believe what I was actually witnessing. Not because of this news — and yeah, I thought they were doing people a favor — but because on the same afternoon, the same day, they buried the opposite news on a help-center page no journalist reads. They cut your background Claude agents by up to forty times. That is not a typo. Forty. Times."**
 
-*[B-roll: 0:00–0:04 face cam dead center, slight head shake on "could not believe." 0:04–0:10 green-tinted montage of real press headlines — 9to5Google "Claude Code limits doubled", Business Standard "post SpaceX deal", AndroidHeadlines "More Claude for Everyone". Each lights up as it appears.]*
+*[B-roll arc:
+0:00–0:04 face cam dead center.
+0:04–0:12 green-tinted press headline montage — 9to5Google "Claude Code limits doubled", Business Standard "post SpaceX deal", AndroidHeadlines "More Claude for Everyone". Each lights up.
+0:12–0:16 face cam, slight head shake on "could not believe what I was actually witnessing."
+0:16–0:25 hard cut to a dark-red full-screen card. support.claude.com URL with "agent-sdk" highlighted, "May 13" big and red. Number "40x" stamps onto the card with a heavy impact sound.]*
 
----
-
-## 0:10–0:25 — BEAT 1B: THE REVEAL
-
-**"On the same afternoon — the same day — they buried the opposite news on a help-center page no journalist reads. They cut your background Claude agents by up to forty times. That is not a typo. Forty. Times."**
-
-*[B-roll: hard cut from the green-tinted press montage to a single dark-red full-screen card. support.claude.com URL with "agent-sdk" highlighted, the date "May 13" big and red underneath. Number "40x" stamps onto the card with a heavy impact sound.]*
+**Retention check:** 25 seconds. Headlines → personal disbelief → reveal. The pivot ("Not because of this news but because…") is what locks the viewer in.
 
 ---
 
-## 0:25–0:50 — BEAT 1C: WHY YOU CARE (the stakes for the viewer)
+## 0:25–1:10 — BEAT 1B: WHY THE HELL DO YOU CARE (the stakes for the viewer)
 
-**"And here is why you need to care, right now, before I show you the proof. If you run any agent script while you sleep — Claude reviewing your pull requests, OpenClaw, Conductor, T3 code, anything that types 'claude dash p' in a terminal — starting June 15th, your monthly programmatic usage gets capped at twenty dollars on Pro. A hundred on Max 5x. Two hundred on Max 20x. After that, you pay full API rates. The five thousand dollars of effective API value people have been pulling out of a two hundred dollar Max plan every month? Gone. The agent loops you've been running on a twenty dollar Pro sub? Gone. If you build anything with Claude that doesn't have a human typing into it — this is your bill changing."**
+**"Why the hell do you have to care about this? If you've ever played with agents, looked into them, or you're already using them — this affects you, greatly. And to be honest? Sooner or later, you're going to be using agents. That's just where this whole industry is going. Which means starting June 15th, you have a problem."**
 
-*[B-roll: rapid-cut visual checklist as you read it.
-- "Agent script while you sleep" → cron icon
+*[B-roll: face cam for the question, then cut to a quick grid — agent screenshots from OpenClaw, Conductor, T3 code, Cursor agents — pulsing as you say "if you've ever played with agents."]*
+
+**"Right now, on a twenty dollar Pro plan, you can spin up Claude reviewing your pull requests, OpenClaw running tasks while you sleep, Conductor, T3 code, anything that types 'claude dash p' in a terminal — all of it pulling from the same subscription bucket. After June 15th, all of it draws from a separate credit. Twenty dollars a month on Pro. A hundred on Max 5x. Two hundred on Max 20x. After that — full API rates. The five thousand dollars of effective API value people have been pulling out of a two hundred dollar Max plan every month? Gone. The agent loops you've been running on a twenty dollar Pro sub? Gone."**
+
+*[B-roll: rapid checklist as you read.
 - "Claude reviewing your PRs" → GitHub Actions logo
-- "OpenClaw / Conductor / T3 code" → three tool logos in a row
+- "OpenClaw running while you sleep" → cron icon
+- "Conductor / T3 code" → two tool logos
 - "claude dash p" → terminal screenshot
-- "$5,000 → $200" → big number-drop visualization
-- "If you build with Claude" → camera back on face.]*
+- "$5,000 → $200" → big number-drop visualization with arrow]*
+
+**"So here's what this really means for you. You have a one-month window — before they pull this — to test things out while usage is still effectively uncapped. Because if you've never had to play with API bills before, you really don't want to do it for the first time on your own money. Not your money, not your company's money, not even when somebody else is covering it. Once you're the one paying the API bill for your own agents — it gets really hard to go to sleep comfortably."**
+
+*[B-roll: split-screen.
+LEFT: a calendar countdown — "30 days" ticking down to "0 days" at June 15.
+RIGHT: a mock bill receipt printing out token charges. The receipt gets longer and longer as the camera holds.
+End on a face-cam reaction.]*
 
 ---
 
-## 0:50–1:05 — BEAT 1D: THE TAKE + CREATOR PROOF + CONTRACT
+## 1:10–1:25 — BEAT 1C: THE TAKE + CREATOR PROOF + CONTRACT
 
 **"That was weasel. That was wrong. And I'm not the first person saying it. Theo Browne — T3 Code creator, five hundred thousand subscribers, the guy whose own product Anthropic explicitly cited in their announcement — canceled his Anthropic plan two days ago and called it, quote, 'an attack on open source.' Matt Pocock, who literally sells a Claude Code course, said the announcement, quote, 'sounds like a bonus, why it might not actually be a bonus.' Neither put the two May 13th announcements side-by-side and named what that pairing actually is. I'm going to. Math, deception, three moves before June 15th. Let's go."**
 
