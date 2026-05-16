@@ -1,8 +1,16 @@
-# Full Script v2 — Anthropic's Same-Day Switch: 50% Increase Headline + 20x Agent SDK Cut (2026-05-15)
+# Full Script v3 — Anthropic's Same-Day Switch (hook-forward rewrite, 2026-05-16)
 
 **Format:** Full ready-to-film script. Every line in **bold quotes** is exactly what you say to camera. Brackets are b-roll / screen direction.
-**Target length:** 13:00–14:00 (full v2 cut, 2,199 words) · or 9:00–10:00 if you trim Beats 2-recap, 5-framing, and 8-timeline · **Voice:** direct, raw, controversial-without-being-conspiratorial, numbers-first
-**Lead thesis:** On May 13th, Anthropic did two opposite things in the same press cycle. Matt Pocock saw it ("a bonus that's not a bonus"). Theo saw it ("feels like the finger"). Neither said it as plainly as you're about to.
+**Target length:** 15:00–16:00 at 150 wpm (2,358 words) · **Voice:** direct, raw, personal disbelief at the top, numbers-first
+**Lead thesis:** "I could not believe what I was witnessing." Anthropic announced a 50% Claude increase to the press the same day they buried a 25-to-175x Agent SDK cut in the help center. Matt Pocock saw it. Theo Browne *canceled his plan*. Even Anthropic's own dev-rel person got Community Noted for trying to spin it. Here's the math, the deception, and the three moves you make this week.
+
+## What changed in v3 (from v2)
+
+- **Cold open: personal disbelief.** "I could not believe what I was witnessing" replaces the news-anchor opener. Stakes for the viewer land by 0:30, not 1:20.
+- **Beats 1–2 collapsed into a single hook engine** (0:00–1:05) that gets to the math, the why-you-care, the creator proof, and the contract all inside the first minute.
+- **Math beat upgraded:** 25–40x for Max heavy users, **up to 175x at the Sonnet-heavy end** (per the canonical reference gist). Five thousand dollars to two hundred = 25x at the conservative end.
+- **Beat 5 (Framing) gains the Community Note story.** Anthropic's own Lydia Hallie got Community Noted by X within hours for the framing. Devastating fact, not opinion.
+- **Beat 3 quote anchor swapped:** Theo Browne's *"an attack on open source"* + *canceled his plan* replaces the softer "feels like the finger." He's a 500K-sub creator whose product Anthropic explicitly cited.
 
 ## Working titles (pick one, A/B the thumbnail)
 
@@ -32,19 +40,47 @@ First 30 seconds is a hard ranking checkpoint. Cold open delivers the **contradi
 
 ---
 
-## 0:00–0:10 — COLD OPEN (face cam, level voice, no smile)
+## 0:00–0:10 — COLD OPEN (face cam, personal disbelief, no smile)
 
-**"May 13th. Anthropic posts two announcements. One — for the press. One — for the help center. The press one says fifty percent more Claude. The help center one quietly cuts agent usage by up to twenty times. Same day. Same audience. Opposite directions. Let me show you exactly what they did."**
+**"I could not believe what I was witnessing. Last Tuesday, Anthropic walked out in front of every tech reporter in the world and announced — fifty percent more Claude for you. Headlines wrote themselves. SpaceX compute deal. Free upgrade. Anthropic is doing you a favor."**
 
-*[B-roll: 0:00–0:03 face cam. 0:03–0:10 — split screen. LEFT: anthropic.com/news/higher-limits-spacex headline "Higher usage limits for Claude" with date "May 13" highlighted. RIGHT: support.claude.com help-center URL with "May 13" highlighted and the credit-tier table visible. A red caret arrow points from LEFT to RIGHT.]*
-
-**Retention check:** 10 seconds. Two screenshots. One date on both. The viewer's brain locks on "same day."
+*[B-roll: 0:00–0:04 face cam dead center, slight head shake on "could not believe." 0:04–0:10 green-tinted montage of real press headlines — 9to5Google "Claude Code limits doubled", Business Standard "post SpaceX deal", AndroidHeadlines "More Claude for Everyone". Each lights up as it appears.]*
 
 ---
 
-## 0:10–1:20 — BEAT 2: THE TWO ANNOUNCEMENTS, SIDE BY SIDE
+## 0:10–0:25 — BEAT 1B: THE REVEAL
 
-**"Here's announcement one. May 13th. Anthropic's official news page. The headline — 'Higher usage limits for Claude.' Claude Code weekly limits up fifty percent through July 13th. They cite the new SpaceX compute deal. Three hundred megawatts of new GPUs. The story gets picked up by 9to5Google, Business Standard, AndroidHeadlines, Pulse2 — all positive coverage. 'Anthropic doubles usage limits.' 'More Claude for everyone.' This is the announcement everyone saw."**
+**"On the same afternoon — the same day — they buried the opposite news on a help-center page no journalist reads. They cut your background Claude agents by up to forty times. That is not a typo. Forty. Times."**
+
+*[B-roll: hard cut from the green-tinted press montage to a single dark-red full-screen card. support.claude.com URL with "agent-sdk" highlighted, the date "May 13" big and red underneath. Number "40x" stamps onto the card with a heavy impact sound.]*
+
+---
+
+## 0:25–0:50 — BEAT 1C: WHY YOU CARE (the stakes for the viewer)
+
+**"And here is why you need to care, right now, before I show you the proof. If you run any agent script while you sleep — Claude reviewing your pull requests, OpenClaw, Conductor, T3 code, anything that types 'claude dash p' in a terminal — starting June 15th, your monthly programmatic usage gets capped at twenty dollars on Pro. A hundred on Max 5x. Two hundred on Max 20x. After that, you pay full API rates. The five thousand dollars of effective API value people have been pulling out of a two hundred dollar Max plan every month? Gone. The agent loops you've been running on a twenty dollar Pro sub? Gone. If you build anything with Claude that doesn't have a human typing into it — this is your bill changing."**
+
+*[B-roll: rapid-cut visual checklist as you read it.
+- "Agent script while you sleep" → cron icon
+- "Claude reviewing your PRs" → GitHub Actions logo
+- "OpenClaw / Conductor / T3 code" → three tool logos in a row
+- "claude dash p" → terminal screenshot
+- "$5,000 → $200" → big number-drop visualization
+- "If you build with Claude" → camera back on face.]*
+
+---
+
+## 0:50–1:05 — BEAT 1D: THE TAKE + CREATOR PROOF + CONTRACT
+
+**"That was weasel. That was wrong. And I'm not the first person saying it. Theo Browne — T3 Code creator, five hundred thousand subscribers, the guy whose own product Anthropic explicitly cited in their announcement — canceled his Anthropic plan two days ago and called it, quote, 'an attack on open source.' Matt Pocock, who literally sells a Claude Code course, said the announcement, quote, 'sounds like a bonus, why it might not actually be a bonus.' Neither put the two May 13th announcements side-by-side and named what that pairing actually is. I'm going to. Math, deception, three moves before June 15th. Let's go."**
+
+*[B-roll: Theo's "I'm done." thumbnail with the date he canceled annotated. Then Matt Pocock's video thumbnail. Then a final cut to the split-screen of both Anthropic announcements with "MAY 13" date stripe between them.]*
+
+---
+
+## 1:05–1:50 — BEAT 2: SHOW THE PROOF SIDE-BY-SIDE
+
+**"Here's announcement one. Last Tuesday. Anthropic's official news page. The headline — 'Higher usage limits for Claude.' Claude Code weekly limits up fifty percent through July 13th. They cite the new SpaceX compute deal. Three hundred megawatts of new GPUs. Story gets picked up by every major tech outlet. 'More Claude for everyone.' This is the announcement everyone saw."**
 
 *[B-roll: scroll through the anthropic.com/news/higher-limits-spacex page. Highlight "50%" and "July 13" with yellow underlines. Cut to a grid of headlines from the major tech press — 9to5Google, Business Standard, AndroidHeadlines, Knightli — all positive. Each headline highlighted as it appears.]*
 
@@ -52,25 +88,28 @@ First 30 seconds is a hard ranking checkpoint. Cold open delivers the **contradi
 
 *[B-roll: scroll through support.claude.com Agent SDK page. Highlight the credit-tier table. Then a screenshot of the ClaudeDevs tweet at x.com/ClaudeDevs. Then — crucial — search the @AnthropicAI main timeline for May 13 and show that the official handle never tweeted the credit change. Annotate: "Main handle never tweeted this."]*
 
-**"So — same day. Same company. One announcement makes the headlines. The other gets a help-center URL. And the second one is the one that actually changes how much Claude you can run."**
+**"So — same day. Same company. One announcement makes the front page. The other gets a help-center URL. And the second one is the one that actually changes how much Claude you can run."**
 
 *[B-roll: final cut — both announcement screenshots side-by-side again, with the date "May 13" circled red on both.]*
 
 ---
 
-## 1:20–2:30 — BEAT 3: TWO BIG CREATORS ALREADY SAID IT (JUST NOT PLAINLY)
+## 1:50–2:45 — BEAT 3: THE CREATOR EVIDENCE
 
-**"I'm not the first person to notice this. Two of the bigger Claude Code creators on YouTube already broke the math on it. Their words, not mine."**
+**"I'm not the first person to notice this. Two of the bigger Claude Code creators on YouTube already broke it. Their words, not mine."**
 
-**"Quote — 'a thing that sounds like a bonus, why it might not actually be a bonus.' Second quote — 'this almost feels like it's a double subsidy. How interesting. But that's not quite right.' Third quote — 'this feels more like a five-x or a ten-x cut.' Fourth quote — 'this is a massive massive cut.' Those are all from the same ten-minute video by a TypeScript educator with two hundred and nineteen thousand subscribers. He said all of that — and then he also said, quote, 'I am a teacher, I am not a pundit, it's not my job to say whether Anthropic has done a good or a bad thing here.' He saw the framing. He laid out the math. And then he stepped back from calling it what it is."**
+**"Quote — 'a thing that sounds like a bonus, why it might not actually be a bonus.' Second quote — 'this almost feels like it's a double subsidy. How interesting. But that's not quite right.' Third quote — 'this feels more like a five-x or a ten-x cut.' Fourth quote — 'this is a massive massive cut.' All from the same ten-minute video by a TypeScript educator with two hundred and nineteen thousand subscribers. He said all of that — then he also said, quote, 'I am a teacher, I am not a pundit, it's not my job to say whether Anthropic has done a good or a bad thing here.' He saw the framing. He laid out the math. And then he stepped back from calling it what it is."**
 
 *[B-roll: each quote types out on screen as you read it, in quote-format with a subtle citation badge "— Matt Pocock, YouTube". The last quote — "I am a teacher, I am not a pundit" — sits on screen alone for two beats.]*
 
-**"The other big creator on this, five hundred thousand subscribers, posted a forty-five minute video titled 'I'm done.' His exact words about the announcement — quote — 'the answer kind of feels like the finger.' Same conclusion. Different volume. He spent forty-five minutes on it. Neither of them put the two May 13th announcements side-by-side and named what that pairing actually is."**
+**"The other big creator on this, five hundred thousand subscribers, posted a forty-five minute video titled 'I'm done.' He's the creator of T3 Code — the exact tool Anthropic explicitly cited in their own announcement. His exact words about Anthropic's policy — quote — 'they took what could have been a good idea and are using it as a bludgeoning stick.' Then he added, quote, 'all of this is an attack on open source.' And then — he canceled his Anthropic plan. The creator of the tool Anthropic name-dropped in their announcement is no longer an Anthropic customer."**
 
-*[B-roll: pull-quote card "— the answer kind of feels like the finger" with channel attribution. Then a cut to the Theo video thumbnail "I'm done." next to the Matt Pocock thumbnail. The viewer should recognize at least one of these.]*
+*[B-roll: pull-quote cards stack on screen.
+Card 1: "they took what could have been a good idea and are using it as a bludgeoning stick"
+Card 2: "all of this is an attack on open source"
+Then a screen-record of Theo's tweet announcing the cancellation, with the date highlighted.]*
 
-**"So I'm going to. Because I think when two big creators see something this clearly and step back from saying it out loud, somebody has to. Here is what actually got cut."**
+**"So we have one big creator who saw it, did the math, and stepped back from naming it. We have another big creator who saw it, named it as a bludgeoning stick, and walked. Neither put the two May 13th announcements side-by-side and named what that pairing actually is. I'm going to. Here is what actually got cut."**
 
 ---
 
@@ -85,14 +124,14 @@ Line 1: "$20 ÷ avg $0.014/1K tokens ≈ 1.43M tokens"
 Line 2: "1 Claude Code session ≈ 100K–500K tokens"
 Line 3 (lands hard): **"≈ 3 to 14 sessions / month"**]*
 
-**"That's Pro. Here's where it gets ugly. The Max 20x plan — the two hundred dollar a month plan — that one has been quoted, the educator I mentioned cited this directly, as delivering up to five thousand dollars of effective API value every single month. Five thousand dollars. That's the value people have been pulling out of a two hundred dollar subscription using the Agent SDK and OpenClaw and `claude dash p` for the last year. Starting June 15th, that exact same Max 20x plan caps your programmatic usage at two hundred dollars of API value. Five grand to two hundred. That is not a fifty percent change. That is a twenty-five times cut."**
+**"That's Pro. Here's where it gets ugly. The Max 20x plan — the two hundred dollar a month plan — that one has been quoted as delivering up to five thousand dollars of effective API value every single month. Five thousand dollars. That's the value indie hackers and small teams have been pulling out of a two hundred dollar subscription for the last year using the Agent SDK. Starting June 15th, that exact same Max 20x plan caps your programmatic usage at two hundred dollars of API value. Five grand to two hundred. That is not a fifty percent change. That is a twenty-five-times cut at the conservative end. Forty-times at the heavy end. And on Sonnet-heavy workloads — where one dollar of subscription buys you the most tokens — the credible math goes as high as one hundred seventy-five times. The fifty percent increase headline that ran the same day is not in the same universe of magnitude. That is a different number, on purpose, pointed at a different audience, on the same calendar day."**
 
 *[B-roll: bar chart with two columns.
 Before bar: $5,000 effective value on Max 20x (tall green bar, labeled "Max 20x — old effective ceiling").
 After bar: $200 hard cap (short red bar).
-A diagonal slash labeled "−25x" cuts the green bar down to the red one.]*
+Three diagonal slash labels stack on the cut: "−25x conservative", "−40x heavy", "−175x Sonnet-heavy".]*
 
-**"On Pro, the OpenClaw operator who's been squeezing about two hundred dollars of API value out of a twenty dollar plan — that ratio dies. Two hundred down to twenty. Ten times cut. Same hardware. Same plan. Different month."**
+**"On Pro, the OpenClaw operator who's been squeezing about two hundred dollars of API value out of a twenty dollar plan — that ratio dies. Two hundred down to twenty. Ten-times cut on Pro. Same hardware. Same plan. Different month."**
 
 *[B-roll: second smaller bar chart, "Pro plan — OpenClaw operator" with $200 → $20 collapse, labeled "−10x".]*
 
@@ -110,7 +149,11 @@ A diagonal slash labeled "−25x" cuts the green bar down to the red one.]*
 
 *[B-roll: the @ClaudeDevs tweet on screen, highlighted phrase by phrase as you read it. "We have heard your questions" — yellow underline. "claim a dedicated monthly credit" — yellow underline.]*
 
-**"Then notice where it was posted. The credit change went out from @ClaudeDevs. The fifty-percent-increase announcement went out from the main @AnthropicAI account and got blasted by the company's PR machine. Same day. Different channels. Different audiences. The press never saw the help-center page. The headline writers wrote what they were handed."**
+**"It got so brazen that Anthropic's own Lydia Hallie — she works on Claude Code, she's a real Anthropic employee — posted a tweet trying to clarify the change. Her tweet got Community Noted on X within hours. Community Notes require broad consensus across political lines. They don't go up for spin. The note that landed on her tweet said the truth in one sentence — that programmatic usage now draws from a separate twenty-to-two-hundred dollar monthly credit metered at full API rates. When the platform's own consensus system has to correct your developer-relations team about your own pricing change, the framing has already failed. That's not a controversy. That's a fact-check."**
+
+*[B-roll: screenshot of Lydia Hallie's tweet with the Community Note attached underneath in the standard X format. The Community Note text is highlighted. Annotation above: "Anthropic's own dev-rel — Community Noted by X."]*
+
+**"Then notice where the announcements were posted. The credit change went out from @ClaudeDevs. The fifty-percent-increase announcement went out from the main @AnthropicAI account and got blasted by the company's PR machine. Same day. Different channels. Different audiences. The press never saw the help-center page. The headline writers wrote what they were handed."**
 
 *[B-roll: side-by-side of two X profiles — @AnthropicAI with the 50% increase tweet, vs @ClaudeDevs with the credit-pool tweet. Follower counts visible on both — Anthropic main account 800K+, ClaudeDevs much smaller. Annotation: "Different audience. Same day."]*
 
@@ -191,7 +234,7 @@ Arrow extends past May 13 with "??? next" in gray.]*
 
 **"Part one. The cut itself is defensible. The era of squeezing five thousand dollars of API value out of a two hundred dollar plan was always going to end. That was arbitrage. It was never going to last. Anthropic isn't wrong to fix it."**
 
-**"Part two. The way they fixed it is not defensible. This is the standard API-company playbook — headline the gift, footnote the cost. Bury the bad news on a help page on the same day the good news hits the press. Frame the cut as a credit. Use 'we heard your questions' language for a change that takes something away. This isn't a billing change. This is a marketing strategy. And the novelty here isn't the cut. It's that Anthropic ran both halves of the playbook on the same day in the same press cycle and almost nobody put them side-by-side."**
+**"Part two. The way they fixed it is not defensible. This is the standard API-company playbook — headline the gift, footnote the cost. Bury the bad news on a help page on the same day the good news hits the press. Frame the cut as a credit. Use 'we heard your questions' language for a change that takes something away. Let your own developer-relations person get Community Noted by the platform. This isn't a billing change. This is a marketing strategy. And the novelty here isn't the cut. It's that Anthropic ran both halves of the playbook on the same day in the same press cycle and almost nobody put them side-by-side. Theo Browne, the guy whose product they cited, called it 'an attack on open source' and canceled his plan. He's not wrong to call it that."**
 
 **"So no — this isn't malicious. This is just corporate communications doing what corporate communications does. But pretend it wasn't deliberate and you will get hit by the next one too. They bet you'd see the headline and miss the help page. Don't."**
 
