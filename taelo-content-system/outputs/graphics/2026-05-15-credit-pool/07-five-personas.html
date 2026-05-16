@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>07 — Five Personas (paper-texture rebuild)</title>
+<!--
+  Use: Beat 5 (4:50 — 6:10).
+  Keys: press 1-5 to reveal personas on Taelo's cue. Press 0 or Space for footer. R to reset.
+-->
+<style>
+  :root {
+    --paper: #F1E9D6;
+    --paper-shadow: #E2D6BB;
+    --ink: #1E2832;
+    --ink-soft: #7A8590;
+    --red: #C8463C;
+    --highlight: #F4E04D;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100vw; height: 100vh; overflow: hidden; background: var(--paper); font-family: "Inter", "Helvetica Neue", Arial, sans-serif; color: var(--ink); }
+  body { display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; padding: 5vh 3vw; }
+
+  body::before {
+    content: "";
+    position: fixed; inset: -20px;
+    pointer-events: none;
+    z-index: 1;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.118  0 0 0 0 0.157  0 0 0 0 0.196  0 0 0 0.28 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity: 0.6;
+    mix-blend-mode: multiply;
+    animation: drift 14s ease-in-out infinite;
+  }
+  body::after {
+    content: "";
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    background: radial-gradient(ellipse at center, transparent 45%, rgba(60, 40, 20, 0.16) 100%);
+  }
+  @keyframes drift {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(-6px, 3px); }
+    50% { transform: translate(3px, -5px); }
+    75% { transform: translate(-3px, 6px); }
+  }
+
+  .stage { position: relative; z-index: 10; width: 100%; display: flex; flex-direction: column; align-items: center; }
+
+  .header { text-align: center; margin-bottom: 4vh; opacity: 0; transform: translateY(-12px); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
+  .header.show { opacity: 1; transform: translateY(0); }
+  .header .eyebrow { font-family: "JetBrains Mono", monospace; font-size: 0.95vw; color: var(--red); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 1.2vh; }
+  .header h1 { font-size: 3vw; font-weight: 800; color: var(--ink); letter-spacing: -0.025em; }
+  .header h1 .marker { background: linear-gradient(120deg, transparent 0%, var(--highlight) 30%, var(--highlight) 70%, transparent 100%); padding: 0 0.4vw; }
+
+  /* Index-card grid */
+  .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.2vw; width: 100%; max-width: 1700px; align-items: stretch; }
+
+  .card { background: rgba(255, 252, 244, 0.45); border: 1.5px dashed var(--ink-soft); padding: 2.5vh 1.2vw 2vh; display: flex; flex-direction: column; align-items: center; gap: 1.6vh; min-height: 50vh; position: relative; opacity: 0.2; filter: grayscale(0.7); transition: opacity 0.45s ease-out, filter 0.45s ease-out, transform 0.45s cubic-bezier(0.2, 0.7, 0.3, 1.1); }
+  .card.show { opacity: 1; filter: grayscale(0); }
+  .card.active { transform: scale(1.04) translateY(-1vh) !important; }
+
+  /* Tilt each card */
+  .card:nth-child(1) { transform: rotate(-1.8deg); }
+  .card:nth-child(2) { transform: rotate(1.4deg); }
+  .card:nth-child(3) { transform: rotate(-1deg); }
+  .card:nth-child(4) { transform: rotate(2deg); }
+  .card:nth-child(5) { transform: rotate(-1.6deg); }
+
+  /* Card top corner */
+  .corner { position: absolute; top: -1.4vh; left: 0.8vw; padding: 0 0.5vw; background: var(--paper); font-family: "JetBrains Mono", monospace; font-size: 0.85vw; color: var(--ink-soft); letter-spacing: 0.2em; }
+  .card.show .corner { color: var(--red); font-weight: 700; }
+
+  .icon { width: 5.5vw; height: 5.5vw; margin-top: 1vh; }
+  .icon svg { width: 100%; height: 100%; stroke: var(--ink); stroke-width: 1.4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .icon svg .accent { stroke: var(--red); }
+
+  .role { font-size: 1.3vw; font-weight: 800; text-align: center; line-height: 1.15; color: var(--ink); letter-spacing: -0.01em; min-height: 4vh; display: flex; align-items: center; }
+
+  /* Cut number (mono, not pill) */
+  .cut { font-family: "JetBrains Mono", monospace; font-weight: 800; font-size: 2vw; color: var(--red); line-height: 1; letter-spacing: -0.02em; display: flex; align-items: baseline; gap: 0.3vw; }
+  .cut .x { font-size: 1.4vw; }
+  .cut .lbl { font-family: "JetBrains Mono", monospace; font-size: 0.75vw; color: var(--ink-soft); letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500; margin-left: 0.4vw; }
+
+  /* Body detail */
+  .detail { font-family: "Source Serif Pro", "Georgia", serif; font-style: italic; font-size: 0.95vw; color: var(--ink); text-align: center; line-height: 1.4; padding: 0 0.4vw; }
+  .detail .strong { font-style: normal; font-weight: 700; color: var(--ink); }
+
+  /* Move hint at bottom (dashed underline) */
+  .move-hint { position: absolute; bottom: 1.8vh; left: 50%; transform: translateX(-50%); font-family: "JetBrains Mono", monospace; font-size: 0.7vw; color: var(--ink-soft); letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; border-top: 1px dashed var(--ink-soft); padding-top: 0.6vh; opacity: 0; transition: opacity 0.3s ease-out; }
+  .card.show .move-hint { opacity: 1; }
+
+  /* Footer prompt */
+  .footer { margin-top: 4vh; font-family: "Source Serif Pro", "Georgia", serif; font-style: italic; font-size: 1.4vw; color: var(--ink); opacity: 0; transition: opacity 0.5s ease-out; padding: 1vh 2vw; border-top: 1.5px dashed var(--ink-soft); border-bottom: 1.5px dashed var(--ink-soft); transform: rotate(-0.4deg); }
+  .footer.show { opacity: 1; }
+  .footer .b { font-style: normal; color: var(--red); font-weight: 800; }
+</style>
+</head>
+<body data-duration="18000">
+<div class="stage">
+  <div class="header" id="hdr">
+    <div class="eyebrow">5 personas · 1 deadline</div>
+    <h1>Which one of these is <span class="marker">you</span>?</h1>
+  </div>
+
+  <div class="grid">
+    <!-- 01 OpenClaw -->
+    <div class="card" id="c1">
+      <div class="corner">01</div>
+      <div class="icon">
+        <svg viewBox="0 0 64 64">
+          <rect x="6" y="14" width="52" height="36" rx="2"/>
+          <circle cx="20" cy="32" r="2.5"/>
+          <circle cx="32" cy="32" r="2.5"/>
+          <circle cx="44" cy="32" r="2.5"/>
+          <path d="M14 6 L14 14" class="accent"/>
+          <path d="M50 6 L50 14" class="accent"/>
+        </svg>
+      </div>
+      <div class="role">OpenClaw operator</div>
+      <div class="cut">−10<span class="x">×</span><span class="lbl">Pro · hit hardest</span></div>
+      <div class="detail">$200 effective <span class="strong">→</span> $20 hard cap</div>
+      <div class="move-hint">move to API key</div>
+    </div>
+
+    <!-- 02 claude -p scripter -->
+    <div class="card" id="c2">
+      <div class="corner">02</div>
+      <div class="icon">
+        <svg viewBox="0 0 64 64">
+          <rect x="6" y="10" width="52" height="44" rx="2"/>
+          <line x1="6" y1="20" x2="58" y2="20"/>
+          <circle cx="12" cy="15" r="1"/>
+          <circle cx="16" cy="15" r="1"/>
+          <text x="11" y="36" fill="#1E2832" font-family="JetBrains Mono" font-size="8" font-weight="700">$</text>
+          <text x="22" y="36" fill="#C8463C" font-family="JetBrains Mono" font-size="8" font-weight="700" class="accent">cron</text>
+          <text x="11" y="48" fill="#1E2832" font-family="JetBrains Mono" font-size="8" font-weight="700">-p ...</text>
+        </svg>
+      </div>
+      <div class="role">claude -p scripter</div>
+      <div class="cut">−5 to 10<span class="x">×</span><span class="lbl">cron · pipelines</span></div>
+      <div class="detail">Painless to fix — <span class="strong">if you measure first</span></div>
+      <div class="move-hint">bookmark Usage today</div>
+    </div>
+
+    <!-- 03 PR reviewer -->
+    <div class="card" id="c3">
+      <div class="corner">03</div>
+      <div class="icon">
+        <svg viewBox="0 0 64 64">
+          <circle cx="14" cy="14" r="4"/>
+          <circle cx="14" cy="50" r="4"/>
+          <circle cx="50" cy="32" r="4"/>
+          <path d="M14 18 L14 46"/>
+          <path d="M18 16 Q 30 18, 32 32 L 46 32"/>
+          <path d="M44 28 L 48 32 L 44 36" class="accent"/>
+        </svg>
+      </div>
+      <div class="role">GitHub Actions PR reviewer</div>
+      <div class="cut">7–20<span class="lbl">PRs / month on Pro</span></div>
+      <div class="detail">$1–3 per review · <span class="strong">bot dies on the 18th</span></div>
+      <div class="move-hint">route to org API key</div>
+    </div>
+
+    <!-- 04 SaaS founder -->
+    <div class="card" id="c4">
+      <div class="corner">04</div>
+      <div class="icon">
+        <svg viewBox="0 0 64 64">
+          <circle cx="32" cy="14" r="4"/>
+          <path d="M32 18 L 32 36"/>
+          <path d="M32 36 L 14 50"/>
+          <path d="M32 36 L 32 50"/>
+          <path d="M32 36 L 50 50"/>
+          <circle cx="14" cy="52" r="3" class="accent"/>
+          <circle cx="32" cy="52" r="3" class="accent"/>
+          <circle cx="50" cy="52" r="3" class="accent"/>
+        </svg>
+      </div>
+      <div class="role">Agentic SaaS founder</div>
+      <div class="cut">3 choices<span class="lbl">eat · pass · gate</span></div>
+      <div class="detail">Users hit your account — <span class="strong">architecture call</span></div>
+      <div class="move-hint">pick pricing model now</div>
+    </div>
+
+    <!-- 05 International -->
+    <div class="card" id="c5">
+      <div class="corner">05</div>
+      <div class="icon">
+        <svg viewBox="0 0 64 64">
+          <circle cx="32" cy="32" r="22"/>
+          <ellipse cx="32" cy="32" rx="10" ry="22"/>
+          <line x1="10" y1="32" x2="54" y2="32"/>
+          <circle cx="42" cy="22" r="2" class="accent"/>
+          <circle cx="44" cy="38" r="2" class="accent"/>
+          <circle cx="18" cy="40" r="1.5" class="accent"/>
+        </svg>
+      </div>
+      <div class="role">International / client-work operator</div>
+      <div class="cut">margin squeeze<span class="lbl">korea · sg · sea</span></div>
+      <div class="detail">Billing clients on Pro? — <span class="strong">move now</span></div>
+      <div class="move-hint">renegotiate by June 15</div>
+    </div>
+  </div>
+
+  <div class="footer" id="ftr">Pick yours <span class="b">→</span> comment below for the deep-dive next month</div>
+</div>
+
+<script>
+  let active = null;
+  function show(n) {
+    if (active) { const o = document.getElementById('c' + active); if (o) o.classList.remove('active'); }
+    const c = document.getElementById('c' + n);
+    c.classList.add('show'); c.classList.add('active');
+    active = n;
+  }
+  function autoPlay() {
+    document.querySelectorAll('.show, .active').forEach(el => { el.classList.remove('show'); el.classList.remove('active'); });
+    active = null;
+    setTimeout(() => document.getElementById('hdr').classList.add('show'), 200);
+    [1,2,3,4,5].forEach((n,i) => setTimeout(() => show(n), 1200 + i * 2900));
+    setTimeout(() => document.getElementById('ftr').classList.add('show'), 1200 + 5 * 2900);
+  }
+  document.addEventListener('DOMContentLoaded', () => setTimeout(autoPlay, 500));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'r' || e.key === 'R') autoPlay();
+    if (['1','2','3','4','5'].includes(e.key)) {
+      if (!document.getElementById('hdr').classList.contains('show')) document.getElementById('hdr').classList.add('show');
+      show(parseInt(e.key));
+    }
+    if (e.key === '0' || e.key === ' ') document.getElementById('ftr').classList.add('show');
+  });
+</script>
+</body>
+</html>

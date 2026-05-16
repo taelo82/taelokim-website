@@ -1,0 +1,7 @@
+# Rendered video outputs — regenerate via `python3 render.py`
+# HTML sources + render.py + README are the source of truth, tracked normally.
+*.mp4
+*.mov
+
+# Render work dir (cleaned by render.py but ignore just in case)
+.render-tmp/

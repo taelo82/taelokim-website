@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>05 — Extra Usage Toggle Off-By-Default</title>
+<!--
+  Use: Beat 3 end (~3:30 — 3:50) when Taelo says "the 'Extra Usage' toggle...is off by default. So a lot of people will hit the wall in late June..."
+  Total animation: 9 sec
+  Two-act: toggle stays OFF → ghosted clock ticks to June 18 2am → "agent dies" message
+-->
+<style>
+  :root { --slate: #0E1116; --cream: #F5F1EB; --coral: #D97757; --red: #E04848; --green: #2E7D5B; --muted: #6B6B6B; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100vw; height: 100vh; overflow: hidden; background: var(--cream); font-family: -apple-system, "SF Pro Display", "Helvetica Neue", sans-serif; }
+  body { display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; padding: 5vh 4vw; gap: 4vh; }
+
+  .header { text-align: center; opacity: 0; transform: translateY(-15px); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
+  .header.show { opacity: 1; transform: translateY(0); }
+  .header h1 { font-size: 3vw; font-weight: 800; color: var(--slate); letter-spacing: -0.02em; }
+  .header .sub { font-family: "JetBrains Mono", monospace; font-size: 1vw; color: var(--muted); margin-top: 1vh; letter-spacing: 0.15em; text-transform: uppercase; }
+
+  /* Console panel */
+  .panel { width: 60vw; max-width: 900px; background: white; border-radius: 18px; box-shadow: 0 20px 50px rgba(0,0,0,0.08); overflow: hidden; opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
+  .panel.show { opacity: 1; transform: translateY(0); }
+  .panel-head { padding: 1.6vh 2vw; background: #FAFAFA; border-bottom: 1px solid rgba(0,0,0,0.06); display: flex; align-items: center; gap: 1vw; font-family: "JetBrains Mono", monospace; font-size: 0.95vw; color: var(--muted); }
+  .panel-head .dot { width: 0.6vw; height: 0.6vw; border-radius: 50%; background: #ddd; }
+  .panel-head .dot.r { background: #FF5F57; }
+  .panel-head .dot.y { background: #FFBD2E; }
+  .panel-head .dot.g { background: #28CA42; }
+  .panel-head .path { margin-left: auto; opacity: 0.6; }
+  .panel-body { padding: 4vh 3vw; display: flex; align-items: center; justify-content: space-between; gap: 3vw; }
+  .row-info { flex: 1; }
+  .row-title { font-size: 1.6vw; font-weight: 700; color: var(--slate); }
+  .row-desc { font-size: 0.95vw; color: var(--muted); margin-top: 0.8vh; line-height: 1.4; }
+
+  /* Toggle */
+  .toggle { width: 7vw; height: 3.6vw; background: #E5E5E5; border-radius: 999px; position: relative; flex-shrink: 0; box-shadow: inset 0 2px 6px rgba(0,0,0,0.1); }
+  .toggle .knob { position: absolute; top: 0.25vw; left: 0.25vw; width: 3.1vw; height: 3.1vw; background: white; border-radius: 50%; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: left 0.3s ease-out; }
+  .toggle.on { background: var(--green); }
+  .toggle.on .knob { left: calc(100% - 3.35vw); }
+  .toggle .state { position: absolute; top: 50%; transform: translateY(-50%); font-family: "JetBrains Mono", monospace; font-size: 0.9vw; font-weight: 700; color: var(--muted); letter-spacing: 0.1em; }
+  .toggle .state.off { right: 0.6vw; }
+  .toggle.on .state.off { display: none; }
+  .toggle .state.on { left: 0.7vw; display: none; color: white; }
+  .toggle.on .state.on { display: block; }
+
+  /* Red arrow pointing at toggle */
+  .arrow-cluster { position: relative; display: flex; flex-direction: column; align-items: center; opacity: 0; transition: opacity 0.4s ease-out; }
+  .arrow-cluster.show { opacity: 1; }
+  .arrow-cluster .ar { font-size: 3vw; color: var(--red); animation: bob 1s ease-in-out infinite; }
+  @keyframes bob { 0%, 100% { transform: translateY(0);} 50% { transform: translateY(-6px);} }
+  .arrow-cluster .lbl { font-family: "JetBrains Mono", monospace; font-size: 0.95vw; color: var(--red); font-weight: 700; margin-top: 0.6vh; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; }
+
+  /* Result panel - "agent silently dies" */
+  .result { width: 60vw; max-width: 900px; background: #1A0606; color: var(--cream); border-radius: 14px; padding: 3vh 2.5vw; font-family: "JetBrains Mono", monospace; box-shadow: 0 20px 50px rgba(0,0,0,0.2); opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
+  .result.show { opacity: 1; transform: translateY(0); }
+  .result .line { font-size: 1.1vw; line-height: 1.7; opacity: 0; }
+  .result .line.show { opacity: 1; transition: opacity 0.3s ease-out; }
+  .result .ts { color: var(--muted); }
+  .result .ok { color: #4FA67D; }
+  .result .err { color: var(--red); font-weight: 700; }
+  .result .dim { opacity: 0.5; }
+  .cursor { display: inline-block; width: 0.6vw; height: 1.2vw; background: var(--cream); vertical-align: text-bottom; animation: blink 0.8s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0;} }
+
+</style>
+</head>
+<body data-duration="7500">
+  <div class="header" id="hdr">
+    <h1>The toggle that's <span style="color: var(--red);">OFF by default</span></h1>
+    <div class="sub">console.anthropic.com / billing / extra usage</div>
+  </div>
+
+  <div class="panel" id="panel">
+    <div class="panel-head">
+      <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+      <div class="path">Billing settings</div>
+    </div>
+    <div class="panel-body">
+      <div class="row-info">
+        <div class="row-title">Allow extra usage</div>
+        <div class="row-desc">When enabled, programmatic usage continues past your monthly credit at standard pay-as-you-go API rates.</div>
+      </div>
+      <div class="toggle" id="toggle">
+        <div class="knob"></div>
+        <div class="state off">OFF</div>
+        <div class="state on">ON</div>
+      </div>
+      <div class="arrow-cluster" id="ar">
+        <div class="ar">←</div>
+        <div class="lbl">stays off</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="result" id="res">
+    <div class="line" id="l1"><span class="ts">[2026-06-18 02:14:33]</span> <span class="ok">claude -p</span> "Review PR #423 changes" <span class="dim">--background</span></div>
+    <div class="line" id="l2"><span class="ts">[2026-06-18 02:14:51]</span> Loading context... 42K tokens</div>
+    <div class="line" id="l3"><span class="ts">[2026-06-18 02:15:02]</span> <span class="err">ERROR:</span> credit_exhausted (extra_usage=disabled)</div>
+    <div class="line" id="l4"><span class="ts">[2026-06-18 02:15:02]</span> <span class="err">Agent terminated. PR review not posted.</span><span class="cursor"></span></div>
+  </div>
+
+<script>
+  function play() {
+    document.querySelectorAll('.show').forEach(el => el.classList.remove('show'));
+    document.getElementById('toggle').classList.remove('on');
+    setTimeout(() => document.getElementById('hdr').classList.add('show'), 200);
+    setTimeout(() => document.getElementById('panel').classList.add('show'), 800);
+    setTimeout(() => document.getElementById('ar').classList.add('show'), 2000);
+    // Show result panel
+    setTimeout(() => document.getElementById('res').classList.add('show'), 4000);
+    [['l1', 4400],['l2', 5000],['l3', 5800],['l4', 6400]].forEach(([id,t]) => setTimeout(() => document.getElementById(id).classList.add('show'), t));
+  }
+  document.addEventListener('DOMContentLoaded', () => setTimeout(play, 500));
+  document.addEventListener('keydown', (e) => { if (e.key === 'r' || e.key === 'R') play(); });
+</script>
+</body>
+</html>

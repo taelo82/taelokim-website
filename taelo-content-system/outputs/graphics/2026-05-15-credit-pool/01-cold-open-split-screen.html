@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>01 — Cold Open Split-Screen Reveal</title>
+<!--
+  Use: Beat 1A (0:14 — 0:24 in script, right when Taelo says "I could not believe what I was witnessing...same afternoon...buried the opposite news")
+  Total animation: 10 sec
+  Background music: cut to silence on red side reveal
+  Trigger: refresh page (Cmd+R) to replay
+-->
+<style>
+  :root {
+    --slate: #0E1116;
+    --cream: #F5F1EB;
+    --coral: #D97757;
+    --red: #E04848;
+    --green: #2E7D5B;
+    --gold: #C9A227;
+    --muted: #6B6B6B;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100vw; height: 100vh; overflow: hidden; background: var(--cream); font-family: -apple-system, "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  body { display: flex; align-items: center; justify-content: center; position: relative; }
+
+  /* Two-panel layout */
+  .stage { width: 100vw; height: 100vh; display: flex; position: relative; overflow: hidden; }
+  .panel { flex: 1; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; opacity: 0; transform: translateY(40px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; padding: 4vh 3vw; }
+  .panel.green { background: linear-gradient(180deg, #EAF5EE 0%, #D9EBDE 100%); }
+  .panel.red { background: linear-gradient(180deg, #2A0A0A 0%, #1A0606 100%); color: var(--cream); }
+
+  .panel.show { opacity: 1; transform: translateY(0); }
+
+  /* Center date stripe */
+  .date-stripe { position: absolute; top: 0; left: 50%; transform: translateX(-50%) scaleY(0); transform-origin: top center; width: 11vw; height: 100%; background: var(--red); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2vh; z-index: 10; transition: transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.2); box-shadow: 0 0 60px rgba(224, 72, 72, 0.4); }
+  .date-stripe.show { transform: translateX(-50%) scaleY(1); }
+  .date-stripe .month { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 2.4vw; font-weight: 700; color: var(--cream); letter-spacing: 0.15em; }
+  .date-stripe .day { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 11vw; font-weight: 800; color: var(--cream); line-height: 1; }
+  .date-stripe .label { font-family: "JetBrains Mono", monospace; font-size: 1.1vw; color: var(--cream); opacity: 0.85; letter-spacing: 0.2em; margin-top: 1vh; }
+
+  /* Browser chrome */
+  .browser { width: 88%; max-width: 700px; background: white; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.15); overflow: hidden; }
+  .panel.red .browser { background: #1F1B1B; box-shadow: 0 20px 50px rgba(0,0,0,0.6); }
+  .url-bar { padding: 1.2vh 1.5vw; display: flex; align-items: center; gap: 0.8vw; border-bottom: 1px solid rgba(0,0,0,0.08); }
+  .panel.red .url-bar { border-bottom-color: rgba(255,255,255,0.08); }
+  .dots { display: flex; gap: 0.4vw; }
+  .dot { width: 0.7vw; height: 0.7vw; border-radius: 50%; background: #ddd; }
+  .panel.red .dot { background: #4A3A3A; }
+  .dot.r { background: #FF5F57; }
+  .dot.y { background: #FFBD2E; }
+  .dot.g { background: #28CA42; }
+  .url { font-family: "JetBrains Mono", monospace; font-size: 1.05vw; color: var(--slate); flex: 1; padding: 0.5vh 1vw; background: rgba(0,0,0,0.04); border-radius: 6px; }
+  .panel.red .url { color: var(--cream); background: rgba(255,255,255,0.06); }
+  .url .highlight { background: rgba(224, 72, 72, 0.35); padding: 0 4px; border-radius: 3px; color: white; font-weight: 600; }
+  .panel.green .url .highlight { background: rgba(46, 125, 91, 0.3); color: var(--green); font-weight: 600; }
+  .page-body { padding: 3vh 2vw; min-height: 26vh; }
+  .headline { font-size: 2.4vw; font-weight: 700; line-height: 1.2; margin-bottom: 1.6vh; color: var(--slate); }
+  .panel.red .headline { color: var(--cream); }
+  .panel.red .headline .accent { color: var(--red); }
+  .panel.green .headline .accent { color: var(--green); }
+  .sub { font-size: 1.2vw; color: var(--muted); line-height: 1.5; }
+  .panel.red .sub { color: rgba(245, 241, 235, 0.6); }
+  .stat { display: inline-block; margin-top: 2vh; padding: 1vh 1.4vw; background: var(--green); color: white; border-radius: 999px; font-family: "JetBrains Mono", monospace; font-size: 1.4vw; font-weight: 700; }
+  .panel.red .stat { background: var(--red); color: white; }
+  .panel.red .stat .x { font-size: 2vw; }
+
+  /* Headline grid in green panel */
+  .press-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4vh 1vw; margin-top: 2.5vh; }
+  .press-card { background: white; padding: 1vh 1.2vw; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); opacity: 0; transform: translateY(10px); transition: opacity 0.4s ease-out, transform 0.4s ease-out; }
+  .press-card.show { opacity: 1; transform: translateY(0); }
+  .press-card .src { font-family: "JetBrains Mono", monospace; font-size: 0.75vw; color: var(--green); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+  .press-card .ph { font-size: 1.05vw; font-weight: 600; color: var(--slate); margin-top: 0.3vh; }
+
+  /* Top chyron */
+  .chyron { position: absolute; top: 3vh; left: 50%; transform: translateX(-50%); font-family: "JetBrains Mono", monospace; font-size: 1vw; color: var(--slate); opacity: 0; transition: opacity 0.4s ease-out 1.2s; letter-spacing: 0.25em; z-index: 20; text-transform: uppercase; background: var(--cream); padding: 0.6vh 1.5vw; border-radius: 999px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+  .chyron.show { opacity: 0.7; }
+
+</style>
+</head>
+<body data-duration="5500">
+<div class="stage">
+  <div class="panel green" id="left">
+    <div class="browser">
+      <div class="url-bar">
+        <div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+        <div class="url">anthropic.com/news/<span class="highlight">higher-limits-spacex</span></div>
+      </div>
+      <div class="page-body">
+        <div class="headline">Higher usage limits for Claude <span class="accent">↑</span></div>
+        <div class="sub">SpaceX compute deal expands Claude Code capacity for Pro, Max, Team, and Enterprise.</div>
+        <div class="stat">+50% weekly · through July 13</div>
+      </div>
+    </div>
+    <div class="press-grid">
+      <div class="press-card" id="p1"><div class="src">9to5Google</div><div class="ph">"Claude Code limits doubled"</div></div>
+      <div class="press-card" id="p2"><div class="src">Business Standard</div><div class="ph">"Post SpaceX deal"</div></div>
+      <div class="press-card" id="p3"><div class="src">AndroidHeadlines</div><div class="ph">"More Claude for everyone"</div></div>
+      <div class="press-card" id="p4"><div class="src">Pulse2</div><div class="ph">"Anthropic doubles usage"</div></div>
+    </div>
+  </div>
+
+  <div class="date-stripe" id="stripe">
+    <div class="month">MAY</div>
+    <div class="day">13</div>
+    <div class="label">SAME DAY</div>
+  </div>
+
+  <div class="panel red" id="right">
+    <div class="browser">
+      <div class="url-bar">
+        <div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+        <div class="url">support.claude.com/.../<span class="highlight">agent-sdk</span></div>
+      </div>
+      <div class="page-body">
+        <div class="headline">Use the Claude Agent SDK with your plan <span class="accent">⚠</span></div>
+        <div class="sub">"Paid Claude plans can claim a dedicated monthly credit for programmatic usage."</div>
+        <div class="stat">−<span class="x">40×</span> cut · starts June 15</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chyron" id="chyron">SAME DAY · OPPOSITE DIRECTIONS</div>
+</div>
+
+<script>
+  function play() {
+    document.querySelectorAll('.show').forEach(el => el.classList.remove('show'));
+    setTimeout(() => document.getElementById('left').classList.add('show'), 200);
+    [['p1', 1100],['p2',1300],['p3',1500],['p4',1700]].forEach(([id,t]) => setTimeout(() => document.getElementById(id).classList.add('show'), t));
+    setTimeout(() => document.getElementById('stripe').classList.add('show'), 2700);
+    setTimeout(() => document.getElementById('right').classList.add('show'), 3400);
+    setTimeout(() => document.getElementById('chyron').classList.add('show'), 4000);
+  }
+  document.addEventListener('DOMContentLoaded', () => setTimeout(play, 500));
+  document.addEventListener('keydown', (e) => { if (e.key === 'r' || e.key === 'R') play(); });
+</script>
+</body>
+</html>

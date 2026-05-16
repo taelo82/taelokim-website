@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>06 — Lydia Hallie Community Note</title>
+<!--
+  Use: Beat 4 (4:00 — 4:30) when Taelo says "Anthropic's own Lydia Hallie...posted a tweet trying to clarify the change and got Community Noted within hours."
+  Total animation: 9 sec
+  Mock tweet → fade tint, Community Note slides up from beneath with X's standard styling
+-->
+<style>
+  :root { --slate: #0E1116; --cream: #F5F1EB; --twitter-text: #0F1419; --twitter-muted: #536471; --twitter-border: #EFF3F4; --note-bg: #F7F9F9; --note-accent: #16181C; --red: #E04848; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100vw; height: 100vh; overflow: hidden; background: var(--cream); font-family: -apple-system, "SF Pro Display", "Helvetica Neue", sans-serif; }
+  body { display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; padding: 5vh 4vw; }
+
+  .header { text-align: center; opacity: 0; transform: translateY(-15px); transition: opacity 0.5s ease-out, transform 0.5s ease-out; margin-bottom: 4vh; }
+  .header.show { opacity: 1; transform: translateY(0); }
+  .header h1 { font-size: 2.8vw; font-weight: 800; color: var(--slate); letter-spacing: -0.02em; }
+  .header .sub { font-family: "JetBrains Mono", monospace; font-size: 0.95vw; color: var(--red); margin-top: 1vh; letter-spacing: 0.15em; text-transform: uppercase; }
+
+  /* Tweet card */
+  .tweet { width: 50vw; max-width: 720px; background: white; border-radius: 16px; padding: 2.5vh 2vw; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid var(--twitter-border); opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
+  .tweet.show { opacity: 1; transform: translateY(0); }
+  .tweet-head { display: flex; align-items: flex-start; gap: 1vw; }
+  .avatar { width: 3.6vw; height: 3.6vw; border-radius: 50%; background: linear-gradient(135deg, #D97757 0%, #C9A227 100%); display: flex; align-items: center; justify-content: center; font-weight: 800; color: white; font-size: 1.6vw; flex-shrink: 0; }
+  .name-block { flex: 1; }
+  .name { display: flex; align-items: center; gap: 0.4vw; font-size: 1.1vw; font-weight: 700; color: var(--twitter-text); }
+  .name .verified { color: #1D9BF0; font-size: 1.1vw; }
+  .handle { font-size: 0.95vw; color: var(--twitter-muted); }
+  .handle .role { background: var(--note-bg); padding: 0.2vh 0.5vw; border-radius: 4px; font-size: 0.75vw; color: var(--twitter-muted); margin-left: 0.4vw; font-weight: 600; }
+  .menu { color: var(--twitter-muted); font-size: 1.4vw; padding: 0 0.5vw; }
+  .tweet-body { font-size: 1.15vw; line-height: 1.45; color: var(--twitter-text); margin-top: 1.5vh; }
+  .tweet-meta { font-size: 0.9vw; color: var(--twitter-muted); margin-top: 1.5vh; padding-top: 1.5vh; border-top: 1px solid var(--twitter-border); }
+
+  /* Tweet darkens after Community Note slides in */
+  .tweet.dimmed { filter: grayscale(0.4) brightness(0.92); }
+  .tweet.dimmed { transition: filter 0.5s ease-out, opacity 0.5s ease-out, transform 0.5s ease-out; }
+
+  /* Community Note card */
+  .note { width: 50vw; max-width: 720px; background: white; border: 1px solid var(--twitter-border); border-radius: 16px; padding: 2.2vh 2vw; box-shadow: 0 10px 30px rgba(0,0,0,0.08); margin-top: 2vh; opacity: 0; transform: translateY(40px); transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.2, 0.8, 0.3, 1.1); }
+  .note.show { opacity: 1; transform: translateY(0); }
+  .note-head { display: flex; align-items: center; gap: 0.6vw; font-size: 1.05vw; font-weight: 700; color: var(--twitter-text); margin-bottom: 1.2vh; }
+  .note-head .icon { width: 1.4vw; height: 1.4vw; border-radius: 50%; background: linear-gradient(135deg, #4FA67D 0%, #2E7D5B 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.9vw; font-weight: 800; }
+  .note-head .badge { font-size: 0.8vw; background: var(--note-bg); color: var(--twitter-muted); padding: 0.3vh 0.6vw; border-radius: 4px; font-weight: 600; letter-spacing: 0.05em; }
+  .note-body { font-size: 1.05vw; line-height: 1.55; color: var(--twitter-text); }
+  .note-body .key { background: rgba(46, 125, 91, 0.12); color: var(--slate); padding: 0 4px; border-radius: 3px; font-weight: 600; }
+  .note-foot { font-size: 0.85vw; color: var(--twitter-muted); margin-top: 1.5vh; padding-top: 1.2vh; border-top: 1px solid var(--twitter-border); display: flex; gap: 1vw; }
+  .note-foot .yes { color: #2E7D5B; font-weight: 700; }
+
+  /* Tooltip — "within hours" */
+  .within-hours { position: absolute; right: 22vw; top: 41vh; font-family: "JetBrains Mono", monospace; font-size: 1vw; color: var(--red); font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0; transform: translateX(20px); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
+  .within-hours.show { opacity: 1; transform: translateX(0); }
+  .within-hours .ar { display: inline-block; margin-right: 0.4vw; animation: bob 1s ease-in-out infinite; }
+  @keyframes bob { 0%,100% { transform: translateX(0);} 50% { transform: translateX(-4px);} }
+
+  .sig { position: absolute; bottom: 2.5vh; right: 3vw; font-family: "JetBrains Mono", monospace; font-size: 0.85vw; color: rgba(0,0,0,0.35); opacity: 0; transition: opacity 0.4s ease-out 6s; letter-spacing: 0.2em; text-transform: uppercase; }
+  .sig.show { opacity: 1; }
+</style>
+</head>
+<body>
+  <div class="header" id="hdr">
+    <h1>Anthropic's own dev-rel · Community Noted</h1>
+    <div class="sub">When the platform corrects you on your own pricing change</div>
+  </div>
+
+  <div class="tweet" id="tweet">
+    <div class="tweet-head">
+      <div class="avatar">L</div>
+      <div class="name-block">
+        <div class="name">Lydia Hallie <span class="verified">✓</span></div>
+        <div class="handle">@lydiahallie<span class="role">Anthropic · Claude Code</span></div>
+      </div>
+      <div class="menu">···</div>
+    </div>
+    <div class="tweet-body">Just to clarify — the new programmatic credit gives the Agent SDK its own dedicated budget. Subscription limits stay reserved for interactive Claude use.</div>
+    <div class="tweet-meta">2:47 PM · May 13, 2026 · 184K Views</div>
+  </div>
+
+  <div class="within-hours" id="wh"><span class="ar">←</span>WITHIN HOURS</div>
+
+  <div class="note" id="note">
+    <div class="note-head">
+      <div class="icon">i</div>
+      <span>Readers added context</span>
+      <span class="badge">COMMUNITY NOTE</span>
+    </div>
+    <div class="note-body">
+      Previously, programmatic usage (like <span class="key">claude -p</span> and Agent SDK) drew from subsidized subscription limits.
+      Starting June 15, it draws from a separate <span class="key">$20–$200 monthly credit metered at full API rates</span>,
+      effectively a 25–40× usage reduction for AFK workloads.
+    </div>
+    <div class="note-foot">
+      <span><span class="yes">✓ Helpful</span></span>
+      <span>Cross-political consensus required</span>
+      <span style="margin-left: auto;">support.claude.com/.../agent-sdk</span>
+    </div>
+  </div>
+
+  <div class="sig" id="sig">Taelo Kim · The May 13 Switch</div>
+
+<script>
+  function play() {
+    document.querySelectorAll('.show').forEach(el => el.classList.remove('show'));
+    document.getElementById('tweet').classList.remove('dimmed');
+    setTimeout(() => document.getElementById('hdr').classList.add('show'), 200);
+    setTimeout(() => document.getElementById('tweet').classList.add('show'), 800);
+    setTimeout(() => document.getElementById('wh').classList.add('show'), 2200);
+    setTimeout(() => document.getElementById('tweet').classList.add('dimmed'), 3000);
+    setTimeout(() => document.getElementById('note').classList.add('show'), 3200);
+    setTimeout(() => document.getElementById('sig').classList.add('show'), 5800);
+  }
+  document.addEventListener('DOMContentLoaded', () => setTimeout(play, 500));
+  document.addEventListener('keydown', (e) => { if (e.key === 'r' || e.key === 'R') play(); });
+</script>
+</body>
+</html>
