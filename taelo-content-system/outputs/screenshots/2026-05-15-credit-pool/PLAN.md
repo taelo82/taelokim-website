@@ -17,10 +17,56 @@ outputs/screenshots/2026-05-15-credit-pool/
   news/          # headline screenshots, article hero crops
   timeline/      # April 4 / April 21 / May 13 source captures
   recordings/    # screen recordings (terminal, scroll-throughs)
+  filler/        # stock / meme / gif filler (heavy density per beat)
   raw/           # untrimmed source before crop
 ```
 
 Naming: `NN-beat-source.png` (e.g. `04-lydia-tweet.png`).
+
+## 2b. Locked decisions (2026-05-17)
+
+- **Announcement One = the @ClaudeDevs May 14 "50% higher through July 13" tweet**, NOT the May 6 anthropic.com/news SpaceX blog post. Preserves the "same day" framing at the dev-rel tweet layer. Do not cut to the May 6 blog at all.
+- **Theo reference = the "Theo - t3.gg is hosting" thumbnail crop from the Pocock screenshot** (Live-on-X sidebar). No separate Theo tweet or video clip. Caveat: viewer sees Theo's face but not his actual words — voiceover carries the takedown alone.
+- **Filler density: HEAVY** — every 8–15 sec of face-cam gets a filler cut. Target 40–60 filler clips total for the 10-min cut.
+- Capture path: Chrome MCP, autonomous batch (Taelo handles signed-in console + terminal recordings).
+
+## 2c. Confirmed URLs (URL hunt result, 2026-05-17)
+
+| # | Beat | URL |
+|---|---|---|
+| 1 | 4 — Lydia clarification + her two-pool diagram | https://x.com/lydiahallie/status/2054670303834616119 |
+| 2 | 2 — ClaudeDevs credit-split thread | https://x.com/ClaudeDevs/status/2054610152817619388 |
+| 3 | 1A — ClaudeDevs "50% higher" amplification | https://x.com/ClaudeDevs (May 14, separate post — capture from feed) |
+| 4 | 2 — Theo "25× cut" tweet *(reference only, not used per Taelo decision)* | https://x.com/theo/status/2054620998205624746 |
+| 5 | 9 — Axios "OpenAI courts defectors" | https://www.axios.com/2026/05/14/anthropic-claude-price-openai-tokens |
+| 6 | 9 — Noah Zweben "gaslighting replies" | https://x.com/noahzweben/status/2054615670684619255 |
+| 7 | 2 — help center | https://support.claude.com/en/articles/15036540-use-the-claude-agent-sdk-with-your-claude-plan |
+| 8 | 1B — code.claude.com Agent SDK overview | https://code.claude.com/docs/en/agent-sdk/overview |
+
+## 2d. Filler shot list (heavy density)
+
+| Beat / cue | Filler concept | Source candidates |
+|---|---|---|
+| Cold open — "walked out in front of every tech reporter" | TV-news anchor / press-conference podium / red-carpet flashbulbs | Pexels stock, Unsplash |
+| "Behind our back" | Sneaky-hand / cookie-jar / shadowy-figure meme | Giphy, Tenor |
+| "Forty. Times." / "$5K → $200" | Money-on-fire / dollar bills flying / vacuum sucking cash | Giphy + Pexels |
+| "Two a.m., your agent silently dies" | Crashed-server / robot collapsing / spinner-of-death gif | Giphy + Tenor |
+| "Weasel move" | Literal weasel B-roll or cartoon-weasel gif | Pexels + Giphy |
+| "OpenClaw bill shock — lived through it" | Credit card on fire / sweating-Jordan-Peele meme / "This is fine" dog | Giphy |
+| "Community Noted within hours" | Stamp-down / red-X / "FACT-CHECK" overlay | Giphy + Pexels |
+| "Three subscription changes in six weeks" | Calendar pages flipping / clock spinning | Pexels |
+| "Bookmark the page" | Browser-bookmark UI gif / hand pressing star icon | Tenor |
+| "API key with budget alerts" | Notification ping / alarm clock / red-bell ringtone | Giphy |
+| Friday reset closer — "market correcting in real time" | Stock-ticker / scoreboard flip / corrective-arrow | Giphy + Pexels |
+| Outro CTA | "Subscribe" arrow / red-button click gif | Giphy |
+
+Plan: 3–5 candidates per beat, Taelo picks one in the NLE. Output to `filler/`.
+
+Licensing:
+- Pexels / Unsplash → free, no attribution required
+- Giphy / Tenor → standard YouTube fair use, no problem
+- Google Image generic → AVOID Shutterstock/Getty/Alamy results; safe only if Wikimedia, Pexels, Unsplash, or known free-source
+- All filler captures saved to `filler/` with source URL recorded in filename or sidecar `.txt`
 
 ## 3. Beat-by-beat shot list
 
