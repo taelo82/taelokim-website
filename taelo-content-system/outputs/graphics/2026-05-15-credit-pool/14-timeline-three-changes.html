@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>14 — Three subscription changes in six weeks · timeline</title>
+<!--
+  Use: Beat "Zoom out" (~7:40–8:30) when Taelo says
+  "April 4th — Anthropic banned third-party agents.
+   April 21st — they briefly removed Claude Code from Pro entirely, walked it back after outrage.
+   May 13th — the credit split.
+   Three subscription changes in six weeks. Each one took something from the power-user lane."
+  Total animation: ~10 sec
+-->
+<style>
+  :root {
+    --paper: #F1E9D6;
+    --ink: #1E2832;
+    --ink-mid: #4A5660;
+    --ink-soft: #7A8590;
+    --red: #C8463C;
+    --highlight: #F4E04D;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100vw; height: 100vh; overflow: hidden; background: var(--paper); font-family: "Inter", "Helvetica Neue", Arial, sans-serif; color: var(--ink); }
+  body { display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; padding: 6vh 5vw; }
+
+  body::before {
+    content: ""; position: fixed; inset: -20px; pointer-events: none; z-index: 1;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.118  0 0 0 0 0.157  0 0 0 0 0.196  0 0 0 0.28 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity: 0.6; mix-blend-mode: multiply; animation: drift 14s ease-in-out infinite;
+  }
+  body::after {
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 2;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(60, 40, 20, 0.18) 100%);
+  }
+  @keyframes drift {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(-6px, 3px); }
+    50% { transform: translate(3px, -5px); }
+    75% { transform: translate(-3px, 6px); }
+  }
+
+  .stage { position: relative; z-index: 10; width: 100%; max-width: 1700px; display: flex; flex-direction: column; align-items: center; }
+
+  .header { text-align: center; opacity: 0; transform: translateY(-12px) rotate(-0.4deg); transition: opacity 0.5s ease-out, transform 0.5s ease-out; margin-bottom: 6vh; }
+  .header.show { opacity: 1; transform: translateY(0) rotate(-0.4deg); }
+  .header .eyebrow { font-family: "JetBrains Mono", monospace; font-size: 0.85vw; color: var(--red); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 1.2vh; }
+  .header h1 { font-size: 3vw; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
+  .header h1 .marker { background: linear-gradient(120deg, transparent 0%, var(--highlight) 30%, var(--highlight) 70%, transparent 100%); padding: 0 0.4vw; }
+
+  .timeline-wrap { width: 100%; position: relative; padding: 4vh 6vw 0; }
+
+  /* Horizontal axis */
+  .axis { position: relative; height: 4px; background: var(--ink); width: 100%; transform: scaleX(0); transform-origin: left center; transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1); }
+  .axis.show { transform: scaleX(1); }
+  .axis::after { content: ""; position: absolute; right: -10px; top: -8px; border: 10px solid transparent; border-left-color: var(--ink); border-right: none; }
+
+  /* Tick marks */
+  .ticks { position: absolute; left: 6vw; right: 6vw; top: calc(4vh + 0px); }
+  .tick { position: absolute; width: 18px; height: 18px; border-radius: 50%; background: var(--paper); border: 2.5px solid var(--ink); top: -9px; transform: translateX(-50%) scale(0); transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.3, 1.2); }
+  .tick.show { transform: translateX(-50%) scale(1); }
+  .tick.t1 { left: 12%; }
+  .tick.t2 { left: 50%; }
+  .tick.t3 { left: 88%; background: var(--red); border-color: var(--red); }
+
+  /* Cards */
+  .cards { position: absolute; left: 6vw; right: 6vw; top: calc(4vh + 28px); height: 28vh; }
+  .card { position: absolute; width: 22vw; max-width: 380px; padding: 2vh 1.4vw 1.8vh; border: 1.5px dashed var(--ink-soft); background: rgba(255, 252, 244, 0.65); opacity: 0; transform: translateY(15px) rotate(0); transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.2, 0.8, 0.3, 1.1); }
+  .card.show { opacity: 1; transform: translateY(0); }
+  .card.c1 { left: calc(12% - 11vw); transform: translateY(15px) rotate(-1.2deg); }
+  .card.c1.show { transform: translateY(0) rotate(-1.2deg); }
+  .card.c2 { left: calc(50% - 11vw); transform: translateY(15px) rotate(0.7deg); }
+  .card.c2.show { transform: translateY(0) rotate(0.7deg); }
+  .card.c3 { left: calc(88% - 11vw); transform: translateY(15px) rotate(-0.6deg); }
+  .card.c3.show { transform: translateY(0) rotate(-0.6deg); }
+
+  .card .date { font-family: "JetBrains Mono", monospace; font-size: 0.9vw; color: var(--ink-soft); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.6vh; }
+  .card.c3 .date { color: var(--red); }
+  .card .title { font-size: 1.35vw; font-weight: 800; letter-spacing: -0.01em; line-height: 1.15; margin-bottom: 1vh; }
+  .card .desc { font-family: "Source Serif Pro", "Georgia", serif; font-style: italic; font-size: 0.95vw; color: var(--ink-mid); line-height: 1.4; }
+  .card .took { font-family: "JetBrains Mono", monospace; font-size: 0.78vw; color: var(--red); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 1vh; padding-top: 1vh; border-top: 1px dashed var(--ink-soft); }
+
+  /* Bridging arrows above cards — show "→ took" between cards */
+  .arrow { position: absolute; top: -1.2vh; height: 3px; background: var(--red); opacity: 0; transition: opacity 0.4s ease-out; }
+  .arrow.show { opacity: 0.85; }
+  .arrow.a12 { left: 22%; right: 50%; }
+  .arrow.a23 { left: 60%; right: 12%; }
+
+  .verdict { position: absolute; bottom: 6vh; left: 0; right: 0; text-align: center; opacity: 0; transition: opacity 0.6s ease-out; }
+  .verdict.show { opacity: 1; }
+  .verdict .q { font-family: "Source Serif Pro", "Georgia", serif; font-style: italic; font-size: 1.45vw; color: var(--ink); line-height: 1.4; }
+  .verdict .q strong { font-family: "Inter", sans-serif; font-style: normal; font-weight: 800; color: var(--red); }
+  .verdict .src { font-family: "JetBrains Mono", monospace; font-size: 0.78vw; color: var(--ink-soft); letter-spacing: 0.2em; margin-top: 1vh; text-transform: uppercase; }
+
+  /* Six-weeks bracket */
+  .bracket { position: absolute; top: calc(4vh - 4vh); left: 12%; right: 12%; height: 2.5vh; pointer-events: none; opacity: 0; transition: opacity 0.5s ease-out; }
+  .bracket.show { opacity: 1; }
+  .bracket svg { width: 100%; height: 100%; }
+  .bracket .lbl { position: absolute; top: -2.2vh; left: 50%; transform: translateX(-50%); font-family: "JetBrains Mono", monospace; font-size: 0.85vw; color: var(--ink); background: var(--paper); padding: 0.2vh 0.8vw; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; }
+</style>
+</head>
+<body data-duration="10000">
+<div class="stage">
+  <div class="header" id="hdr">
+    <div class="eyebrow">Zoom out · the pattern</div>
+    <h1>Three subscription changes in <span class="marker">six weeks</span></h1>
+  </div>
+
+  <div class="timeline-wrap">
+    <div class="bracket" id="bracket">
+      <span class="lbl">6 weeks</span>
+      <svg viewBox="0 0 1000 20" preserveAspectRatio="none">
+        <path d="M 10 18 L 10 6 L 500 6" fill="none" stroke="#1E2832" stroke-width="2" stroke-linecap="round"/>
+        <path d="M 500 6 L 990 6 L 990 18" fill="none" stroke="#1E2832" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="axis" id="axis"></div>
+    <div class="ticks">
+      <div class="tick t1" id="tick1"></div>
+      <div class="tick t2" id="tick2"></div>
+      <div class="tick t3" id="tick3"></div>
+      <div class="arrow a12" id="a12"></div>
+      <div class="arrow a23" id="a23"></div>
+    </div>
+    <div class="cards">
+      <div class="card c1" id="card1">
+        <div class="date">April 4</div>
+        <div class="title">Third-party agents banned</div>
+        <div class="desc">Anthropic blocks unauthorized agents from claude.ai login.</div>
+        <div class="took">↓ Took: 3rd-party SaaS lane</div>
+      </div>
+      <div class="card c2" id="card2">
+        <div class="date">April 21</div>
+        <div class="title">Claude Code briefly removed from Pro</div>
+        <div class="desc">Walked back after outrage. Trial balloon.</div>
+        <div class="took">↓ Took: trust in Pro tier</div>
+      </div>
+      <div class="card c3" id="card3">
+        <div class="date">May 13</div>
+        <div class="title">Agent SDK credit split</div>
+        <div class="desc">Programmatic usage capped at $20–$200 monthly. The squeeze.</div>
+        <div class="took">↓ Took: AFK power-user lane</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="verdict" id="verdict">
+    <div class="q">Each one took something from the <strong>power-user lane.</strong></div>
+    <div class="src">Pattern, not coincidence</div>
+  </div>
+</div>
+
+<script>
+  function play() {
+    document.querySelectorAll('.show').forEach(el => el.classList.remove('show'));
+    setTimeout(() => document.getElementById('hdr').classList.add('show'), 200);
+    setTimeout(() => document.getElementById('axis').classList.add('show'), 1000);
+    setTimeout(() => document.getElementById('tick1').classList.add('show'), 1700);
+    setTimeout(() => document.getElementById('card1').classList.add('show'), 1900);
+    setTimeout(() => document.getElementById('a12').classList.add('show'), 3000);
+    setTimeout(() => document.getElementById('tick2').classList.add('show'), 3200);
+    setTimeout(() => document.getElementById('card2').classList.add('show'), 3400);
+    setTimeout(() => document.getElementById('a23').classList.add('show'), 4600);
+    setTimeout(() => document.getElementById('tick3').classList.add('show'), 4800);
+    setTimeout(() => document.getElementById('card3').classList.add('show'), 5000);
+    setTimeout(() => document.getElementById('bracket').classList.add('show'), 6400);
+    setTimeout(() => document.getElementById('verdict').classList.add('show'), 7400);
+  }
+  document.addEventListener('DOMContentLoaded', () => setTimeout(play, 500));
+  document.addEventListener('keydown', (e) => { if (e.key === 'r' || e.key === 'R') play(); });
+</script>
+</body>
+</html>
