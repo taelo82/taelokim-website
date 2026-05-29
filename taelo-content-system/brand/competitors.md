@@ -49,8 +49,16 @@
 | 35 | Chris Raroque | Solo app dev running multiple coding agents; Claude Code workflows (operator POV) | https://www.youtube.com/@raroque |
 | 36 | Ryan Doser | Claude Code AI-marketing workflows for non-technical marketers | https://www.youtube.com/@RyanDoserAI |
 | 37 | Yifan - Beyond the Hype | Reverse-engineering Claude Code agent tricks / context engineering | https://www.youtube.com/@YifanBTH |
+| 38 | Sigrid Jin | Korean clean-room Claude harness (105K★); Korea/SEA + technical overlap, possible collab | https://claw-code.codes/ |
+| 39 | Peter Steinberger | OpenClaw author (Altman-praised); candid agentic-engineering threads | https://x.com/steipete |
+| 40 | Matt Pocock | TS/AI educator; explainer-cadence benchmark + reaction surface | https://www.youtube.com/@mattpocockuk |
+| 41 | Hamel Husain | Applied LLM evals/ops; breaks technical news small creators miss | https://www.youtube.com/@HamelHusain |
+| 42 | Theo (t3.gg) | Reaction-news benchmark; contrarian-counter surface | https://www.youtube.com/@t3dotgg |
+| 43 | swyx (Latent Space) | AI Engineer conf signal; talk drips = early trend radar | https://www.youtube.com/@LatentSpaceTV |
+
+> Added 2026-05-29 (rows 38–43): Sigrid Jin (Korea/SEA fit) + OpenClaw/reaction-news surfaces from the 5/29 scan. Education-quality benchmarks (3B1B, Welch Labs, Karpathy, Vcubingx, Jay Alammar) tracked separately in `brand/education-benchmarks.md` so they don't distort outlier math.
 
 ## Notes
-- All 37 channels are AI/automation/MMO-adjacent — strong overlap with Taelo's pillars
+- All 43 channels are AI/automation/MMO-adjacent — strong overlap with Taelo's pillars
 - Outlier scoring against own channel average is the primary signal
 - Track which formats are over-performing (tutorial vs. case study vs. opinion vs. teardown)
