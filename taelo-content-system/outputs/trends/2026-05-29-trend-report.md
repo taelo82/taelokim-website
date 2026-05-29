@@ -1,8 +1,8 @@
 # Trend Report — 2026-05-29 (4-day window · the "stop shipping nothing" reframe · news + viral + education + skills)
 
 **Window:** 2026-05-26 → 2026-05-29 (4 days)
-**Channels scanned:** 29 (rows 1–29 of `brand/competitors.md`) + news/viral/X signal (web)
-**Scoring:** size-adjusted outlier (raw × log size factor). Video scan carried from [2026-05-27](2026-05-27-trend-report.md) (only 2 days elapsed, 0 strong outliers then) + web-sourced delta. **Live YouTube API rescan offered — not auto-run this round** (see Files).
+**Channels scanned:** 41 `@handle` channels (rows 1–44 of `brand/competitors.md`; 3 non-`@` rows skipped) — **38 returned data, 48 recent videos in window.** + news/viral/X signal (web)
+**Scoring:** size-adjusted outlier (raw × log size factor). **LIVE yt-dlp scan run as of 2026-05-29** — see [§Video scan results](#-video-scan-results-live-as-of-2026-05-29). Raw: `outputs/trends/2026-05-29-scan-results.json`.
 **Mode this round:** **Intervention report.** The signal isn't "what's trending" — it's that **nothing has shipped since the 5/20 command-center script.** Three consecutive plans (5/25, 5/27, this one's predecessor) named picks with 1–2 day film-day production. None shipped. Last actual films in `raw-takes/` are the `/watch` tutorial (May 5). **This report optimizes for one variable: time-to-publish. Every pick below is buildable in hours, screen-capture-first, no film day required.**
 
 ---
@@ -23,6 +23,20 @@ Taelo's brief is explicit and correct: **stop the weeks-long builds (website-wit
 
 **Backup #2 — evergreen anchor (the series Taelo is most excited about):**
 **Episode 1 of "How LLMs Actually Work (so you prompt better)" — "What is a token, really?"** Locked since 5/27. Film today (the 5/27 plan's Friday slot). Three-way tiktokenizer strawberry demo. This is the pillar that survives every news cycle.
+
+---
+
+## 🚨 LIVE SCAN UPDATE — the news the window actually turned on (added after rescan)
+
+The live yt-dlp scan surfaced the dominant story of these 4 days, bigger than anything in the web pass: **Claude Opus 4.8 launched May 28** ([MarkTechPost](https://www.marktechpost.com/2026/05/28/anthropic-ships-claude-opus-4-8-alongside-dynamic-workflows-and-cheaper-fast-mode-with-workflows-capped-at-1000-subagents/) · [MacRumors](https://www.macrumors.com/2026/05/28/anthropic-claude-opus-4-8/) · [Latent Space AINews](https://www.latent.space/p/ainews-anthropic-raises-965b-series)) — same price ($5/$25), **~4x less likely to let a coding error slip**, SWE-bench Pro 69.2% (from 64.3%), plus **"Ultracode"** (xhigh effort + **Dynamic Workflows** — plans a task, spins up to **1,000 parallel self-refuting subagents**, verifies its own output) and a 3x-cheaper, 2.5x-faster Fast Mode. Anthropic also raised a **$965B Series H** and a future model "**Claude Mythos 1**" leaked.
+
+**What this does to the plan: nothing — and that's the point.**
+- **The Opus 4.8 *breakdown* is already a closed loop.** 7 roster videos in ~24h (Nate Herk 89K, Alex Finn 45K, Brock 33K, Chase AI 27K, WorldofAI, Mervin, RoboNuggets). A "what's new in Opus 4.8" video ships into a wall. **Decline the breakdown.**
+- **The one fresh seam is Ultracode / Dynamic Workflows hands-on** — RoboNuggets already flagged "Opus 4.8 is NOT the biggest release — Ultracode is" (8.4K, adj 0.53). *"I let Claude's new Ultracode spawn 200 subagents on my repo — here's what happened"* is screen-capture, empty-ish, and **only worth it if shipped same-day.** Otherwise skip; it saturates within 48h like the breakdown.
+- **Two confirmations for the picks already chosen:**
+  - **Video-editing cluster = 0 videos.** The Codex-editing script ([2026-05-29-codex-video-editing-script.md](../scripts/2026-05-29-codex-video-editing-script.md)) sits in a **fully empty lane** across all 38 channels. Strongest possible validation.
+  - **Skills content is outlying:** Matt Pocock "9 Things… /grill-* skills" **51K** (adj 0.34), Peter Yang "I Stopped Using PowerPoint After Building This Claude Code Skill" (6.2K), Brock "The 3 Claude Cowork Features You Can't Ignore." **The 3-skills Pick of the Week is riding a live, performing format.**
+  - **Comparison genre is the hottest shape:** Theo "Claude Code vs Codex vs Cursor (honest comparison)" **105.9K, raw 1.04** — the single highest-view roster video in window. The Codex-vs-Claude-Code beat inside the editing script taps the same vein.
 
 ---
 
@@ -206,9 +220,74 @@ Correction vs prior reports: the roster was **already expanded to 37** (rows 30�
 
 ---
 
-## 📊 Video scan note
+## 📊 Video scan results (LIVE, as of 2026-05-29)
 
-Video outlier scan **carried from [2026-05-27](2026-05-27-trend-report.md)** — only 2 days elapsed and that scan found **0 strong outliers (≥2.0x adjusted)**, with Jason Lee's "vibe-coded recipe app" (adj 1.04) the lone >1.0. Web-sourced delta since: comparison-genre (Nate Herk "100 hours Claude Code vs Codex") and omnibus-news (Riley Brown) remain the active shapes; **`/usage`, `/dream`, `/goal`, and operator-skills-ROI framings remain empty lanes.** A live YouTube Data API rescan (`python3 scripts/trend_scan_weekly.py --days 4 --top 30`) is available on request — say the word and I'll run it to refresh the numbers before you commit.
+**Command:** `python3 scripts/trend_scan_weekly.py --days 4 --top 30 --limit 12` (run in 6 parallel `--rows` chunks to beat the process cap, then merged).
+**41 `@handle` channels attempted · 38 returned data · 48 recent videos (2026-05-26→29) · 0 strong outliers (≥2.0x raw).**
+
+### ⚠️ Read the top rows correctly
+The size-adjustment formula (`raw × log10(1M/subs)`) **inflates tiny/zero-sub channels into false outliers.** The top 3 adjusted scores are **noise**, not signal:
+- Latent Space TV **adj 2.747** = a **202-view** paper-club livestream on a 2,140-sub channel.
+- Two "NA" rows (adj 0.76 / 0.67) = **0-sub** entries (handle parse miss) with ~2.5K views, so the size factor maxes out.
+
+**Real signal starts at the Opus 4.8 cluster (Chase AI, 27K, 129K subs).** As in every scan since 5/18: **no genuine viral outlier** — the roster posts consistently, so channel-relative averages stay flat. The story is in the **clusters**, not the per-video score.
+
+### Top 30 by adjusted score
+
+| Adj | Raw | Views | Subs | Channel | Date | Title |
+|---|---|---|---|---|---|---|
+| 2.747 | 1.03 | 202 | 2,140 | Latent Space TV | 2026-05-28 | ⚠️noise — Poolside Laguna M.1/XS.2 Technical Report (Paper Club) |
+| 0.762 | 0.25 | 2,715 | 0 | NA | 2026-05-26 | ⚠️noise — I Asked Claude to Help My Mom Make Money (She's 60) |
+| 0.672 | 0.22 | 2,394 | 0 | NA | 2026-05-27 | ⚠️noise — AI Engineer: Nobody Knows What They're Doing |
+| 0.649 | 0.73 | 27,300 | 129,000 | Chase AI | 2026-05-28 | Anthropic Drops The Opus 4.8 BOMB |
+| 0.622 | 0.95 | 34,560 | 221,000 | WorldofAI | 2026-05-27 | Gemini 3.5 Pro X-High, MiniMax M3, DeepSwe, New Claude Models |
+| 0.593 | 0.63 | 33,648 | 113,000 | Brock Mesarich | 2026-05-28 | Anthropic Just Dropped Claude Opus 4.8 (Full Breakdown) |
+| 0.589 | 0.90 | 32,771 | 221,000 | WorldofAI | 2026-05-28 | Claude Mythos 1 Preview Leaked... |
+| 0.569 | 0.65 | 22,839 | 133,000 | IndyDevDan | 2026-05-26 | Top #1 Opportunity for Senior Engineers: Agentic Engineering |
+| 0.525 | 0.64 | 8,368 | 149,000 | RoboNuggets | 2026-05-28 | Opus 4.8 is NOT Claude's biggest release today (Ultracode…) |
+| 0.507 | 0.74 | 47,064 | 205,000 | Alex Finn | 2026-05-26 | Hermes Agent is the greatest AI tool ever made |
+| 0.492 | 0.71 | 45,675 | 205,000 | Alex Finn | 2026-05-28 | Claude Opus 4.8 actually blew my mind... |
+| 0.476 | 0.72 | 25,419 | 216,000 | Jack Roberts | 2026-05-27 | How I build $10,000 AI Websites in 17 mins (Google AI Studio 2) |
+| 0.467 | 0.21 | 375 | 5,950 | Brooke Wright | 2026-05-27 | Claude Cowork Tutorial: Create Viral Carousels in Canva |
+| 0.414 | 0.38 | 1,592 | 80,700 | Mervin Praison | 2026-05-28 | Claude Opus 4.8 is Here — Same Price, 4x Fewer Code Bugs |
+| 0.403 | 0.47 | 15,002 | 138,000 | Jono Catliff | 2026-05-26 | Build a WordPress Website in 20 Minutes with Claude Code |
+| 0.371 | 0.57 | 20,604 | 221,000 | WorldofAI | 2026-05-26 | OpenHuman Is The Hermes Agent Killer? |
+| 0.344 | 0.83 | 51,770 | 385,000 | David Ondrej | 2026-05-26 | Build Anything with Tmux, Here's How |
+| 0.343 | 0.57 | 51,177 | 247,000 | Matt Pocock | 2026-05-26 | 9 Things People Get Wrong With My /grill-* skills |
+| 0.327 | 0.31 | 17,130 | 88,000 | Chris Raroque | 2026-05-26 | I asked SF founders: should I keep bootstrapping? |
+| 0.321 | 0.47 | 16,598 | 207,000 | Cole Medin | 2026-05-28 | Harness Engineering: What Separates Top Agentic Engineers |
+| 0.285 | 0.26 | 1,097 | 80,700 | Mervin Praison | 2026-05-27 | Custom Skills for Hermes Agent: Full Tutorial |
+| 0.278 | 1.04 | 105,931 | 539,000 | Theo (t3.gg) | 2026-05-26 | Claude Code vs Codex vs Cursor (an honest comparison) |
+| 0.276 | 0.33 | 15,013 | 147,000 | Danny Why | 2026-05-26 | WARNING: The END of Faceless AI YouTube Channels |
+| 0.267 | 0.09 | 568 | 0 | NA | 2026-05-27 | I built an AI agent finance department (full build) |
+| 0.239 | 0.28 | 8,900 | 138,000 | Jono Catliff | 2026-05-27 | Claude Code Local SEO: How I Got 50,000 Google Clicks/Mo |
+| 0.229 | 0.85 | 87,024 | 539,000 | Theo (t3.gg) | 2026-05-28 | How I code with AI changed a lot |
+| 0.211 | 0.25 | 3,358 | 149,000 | RoboNuggets | 2026-05-28 | Learn 98% of Hermes Agent in just 15 minutes |
+| 0.211 | 0.18 | 1,548 | 65,200 | Duncan Rogoff | 2026-05-28 | How I Use Claude Code to Make INSANE Instagram Carousels |
+| 0.178 | 0.19 | 10,079 | 113,000 | Brock Mesarich | 2026-05-28 | The 3 Claude Cowork Features You Can't Ignore (master them) |
+| 0.164 | 0.16 | 6,198 | 89,900 | Peter Yang | 2026-05-28 | I Stopped Using PowerPoint After Building This Claude Code Skill |
+
+### Cluster read
+
+| Cluster | Roster hits | Top view | Verdict |
+|---|---|---|---|
+| **Claude Opus 4.8 breakdown** | 7 | Nate Herk 89K | **Closed loop in 24h. Decline the breakdown.** |
+| **Ultracode / Dynamic Workflows** | 1 (RoboNuggets, early) | 8.4K | **Only fresh seam — hands-on, same-day-or-skip.** |
+| **Claude Code vs Codex vs Cursor comparison** | 2 (Theo) | **105.9K** | **Hottest format in window.** Editing script's Codex-vs-CC beat taps it. |
+| **⭐ Video editing (any AI/CLI)** | **0** | — | **EMPTY LANE — confirms the Codex-editing script.** |
+| **Skills / custom-skill builds** | 4 | Matt Pocock 51K | **Performing — validates 3-skills Pick of the Week.** |
+| **Tmux + agent CLI workflow** | 1 (David Ondrej) | 51.8K | Adjacent to terminal-editing workflow. Monitor. |
+| **Hermes Agent** | 3 | Alex Finn 47K | Closed loop — decline (4th week running). |
+| **Agentic/Harness engineering** | 2 (IndyDevDan, Cole Medin) | 22.8K | Off-altitude for Taelo (senior-eng framing). Skip. |
+| **WordPress / web-build agency** | 2 (Jono Catliff) | 15K | Off-pillar. Skip. |
+| **Claude Cowork (NEW surface)** | 3 (Brooke, Brock, +) | 20K | New Anthropic surface gaining roster traction — **monitor; possible future explainer.** |
+| **Faceless-YT warning** | 1 (Danny Why, new add) | 15K | Meta-commentary; watch the new add. |
+
+### Decision against the scan (no change to ship plan)
+1. **Codex-editing video is the move** — 0 competing videos across 38 channels; the comparison genre (Theo 105K) and tmux-workflow (Ondrej 51K) signals both feed its sub-themes. Script is written.
+2. **3-skills Pick of the Week is live-format-validated** — Pocock's /grill-skills 51K + the skill-build cluster.
+3. **Opus 4.8: decline the breakdown, ship Ultracode hands-on ONLY if same-day**, else let it pass.
+4. **New watch item: "Claude Cowork"** is surfacing across 3 roster channels — log for a possible future explainer (not this week).
 
 ## Files
 - This report: `outputs/trends/2026-05-29-trend-report.md`
