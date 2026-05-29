@@ -1,7 +1,7 @@
 # Competitor Tracker — Taelo Kim
 
 > Curated by Taelo. Focus: recently risen creators (small-to-mid) in AI / automation / building-in-public — better signal than mega-channels.
-> Last updated: 2026-05-11
+> Last updated: 2026-05-29
 
 ## Selection Logic
 - Prioritize creators who have **recently risen** rather than established mega-channels
@@ -41,8 +41,16 @@
 | 27 | Corey Ganim | Operator + live build-along podcast format | https://www.youtube.com/@coreyganim |
 | 28 | Tyler AI (Tyler Reed) | OpenAI Agents SDK / AutoGen — code-first agent builds | https://www.youtube.com/@TylerReedAI |
 | 29 | AI Foundations (Drake Surach) | Vibe-coding for creators/entrepreneurs | https://www.youtube.com/@AIFoundationsHQ |
+| 30 | Duncan Rogoff | AI automation / make.com — money-making automations, faceless channels, "Build Room" community | https://www.youtube.com/@duncanrogoff |
+| 31 | Charlie (Charles Dove) | Claude Code workflows & templates for business operators; 2 vids/wk | https://www.youtube.com/@charlieautomates |
+| 32 | Brooke Wright | AI strategy/education for women + neurodivergent founders; no-code, custom GPTs | https://www.youtube.com/@WrightMode |
+| 33 | Mahi (WorldofAI) | Daily AI news / new models / tools — fast-turnaround coverage | https://www.youtube.com/@intheworldofai |
+| 34 | Eric Michaud | AI revenue systems for creators — practical "how AI works" builds | https://www.youtube.com/channel/UCIumQAB--XargjJuF-w_MFA |
+| 35 | Chris Raroque | Solo app dev running multiple coding agents; Claude Code workflows (operator POV) | https://www.youtube.com/@raroque |
+| 36 | Ryan Doser | Claude Code AI-marketing workflows for non-technical marketers | https://www.youtube.com/@RyanDoserAI |
+| 37 | Yifan - Beyond the Hype | Reverse-engineering Claude Code agent tricks / context engineering | https://www.youtube.com/@YifanBTH |
 
 ## Notes
-- All 24 channels are AI/automation/MMO-adjacent — strong overlap with Taelo's pillars
+- All 37 channels are AI/automation/MMO-adjacent — strong overlap with Taelo's pillars
 - Outlier scoring against own channel average is the primary signal
 - Track which formats are over-performing (tutorial vs. case study vs. opinion vs. teardown)
