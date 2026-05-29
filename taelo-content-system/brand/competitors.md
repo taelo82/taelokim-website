@@ -55,10 +55,11 @@
 | 41 | Hamel Husain | Applied LLM evals/ops; breaks technical news small creators miss | https://www.youtube.com/@HamelHusain |
 | 42 | Theo (t3.gg) | Reaction-news benchmark; contrarian-counter surface | https://www.youtube.com/@t3dotgg |
 | 43 | swyx (Latent Space) | AI Engineer conf signal; talk drips = early trend radar | https://www.youtube.com/@LatentSpaceTV |
+| 44 | Danny Why (Daniel Satmareanu) | Faceless channel growth + YouTube automation; 8M+ subs across 5 channels | https://www.youtube.com/@danny_why |
 
-> Added 2026-05-29 (rows 38–43): Sigrid Jin (Korea/SEA fit) + OpenClaw/reaction-news surfaces from the 5/29 scan. Education-quality benchmarks (3B1B, Welch Labs, Karpathy, Vcubingx, Jay Alammar) tracked separately in `brand/education-benchmarks.md` so they don't distort outlier math.
+> Added 2026-05-29 (rows 38–44): Sigrid Jin (Korea/SEA fit) + OpenClaw/reaction-news surfaces from the 5/29 scan. Education-quality benchmarks (3B1B, Welch Labs, Karpathy, Vcubingx, Jay Alammar) tracked separately in `brand/education-benchmarks.md` so they don't distort outlier math.
 
 ## Notes
-- All 43 channels are AI/automation/MMO-adjacent — strong overlap with Taelo's pillars
+- All 44 channels are AI/automation/MMO-adjacent — strong overlap with Taelo's pillars
 - Outlier scoring against own channel average is the primary signal
 - Track which formats are over-performing (tutorial vs. case study vs. opinion vs. teardown)
