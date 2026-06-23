@@ -3,7 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Taelo Kim</title>
+<title>Taelo Kim — Build real AI products with Claude</title>
+<meta name="description" content="Playbooks, prompt packs and build logs for people shipping real AI products with Claude — plus AI Movers, the builder community that doesn't sell you a course.">
+<meta property="og:title" content="Taelo Kim — Build real AI products with Claude">
+<meta property="og:description" content="Playbooks, prompt packs and build logs for people shipping real AI products with Claude — plus AI Movers, the builder community.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://taeloai.com/">
+<meta property="og:image" content="https://taeloai.com/taelo.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@taelo_kim">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -586,6 +594,31 @@ main {
 @media (max-width: 720px) {
   .about-split { grid-template-columns: 1fr; gap: 40px; }
 }
+.about-left { display: flex; flex-direction: column; gap: 36px; }
+.about-portrait {
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(122,181,176,0.25);
+  aspect-ratio: 4 / 5;
+  box-shadow: 0 24px 70px rgba(0,0,0,0.5);
+}
+.about-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  filter: saturate(0.92) contrast(1.02);
+  display: block;
+}
+/* Mint wash so the photo sits inside the tesseract palette instead of fighting it */
+.about-portrait::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(122,181,176,0.10) 0%, transparent 40%, rgba(5,5,16,0.35) 100%);
+  pointer-events: none;
+}
 .about-statement {
   font-family: var(--font-display);
   font-size: clamp(22px, 2.8vw, 36px);
@@ -695,6 +728,9 @@ main {
 }
 @media (max-width: 640px) { .resource-grid { grid-template-columns: 1fr; } }
 .resource-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
   background: var(--void);
   padding: 32px 28px;
   transition: background var(--dur-med) var(--ease-cin), transform var(--dur-med) var(--ease-cin);
@@ -1148,7 +1184,7 @@ body:not(:hover) #cursor-thread { opacity: 0; }
   <a href="#about" data-section="about">About</a>
   <a href="#resources" data-section="resources">Resources</a>
   <a href="#community" data-section="community">Community</a>
-  <a href="#writing" data-section="writing">Writing</a>
+  <a href="#writing" data-section="writing">Watch</a>
   <a href="#join" data-section="join">Join</a>
 </nav>
 
@@ -1162,7 +1198,7 @@ body:not(:hover) #cursor-thread { opacity: 0; }
     <h1 class="hero-headline" id="hero-hl" aria-label="Pull the thread.">
     </h1>
     <p class="hero-sub" id="hero-sub">
-      Playbooks, frameworks and prompt packs for operators shipping AI products across Korea, Japan and Southeast Asia. Real numbers. No cadence.
+      Playbooks, prompt packs and build logs for people shipping real AI products with Claude. Plus AI Movers — the builder community that doesn't sell you a course.
     </p>
     <div class="hero-cta-wrap" id="hero-cta">
       <a href="#join" class="cta-primary">Connect with Taelo →</a>
@@ -1193,7 +1229,7 @@ body:not(:hover) #cursor-thread { opacity: 0; }
           <div class="murphy-echo"></div>
           <div class="pillar-num">01</div>
           <div class="pillar-title">Operator playbooks.</div>
-          <p class="pillar-desc">How to enter Korea and Southeast Asia. What to validate. The failure modes I've seen across 150+ pitches and my own shipped products. Steal them.</p>
+          <p class="pillar-desc">How to actually ship an AI product — what to build, what to validate, the failure modes I've seen across 150+ pitches and my own products. Steal them.</p>
         </div>
         <div class="pillar card-interactive" data-pull="2">
           <div class="murphy-echo"></div>
@@ -1221,10 +1257,14 @@ body:not(:hover) #cursor-thread { opacity: 0; }
     <div class="scene-reveal">
       <div class="section-label">Cooper on the other side</div>
       <div class="about-split">
-        <div>
+        <div class="about-left">
+          <div class="about-portrait">
+            <img src="taelo.jpg" alt="Taelo Kim" width="1200" height="675" loading="lazy">
+          </div>
           <p class="about-statement">
-            I reviewed <em>150+ pitches</em> as a VC. Then crossed the table
-            and shipped products across Korea, Japan and Southeast Asia.
+            I reviewed <em>150+ pitches</em> as a VC. Then crossed the table and
+            started shipping real AI products with Claude. Now I build in public and run
+            <em>AI Movers</em> — a community of serious builders.
             Everything here is something I'm using — not something I think might work.
           </p>
         </div>
@@ -1258,31 +1298,31 @@ body:not(:hover) #cursor-thread { opacity: 0; }
 
       <div class="resource-featured card-interactive" data-pull="featured">
         <div class="murphy-echo"></div>
-        <div class="featured-tag">Featured · Free download</div>
-        <div class="featured-title">The Operator Override Pack</div>
-        <p class="featured-desc">Seven overrides that stop your AI products looking like every other tutorial output. Banned defaults sheet, reference dictionary, voice spec, design token starter. The complete prompt set I actually used to ship.</p>
-        <a href="#join" class="resource-link">Get it free</a>
+        <div class="featured-tag">Featured · Free inside the classroom</div>
+        <div class="featured-title">The AI Movers classroom</div>
+        <p class="featured-desc">Every build broken down step by step — the prompts, the specs, the exact Claude Code setups I use to ship. New walkthroughs added as I build them. Free to start.</p>
+        <a href="https://www.skool.com/ai-movers-1936/classroom" target="_blank" rel="noopener noreferrer" class="resource-link">Open the classroom</a>
       </div>
 
       <div class="resource-grid">
-        <div class="resource-card card-interactive" data-pull="r1">
+        <a href="https://www.skool.com/ai-movers-1936/classroom" target="_blank" rel="noopener noreferrer" class="resource-card card-interactive" data-pull="r1">
           <div class="murphy-echo"></div>
-          <div class="resource-card-tag">Framework</div>
-          <div class="resource-card-title">KR / SEA Market Entry Checklist</div>
-          <p class="resource-card-desc">What to validate before launching across Korea, Japan, Vietnam, Indonesia.</p>
-        </div>
-        <div class="resource-card card-interactive" data-pull="r2">
+          <div class="resource-card-tag">Build-along</div>
+          <div class="resource-card-title">Ship an AI product with Claude</div>
+          <p class="resource-card-desc">Full walkthroughs — the repo, the prompts and the Claude Code setup, start to finish.</p>
+        </a>
+        <a href="https://www.skool.com/ai-movers-1936/classroom" target="_blank" rel="noopener noreferrer" class="resource-card card-interactive" data-pull="r2">
           <div class="murphy-echo"></div>
-          <div class="resource-card-tag">Template</div>
-          <div class="resource-card-title">AI Product Spec Template</div>
-          <p class="resource-card-desc">The exact doc structure I used for the last five products I shipped.</p>
-        </div>
-        <div class="resource-card card-interactive" data-pull="r3">
+          <div class="resource-card-tag">Templates</div>
+          <div class="resource-card-title">Spec + prompt packs</div>
+          <p class="resource-card-desc">The exact docs and prompts I use for every product I ship. Copy them.</p>
+        </a>
+        <a href="https://www.skool.com/ai-movers-1936" target="_blank" rel="noopener noreferrer" class="resource-card card-interactive" data-pull="r3">
           <div class="murphy-echo"></div>
-          <div class="resource-card-tag">Playbook</div>
-          <div class="resource-card-title">Cross-Border Ops Playbook</div>
-          <p class="resource-card-desc">Logistics, partners, returns, taxes across 6 markets. The unglamorous stuff that decides survival.</p>
-        </div>
+          <div class="resource-card-tag">Feedback</div>
+          <div class="resource-card-title">Get your build reviewed</div>
+          <p class="resource-card-desc">Post what you're building and get fast, honest feedback from serious movers.</p>
+        </a>
       </div>
     </div>
   </section>
@@ -1303,16 +1343,16 @@ body:not(:hover) #cursor-thread { opacity: 0; }
         <div class="community-card card-interactive" data-pull="c1">
           <div class="murphy-echo"></div>
           <div class="card-label">Community</div>
-          <div class="card-title">Operators building in Asia</div>
-          <p class="card-desc">A small group of people shipping AI products across KR, JP and SEA. No hype, just real progress updates and shared resources.</p>
-          <a href="#join" class="card-action">Request access</a>
+          <div class="card-title">AI Movers</div>
+          <p class="card-desc">A community of serious AI builders shipping real products. The only one that doesn't sell you a course — fast feedback, real builds, quality-filtered.</p>
+          <a href="https://www.skool.com/ai-movers-1936" target="_blank" rel="noopener noreferrer" class="card-action">Join the community</a>
         </div>
         <div class="community-card card-interactive" data-pull="c2">
           <div class="murphy-echo"></div>
-          <div class="card-label">Office Hours</div>
-          <div class="card-title">30-min operator calls</div>
-          <p class="card-desc">Book a session. Bring your actual problem — market entry, product spec, distribution. I'll be direct.</p>
-          <a href="#join" class="card-action">Join the list</a>
+          <div class="card-label">Inside</div>
+          <div class="card-title">Build-alongs & office hours</div>
+          <p class="card-desc">Live build sessions, events and a classroom full of step-by-step walkthroughs. Bring what you're stuck on — I'll be direct.</p>
+          <a href="https://www.skool.com/ai-movers-1936" target="_blank" rel="noopener noreferrer" class="card-action">See what's inside</a>
         </div>
       </div>
     </div>
@@ -1326,36 +1366,39 @@ body:not(:hover) #cursor-thread { opacity: 0; }
 <div class="panel-slot" id="slot-writing" data-section-id="writing">
   <section id="writing" class="scene" data-screen-label="06 Writing">
     <div class="scene-reveal">
-      <div class="section-label">Field reports</div>
+      <div class="section-label">Watch · @TaeloKim</div>
       <div class="writing-entries">
-        <a href="#" class="writing-row card-interactive" data-pull="w1">
+        <a href="https://www.youtube.com/watch?v=N3Mro1kkvtY" target="_blank" rel="noopener noreferrer" class="writing-row card-interactive" data-pull="w1">
           <div class="writing-left">
-            <div class="writing-title">Why most AI products die at distribution, not the model</div>
-            <div class="writing-sub">It's not the model. It's the motion.</div>
+            <div class="writing-title">This NEW Method Makes Your AI Agent 35x More Efficient</div>
+            <div class="writing-sub">Sub-agents and context engineering, end to end.</div>
           </div>
-          <div class="writing-date">2026-04-21</div>
+          <div class="writing-date">YouTube ↗</div>
         </a>
-        <a href="#" class="writing-row card-interactive" data-pull="w2">
+        <a href="https://www.youtube.com/watch?v=oZsNXqPBolc" target="_blank" rel="noopener noreferrer" class="writing-row card-interactive" data-pull="w2">
           <div class="writing-left">
-            <div class="writing-title">What 150 pitch decks taught me about narrative</div>
-            <div class="writing-sub">Pattern recognition from the other side of the table.</div>
+            <div class="writing-title">I Fired My $2,000/mo Video Editor — Claude Code Replaced Him</div>
+            <div class="writing-sub">Automating real, expensive work with Claude Code.</div>
           </div>
-          <div class="writing-date">2026-03-30</div>
+          <div class="writing-date">YouTube ↗</div>
         </a>
-        <a href="#" class="writing-row card-interactive" data-pull="w3">
+        <a href="https://www.youtube.com/watch?v=RJXKrNLd90c" target="_blank" rel="noopener noreferrer" class="writing-row card-interactive" data-pull="w3">
           <div class="writing-left">
-            <div class="writing-title">Operating cross-border in KR and SEA, plainly</div>
-            <div class="writing-sub">The part no one writes about because it's unglamorous.</div>
+            <div class="writing-title">I Built a Second Brain to Run My Entire Life (Full Guide)</div>
+            <div class="writing-sub">A complete build, start to finish.</div>
           </div>
-          <div class="writing-date">2026-03-12</div>
+          <div class="writing-date">YouTube ↗</div>
         </a>
-        <a href="#" class="writing-row card-interactive" data-pull="w4">
+        <a href="https://www.youtube.com/watch?v=WlorPYYgvUQ" target="_blank" rel="noopener noreferrer" class="writing-row card-interactive" data-pull="w4">
           <div class="writing-left">
-            <div class="writing-title">How I think about e-commerce logistics at scale</div>
-            <div class="writing-sub">Global logistics is a design problem, not a spreadsheet.</div>
+            <div class="writing-title">I Built a Command Center that Runs My Entire Life</div>
+            <div class="writing-sub">One dashboard, everything wired together.</div>
           </div>
-          <div class="writing-date">2026-02-18</div>
+          <div class="writing-date">YouTube ↗</div>
         </a>
+      </div>
+      <div style="margin-top:36px">
+        <a href="https://www.youtube.com/@TaeloKim/videos" target="_blank" rel="noopener noreferrer" class="resource-link">See all on YouTube</a>
       </div>
     </div>
   </section>
@@ -1386,10 +1429,16 @@ body:not(:hover) #cursor-thread { opacity: 0; }
       <!-- Honeypot: bots fill it, humans don't see it. -->
       <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"
              aria-hidden="true" style="position:absolute;left:-9999px">
+      <input type="hidden" name="_subject" value="New signup from taeloai.com">
       <button class="email-btn" type="submit">Join the list</button>
     </form>
     <p class="join-msg" id="join-msg" hidden></p>
     <p class="join-note">One email per new resource. That's the deal.</p>
+    <p class="join-note" style="margin-top:18px">
+      Or skip the list and
+      <a href="https://www.skool.com/ai-movers-1936" target="_blank" rel="noopener noreferrer"
+         style="color:var(--thread);text-decoration:none;border-bottom:1px solid rgba(122,181,176,0.4)">join AI Movers now ↗</a>
+    </p>
   </div>
 </section>
 
@@ -1399,7 +1448,8 @@ body:not(:hover) #cursor-thread { opacity: 0; }
   <div class="foot-links">
     <a href="https://www.youtube.com/@TaeloKim/videos" target="_blank" rel="noopener noreferrer" aria-label="YouTube">YouTube</a>
     <a href="https://x.com/taelo_kim" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter">X</a>
-    <a href="#join" aria-label="Subscribe">Email</a>
+    <a href="https://www.skool.com/ai-movers-1936" target="_blank" rel="noopener noreferrer" aria-label="AI Movers community">AI Movers</a>
+    <a href="mailto:taelokim1@gmail.com" aria-label="Email Taelo">Email</a>
   </div>
 </footer>
 
@@ -1854,7 +1904,7 @@ document.querySelectorAll('.card-interactive').forEach(card => {
     ripple.addEventListener('animationend', () => ripple.remove());
 
     // Brief flash on thread canvas
-    [t1, t2, t3, t1g, t2g, t3g].forEach(el => {
+    [t1, t1g].forEach(el => {
       el.style.transition = 'opacity 0.12s';
       el.style.opacity = '1';
       setTimeout(() => { el.style.opacity = ''; el.style.transition = ''; }, 400);
