@@ -32,8 +32,7 @@
 <link rel="preload" as="image" href="/blog/img/ai-agent-35x-more-efficient-thumb.jpg" fetchpriority="high">
 <link rel="stylesheet" href="/blog/blog.css">
 
-<script type="application/ld+json">
-{
+<script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -44,22 +43,24 @@
       "image": "https://taeloai.com/blog/img/ai-agent-35x-more-efficient-thumb.jpg",
       "datePublished": "2026-06-21",
       "dateModified": "2026-06-21",
-      "wordCount": 1783,
+      "wordCount": 2600,
       "keywords": "MCP vs CLI for AI agents, reduce AI agent token usage, AI agent token cost, agent-friendly command line tool, MCP tool definitions token overhead, Printing Press CLI",
       "inLanguage": "en",
       "author": {
-        "@type": "Person",
-        "name": "Taelo Kim",
-        "url": "https://taeloai.com/",
-        "sameAs": ["https://www.youtube.com/@TaeloKim", "https://x.com/taelo_kim", "https://github.com/taelo82"]
+        "@id": "https://taeloai.com/#taelo"
       },
       "publisher": {
-        "@type": "Person",
-        "name": "Taelo Kim",
-        "url": "https://taeloai.com/"
+        "@id": "https://taeloai.com/#taelo"
       },
-      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://taeloai.com/blog/ai-agent-35x-more-efficient/" },
-      "isPartOf": { "@type": "Blog", "@id": "https://taeloai.com/blog/#blog", "name": "Taelo Kim — Build Logs" }
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://taeloai.com/blog/ai-agent-35x-more-efficient/"
+      },
+      "isPartOf": {
+        "@type": "Blog",
+        "@id": "https://taeloai.com/blog/#blog",
+        "name": "Taelo Kim — Build Logs"
+      }
     },
     {
       "@type": "VideoObject",
@@ -71,14 +72,31 @@
       "duration": "PT7M16S",
       "embedUrl": "https://www.youtube.com/embed/N3Mro1kkvtY",
       "contentUrl": "https://www.youtube.com/watch?v=N3Mro1kkvtY",
-      "publisher": { "@type": "Person", "name": "Taelo Kim" }
+      "publisher": {
+        "@id": "https://taeloai.com/#taelo"
+      }
     },
     {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://taeloai.com/" },
-        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://taeloai.com/blog/" },
-        { "@type": "ListItem", "position": 3, "name": "I Made My AI Agent 35x More Efficient", "item": "https://taeloai.com/blog/ai-agent-35x-more-efficient/" }
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://taeloai.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://taeloai.com/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "I Made My AI Agent 35x More Efficient",
+          "item": "https://taeloai.com/blog/ai-agent-35x-more-efficient/"
+        }
       ]
     },
     {
@@ -87,27 +105,42 @@
         {
           "@type": "Question",
           "name": "Does a CLI really use fewer tokens than MCP?",
-          "acceptedAnswer": { "@type": "Answer", "text": "In one controlled benchmark on the same task, going through MCP directly used between 4 and 32 times more tokens than an equivalent command line tool. The gap came from loading 43 tool definitions into context before the agent called one or two of them. A CLI carries no resident schema, so the agent only pays for the command it actually runs." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In one controlled benchmark on the same task, going through MCP directly used between 4 and 32 times more tokens than an equivalent command line tool. The gap came from loading 43 tool definitions into context before the agent called one or two of them. A CLI carries no resident schema, so the agent only pays for the command it actually runs."
+          }
         },
         {
           "@type": "Question",
           "name": "What is Printing Press and is it free to use?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Printing Press is a free, open source project that turns an API, an app, or a website into an agent-friendly command line tool. It also ships a public library of tools other people have already built. I did not write the ESPN CLI I used for the World Cup dashboard. It was already in that library, so I installed it and moved on." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Printing Press is a free, open source project that turns an API, an app, or a website into an agent-friendly command line tool. It also ships a public library of tools other people have already built. I did not write the ESPN CLI I used for the World Cup dashboard. It was already in that library, so I installed it and moved on."
+          }
         },
         {
           "@type": "Question",
           "name": "Do I need an API key to pull live sports data?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Not for this build. The ESPN CLI needed no API key, no account signup and no paid plan, and the dashboard it fed has no backend I wrote. The agent ran the command, read the text that came back and wrote a self-contained page from it. Total data cost for the project was zero." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not for this build. The ESPN CLI needed no API key, no account signup and no paid plan, and the dashboard it fed has no backend I wrote. The agent ran the command, read the text that came back and wrote a self-contained page from it. Total data cost for the project was zero."
+          }
         },
         {
           "@type": "Question",
           "name": "Should I delete all my MCP servers?",
-          "acceptedAnswer": { "@type": "Answer", "text": "No. The lesson is not that CLI always beats MCP. MCP earns its cost when the structure is doing real work, like typed schemas, stateful sessions or auth your shell cannot handle. The rule is narrower than it sounds: give the agent the smallest useful interface for the job, and drop servers you connected once and never used." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The lesson is not that CLI always beats MCP. MCP earns its cost when the structure is doing real work, like typed schemas, stateful sessions or auth your shell cannot handle. The rule is narrower than it sounds: give the agent the smallest useful interface for the job, and drop servers you connected once and never used."
+          }
         },
         {
           "@type": "Question",
           "name": "Which coding agent did you use to build the dashboard?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Claude Code, though Codex handles this fine too. The logo on the agent is not the interesting variable. What matters is that the agent can run a shell command, read the result, write files and then open the page and test its own work. Any agent with those four abilities can reproduce this build." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Claude Code, though Codex handles this fine too. The logo on the agent is not the interesting variable. What matters is that the agent can run a shell command, read the result, write files and then open the page and test its own work. Any agent with those four abilities can reproduce this build."
+          }
         }
       ]
     },
@@ -116,15 +149,38 @@
       "name": "Build a live dashboard by giving an AI agent one CLI tool",
       "description": "MCP vs CLI for AI agents: why loading 43 tool definitions costs 4-32x more tokens than one command, and how I built a live dashboard on the lean path.",
       "step": [
-        { "@type": "HowToStep", "position": 1, "name": "Get the data flowing before you mention design", "text": "Install the CLI and run it by hand until the output is reliable. Confirm the agent has one dependable way to retrieve the information it needs.", "url": "https://taeloai.com/blog/ai-agent-35x-more-efficient/#the-build-brief" },
-        { "@type": "HowToStep", "position": 2, "name": "Write the brief as questions, not features", "text": "Ask what a real person watching the tournament would genuinely want to know: what just happened, what is next, what should I pay attention to for my team.", "url": "https://taeloai.com/blog/ai-agent-35x-more-efficient/#the-build-brief" },
-        { "@type": "HowToStep", "position": 3, "name": "Turn each question into one surface", "text": "Map every question to a single element on the page: latest results, next fixture, country picker, knockout path, prediction builder, stat cards, group tables, simulation." , "url": "https://taeloai.com/blog/ai-agent-35x-more-efficient/#the-build-brief" },
-        { "@type": "HowToStep", "position": 4, "name": "Make the agent test its own work", "text": "Tell the agent to open the finished page, click through every interaction and fix anything that breaks. That instruction is the difference between a mock-up and a product.", "url": "https://taeloai.com/blog/ai-agent-35x-more-efficient/#the-build-brief" }
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Get the data flowing before you mention design",
+          "text": "Install the CLI and run it by hand until the output is reliable. Confirm the agent has one dependable way to retrieve the information it needs.",
+          "url": "https://taeloai.com/blog/ai-agent-35x-more-efficient/#the-build-brief"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Write the brief as questions, not features",
+          "text": "Ask what a real person watching the tournament would genuinely want to know: what just happened, what is next, what should I pay attention to for my team.",
+          "url": "https://taeloai.com/blog/ai-agent-35x-more-efficient/#the-build-brief"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Turn each question into one surface",
+          "text": "Map every question to a single element on the page: latest results, next fixture, country picker, knockout path, prediction builder, stat cards, group tables, simulation.",
+          "url": "https://taeloai.com/blog/ai-agent-35x-more-efficient/#the-build-brief"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Make the agent test its own work",
+          "text": "Tell the agent to open the finished page, click through every interaction and fix anything that breaks. That instruction is the difference between a mock-up and a product.",
+          "url": "https://taeloai.com/blog/ai-agent-35x-more-efficient/#the-build-brief"
+        }
       ]
     }
   ]
-}
-</script>
+}</script>
 </head>
 <body>
 
@@ -163,11 +219,13 @@
 
   <article class="post-body col">
 
-    <p>The MCP vs CLI question for AI agents sounds like plumbing trivia right up until you look at the bill. In one controlled benchmark on an identical task, going through MCP directly used between 4 and 32 times more tokens than a plain command line tool. Not because the model reasoned worse. Because of what was sitting in the context window before it started reasoning at all.</p>
+    <p>The MCP vs CLI question for AI agents sounds like plumbing trivia right up until you look at the bill. In one controlled benchmark on an identical task, going through MCP directly used <mark class="hl">between 4 and 32 times more tokens than a plain command line tool</mark>. Not because the model reasoned worse. Because of what was sitting in the context window before it started reasoning at all.</p>
 
     <p>The mechanism is boring, which is why people miss it. That MCP setup loaded <strong>43 tool definitions</strong> into context, and the agent then used one or two of them. Every schema, every parameter description, every enum in the other 41 got paid for anyway. Then paid for again on the next turn.</p>
 
-    <p>So I ran the opposite experiment. One coding agent, one focused command line tool, one build prompt. What came out was a live World Cup dashboard: current results, upcoming matches, a personalised road to the final, a shareable prediction builder, market odds and a model that plays the rest of the tournament out 20,000 times. No API, no backend I wrote, zero data cost. Below is why the smaller interface won, and how to point the same move at whatever you check twelve times a day.</p>
+    <p>So I ran the opposite experiment. One coding agent, one focused command line tool, one build prompt. What came out was a live World Cup dashboard: current results, upcoming matches, a personalised road to the final, a shareable prediction builder, market odds and a model that plays the rest of the tournament out 20,000 times.</p>
+
+    <p><mark class="hl">No API, no backend I wrote, zero data cost.</mark> Below is why the smaller interface won, and how to point the same move at whatever you check twelve times a day.</p>
 
     <div class="takeaways">
       <h2>What you'll get out of this</h2>
@@ -182,7 +240,7 @@
 
     <h2 id="tool-definitions-tax">Why your agent pays for tools it never uses</h2>
 
-    <p>Here is the part nobody puts on the marketing page. When you connect an MCP server, its tool definitions become <em>resident</em>. They live in the prompt. Names, descriptions, full JSON schemas for every parameter, the little paragraph explaining what <code>include_archived</code> means. Connect four or five servers and you are carrying dozens of these before the agent has read your actual request.</p>
+    <p>Here is the part nobody puts on the marketing page. When you connect an MCP server, <mark class="hl hl--mint">its tool definitions become <em>resident</em>. They live in the prompt.</mark> Names, descriptions, full JSON schemas for every parameter, the little paragraph explaining what <code>include_archived</code> means. Connect four or five servers and you are carrying dozens of these before the agent has read your actual request.</p>
 
     <p>The agent does not get to skim. There is no "read the table of contents first." The whole manifest goes in, every turn, and the model attends over all of it. Forty-three definitions to reach for one or two is not a rounding error. It is the majority of what you paid for.</p>
 
@@ -258,7 +316,7 @@
 
     <p>Be precise about the claim, because the internet will not be. The benchmark compared direct MCP against a command line tool doing the <em>same</em> task, and the spread was 4x to 32x more tokens on the MCP side. That is a wide range on purpose. How badly you get hit depends on how many servers you have connected, how verbose their schemas are, and how many turns the job takes, because the tax repeats.</p>
 
-    <p>The ceiling is the number that matters. A 4x overhead on a one-shot lookup is annoying. A 30x overhead on a forty-turn loop is a different category of problem, and it compounds where you cannot see it: your context window fills with documentation instead of work.</p>
+    <p>The ceiling is the number that matters. A 4x overhead on a one-shot lookup is annoying. A 30x overhead on a forty-turn loop is a different category of problem, and it compounds where you cannot see it: <mark class="hl">your context window fills with documentation instead of work</mark>.</p>
 
     <div class="callout">
       <p>This is not "MCP is bad." MCP is a protocol for structure, and structure sometimes earns its price. The failure is treating it as the default connector for everything, including jobs the shell solved in 1978.</p>
@@ -270,13 +328,13 @@
 
     <p>For an agent that difference stops being aesthetic. A CLI returns text, which the model already reads natively. It composes: output of one command becomes input to the next without a translation layer. It is deterministic enough to repeat. And critically, its documentation is <em>lazy</em>. The agent runs <code>--help</code> when it needs to know what exists, and otherwise pays nothing for the existence of forty other subcommands.</p>
 
-    <p>That is the whole trick, stated plainly. MCP is eager loading. A CLI is lazy loading. Everything else follows from that.</p>
+    <p>That is the whole trick, stated plainly. <mark class="hl hl--mint">MCP is eager loading. A CLI is lazy loading.</mark> Everything else follows from that.</p>
 
     <blockquote>Imagine asking someone to tighten one IKEA screw. MCP hands them the catalogue, the parts list and the full instruction booklet. A CLI hands them a screwdriver and says: tighten this.</blockquote>
 
     <h2 id="printing-press-espn-cli">The one tool I gave it: Printing Press and the ESPN CLI</h2>
 
-    <p>The tool in this build is the ESPN CLI from <a href="https://github.com/mvanhorn/cli-printing-press" target="_blank" rel="noopener">Printing Press</a>, a free open source project that manufactures an agent-friendly command line tool out of an API, an app or a website. It also keeps a public library of tools people have already pressed.</p>
+    <p>The tool in this build is the <strong>ESPN CLI</strong> from <a href="https://github.com/mvanhorn/cli-printing-press" target="_blank" rel="noopener">Printing Press</a>, a free open source project that manufactures an agent-friendly command line tool out of an API, an app or a website. It also keeps a public library of tools people have already pressed.</p>
 
     <p>The ESPN one already existed, so I reused it. Worth saying out loud, because AI videos have a habit of making simple work look complicated: if a good tool already exists, use it. You do not get bonus points for rebuilding the screwdriver.</p>
 
@@ -301,7 +359,7 @@
 
     <h2 id="the-build-brief">How I briefed the agent to build the dashboard</h2>
 
-    <p>Claude Code and Codex both handle this. The logo on the agent is not the interesting variable — what matters is whether the agent can run the tool, inspect the result, create files and test whether the result is any good. Four abilities, in that order.</p>
+    <p><strong>Claude Code</strong> and Codex both handle this. The logo on the agent is not the interesting variable — what matters is whether the agent can run the tool, inspect the result, create files and test whether the result is any good. Four abilities, in that order.</p>
 
     <ol class="steps">
       <li>
@@ -314,7 +372,7 @@
       </li>
       <li>
         <h3>Turn each question into exactly one surface</h3>
-        <p>Those questions became the product, and the technology came afterward: latest results, next fixture, a country selector, an interactive knockout path, a scenario builder, fun stats, all twelve group tables, market odds, and a clearly labelled tournament simulation. One question, one thing on the page.</p>
+        <p>Those questions became the product, and the technology came afterward: latest results, next fixture, a country selector, an interactive knockout path, a scenario builder, fun stats, all twelve group tables, market odds, and a clearly labelled tournament simulation. <mark class="hl">One question, one thing on the page.</mark></p>
       </li>
       <li>
         <h3>Make the agent test its own work</h3>
@@ -322,7 +380,7 @@
       </li>
     </ol>
 
-    <blockquote>A mock-up only needs to look right. A product needs to work when someone touches it.</blockquote>
+    <p class="key">A mock-up only needs to look right. A product needs to work when someone touches it.</p>
 
     <figure>
       <svg viewBox="0 0 880 372" width="100%" class="diagram" role="img" aria-labelledby="d2title">
@@ -384,7 +442,7 @@
 
     <h2 id="what-the-dashboard-does">What one page can answer when the data is cheap</h2>
 
-    <p>The hero does the fast work. It carries the visual identity, but it also answers the two questions with the shortest shelf life: what just happened, and what happens next. Then the country picker makes that personal. Choose the United States, South Korea, Brazil or anyone else and the hero swaps to that nation's most recent result and next match. One control turns a generic tournament page into <em>your</em> tournament page.</p>
+    <p>The hero does the fast work. It carries the visual identity, but it also answers the two questions with the shortest shelf life: what just happened, and what happens next. Then the country picker makes that personal. Choose the United States, South Korea, Brazil or anyone else and the hero swaps to that nation's most recent result and next match. <mark class="hl">One control turns a generic tournament page into <em>your</em> tournament page.</mark></p>
 
     <figure>
       <img src="/blog/img/ai-agent-35x-more-efficient-02.jpg" alt="World Cup dashboard hero section with country picker showing latest result and next fixture for the selected nation" width="1280" height="720" loading="lazy">
@@ -400,9 +458,13 @@
 
     <p>The prediction builder is where it stops being a dashboard and becomes something people send each other. You back a country, select its opponent in every knockout round, set the scorelines, and the share card updates with each choice. Win all five rounds and the card crowns your champion and summarises the run. You copy that exact scenario into a link, send it to a friend, and they disagree immediately, as friends do, and build their own.</p>
 
-    <p>That is a sharing loop, and it exists for a reason worth stealing: people rarely share a table of data. They share an opinion.</p>
+    <p>That is a sharing loop, and it exists for a reason worth stealing: <mark class="hl">people rarely share a table of data. They share an opinion.</mark></p>
 
-    <p>Under that, six stat cards compress the tournament into facts you absorb in seconds — biggest win, nation with the most goals, current title favourite, the group of death, total goals, and the teams with a perfect start. The title race shows which team wins most often when the model simulates the rest of the tournament 20,000 times. The market section carries the current betting view, and twelve group tables show points, goal difference and each team's estimated chance of advancing.</p>
+    <h3>Stats, simulation and group tables</h3>
+
+    <p>Under that, six stat cards compress the tournament into facts you absorb in seconds — biggest win, nation with the most goals, current title favourite, the group of death, total goals, and the teams with a perfect start.</p>
+
+    <p>The title race shows which team wins most often when the model simulates the rest of the tournament 20,000 times. The market section carries the current betting view, and twelve group tables show points, goal difference and each team's estimated chance of advancing.</p>
 
     <figure>
       <img src="/blog/img/ai-agent-35x-more-efficient-04.jpg" alt="Title race panel from a 20,000-run tournament simulation next to group tables showing points, goal difference and advancement chances" width="1280" height="720" loading="lazy">
@@ -413,9 +475,11 @@
 
     <h2 id="steal-this-approach">How to run this on something you check every day</h2>
 
-    <p>You do not need a sports dashboard. Think of one piece of information you check repeatedly and resent checking: flight prices, product availability, appointment slots, competitor updates, industry news. Find one focused tool that can retrieve it, and ask your agent to turn it into one useful screen.</p>
+    <p>You do not need a sports dashboard. Think of <mark class="hl">one piece of information you check repeatedly and resent checking</mark>: flight prices, product availability, appointment slots, competitor updates, industry news. Find one focused tool that can retrieve it, and ask your agent to turn it into one useful screen.</p>
 
-    <p>Start with a single question and a single reliable answer. Add features only when they make that answer more useful — that constraint is what keeps the build from sprawling into a half-finished platform. It is the same discipline behind <a href="/blog/command-center-claude-code/">the command center I built to run my week</a> and <a href="/blog/automate-video-editing-claude-code/">the editing pipeline that cuts my videos</a>: one job, one interface, ruthlessly scoped. If you want the reading-and-recall version of this idea rather than the dashboard version, <a href="/blog/second-brain-claude-code/">the second brain build</a> applies the same rule to notes.</p>
+    <p>Start with a single question and a single reliable answer. Add features only when they make that answer more useful — that constraint is what keeps the build from sprawling into a half-finished platform.</p>
+
+    <p>It is the same discipline behind <a href="/blog/command-center-claude-code/">the command center I built to run my week</a> and <a href="/blog/automate-video-editing-claude-code/">the editing pipeline that cuts my videos</a>: one job, one interface, ruthlessly scoped. If you want the reading-and-recall version of this idea rather than the dashboard version, <a href="/blog/second-brain-claude-code/">the second brain build</a> applies the same rule to notes.</p>
 
     <h2 id="when-mcp-wins">When MCP is still the right call</h2>
 
@@ -423,7 +487,7 @@
 
     <p>The honest rule is narrower and more useful. Give the agent the <em>smallest useful interface</em> for the job. Audit what you have connected and disconnect the servers you wired up once out of curiosity and never used — they are still in your context window, still billing you, still competing for the model's attention with the thing you actually asked for.</p>
 
-    <p>Fewer tokens, fewer moving parts, and a much shorter path from an idea to a working thing. Don't hand your agent the manual. Hand it the tool.</p>
+    <p>Fewer tokens, fewer moving parts, and a much shorter path from an idea to a working thing. <mark class="hl">Don't hand your agent the manual. Hand it the tool.</mark></p>
 
     <div class="cta">
       <h3>Watch the dashboard get built in seven minutes</h3>

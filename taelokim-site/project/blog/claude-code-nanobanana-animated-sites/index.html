@@ -32,8 +32,7 @@
 <link rel="preload" as="image" href="/blog/img/claude-code-nanobanana-animated-sites-thumb.jpg" fetchpriority="high">
 <link rel="stylesheet" href="/blog/blog.css">
 
-<script type="application/ld+json">
-{
+<script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -44,22 +43,24 @@
       "image": "https://taeloai.com/blog/img/claude-code-nanobanana-animated-sites-thumb.jpg",
       "datePublished": "2026-05-03",
       "dateModified": "2026-05-03",
-      "wordCount": 1893,
+      "wordCount": 2666,
       "keywords": "build an animated website with AI, Claude Code website design, Nano Banana video background, Claude Design handoff, AI website prompt structure",
       "inLanguage": "en",
       "author": {
-        "@type": "Person",
-        "name": "Taelo Kim",
-        "url": "https://taeloai.com/",
-        "sameAs": ["https://www.youtube.com/@TaeloKim", "https://x.com/taelo_kim", "https://github.com/taelo82"]
+        "@id": "https://taeloai.com/#taelo"
       },
       "publisher": {
-        "@type": "Person",
-        "name": "Taelo Kim",
-        "url": "https://taeloai.com/"
+        "@id": "https://taeloai.com/#taelo"
       },
-      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://taeloai.com/blog/claude-code-nanobanana-animated-sites/" },
-      "isPartOf": { "@type": "Blog", "@id": "https://taeloai.com/blog/#blog", "name": "Taelo Kim — Build Logs" }
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://taeloai.com/blog/claude-code-nanobanana-animated-sites/"
+      },
+      "isPartOf": {
+        "@type": "Blog",
+        "@id": "https://taeloai.com/blog/#blog",
+        "name": "Taelo Kim — Build Logs"
+      }
     },
     {
       "@type": "VideoObject",
@@ -71,14 +72,31 @@
       "duration": "PT18M8S",
       "embedUrl": "https://www.youtube.com/embed/XMIULfNq-2k",
       "contentUrl": "https://www.youtube.com/watch?v=XMIULfNq-2k",
-      "publisher": { "@type": "Person", "name": "Taelo Kim" }
+      "publisher": {
+        "@id": "https://taeloai.com/#taelo"
+      }
     },
     {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://taeloai.com/" },
-        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://taeloai.com/blog/" },
-        { "@type": "ListItem", "position": 3, "name": "How I Built an Animated Website With AI (Full Workflow)", "item": "https://taeloai.com/blog/claude-code-nanobanana-animated-sites/" }
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://taeloai.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://taeloai.com/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "How I Built an Animated Website With AI (Full Workflow)",
+          "item": "https://taeloai.com/blog/claude-code-nanobanana-animated-sites/"
+        }
       ]
     },
     {
@@ -87,27 +105,42 @@
         {
           "@type": "Question",
           "name": "Can Claude Code build a website with animated video backgrounds?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Claude Code handled the structure, the scroll behaviour and the layering of two 8-second video loops that cross-fade into each other. What it cannot do is invent the video. You bring the asset, generated or filmed, and Claude Code wires it into the page. Expect many revision passes rather than one shot." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Claude Code handled the structure, the scroll behaviour and the layering of two 8-second video loops that cross-fade into each other. What it cannot do is invent the video. You bring the asset, generated or filmed, and Claude Code wires it into the page. Expect many revision passes rather than one shot."
+          }
         },
         {
           "@type": "Question",
           "name": "Do I need the $200 Claude plan to build a site like this?",
-          "acceptedAnswer": { "@type": "Answer", "text": "No. This site was built on the $20 Pro plan. The trade-off is time: I hit the five-hour usage limit constantly and started fresh sessions purely to save tokens. On Pro, do the bulk of the build in Claude Code and save Claude Design for the final touch. A higher tier mainly buys you room to iterate without stopping." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. This site was built on the $20 Pro plan. The trade-off is time: I hit the five-hour usage limit constantly and started fresh sessions purely to save tokens. On Pro, do the bulk of the build in Claude Code and save Claude Design for the final touch. A higher tier mainly buys you room to iterate without stopping."
+          }
         },
         {
           "@type": "Question",
           "name": "Why do AI-generated websites all look generic?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Because the prompt describes what you are selling. Build me a website that sells X gives the model nothing to push against, so it returns the median of everything it has seen: same hero, same gradient, same three-column feature grid. Give it a real reference asset, a stated feeling and an explicit list of what you do not want." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Because the prompt describes what you are selling. Build me a website that sells X gives the model nothing to push against, so it returns the median of everything it has seen: same hero, same gradient, same three-column feature grid. Give it a real reference asset, a stated feeling and an explicit list of what you do not want."
+          }
         },
         {
           "@type": "Question",
           "name": "How do you get video backgrounds for an AI-built website?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Generate a still first in Nano Banana or GPT image 2, then animate that still into a short loop. On a paid Gemini Pro subscription you only get three video generations, so iterate on the image, which is cheap, and animate only the frame you have already committed to. Filming your own clip works just as well." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Generate a still first in Nano Banana or GPT image 2, then animate that still into a short loop. On a paid Gemini Pro subscription you only get three video generations, so iterate on the image, which is cheap, and animate only the frame you have already committed to. Filming your own clip works just as well."
+          }
         },
         {
           "@type": "Question",
           "name": "Why did Claude Design rebuild an old version of my site?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Because it reads your git repository, not your local working tree. Mine pulled a state from before my latest commits and rebuilt the wrong site. Push everything, then tell it explicitly to re-read the repo and redo the job. The same rule applies to the handoff file: it has to point at the current version." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Because it reads your git repository, not your local working tree. Mine pulled a state from before my latest commits and rebuilt the wrong site. Push everything, then tell it explicitly to re-read the repo and redo the job. The same rule applies to the handoff file: it has to point at the current version."
+          }
         }
       ]
     },
@@ -116,16 +149,45 @@
       "name": "How to build an animated website with Claude Code and Claude Design",
       "description": "Build an animated website with AI: the Claude Code workflow, prompt structure and video-background setup behind a site that beat a $15K agency build.",
       "step": [
-        { "@type": "HowToStep", "position": 1, "name": "Generate the reference before you prompt", "text": "Decide the feeling first, generate the still in Nano Banana or GPT image 2, iterate on the image, and animate only the frame you have committed to. Video generations are the scarce resource.", "url": "https://taeloai.com/blog/claude-code-nanobanana-animated-sites/#build-order" },
-        { "@type": "HowToStep", "position": 2, "name": "Write the metaphor down before the layout", "text": "One paragraph on what the visitor should feel in the first second and why. This is the constraint the model cannot invent for you, and it is what keeps the output off the template.", "url": "https://taeloai.com/blog/claude-code-nanobanana-animated-sites/#build-order" },
-        { "@type": "HowToStep", "position": 3, "name": "Build the whole thing in Claude Code", "text": "Structure, scroll behaviour and video layering all happen here. Prompt in reference plus intent plus constraints form, and always state what you do not want alongside what you do.", "url": "https://taeloai.com/blog/claude-code-nanobanana-animated-sites/#build-order" },
-        { "@type": "HowToStep", "position": 4, "name": "Push to git, then hand off", "text": "Ask Claude Code for a handoff file containing the entire site with inline JS and HTML plus an architecture map, push the repo, and give Claude Design the current version link.", "url": "https://taeloai.com/blog/claude-code-nanobanana-animated-sites/#build-order" },
-        { "@type": "HowToStep", "position": 5, "name": "Final touch, then get out", "text": "Use the free tweaks for small adjustments, check nothing regressed, and go back to Claude Code the moment a tweak silently eats a feature you already shipped.", "url": "https://taeloai.com/blog/claude-code-nanobanana-animated-sites/#build-order" }
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Generate the reference before you prompt",
+          "text": "Decide the feeling first, generate the still in Nano Banana or GPT image 2, iterate on the image, and animate only the frame you have committed to. Video generations are the scarce resource.",
+          "url": "https://taeloai.com/blog/claude-code-nanobanana-animated-sites/#build-order"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Write the metaphor down before the layout",
+          "text": "One paragraph on what the visitor should feel in the first second and why. This is the constraint the model cannot invent for you, and it is what keeps the output off the template.",
+          "url": "https://taeloai.com/blog/claude-code-nanobanana-animated-sites/#build-order"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Build the whole thing in Claude Code",
+          "text": "Structure, scroll behaviour and video layering all happen here. Prompt in reference plus intent plus constraints form, and always state what you do not want alongside what you do.",
+          "url": "https://taeloai.com/blog/claude-code-nanobanana-animated-sites/#build-order"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Push to git, then hand off",
+          "text": "Ask Claude Code for a handoff file containing the entire site with inline JS and HTML plus an architecture map, push the repo, and give Claude Design the current version link.",
+          "url": "https://taeloai.com/blog/claude-code-nanobanana-animated-sites/#build-order"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "name": "Final touch, then get out",
+          "text": "Use the free tweaks for small adjustments, check nothing regressed, and go back to Claude Code the moment a tweak silently eats a feature you already shipped.",
+          "url": "https://taeloai.com/blog/claude-code-nanobanana-animated-sites/#build-order"
+        }
       ]
     }
   ]
-}
-</script>
+}</script>
 </head>
 <body>
 
@@ -168,7 +230,7 @@
 
     <p>I have a slightly unusual angle on this. I used to buy websites that were the most expensive in their category, with a full team of designers and programmers behind them, at $10–20K a build. As a VC partner I also sat across from a lot of founders raising rounds, and investors judge them on two artifacts: the website and the pitch deck. That's it. So the site has to be aesthetic, and it has to carry the story.</p>
 
-    <p>The site I'm about to break down was built with Claude Code, two generated video clips and a colour reference, on the $20 Pro plan. It's better than the ones I paid for. It also took a week and I hit the usage limit almost every day, so if an AI influencer tells you to one-shot something like this, they haven't built one. Here's the workflow, the prompt structure, and the two places it went wrong.</p>
+    <p>The site I'm about to break down was built with Claude Code, two generated video clips and a colour reference, on the $20 Pro plan. <mark class="hl">It's better than the ones I paid for.</mark> It also took a week and I hit the usage limit almost every day, so if an AI influencer tells you to one-shot something like this, they haven't built one. Here's the workflow, the prompt structure, and the two places it went wrong.</p>
 
     <div class="takeaways">
       <h2>What you'll get out of this</h2>
@@ -183,7 +245,7 @@
 
     <h2 id="why-ai-websites-look-generic">Why AI-built websites all look the same</h2>
 
-    <p>Most people prompt forward. "Build me a website that sells X." "Build me a site that resembles Y." The model has nothing to push against except its own average, so it hands back the median of every site it has ever seen. That's not a model failure. That's the prompt describing what you're selling, and a page that describes what you're selling is a brochure.</p>
+    <p>Most people prompt forward. "Build me a website that sells X." "Build me a site that resembles Y." The model has nothing to push against except its own average, so <mark class="hl">it hands back the median of every site it has ever seen.</mark> That's not a model failure. That's the prompt describing what you're selling, and a page that describes what you're selling is a brochure.</p>
 
     <p>The prompt history for this build is not glamorous. It's weeks of back-and-forth on one machine, plus more on a second one, mostly consisting of me telling it what to remove.</p>
 
@@ -196,7 +258,7 @@
 
     <p>I don't start from what I want to sell. I start from how somebody lands on the page. What do they feel in the first second? What makes them go <em>wait, what is this</em>, then <em>okay, that's actually cool</em>, maybe a small laugh. That feeling is the thing you're designing. Everything after it is content.</p>
 
-    <p>For this site the feeling was a specific scene: the tesseract sequence in <em>Interstellar</em>, where Cooper is floating in the bookshelf reaching through to affect the past. Every CTA on the page is meant to be that gesture — the action you take here changes what happens next. Abstract, sure. But it's a constraint, and a constraint is the one thing a model can't supply for you.</p>
+    <p>For this site the feeling was a specific scene: the tesseract sequence in <em>Interstellar</em>, where Cooper is floating in the bookshelf reaching through to affect the past. Every CTA on the page is meant to be that gesture — the action you take here changes what happens next. Abstract, sure. But it's a constraint, and <mark class="hl hl--mint">a constraint is the one thing a model can't supply for you.</mark></p>
 
     <p>Three things multiplied the output quality more than any prompt trick:</p>
 
@@ -221,7 +283,7 @@
 <span class="k">constraint</span> <span class="s">flip the second video 180° so the character sits left</span>
 </code></pre>
 
-    <p>Nothing in there is clever. It's just decided. The reason it works is that each line closes off an option the model would otherwise take on its own, which is exactly how you get off the template. The same instinct powers <a href="/blog/claude-design-genius-4-steps/">the four-step approach I use to turn Claude into a design collaborator</a> rather than a slot-machine.</p>
+    <p>Nothing in there is clever. It's just decided. The reason it works is that <mark class="hl">each line closes off an option the model would otherwise take on its own,</mark> which is exactly how you get off the template. The same instinct powers <a href="/blog/claude-design-genius-4-steps/">the four-step approach I use to turn Claude into a design collaborator</a> rather than a slot-machine.</p>
 
     <figure>
       <img src="/blog/img/claude-code-nanobanana-animated-sites-02.jpg" alt="The animated website hero section mid-revision, wider than the previous pass but still carrying the extra bookshelf layer" width="1280" height="720" loading="lazy" decoding="async">
@@ -232,7 +294,7 @@
 
     <p>If you want a video background like mine, you bring your own. Generate one or film one — there's no prompt that conjures a usable clip out of nothing. The light in the hero started life as a ChatGPT image that I then animated into a loop. Once the reference exists, the rest of the work is mechanical.</p>
 
-    <p>The constraint nobody warns you about is quota. On a paid Gemini Pro subscription you get three video generations. Three. That is your entire budget for the look of the page, so the decision has to be made before you spend one.</p>
+    <p>The constraint nobody warns you about is quota. <mark class="hl">On a paid Gemini Pro subscription you get three video generations.</mark> Three. That is your entire budget for the look of the page, so the decision has to be made before you spend one.</p>
 
     <div class="callout callout--warn">
       <span class="callout__label">Spend the cheap currency first</span>
@@ -241,7 +303,7 @@
 
     <h2 id="cross-fade-on-scroll">How to cross-fade two video backgrounds on scroll</h2>
 
-    <p>The single hardest part of the build wasn't visual, it was temporal. One 8-second loop at the top, one at the bottom, and the page has to hand off between them without the seam showing.</p>
+    <p class="key">The single hardest part of the build wasn't visual, it was temporal. One 8-second loop at the top, one at the bottom, and the page has to hand off between them without the seam showing.</p>
 
     <figure>
       <svg class="diagram" viewBox="0 0 880 430" width="100%" role="img" aria-labelledby="d1t" xmlns="http://www.w3.org/2000/svg">
@@ -288,7 +350,9 @@
       <figcaption>The percentages are the whole trick. <b>60–70% down</b> was the first setting where the transition stopped announcing itself; anything earlier and visitors register a section change rather than a continuous space.</figcaption>
     </figure>
 
-    <p>Two details make or break it. First, the flip: the hero character sits on the right, so the second clip is mirrored 180° horizontally to put its character on the left. Without it, the two collide in the middle of the frame during the fade and the effect turns into a mess. Second, dead space — the page needs extra length at the bottom so the fade has room to happen without the sections overlapping each other.</p>
+    <p>Two details make or break it. First, the flip: the hero character sits on the right, so <mark class="hl">the second clip is mirrored 180° horizontally to put its character on the left.</mark> Without it, the two collide in the middle of the frame during the fade and the effect turns into a mess.</p>
+
+    <p>Second, dead space — the page needs extra length at the bottom so the fade has room to happen without the sections overlapping each other.</p>
 
     <p>The other seam problem was structural. The hero had three visibly cut edges where sections met, each one reading as a pasted square. The fix was a gradient fade at the boundaries so the sections blend into the background instead of stacking on it.</p>
 
@@ -299,7 +363,7 @@
 
     <h2 id="brand-color">Getting a colour that isn't every other AI site's colour</h2>
 
-    <p>The first build came back gold and orange, which is fine and also everywhere. I fed it thumbnails from a podcast as the colour reference and asked it to move the whole theme there — a green that isn't mint, near mint but not the mint everybody uses. My own colour, that sits well against red and plain white.</p>
+    <p>The first build came back gold and orange, which is fine and also everywhere. I fed it thumbnails from a podcast as the colour reference and asked it to move the whole theme there — <mark class="hl">a green that isn't mint, near mint but not the mint everybody uses.</mark> My own colour, that sits well against red and plain white.</p>
 
     <p>The first attempt landed too stale and too blue, so the follow-up got specific about <em>which part</em> of the reference image mattered: the brighter region near the person, not the darker stale areas. More glow, more gradient, brighter overall. That's the method in miniature — reference (the thumbnail), intent (a colour that isn't already everywhere), constraint (not stale blue, not mint, lean bright).</p>
 
@@ -312,9 +376,13 @@
 
     <p>No designers, no programmers, no Framer, no Figma. A $20 Pro plan, against a $10–20K agency build with a full team on it.</p>
 
-    <p>The real cost isn't money, it's ceilings. I hit the five-hour Pro limit constantly, and got limit-conscious enough that I started opening fresh sessions purely to save tokens — the same discipline that made the difference when I <a href="/blog/ai-agent-35x-more-efficient/">cut an agent's usage by 35x</a>. Doing the bulk of the work in Claude Code and saving Claude Design for the final touch isn't a stylistic preference on Pro. It's the only way the budget works. On the $200 tier you'd have more room to iterate in one place.</p>
+    <h3>The real cost is ceilings</h3>
 
-    <p>Time cost: one week. The next one is under a day, because the prompts now exist and can be pasted. If you're building sites for other people, that gap between "one week" and "under a day" is the entire business — which is roughly how I think about <a href="/blog/make-money-with-claude/">actually making money with Claude</a> rather than posting screenshots about it.</p>
+    <p>The real cost isn't money, it's ceilings. I hit the five-hour Pro limit constantly, and got limit-conscious enough that I started opening fresh sessions purely to save tokens — the same discipline that made the difference when I <a href="/blog/ai-agent-35x-more-efficient/">cut an agent's usage by 35x</a>.</p>
+
+    <p>Doing the bulk of the work in Claude Code and saving Claude Design for the final touch isn't a stylistic preference on Pro. It's the only way the budget works. On the $200 tier you'd have more room to iterate in one place.</p>
+
+    <p>Time cost: one week. <mark class="hl">The next one is under a day, because the prompts now exist</mark> and can be pasted. If you're building sites for other people, that gap between "one week" and "under a day" is the entire business — which is roughly how I think about <a href="/blog/make-money-with-claude/">actually making money with Claude</a> rather than posting screenshots about it.</p>
 
     <h2 id="claude-code-vs-claude-design">Claude Code vs Claude Design: which one does what</h2>
 
@@ -371,18 +439,22 @@
       <figcaption>The repo is the interface between the two tools, which means an unpushed commit isn't a small mistake — <b>it silently changes which website you're editing.</b></figcaption>
     </figure>
 
+    <h3>Why the first handoff failed</h3>
+
     <p>Which is exactly how the first handoff failed. Claude Design came back having rebuilt a version of the site I'd abandoned days earlier.</p>
 
     <blockquote>It revived the old version. Are you kidding? I want a full refund.</blockquote>
 
-    <p>The cause was mundane: git wasn't pushed. Claude Design reads the repository, and the repository was behind my working tree, so it faithfully rebuilt the wrong site. The fix was to push everything, hand over the current link, and tell it to re-read and redo the job. After that it was noticeably better — smoother motion, the hands meeting at the CTA, working navigation, the small animations on the YouTube, X and email icons, and none of the cliché tilt that gives AI-built pages away.</p>
+    <p>The cause was mundane: git wasn't pushed. <mark class="hl">Claude Design reads the repository, and the repository was behind my working tree,</mark> so it faithfully rebuilt the wrong site. The fix was to push everything, hand over the current link, and tell it to re-read and redo the job.</p>
+
+    <p>After that it was noticeably better — smoother motion, the hands meeting at the CTA, working navigation, the small animations on the YouTube, X and email icons, and none of the cliché tilt that gives AI-built pages away.</p>
 
     <div class="callout">
       <span class="callout__label">Two things worth knowing before you start</span>
       Tweaks in Claude Design don't spend tokens, which on a Pro plan makes them the most valuable feature in the product. But one of mine quietly reverted the hero and lost the second video entirely, so verify after each one. And skip the voice input — dictated prompts were bad enough that I went back to typing and never tried again.
     </div>
 
-    <p>When the tweak regressed, I reverted to the last good version and finished in Claude Code. That's not a criticism of the tool so much as the actual shape of the workflow: the code environment holds the truth, and the design environment is a finishing pass you can walk away from.</p>
+    <p>When the tweak regressed, I reverted to the last good version and finished in Claude Code. That's not a criticism of the tool so much as the actual shape of the workflow: <mark class="hl hl--mint">the code environment holds the truth, and the design environment is a finishing pass</mark> you can walk away from.</p>
 
     <h2 id="build-order">The build order I'd use next time</h2>
 

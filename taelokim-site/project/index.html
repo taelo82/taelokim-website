@@ -13,6 +13,53 @@
 <meta property="og:image" content="https://taeloai.com/taelo.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@taelo_kim">
+<link rel="canonical" href="https://taeloai.com/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+
+<!-- Entity graph. This is the page Google resolves "who is Taelo Kim" against, and
+     what ties the blog's article authorship back to the YouTube channel. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://taeloai.com/#taelo",
+      "name": "Taelo Kim",
+      "url": "https://taeloai.com/",
+      "image": "https://taeloai.com/taelo.jpg",
+      "jobTitle": "Operator and AI product builder",
+      "description": "VC-turned-operator building and shipping AI products across Korea, Japan and Southeast Asia. Publishes build logs on Claude Code, AI agents and automation.",
+      "knowsAbout": ["Claude Code", "AI agents", "Anthropic Claude", "AI automation", "prompt engineering", "product design"],
+      "sameAs": [
+        "https://www.youtube.com/@TaeloKim",
+        "https://x.com/taelo_kim",
+        "https://github.com/taelo82",
+        "https://www.skool.com/ai-movers-1936"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://taeloai.com/#website",
+      "url": "https://taeloai.com/",
+      "name": "Taelo Kim",
+      "description": "Playbooks, prompt packs and build logs for people shipping real AI products with Claude.",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://taeloai.com/#taelo" }
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": "https://taeloai.com/#profile",
+      "url": "https://taeloai.com/",
+      "name": "Taelo Kim — Build real AI products with Claude",
+      "isPartOf": { "@id": "https://taeloai.com/#website" },
+      "about": { "@id": "https://taeloai.com/#taelo" },
+      "hasPart": { "@id": "https://taeloai.com/blog/#blog" }
+    }
+  ]
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">

@@ -32,8 +32,7 @@
 <link rel="preload" as="image" href="/blog/img/codex-computer-use-browser-thumb.jpg" fetchpriority="high">
 <link rel="stylesheet" href="/blog/blog.css">
 
-<script type="application/ld+json">
-{
+<script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -44,22 +43,24 @@
       "image": "https://taeloai.com/blog/img/codex-computer-use-browser-thumb.jpg",
       "datePublished": "2026-07-16",
       "dateModified": "2026-07-16",
-      "wordCount": 1695,
+      "wordCount": 2344,
       "keywords": "computer use agent, AI agent that browses the web for you, browser automation with AI, Codex computer use, delegate research to an AI agent",
       "inLanguage": "en",
       "author": {
-        "@type": "Person",
-        "name": "Taelo Kim",
-        "url": "https://taeloai.com/",
-        "sameAs": ["https://www.youtube.com/@TaeloKim", "https://x.com/taelo_kim", "https://github.com/taelo82"]
+        "@id": "https://taeloai.com/#taelo"
       },
       "publisher": {
-        "@type": "Person",
-        "name": "Taelo Kim",
-        "url": "https://taeloai.com/"
+        "@id": "https://taeloai.com/#taelo"
       },
-      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://taeloai.com/blog/codex-computer-use-browser/" },
-      "isPartOf": { "@type": "Blog", "@id": "https://taeloai.com/blog/#blog", "name": "Taelo Kim — Build Logs" }
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://taeloai.com/blog/codex-computer-use-browser/"
+      },
+      "isPartOf": {
+        "@type": "Blog",
+        "@id": "https://taeloai.com/blog/#blog",
+        "name": "Taelo Kim — Build Logs"
+      }
     },
     {
       "@type": "VideoObject",
@@ -71,14 +72,31 @@
       "duration": "PT6M32S",
       "embedUrl": "https://www.youtube.com/embed/7nqoRv6k-kU",
       "contentUrl": "https://www.youtube.com/watch?v=7nqoRv6k-kU",
-      "publisher": { "@type": "Person", "name": "Taelo Kim" }
+      "publisher": {
+        "@id": "https://taeloai.com/#taelo"
+      }
     },
     {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://taeloai.com/" },
-        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://taeloai.com/blog/" },
-        { "@type": "ListItem", "position": 3, "name": "Computer use agents: when to let AI drive your browser", "item": "https://taeloai.com/blog/codex-computer-use-browser/" }
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://taeloai.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://taeloai.com/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Computer use agents: when to let AI drive your browser",
+          "item": "https://taeloai.com/blog/codex-computer-use-browser/"
+        }
       ]
     },
     {
@@ -87,27 +105,42 @@
         {
           "@type": "Question",
           "name": "What is a computer use agent?",
-          "acceptedAnswer": { "@type": "Answer", "text": "A computer use agent is an AI agent that controls a real computer the way a person does: it moves the mouse, types, clicks links, dismisses cookie banners and reads what is on screen. Instead of returning text about a website, it operates the website. You watch the window while it works and step in whenever you want." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A computer use agent is an AI agent that controls a real computer the way a person does: it moves the mouse, types, clicks links, dismisses cookie banners and reads what is on screen. Instead of returning text about a website, it operates the website. You watch the window while it works and step in whenever you want."
+          }
         },
         {
           "@type": "Question",
           "name": "What is the difference between an in-app browser tool and computer use?",
-          "acceptedAnswer": { "@type": "Answer", "text": "An in-app browser opens tabs inside the agent's own window, so the pages live next to your chat and you can take one over instantly. Computer use drives the operating system itself, including apps the agent has no integration with. In-app browsing is faster and tidier; computer use handles anything, including the awkward pages." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "An in-app browser opens tabs inside the agent's own window, so the pages live next to your chat and you can take one over instantly. Computer use drives the operating system itself, including apps the agent has no integration with. In-app browsing is faster and tidier; computer use handles anything, including the awkward pages."
+          }
         },
         {
           "@type": "Question",
           "name": "Can a computer use agent book a flight or pay for something?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Let it research and open the checkout page, then do the payment yourself. When I searched for a train from Brussels to Frankfurt, the agent found the cheapest convenient option and left it on screen, and I clicked the buy button. Card details, passwords and anything irreversible should stay on your side of the line." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Let it research and open the checkout page, then do the payment yourself. When I searched for a train from Brussels to Frankfurt, the agent found the cheapest convenient option and left it on screen, and I clicked the buy button. Card details, passwords and anything irreversible should stay on your side of the line."
+          }
         },
         {
           "@type": "Question",
           "name": "Do I have to watch the agent while it browses?",
-          "acceptedAnswer": { "@type": "Answer", "text": "No, and that is the point. The browser window runs in the background, so you can park it on a second monitor and keep working while it filters results. Glancing at it occasionally is still worth it: seeing which sites it opened is what tells you whether the answer is trustworthy or a guess." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, and that is the point. The browser window runs in the background, so you can park it on a second monitor and keep working while it filters results. Glancing at it occasionally is still worth it: seeing which sites it opened is what tells you whether the answer is trustworthy or a guess."
+          }
         },
         {
           "@type": "Question",
           "name": "What kinds of tasks are worth handing to a browser agent?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Anything browse-heavy and decision-light: comparison shopping, travel options, gathering sources into a spreadsheet, checking twenty listings against three constraints. If a job takes one tab, do it yourself. The agent starts paying for itself around the fifth tab, where the tedium is real and the judgement call is still yours." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Anything browse-heavy and decision-light: comparison shopping, travel options, gathering sources into a spreadsheet, checking twenty listings against three constraints. If a job takes one tab, do it yourself. The agent starts paying for itself around the fifth tab, where the tedium is real and the judgement call is still yours."
+          }
         }
       ]
     },
@@ -116,16 +149,45 @@
       "name": "How to put a computer use agent on your own browser work",
       "description": "A computer use agent drives a real browser, opens the tabs and hands you a decision, not a link dump. Where it works, where it breaks, how to set one up.",
       "step": [
-        { "@type": "HowToStep", "position": 1, "name": "Pick a browse-heavy, decision-light task", "text": "Choose work that is many tabs and one judgement call, like comparing travel options or gathering sources. Skip anything that fits in a single tab.", "url": "https://taeloai.com/blog/codex-computer-use-browser/#how-to-set-one-up" },
-        { "@type": "HowToStep", "position": 2, "name": "Write the constraints into the prompt", "text": "Give the date, the time window, the budget and the tie-breaker up front, so the agent filters instead of returning everything it found.", "url": "https://taeloai.com/blog/codex-computer-use-browser/#how-to-set-one-up" },
-        { "@type": "HowToStep", "position": 3, "name": "Ask for tabs and an artifact, not a summary", "text": "Tell it to open as many browser tabs as it needs and to produce a spreadsheet or workbook, so the output is something you can act on.", "url": "https://taeloai.com/blog/codex-computer-use-browser/#how-to-set-one-up" },
-        { "@type": "HowToStep", "position": 4, "name": "Park the browser window where you can see it", "text": "Put the agent's browser on a second monitor or in a screen corner and keep working. Look over its shoulder instead of waiting on it.", "url": "https://taeloai.com/blog/codex-computer-use-browser/#how-to-set-one-up" },
-        { "@type": "HowToStep", "position": 5, "name": "Keep the last click for yourself", "text": "Review the option it picked, then handle payment, passwords and anything irreversible manually. The agent stops at the decision.", "url": "https://taeloai.com/blog/codex-computer-use-browser/#how-to-set-one-up" }
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Pick a browse-heavy, decision-light task",
+          "text": "Choose work that is many tabs and one judgement call, like comparing travel options or gathering sources. Skip anything that fits in a single tab.",
+          "url": "https://taeloai.com/blog/codex-computer-use-browser/#how-to-set-one-up"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Write the constraints into the prompt",
+          "text": "Give the date, the time window, the budget and the tie-breaker up front, so the agent filters instead of returning everything it found.",
+          "url": "https://taeloai.com/blog/codex-computer-use-browser/#how-to-set-one-up"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Ask for tabs and an artifact, not a summary",
+          "text": "Tell it to open as many browser tabs as it needs and to produce a spreadsheet or workbook, so the output is something you can act on.",
+          "url": "https://taeloai.com/blog/codex-computer-use-browser/#how-to-set-one-up"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Park the browser window where you can see it",
+          "text": "Put the agent's browser on a second monitor or in a screen corner and keep working. Look over its shoulder instead of waiting on it.",
+          "url": "https://taeloai.com/blog/codex-computer-use-browser/#how-to-set-one-up"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "name": "Keep the last click for yourself",
+          "text": "Review the option it picked, then handle payment, passwords and anything irreversible manually. The agent stops at the decision.",
+          "url": "https://taeloai.com/blog/codex-computer-use-browser/#how-to-set-one-up"
+        }
       ]
     }
   ]
-}
-</script>
+}</script>
 </head>
 <body>
 
@@ -164,7 +226,7 @@
 
   <article class="post-body col">
 
-    <p>Most AI research still ends with you doing the research. You ask for the best train from Brussels to Frankfurt, you get eight links and a tidy summary, and then you open all eight links yourself, compare departure times yourself, and close the six you didn't need. The model did the reading. You did the work.</p>
+    <p>Most AI research still ends with you doing the research. You ask for the best train from Brussels to Frankfurt, you get eight links and a tidy summary, and then you open all eight links yourself, compare departure times yourself, and close the six you didn't need. <mark class="hl">The model did the reading. You did the work.</mark></p>
 
     <p>A <strong>computer use agent</strong> removes that handoff. Instead of handing back links, it drives a real browser — clicks, scrolls, dismisses the cookie banner, filters by your constraints — and leaves the finished tabs open in front of you. You arrive at a decision rather than at homework. That's a smaller-sounding change than "AI books your travel," and it's the one that actually shows up in your day.</p>
 
@@ -185,7 +247,7 @@
 
     <p>Two capabilities get lumped under the same headline, and they are not the same thing.</p>
 
-    <p>The first is an <strong>in-app browser</strong>. Your agent app opens real Chrome tabs that live inside its own window — in Codex it's a <code>Ctrl + T</code> away, and you can have as many as you want. The pages sit next to the conversation, so when the agent finds the right one you take it over without switching apps.</p>
+    <p>The first is an <strong>in-app browser</strong>. Your agent app <mark class="hl hl--mint">opens real Chrome tabs that live inside its own window</mark> — in Codex it's a <code>Ctrl + T</code> away, and you can have as many as you want. The pages sit next to the conversation, so when the agent finds the right one you take it over without switching apps.</p>
 
     <p>The second is <strong>computer use</strong>: the agent drives the machine itself, moving the mouse and typing into whatever window is in front of it. The important detail is that it can do this in the background. Earlier versions of this idea took your mouse hostage — you sat and watched because you physically couldn't do anything else. Now the browser runs off to one side while you keep working.</p>
 
@@ -224,7 +286,7 @@
 
     <blockquote>The worst part of delegating research is that when it spits out the result, you're the one who has to follow whatever it gave you and do a second round of research yourself.</blockquote>
 
-    <p>That second round is the whole cost. The agent's answer is a list of candidates, and candidates need verification: is that price current, does that time actually work, is that restaurant open on a Tuesday. So you re-browse everything it already browsed, which means the delegation saved you the reading and gave you back the clicking.</p>
+    <p>That second round is the whole cost. The agent's answer is a list of candidates, and candidates need verification: is that price current, does that time actually work, is that restaurant open on a Tuesday. So you re-browse everything it already browsed, which means <mark class="hl">the delegation saved you the reading and gave you back the clicking.</mark></p>
 
     <p>A browser agent inverts it. The tabs it opened <em>are</em> the deliverable. You're not chasing links; you're reviewing an intern's desk after they've laid everything out for you to sign.</p>
 
@@ -288,7 +350,7 @@ Early afternoon, and make it so it's not too late.
 Find me the <span class="s">cheapest and most convenient</span> one.
 </code></pre>
 
-    <p>Then I did the thing you can only do when the work is genuinely running elsewhere: I fired off a second job while the first was still going.</p>
+    <p>Then I did the thing you can only do when the work is genuinely running elsewhere: <mark class="hl">I fired off a second job while the first was still going.</mark></p>
 
 <pre><code><span class="c"># prompt 2 — sent while prompt 1 was still browsing</span>
 Research the places I must visit during my 4-day stay in
@@ -298,14 +360,22 @@ In another tab, organize what I need to prepare for packing.
 Open all the tabs inside Codex so I can check the sources.
 </code></pre>
 
-    <p>Note what those prompts have in common. Both carry hard constraints — a date, a time window, a tie-breaker, a trip length. Both explicitly authorize tab sprawl. And both ask for an <em>artifact</em>: a spreadsheet, a packing list, open sources. None of them ask for a summary, because a summary is the thing I'd have to redo.</p>
+    <p>Note what those prompts have in common.</p>
+
+    <ul>
+      <li>Both carry hard constraints — a date, a time window, a tie-breaker, a trip length.</li>
+      <li>Both explicitly authorize tab sprawl.</li>
+      <li>And both ask for an <em>artifact</em>: a spreadsheet, a packing list, open sources.</li>
+    </ul>
+
+    <p>None of them ask for a summary, because a summary is the thing I'd have to redo.</p>
 
     <figure>
       <img src="/blog/img/codex-computer-use-browser-02.jpg" alt="OpenAI Codex opening a second Chrome browser window mid-task while searching train tickets from Brussels to Frankfurt" width="1280" height="720" loading="lazy">
       <figcaption>Mid-run the agent decided one browser wasn't enough and opened another. Nobody asked it to; the prompt just said it was allowed to.</figcaption>
     </figure>
 
-    <p>The train came back with what I'd have picked myself: the best balance of price and timing, sitting on screen ready to book. I didn't verify it by re-searching, which is the part that surprised me. I'd watched enough of the search to know it had covered the ground.</p>
+    <p>The train came back with what I'd have picked myself: the best balance of price and timing, sitting on screen ready to book. <mark class="hl">I didn't verify it by re-searching, which is the part that surprised me.</mark> I'd watched enough of the search to know it had covered the ground.</p>
 
     <figure>
       <img src="/blog/img/codex-computer-use-browser-03.jpg" alt="Train ticket result chosen by the browser agent, showing the cheapest convenient Brussels to Frankfurt option ready to book" width="1280" height="720" loading="lazy">
@@ -314,9 +384,9 @@ Open all the tabs inside Codex so I can check the sources.
 
     <h2 id="why-watching-matters">Why watching the agent browse beats a better answer</h2>
 
-    <p>The thing I didn't expect to care about was the window itself.</p>
+    <p class="key">The thing I didn't expect to care about was the window itself.</p>
 
-    <p>Every research agent before this was a black box. You send a prompt, you wait, you get prose, and you have no idea whether it checked four sources or forty. So you distrust it, so you verify, so you're back to doing the work. The trust problem isn't solved by a better model — it's solved by being able to see the process.</p>
+    <p>Every research agent before this was a black box. You send a prompt, you wait, you get prose, and you have no idea whether it checked four sources or forty. So you distrust it, so you verify, so you're back to doing the work. The trust problem isn't solved by a better model — <mark class="hl hl--mint">it's solved by being able to see the process.</mark></p>
 
     <p>Because computer use runs in the background, you can park the browser in the corner of a second monitor and glance at it while you do something else. You see which sites it opened, which results it scrolled past, what it filtered on. It's the Uber map principle: the ride isn't faster because you can watch the car move, but the waiting stops being anxious.</p>
 
@@ -336,7 +406,7 @@ Open all the tabs inside Codex so I can check the sources.
 
     <p>My chronic browser state is 30-plus open tabs I can't bring myself to close. The reason isn't laziness, it's a cost calculation: closing a tab risks spending ten minutes later finding it again. So every tab stays, forever, and the browser becomes a graveyard of undecided research.</p>
 
-    <p>A browser agent can own that decision. Once the tabs belong to the agent, you can just say what you want kept — close everything about souvenirs, keep restaurants, reopen the ones I'll actually use — and it prunes and re-opens. The judgement about whether a tab is still needed stops being yours. That was the last manual chore hiding inside "AI did my research."</p>
+    <p>A browser agent can own that decision. Once the tabs belong to the agent, you can just say what you want kept — close everything about souvenirs, keep restaurants, reopen the ones I'll actually use — and it prunes and re-opens. <mark class="hl">The judgement about whether a tab is still needed stops being yours.</mark> That was the last manual chore hiding inside "AI did my research."</p>
 
     <figure>
       <img src="/blog/img/codex-computer-use-browser-04.jpg" alt="Ten browser tabs open inside Codex alongside a generated spreadsheet workbook of Brussels places to visit" width="1280" height="720" loading="lazy">
@@ -354,11 +424,11 @@ Open all the tabs inside Codex so I can check the sources.
       <p><strong>Cookie banners and consent walls eat real time.</strong> Every site puts one in the way, and the agent has to deal with each one before it can read anything. Expect the run to be slower than you doing it — the win is that you're not the one sitting there.</p>
     </div>
 
-    <p><strong>The last click stays yours.</strong> Payment, passwords, anything irreversible. A good run ends with the agent having narrowed sixty options to one and left it on screen; you sign. If your workflow requires the agent to spend money unsupervised, you don't have a workflow, you have a liability.</p>
+    <p><strong>The last click stays yours.</strong> Payment, passwords, anything irreversible. A good run ends with the agent having narrowed sixty options to one and left it on screen; you sign. If your workflow requires the agent to spend money unsupervised, <mark class="hl">you don't have a workflow, you have a liability.</mark></p>
 
     <p><strong>It is not faster on small jobs.</strong> One tab, one lookup — do it yourself, you'll be done before the browser finishes launching. The maths flips somewhere around the fifth tab, where the tedium compounds and your attention is the scarce resource.</p>
 
-    <p><strong>Background work is still work you're paying for.</strong> An agent clicking through sites for twenty minutes is burning tokens the entire time, and "let it run, I'm not watching" is exactly how bills get surprising. I've written up <a href="/blog/ai-agent-burning-18-dollars-a-day/">what an always-on agent actually costs per day</a> and <a href="/blog/ai-agent-35x-more-efficient/">how to cut the waste out of an agent loop</a> — read one of them before you set anything running on a schedule.</p>
+    <p><strong>Background work is still work you're paying for.</strong> <mark class="hl">An agent clicking through sites for twenty minutes is burning tokens the entire time,</mark> and "let it run, I'm not watching" is exactly how bills get surprising. I've written up <a href="/blog/ai-agent-burning-18-dollars-a-day/">what an always-on agent actually costs per day</a> and <a href="/blog/ai-agent-35x-more-efficient/">how to cut the waste out of an agent loop</a> — read one of them before you set anything running on a schedule.</p>
 
     <h2 id="how-to-set-one-up">How to put a browser agent on your own workflow</h2>
 

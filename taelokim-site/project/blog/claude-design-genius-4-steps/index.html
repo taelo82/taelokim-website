@@ -32,8 +32,7 @@
 <link rel="preload" as="image" href="/blog/img/claude-design-genius-4-steps-thumb.jpg" fetchpriority="high">
 <link rel="stylesheet" href="/blog/blog.css">
 
-<script type="application/ld+json">
-{
+<script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -44,22 +43,24 @@
       "image": "https://taeloai.com/blog/img/claude-design-genius-4-steps-thumb.jpg",
       "datePublished": "2026-07-26",
       "dateModified": "2026-07-26",
-      "wordCount": 2077,
+      "wordCount": 2490,
       "keywords": "AI pitch deck design prompt, why AI designs look the same, Claude Code pitch deck, design.md file for AI, AI slide deck template GitHub, stop AI generated decks looking generic",
       "inLanguage": "en",
       "author": {
-        "@type": "Person",
-        "name": "Taelo Kim",
-        "url": "https://taeloai.com/",
-        "sameAs": ["https://www.youtube.com/@TaeloKim", "https://x.com/taelo_kim", "https://github.com/taelo82"]
+        "@id": "https://taeloai.com/#taelo"
       },
       "publisher": {
-        "@type": "Person",
-        "name": "Taelo Kim",
-        "url": "https://taeloai.com/"
+        "@id": "https://taeloai.com/#taelo"
       },
-      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://taeloai.com/blog/claude-design-genius-4-steps/" },
-      "isPartOf": { "@type": "Blog", "@id": "https://taeloai.com/blog/#blog", "name": "Taelo Kim — Build Logs" }
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://taeloai.com/blog/claude-design-genius-4-steps/"
+      },
+      "isPartOf": {
+        "@type": "Blog",
+        "@id": "https://taeloai.com/blog/#blog",
+        "name": "Taelo Kim — Build Logs"
+      }
     },
     {
       "@type": "VideoObject",
@@ -71,14 +72,31 @@
       "duration": "PT15M20S",
       "embedUrl": "https://www.youtube.com/embed/TOAt3tssL6w",
       "contentUrl": "https://www.youtube.com/watch?v=TOAt3tssL6w",
-      "publisher": { "@type": "Person", "name": "Taelo Kim" }
+      "publisher": {
+        "@id": "https://taeloai.com/#taelo"
+      }
     },
     {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://taeloai.com/" },
-        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://taeloai.com/blog/" },
-        { "@type": "ListItem", "position": 3, "name": "The four-block prompt that fixes AI-generated deck design", "item": "https://taeloai.com/blog/claude-design-genius-4-steps/" }
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://taeloai.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://taeloai.com/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "The four-block prompt that fixes AI-generated deck design",
+          "item": "https://taeloai.com/blog/claude-design-genius-4-steps/"
+        }
       ]
     },
     {
@@ -87,27 +105,42 @@
         {
           "@type": "Question",
           "name": "Why do AI-generated pitch decks all look the same?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Because a model's default output is the average of everything it has seen, and the average is tidy. That produces the same three habits every time: one loud accent color doing all the visual work, grids of rounded cards, and no texture at all. Ask for a deck without constraints and you get the median deck." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Because a model's default output is the average of everything it has seen, and the average is tidy. That produces the same three habits every time: one loud accent color doing all the visual work, grids of rounded cards, and no texture at all. Ask for a deck without constraints and you get the median deck."
+          }
         },
         {
           "@type": "Question",
           "name": "Does this design prompt only work with Claude?",
-          "acceptedAnswer": { "@type": "Answer", "text": "No. I built this deck in Claude Code, but the four blocks are a way of thinking rather than a feature. Guardrails, experience, design and assets work the same in Codex or Gemini, because every one of those models has the same problem: without constraints it returns the average of its training data." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. I built this deck in Claude Code, but the four blocks are a way of thinking rather than a feature. Guardrails, experience, design and assets work the same in Codex or Gemini, because every one of those models has the same problem: without constraints it returns the average of its training data."
+          }
         },
         {
           "@type": "Question",
           "name": "What should I put in the guardrails section of a design prompt?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Mostly nevers, each paired with a replacement. Never accent bars on cards or text blocks. Never neon accent colors. Never box-and-card grids or rounded rectangles as containers. Then the always: asymmetric grids, hairline rules instead of card borders, content sitting directly on the page. Write never and always literally." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Mostly nevers, each paired with a replacement. Never accent bars on cards or text blocks. Never neon accent colors. Never box-and-card grids or rounded rectangles as containers. Then the always: asymmetric grids, hairline rules instead of card borders, content sitting directly on the page. Write never and always literally."
+          }
         },
         {
           "@type": "Question",
           "name": "Why does AI ignore words like warm, premium or handcrafted?",
-          "acceptedAnswer": { "@type": "Answer", "text": "It doesn't ignore them, it averages them. Every model holds a different median for premium or clean or handcrafted, and the median is exactly what you are trying to escape. A model has never touched linen. Give it images or a live URL to study, plus mechanical instructions about color, grain and depth." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It doesn't ignore them, it averages them. Every model holds a different median for premium or clean or handcrafted, and the median is exactly what you are trying to escape. A model has never touched linen. Give it images or a live URL to study, plus mechanical instructions about color, grain and depth."
+          }
         },
         {
           "@type": "Question",
           "name": "Where can I find a design.md template to start from?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Search GitHub for Claude design deck templates. Plenty of design systems are published openly, and the good repos ship a design.md alongside the HTML. I browsed a list, disliked most of it, then found one called Cartesian that was minimal and flowing. I downloaded its design.md and pasted it in as my starting spec." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Search GitHub for Claude design deck templates. Plenty of design systems are published openly, and the good repos ship a design.md alongside the HTML. I browsed a list, disliked most of it, then found one called Cartesian that was minimal and flowing. I downloaded its design.md and pasted it in as my starting spec."
+          }
         }
       ]
     },
@@ -116,15 +149,38 @@
       "name": "How to write a four-block AI pitch deck design prompt",
       "description": "The AI pitch deck design prompt that stops your slides looking machine-made: four blocks, the three tells to ban, and what to hand the model instead.",
       "step": [
-        { "@type": "HowToStep", "position": 1, "name": "Write the guardrails first", "text": "Open with what the model must never do. Ban accent bars, neon accents, box grids and rounded-rectangle containers, and pair each ban with the thing that does the job instead.", "url": "https://taeloai.com/blog/claude-design-genius-4-steps/#guardrails" },
-        { "@type": "HowToStep", "position": 2, "name": "Describe the experience you want", "text": "Say what the person opening the deck should feel and how they should move through it, before you say anything about color or layout. Experience is the umbrella the other blocks serve.", "url": "https://taeloai.com/blog/claude-design-genius-4-steps/#experience" },
-        { "@type": "HowToStep", "position": 3, "name": "Specify the design", "text": "Give the concrete layer: color, theme, layout, font. Start from an existing open-source design.md rather than writing a spec from scratch, then tune palette and gradient intensity slide by slide.", "url": "https://taeloai.com/blog/claude-design-genius-4-steps/#design-spec" },
-        { "@type": "HowToStep", "position": 4, "name": "Hand it assets to study", "text": "Attach the reference images or a live URL and tell the model to study them. Never rely on adjectives like warm or handcrafted, because every model averages those words differently.", "url": "https://taeloai.com/blog/claude-design-genius-4-steps/#assets" }
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Write the guardrails first",
+          "text": "Open with what the model must never do. Ban accent bars, neon accents, box grids and rounded-rectangle containers, and pair each ban with the thing that does the job instead.",
+          "url": "https://taeloai.com/blog/claude-design-genius-4-steps/#guardrails"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Describe the experience you want",
+          "text": "Say what the person opening the deck should feel and how they should move through it, before you say anything about color or layout. Experience is the umbrella the other blocks serve.",
+          "url": "https://taeloai.com/blog/claude-design-genius-4-steps/#experience"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Specify the design",
+          "text": "Give the concrete layer: color, theme, layout, font. Start from an existing open-source design.md rather than writing a spec from scratch, then tune palette and gradient intensity slide by slide.",
+          "url": "https://taeloai.com/blog/claude-design-genius-4-steps/#design-spec"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Hand it assets to study",
+          "text": "Attach the reference images or a live URL and tell the model to study them. Never rely on adjectives like warm or handcrafted, because every model averages those words differently.",
+          "url": "https://taeloai.com/blog/claude-design-genius-4-steps/#assets"
+        }
       ]
     }
   ]
-}
-</script>
+}</script>
 </head>
 <body>
 
@@ -165,7 +221,7 @@
 
     <p>Ask any model for a pitch deck and you get the same artefact back: a neon accent color, three rounded blocks in a row, a vertical bar glued to the edge of every card. You have seen that deck. So has the person reviewing yours.</p>
 
-    <p>I spent my working life in venture capital reading decks for due diligence, and here is the part nobody tells founders. The reviewer is a human being before they are a rational one. Before I judged the product, before I judged the team, I had already decided whether I wanted to keep reading.</p>
+    <p>I spent my working life in venture capital reading decks for due diligence, and here is the part nobody tells founders. <mark class="hl">The reviewer is a human being before they are a rational one.</mark> Before I judged the product, before I judged the team, I had already decided whether I wanted to keep reading.</p>
 
     <p>What follows is the AI pitch deck design prompt I use on real client work. Four blocks: guardrails, experience, design, assets. Same deck, ninety minutes apart, went from machine-generated to warm, textured and quiet enough to read. Nothing here is Claude-specific. I built it in <a href="https://www.anthropic.com/claude-code" target="_blank" rel="noopener">Claude Code</a>, but it works identically in Codex or Gemini, because it is a way of thinking rather than a tool.</p>
 
@@ -182,15 +238,19 @@
 
     <h2 id="why-ai-decks-look-the-same">Why does every AI deck look the same?</h2>
 
-    <p>A model's default output is the average of everything it has seen. When you describe a target, you get the average version of that target. So most of the work in a design prompt is not describing. It is closing doors.</p>
+    <p><mark class="hl hl--mint">A model's default output is the average of everything it has seen.</mark> When you describe a target, you get the average version of that target. So most of the work in a design prompt is not describing. It is closing doors.</p>
 
     <p>Templates make this worse, not better. Templates are the reason every AI deck looks the same: everyone is pulling from the same tidy defaults, and the model optimises for tidy because tidy is safe. A box is the safest way to be tidy.</p>
 
     <h2 id="three-tells">The three tells that give an AI deck away</h2>
 
-    <p><strong>Tell one: the accent bar.</strong> A thin vertical line in the accent color, stuck to the left edge of a card or a text block. In CSS it is <code>border-left: 3px solid accent</code>, and it is the single most recognisable thing a model makes. The color rotates on a schedule. Right now it is neon lime. Before that it was copper orange. Before that, purple. The color changes every six months and the behaviour never does: one loud accent doing all the visual work, because the model has no other idea where to put interest.</p>
+    <p><strong>Tell one: the accent bar.</strong> A thin vertical line in the accent color, stuck to the left edge of a card or a text block. In CSS it is <code>border-left: 3px solid accent</code>, and it is <mark class="hl">the single most recognisable thing a model makes.</mark></p>
 
-    <p><strong>Tell two: the box grid.</strong> That same accent shows up again as section labels in neon caps. I counted fourteen of them on one deck. Then the containers: ten rounded rectangles on one slide, eleven on the next. Nobody names this tell because every individual box is fine. But a deck where every slide is the same grid of cards reads like a form, and you do not argue with a form. You fill it in and leave.</p>
+    <p>The color rotates on a schedule. Right now it is neon lime. Before that it was copper orange. Before that, purple. The color changes every six months and the behaviour never does: one loud accent doing all the visual work, because the model has no other idea where to put interest.</p>
+
+    <h3>Boxes and flat backgrounds</h3>
+
+    <p><strong>Tell two: the box grid.</strong> That same accent shows up again as section labels in neon caps. I counted fourteen of them on one deck. Then the containers: ten rounded rectangles on one slide, eleven on the next. Nobody names this tell because every individual box is fine. But a deck where every slide is the same grid of cards <mark class="hl">reads like a form, and you do not argue with a form.</mark> You fill it in and leave.</p>
 
     <p><strong>Tell three: no texture.</strong> Flat white or flat dark, and nothing else. No grain, no depth, no paper.</p>
 
@@ -271,7 +331,7 @@
 
     <h2 id="guardrails">Block 1: guardrails, or what the model must never do</h2>
 
-    <p>Everyone teaches you to start by describing what you want. I start with what the model must never do, because you are not describing a target. You are fencing off the average.</p>
+    <p>Everyone teaches you to start by describing what you want. I start with what the model must never do, because you are not describing a target. <mark class="hl">You are fencing off the average.</mark></p>
 
     <p>Block one is almost entirely nevers, and the single always is a replacement. I am not taking boxes away and leaving a hole. I am naming what does the job instead. A hairline rule does everything a card border does, and it does not announce itself while doing it.</p>
 
@@ -304,7 +364,7 @@
 
     <p>Block two was feeling. This is the concrete layer: color, theme, layout, font.</p>
 
-    <p>I did not write mine from scratch. I searched for the best Claude design slide deck templates on <a href="https://github.com/search?q=claude+design+deck+template&amp;type=repositories" target="_blank" rel="noopener">GitHub</a>, because most of the big brands' design systems are published openly and you can just use them. I browsed the list, disliked most of it, nearly bounced, then landed on one called Cartesian. Minimal, no blocks, flowing. Clicking into it, there was already a <code>design.md</code> sitting in the repo. Downloaded, pasted in, done.</p>
+    <p>I did not write mine from scratch. I searched for the best Claude design slide deck templates on <a href="https://github.com/search?q=claude+design+deck+template&amp;type=repositories" target="_blank" rel="noopener">GitHub</a>, because most of the big brands' design systems are published openly and you can just use them. I browsed the list, disliked most of it, nearly bounced, then landed on one called Cartesian. Minimal, no blocks, flowing. Clicking into it, <mark class="hl">there was already a <code>design.md</code> sitting in the repo.</mark> Downloaded, pasted in, done.</p>
 
     <p>A few iterations later it still had not dropped the boxes and still had not found the color. So I attached the template HTML and said, roughly word for word: <em>let's apply this template HTML I'm attaching, I don't like the layout of this deck, it's too sloppy with the two or three blocks.</em> That was the whole instruction. Blocks gone, everything flowing, no hard lines.</p>
 
@@ -343,11 +403,11 @@
       <figcaption>The reference I photographed at the event. Warm mixed palette, visible grain, depth in the background — none of which survives being typed as an adjective.</figcaption>
     </figure>
 
-    <p>So I typed: warm linen texture, analog feeling, handcrafted. Garbage, every time. A model has never touched linen. It has a statistical median for the word and that median is nothing like the thing in my head.</p>
+    <p>So I typed: warm linen texture, analog feeling, handcrafted. Garbage, every time. <mark class="hl">A model has never touched linen.</mark> It has a statistical median for the word and that median is nothing like the thing in my head.</p>
 
     <p>Adjectives are a trap. Premium, clean, modern, handcrafted. Every model holds a different average for those words, and the average is precisely what you are running from. What works is handing over the actual thing: give it the file path to the photos and tell it to study them and get the gist of what you mean by warm and textured. Or give it a URL and say go browse this site, I want to recreate that feeling.</p>
 
-    <p>Then describe mechanically whatever the images cannot carry: mix these colors, avoid those colors, make the texture read as linen by adding a little depth, some scratches, and deliberately low resolution. The images set the target. The mechanics tell it how to hit it.</p>
+    <p>Then describe mechanically whatever the images cannot carry: mix these colors, avoid those colors, make the texture read as linen by adding a little depth, some scratches, and deliberately low resolution. <mark class="hl hl--mint">The images set the target. The mechanics tell it how to hit it.</mark></p>
 
     <figure>
       <svg viewBox="0 0 880 372" width="100%" class="diagram" role="img" xmlns="http://www.w3.org/2000/svg">
@@ -392,17 +452,21 @@
       <figcaption>Both paths take one line of prompt. Only one of them survives contact with a model that has never seen linen.</figcaption>
     </figure>
 
-    <p>This is the same principle behind every good result I get out of an agent: specificity is cheaper than iteration. It is why <a href="/blog/ai-agent-35x-more-efficient/">a tighter agent runs 35x more efficiently</a> and why <a href="/blog/claude-code-nanobanana-animated-sites/">the Nanobanana and Claude design pipeline produces animated sites worth charging for</a>. Vague inputs do not save you time. They move the cost to round two.</p>
+    <p>This is the same principle behind every good result I get out of an agent: <mark class="hl">specificity is cheaper than iteration.</mark> It is why <a href="/blog/ai-agent-35x-more-efficient/">a tighter agent runs 35x more efficiently</a> and why <a href="/blog/claude-code-nanobanana-animated-sites/">the Nanobanana and Claude design pipeline produces animated sites worth charging for</a>. Vague inputs do not save you time. They move the cost to round two.</p>
 
     <h2 id="what-design-buys-you">What good design actually buys you</h2>
 
     <p>Let me be honest about what this does not do. Not every slide from one to fifteen is going to be interesting. Some of them are tables of numbers, and the viewer will drift off and think about lunch. Design is not what makes a boring slide interesting.</p>
 
-    <p>Design is what carries somebody <em>through</em> the boring slides to the part that matters, the part you actually want to sell. That is the whole job.</p>
+    <p class="key">Design is what carries somebody <em>through</em> the boring slides to the part that matters, the part you actually want to sell. That is the whole job.</p>
 
     <p>It also will not make a bad proposal good. If the strategy is weak, a beautiful animation will not save it. What it buys you is the attention to be judged on the strategy at all, which, when the person on the other side is reading forty of these a week, is not a small thing.</p>
 
-    <p>The deck in this post is real, with brand and logos masked out. The founder closed a high-ticket business deal with it, and large, sceptical brands found it credible enough to keep reading. That is the bar, and it is a lower bar than most people think — it is just one nobody clears with the default output. If you want more of this kind of work, the same approach is how I <a href="/blog/make-money-with-claude/">turn Claude into paid client output</a>. More build logs live on <a href="/">the home page</a>.</p>
+    <h3>What the real deck did</h3>
+
+    <p>The deck in this post is real, with brand and logos masked out. The founder closed a high-ticket business deal with it, and large, sceptical brands found it credible enough to keep reading.</p>
+
+    <p>That is the bar, and <mark class="hl">it is a lower bar than most people think</mark> — it is just one nobody clears with the default output. If you want more of this kind of work, the same approach is how I <a href="/blog/make-money-with-claude/">turn Claude into paid client output</a>. More build logs live on <a href="/">the home page</a>.</p>
 
     <p>Four blocks. Keep the whole prompt concise. Then be creative inside the structure, starting with the only question that matters: what experience do you want the person on the other side to have?</p>
 
