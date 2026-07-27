@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>When to Use AI Agent Loops (and When a Skill Wins)</title>
+<meta name="description" content="Most people build AI agent loops years too early. Here is the four-level ladder, the six tests a loop has to pass, and the skill to build instead.">
+<link rel="canonical" href="https://taeloai.com/blog/ai-agent-burning-18-dollars-a-day/">
+<meta name="author" content="Taelo Kim">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Your AI agent doesn't need a loop. It needs a skill that stops.">
+<meta property="og:description" content="Most people build AI agent loops years too early. Here is the four-level ladder, the six tests a loop has to pass, and the skill to build instead.">
+<meta property="og:url" content="https://taeloai.com/blog/ai-agent-burning-18-dollars-a-day/">
+<meta property="og:image" content="https://taeloai.com/blog/img/ai-agent-burning-18-dollars-a-day-thumb.jpg">
+<meta property="og:site_name" content="Taelo Kim">
+<meta property="article:published_time" content="2026-06-27">
+<meta property="article:author" content="https://www.youtube.com/@TaeloKim">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@taelo_kim">
+<meta name="twitter:creator" content="@taelo_kim">
+<meta name="twitter:title" content="Your AI agent doesn't need a loop. It needs a skill that stops.">
+<meta name="twitter:description" content="Most people build AI agent loops years too early. Here is the four-level ladder, the six tests a loop has to pass, and the skill to build instead.">
+<meta name="twitter:image" content="https://taeloai.com/blog/img/ai-agent-burning-18-dollars-a-day-thumb.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/blog/blog.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://taeloai.com/blog/ai-agent-burning-18-dollars-a-day/#article",
+      "headline": "Your AI agent doesn't need a loop. It needs a skill that stops.",
+      "description": "Most people build AI agent loops years too early. Here is the four-level ladder, the six tests a loop has to pass, and the skill to build instead.",
+      "image": "https://taeloai.com/blog/img/ai-agent-burning-18-dollars-a-day-thumb.jpg",
+      "datePublished": "2026-06-27",
+      "dateModified": "2026-06-27",
+      "wordCount": 2182,
+      "keywords": "AI agent loops, when to use AI agent loops, AI agent token costs, Claude Code skills, agent loop stop condition, skill vs agent",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Person",
+        "name": "Taelo Kim",
+        "url": "https://taeloai.com/",
+        "sameAs": ["https://www.youtube.com/@TaeloKim", "https://x.com/taelo_kim", "https://github.com/taelo82"]
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Taelo Kim",
+        "url": "https://taeloai.com/"
+      },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://taeloai.com/blog/ai-agent-burning-18-dollars-a-day/" },
+      "isPartOf": { "@type": "Blog", "@id": "https://taeloai.com/blog/#blog", "name": "Taelo Kim — Build Logs" }
+    },
+    {
+      "@type": "VideoObject",
+      "@id": "https://taeloai.com/blog/ai-agent-burning-18-dollars-a-day/#video",
+      "name": "Your AI Agent Is Burning $18 a Day (Build This Instead)",
+      "description": "Most people build AI agent loops years too early. Here is the four-level ladder, the six tests a loop has to pass, and the skill to build instead.",
+      "thumbnailUrl": "https://i.ytimg.com/vi/cMrWxMN7FKk/maxresdefault.jpg",
+      "uploadDate": "2026-06-27",
+      "duration": "PT10M48S",
+      "embedUrl": "https://www.youtube.com/embed/cMrWxMN7FKk",
+      "contentUrl": "https://www.youtube.com/watch?v=cMrWxMN7FKk",
+      "publisher": { "@type": "Person", "name": "Taelo Kim" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://taeloai.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://taeloai.com/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "Your AI agent doesn't need a loop. It needs a skill that stops.", "item": "https://taeloai.com/blog/ai-agent-burning-18-dollars-a-day/" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is an AI agent loop?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A loop is not just running the model again. A real loop has four parts: a trigger that starts it, an action the model takes, an evaluation that checks the work, and memory or state it writes before deciding whether to go again. Drop the evaluation or the stop condition and what you have left is an expensive random number generator." }
+        },
+        {
+          "@type": "Question",
+          "name": "When should I use an AI agent loop instead of a skill?",
+          "acceptedAnswer": { "@type": "Answer", "text": "When the task repeats often, success is measurable in a way a machine can check, failure is bounded by a max number of retries, a max spend and a max set of permissions, and the value clearly beats the token cost. If any of those is missing, a skill you call by hand does the same work with a fraction of the risk." }
+        },
+        {
+          "@type": "Question",
+          "name": "Why do AI agents cost so much to run?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Every iteration re-pays for the whole context. The action is one model call, the evaluation is a second one, and the memory it writes makes the next pass longer than the last. A failing loop is the expensive case, because failure is exactly what makes it retry. Without a spend cap, nothing in that cycle ever says stop." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between a skill and an agent?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A skill is a reusable workflow with instructions, context and expected outputs. It can read files and call tools, but it does one bounded job and then stops. An agent keeps deciding what to do next. The stopping is the feature: you stay in the chair, you keep the taste, and you make the final call on the output." }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I schedule my AI skill to run every day?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Only if you can digest the output at that cadence. A daily report you never open is not leverage, it is an inbox with better branding. Schedule it when you act on the result most times it arrives. If two weeks of runs are sitting unread, the fix is a slower cadence, not a smarter agent." }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="progress"></div>
+
+<nav class="nav">
+  <a class="nav__brand" href="/">Taelo <em>Kim</em></a>
+  <div class="nav__links">
+    <a href="/blog/" class="nav__keep" aria-current="page">Blog</a>
+    <a href="/#resources">Resources</a>
+    <a href="/#community">Community</a>
+    <a class="nav__cta nav__keep" href="https://www.youtube.com/@TaeloKim?sub_confirmation=1" target="_blank" rel="noopener">Subscribe</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <header class="post-head col">
+    <div class="crumb"><a href="/">Home</a> / <a href="/blog/">Blog</a> / Loops vs skills</div>
+    <h1>Your AI agent doesn't need a loop. It needs a skill that stops.</h1>
+    <p class="standfirst">The ladder that actually makes sense — prompt, skill, schedule, loop — and the six tests a task has to pass before it earns any autonomy at all.</p>
+    <div class="meta">
+      <span>June 27, 2026</span>
+      <span>8 min read</span>
+      <span>Built with Claude Code skills</span>
+    </div>
+  </header>
+
+  <div class="col">
+    <div class="video-embed" data-video="cMrWxMN7FKk" data-title="Your AI Agent Is Burning $18 a Day (Build This Instead)" role="button" tabindex="0" aria-label="Play: Your AI Agent Is Burning $18 a Day (Build This Instead)">
+      <img src="/blog/img/ai-agent-burning-18-dollars-a-day-thumb.jpg" alt="Your AI Agent Is Burning $18 a Day (Build This Instead) — video walkthrough by Taelo Kim" width="1280" height="720" fetchpriority="high">
+      <div class="video-embed__play"></div>
+      <span class="video-embed__label">Watch the build — 10:48</span>
+    </div>
+  </div>
+
+  <article class="post-body col">
+
+    <p>Every other thread right now is telling you the same thing: prompt engineering is dead, the future is loop engineering, and the builders who win are the ones running <strong>AI agent loops</strong> in the background. It sounds like the next chapter. For most people it is just a way to make your computer more expensive.</p>
+
+    <p>The people selling you that upgrade usually have a reason to be up there. They ship AI products, they run teams, they spend on a company card, or they work somewhere every extra 1% of automation converts straight into money. Copying their level of autonomy does not copy their ROI. It copies their bill. I know, because I ran up API bills I am not proud of learning this.</p>
+
+    <p>So here is a better ladder: prompt, skill, scheduled skill, loop, in that order. Most people are trying to jump to step four. Step four looks impressive. Step two is where the money is. By the end of this you'll know what a loop actually is, why it leaks tokens on every pass, the six tests a task has to pass before it earns one, and what to build this week instead.</p>
+
+    <div class="takeaways">
+      <h2>What you'll get out of this</h2>
+      <ul>
+        <li>A working definition of a loop — trigger, action, evaluation, memory, decision — and why "run it again" isn't one</li>
+        <li>Where the tokens actually go on every iteration, and the one economic test that decides if a loop is worth it</li>
+        <li>The digestibility rule: if you can't read the output at that cadence, don't schedule it</li>
+        <li>Two real bounded skills, including the one I built to hand off work between Codex, Claude and ChatGPT</li>
+        <li>Six pass/fail questions to run before you give any workflow autonomy</li>
+      </ul>
+    </div>
+
+    <h2 id="what-is-an-agent-loop">What an AI agent loop actually is</h2>
+
+    <p>A loop is not "run the AI again." A real loop has four moving parts and one decision. Something <strong>triggers</strong> it. The model takes an <strong>action</strong>. The system <strong>evaluates</strong> the result. It writes something to <strong>memory or state</strong>. Then it decides whether to go again.</p>
+
+    <p>That last decision is where almost every hobby agent falls apart, because nobody defines it. When does it stop? How many retries? How much money is too much? What counts as success? A loop without a stop condition is not intelligent. It is a process with a credit card.</p>
+
+    <p>The moment your AI can keep acting without you, "this looks futuristic" stops being a good enough reason to run it. You need boundaries, validation, cost control, a clear list of what the machine is allowed to touch, and — the part people skip — some way to tell whether the output is usable at all.</p>
+
+    <figure>
+      <img src="/blog/img/ai-agent-burning-18-dollars-a-day-01.jpg" alt="Taelo Kim breaking an AI agent loop into its four parts: trigger, action, evaluation and memory, before it decides whether to run again" width="1280" height="720" loading="lazy">
+      <figcaption>Every part of the loop is a place to put a limit. Most people build all four and set none of them.</figcaption>
+    </figure>
+
+    <h2 id="why-loops-burn-tokens">Why AI agent loops burn tokens you never see</h2>
+
+    <p>Here's the part the diagrams leave out. A single iteration is not one model call, it's at least two: the action, then the evaluation of the action. Both pay for the full context. And because the loop writes state to memory so the next pass is "smarter," iteration five carries more context than iteration one. The cost curve bends upward exactly when the loop is struggling, because struggling is what makes it retry.</p>
+
+    <figure>
+      <svg viewBox="0 0 880 470" width="100%" class="diagram" role="img" aria-labelledby="loop-cost-title">
+        <title id="loop-cost-title">Where an AI agent loop spends tokens on every iteration</title>
+        <defs>
+          <marker id="arwA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(232,228,220,0.45)"/>
+          </marker>
+          <marker id="arwAmb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#FFB347"/>
+          </marker>
+        </defs>
+
+        <text x="40" y="32" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)" letter-spacing="1.6">ONE ITERATION</text>
+
+        <rect x="40" y="64" width="170" height="84" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"/>
+        <text x="60" y="92" font-family="JetBrains Mono, monospace" font-size="14" fill="#E8E4DC">TRIGGER</text>
+        <text x="60" y="112" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">cron / file / you</text>
+        <text x="60" y="133" font-family="JetBrains Mono, monospace" font-size="11" fill="#7AB5B0">costs nothing</text>
+
+        <rect x="250" y="64" width="170" height="84" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"/>
+        <text x="270" y="92" font-family="JetBrains Mono, monospace" font-size="14" fill="#E8E4DC">ACT</text>
+        <text x="270" y="112" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">model call + tools</text>
+        <text x="270" y="133" font-family="JetBrains Mono, monospace" font-size="11" fill="#FFB347">full context in</text>
+
+        <rect x="460" y="64" width="170" height="84" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"/>
+        <text x="480" y="92" font-family="JetBrains Mono, monospace" font-size="14" fill="#E8E4DC">EVALUATE</text>
+        <text x="480" y="112" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">second model call</text>
+        <text x="480" y="133" font-family="JetBrains Mono, monospace" font-size="11" fill="#FFB347">context, again</text>
+
+        <rect x="670" y="64" width="170" height="84" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"/>
+        <text x="690" y="92" font-family="JetBrains Mono, monospace" font-size="14" fill="#E8E4DC">REMEMBER</text>
+        <text x="690" y="112" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">write state</text>
+        <text x="690" y="133" font-family="JetBrains Mono, monospace" font-size="11" fill="#FFB347">context grows</text>
+
+        <path d="M 212 106 L 246 106" stroke="rgba(232,228,220,0.45)" stroke-width="1" fill="none" marker-end="url(#arwA)"/>
+        <path d="M 422 106 L 456 106" stroke="rgba(232,228,220,0.45)" stroke-width="1" fill="none" marker-end="url(#arwA)"/>
+        <path d="M 632 106 L 666 106" stroke="rgba(232,228,220,0.45)" stroke-width="1" fill="none" marker-end="url(#arwA)"/>
+
+        <path d="M 755 148 L 755 255 L 556 255" stroke="rgba(232,228,220,0.45)" stroke-width="1" fill="none" marker-end="url(#arwA)"/>
+
+        <polygon points="440,213 550,255 440,297 330,255" fill="#0B0B18" stroke="#7AB5B0" stroke-width="1"/>
+        <text x="440" y="260" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="#E8E4DC">good enough?</text>
+
+        <path d="M 330 255 L 290 255 L 290 152" stroke="#FFB347" stroke-width="1" fill="none" marker-end="url(#arwAmb)"/>
+        <text x="322" y="242" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="11" fill="#FFB347">no: pay for it all again</text>
+
+        <path d="M 440 297 L 440 326" stroke="#7AB5B0" stroke-width="1" fill="none" marker-end="url(#arwA)"/>
+        <text x="452" y="316" font-family="JetBrains Mono, monospace" font-size="11" fill="#7AB5B0">yes</text>
+        <rect x="350" y="330" width="180" height="44" rx="4" fill="#0B0B18" stroke="#7AB5B0"/>
+        <text x="440" y="358" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="#E8E4DC">STOP + hand over</text>
+
+        <text x="40" y="400" font-family="JetBrains Mono, monospace" font-size="11.5" fill="rgba(232,228,220,0.45)">SET THESE FOUR, OR THE ANSWER TO &#34;GOOD ENOUGH?&#34; IS NO FOREVER</text>
+        <rect x="40" y="412" width="170" height="34" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"/>
+        <text x="125" y="434" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">max retries</text>
+        <rect x="250" y="412" width="170" height="34" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"/>
+        <text x="335" y="434" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">max spend</text>
+        <rect x="460" y="412" width="170" height="34" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"/>
+        <text x="545" y="434" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">max permissions</text>
+        <rect x="670" y="412" width="170" height="34" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"/>
+        <text x="755" y="434" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">definition of done</text>
+      </svg>
+      <figcaption>The failure path is the expensive one: a loop that can't satisfy its own evaluator pays the amber boxes over and over. Cheap runs are the ones that succeed on pass one.</figcaption>
+    </figure>
+
+    <p>Which gives you the only cost test that matters. If a loop saves you $500 of work and spends $5 of tokens, build it today. If it saves three minutes and spends forty minutes thinking, you have invented a very expensive intern with no legs. Before you optimise anything else, get the shape of the work right — I went through <a href="/blog/ai-agent-35x-more-efficient/">the exercise of making an agent 35x more efficient</a>, and almost all of the win came from cutting work that never needed to happen, not from a cleverer model.</p>
+
+    <h2 id="digestibility">The digestibility problem nobody talks about</h2>
+
+    <p>Cost is the obvious failure. This one is sneakier. If you have ever set up an automation, a cron job or a routine in a tool that runs on a schedule, you know the arc. At first it feels incredible: every morning a report, every day a competitor scan, every Friday a summary of everything.</p>
+
+    <p>Two weeks later you have a pile of automated output you never read. Reports you don't act on. Summaries you don't open. Suggestions you don't have time to judge. You have built a machine that generates homework for you.</p>
+
+    <p>That is not leverage. That is an inbox with better branding. If the machine feeds you faster than you can digest, it isn't saving your time, it's converting tokens into guilt. So before you build a loop, ask the boring question: <em>can I actually use this output at this cadence?</em> If the answer is no, stop. The fix is a slower cadence or a tighter scope, not a smarter agent. This is the same discipline that keeps <a href="/blog/second-brain-claude-code/">a second brain built in Claude Code</a> useful instead of turning it into a landfill with search.</p>
+
+    <div class="callout callout--warn">
+      <span class="callout__label">The trap</span>
+      An agent that monitors your niche all day and hands you 47 recommendations on a Tuesday morning is not a strategy system. It's a content anxiety machine you pay for by the token. Zero of the 47 get used.
+    </div>
+
+    <h2 id="the-ladder">The four-level ladder: prompt, skill, schedule, loop</h2>
+
+    <p>Every level is legitimate. The mistake is the order people attempt them in.</p>
+
+    <figure>
+      <svg viewBox="0 0 880 440" width="100%" class="diagram" role="img" aria-labelledby="ladder-title">
+        <title id="ladder-title">The four-level automation ladder from prompt to loop</title>
+        <defs>
+          <marker id="arwB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#FFB347"/>
+          </marker>
+          <marker id="arwBm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#7AB5B0"/>
+          </marker>
+        </defs>
+
+        <text x="30" y="34" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)" letter-spacing="1.4">UP = MORE AUTONOMY, MORE COST, BIGGER BLAST RADIUS</text>
+
+        <path d="M 30 360 L 220 360 L 220 290 L 420 290 L 420 220 L 620 220 L 620 150 L 820 150" stroke="rgba(232,228,220,0.12)" stroke-width="1" fill="none"/>
+
+        <rect x="30" y="290" width="190" height="70" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"/>
+        <text x="46" y="314" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">LEVEL 01</text>
+        <text x="46" y="334" font-family="JetBrains Mono, monospace" font-size="14" fill="#E8E4DC">PROMPT</text>
+        <text x="46" y="351" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">you're still exploring</text>
+
+        <rect x="230" y="220" width="190" height="70" rx="4" fill="#0B0B18" stroke="#7AB5B0"/>
+        <text x="246" y="244" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">LEVEL 02</text>
+        <text x="246" y="264" font-family="JetBrains Mono, monospace" font-size="14" fill="#7AB5B0">SKILL</text>
+        <text x="246" y="281" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">one job, artifacts, stops</text>
+
+        <rect x="430" y="150" width="190" height="70" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"/>
+        <text x="446" y="174" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">LEVEL 03</text>
+        <text x="446" y="194" font-family="JetBrains Mono, monospace" font-size="14" fill="#E8E4DC">SCHEDULED SKILL</text>
+        <text x="446" y="211" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">same job, on a clock</text>
+
+        <rect x="630" y="80" width="190" height="70" rx="4" fill="#0B0B18" stroke="#FFB347"/>
+        <text x="646" y="104" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">LEVEL 04</text>
+        <text x="646" y="124" font-family="JetBrains Mono, monospace" font-size="14" fill="#FFB347">LOOP</text>
+        <text x="646" y="141" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">grades itself, continues</text>
+
+        <text x="620" y="46" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="12" fill="#FFB347">most advice starts you here</text>
+        <path d="M 632 50 L 706 76" stroke="#FFB347" stroke-width="1" fill="none" marker-end="url(#arwB)"/>
+
+        <text x="30" y="406" font-family="JetBrains Mono, monospace" font-size="12" fill="#7AB5B0">step 02 is where the money is: called on demand, returns something you can use, then stops</text>
+        <path d="M 330 392 L 320 296" stroke="#7AB5B0" stroke-width="1" fill="none" marker-end="url(#arwBm)"/>
+      </svg>
+      <figcaption>Skipping from level 01 to level 04 skips the part where you learn what a good output looks like. If you don't know, your evaluator doesn't either.</figcaption>
+    </figure>
+
+    <p><strong>Level 1, the prompt.</strong> You use this while you're still exploring — ideas, explanations, drafts, options. Prompts are good because they're flexible and bad because it's so easy to keep re-typing them by hand forever.</p>
+
+    <p><strong>Level 2, the skill.</strong> A reusable workflow with instructions, context and expected outputs. It can read files and call tools, but it doesn't wander. You call it, it does the job, it returns something useful, it stops. This is the sweet spot for almost everyone reading this.</p>
+
+    <p><strong>Level 3, the scheduled skill.</strong> Same workflow, now running every morning, every Monday, or on a file change. Useful only if you can digest the output. If you can't, scheduling turns a good skill into automated noise.</p>
+
+    <p><strong>Level 4, the loop.</strong> Now the system grades its own work and decides whether to continue. Real power lives here. So do the costs and the failure modes. The problem is that the internet keeps selling level 4 to people who haven't built level 2 — like watching Formula 1 and deciding your car mechanic needs a pit crew.</p>
+
+    <h2 id="bounded-skill-example">What a bounded skill looks like in practice</h2>
+
+    <p>Take a real creator workflow. You want to know what's working in your niche: recent competitor uploads, title patterns, thumbnail ideas, which videos are moving faster than usual.</p>
+
+    <p>The overbuilt version is obvious. An agent that watches YouTube all day, scans every new upload, compares thumbnails, writes strategy, writes scripts, tells you what to make next. It sounds incredible right up until the 47-recommendation Tuesday.</p>
+
+    <p>The bounded version runs when <em>you</em> sit down to pick a video idea. It looks at the last rolling week. It estimates direction of velocity rather than pretending public view counts are private analytics. It collects titles and thumbnails, packages the evidence into a gallery and contact sheets a model can actually look at, drafts a thumbnail prompt — and then it stops. Input goes in, research happens, organised artifacts come out in a format you can scan in two minutes.</p>
+
+    <figure>
+      <img src="/blog/img/ai-agent-burning-18-dollars-a-day-02.jpg" alt="Artifacts from a bounded content research skill: competitor titles, a thumbnail gallery and contact sheets packaged into one folder" width="1280" height="720" loading="lazy">
+      <figcaption>The output is the point. A skill that leaves behind a readable folder beats an agent that leaves behind a running bill.</figcaption>
+    </figure>
+
+    <p>You still decide. You still keep the taste, the angle and the format. The AI gives you leverage without pretending to be your whole creative brain. Boring? Yes. Beautifully boring. The same shape works anywhere the manual version hurts — it's exactly how I <a href="/blog/automate-video-editing-claude-code/">handed my video editing to Claude Code</a> and how I <a href="/blog/claude-code-watch-any-video/">gave Claude Code the ability to watch a video</a>: one job, real files at the end, no wandering.</p>
+
+    <h2 id="confirmation-not-friction">Why a confirmation prompt beats autonomy</h2>
+
+    <p>Second example, more personal. I work in <a href="https://www.anthropic.com/claude-code" target="_blank" rel="noopener">Claude Code</a> and Codex and switch between them constantly. I kept wanting to push the useful part of a session into a chat window so I could keep going later. The manual version is copy-paste: finish the session, forget what mattered, paste too much or too little, compact the context and lose the thread.</p>
+
+    <p>So I built a skill for it. One job: create a compact work log and send it.</p>
+
+<pre><code><span class="c"># the entire payload the sync skill sends</span>
+<span class="k">goal</span>       <span class="s">what I sat down to do</span>
+<span class="k">result</span>     <span class="s">what actually happened</span>
+<span class="k">artifacts</span>  <span class="s">files, paths, links worth keeping</span>
+<span class="k">next</span>       <span class="s">the one thing to pick up tomorrow</span>
+
+<span class="c"># never included: secrets, raw logs, hidden</span>
+<span class="c"># instructions, unrelated chatter</span></code></pre>
+
+    <p>It works out whether the destination is ChatGPT or Claude, reuses an existing browser tab instead of opening a graveyard of new ones, checks for duplicates, and then — before it sends anything — asks me to confirm.</p>
+
+    <p>That confirmation is not friction. It's the safety lock. The moment automation starts transmitting information somewhere else, I don't want vibes. I want a clear message, a clear destination and a clear yes.</p>
+
+    <figure>
+      <img src="/blog/img/ai-agent-burning-18-dollars-a-day-03.jpg" alt="The sync skill showing the exact work log and destination and asking for confirmation before sending it to the chat" width="1280" height="720" loading="lazy">
+      <figcaption>One checkpoint, one handoff, then it stops. Compare that to a background loop that syncs whatever it feels like, whenever it feels like it.</figcaption>
+    </figure>
+
+    <blockquote>A loop says "don't worry, I'll keep syncing." A skill says "here's the exact message, here's the exact destination, should I send this one thing?"</blockquote>
+
+    <div class="watch-nudge">
+      <span>The handoff skill is easier to watch than to read — the confirmation prompt, the destination check and the duplicate guard all land in about ninety seconds.</span>
+      <a class="btn btn--ghost" href="https://www.youtube.com/watch?v=cMrWxMN7FKk&amp;t=394s" target="_blank" rel="noopener">Watch that part →</a>
+    </div>
+
+    <h2 id="six-tests">Six tests a task has to pass before it earns a loop</h2>
+
+    <p>Loops are not useless. They're excellent when the task has earned them: support queues, QA checks, sales follow-ups, code tests, monitoring, recurring operations with clear success criteria. Run the candidate through all six.</p>
+
+    <ol class="steps">
+      <li>
+        <h3>Does it repeat often enough?</h3>
+        <p>If you do it once a month, don't build a machine around it. The build cost and the maintenance cost both outlive the savings.</p>
+      </li>
+      <li>
+        <h3>Is success measurable?</h3>
+        <p>"Make it better" is not a loop objective. "Tests pass," "find the broken link," "classify every inbox item into this schema" are objectives a machine can check without you.</p>
+      </li>
+      <li>
+        <h3>Can it learn from failure signals inside the task?</h3>
+        <p>If the error message, the failing test or the schema mismatch tells the system what went wrong, a loop makes sense. If success is "I'll know it when I see it," keep a human in the chair.</p>
+      </li>
+      <li>
+        <h3>Is failure bounded?</h3>
+        <p>Max attempts, max cost, max permissions, explicit stop condition. If you can't name all four, you're not building a loop, you're releasing one.</p>
+      </li>
+      <li>
+        <h3>Can you digest the output?</h3>
+        <p>This is the one to remember. If the automation hands you more than you can review, that isn't productivity, it's automated clutter with a subscription fee.</p>
+      </li>
+      <li>
+        <h3>Is the value higher than the cost?</h3>
+        <p>Saves $500 of work, spends $5 of tokens: obvious yes. Saves three minutes, spends forty minutes thinking: obvious no.</p>
+      </li>
+    </ol>
+
+    <div class="callout">
+      <span class="callout__label">The rule</span>
+      Don't automate because the diagram looks cool. Automate because the manual version hurts.
+    </div>
+
+    <h2 id="loop-or-skill">So: do you need a loop, or a better skill?</h2>
+
+    <p>Run the build order in the sequence it was meant to go. Do it manually with a prompt first. When you notice you're re-typing the same instructions, turn it into a skill. When the skill is good and you need it at a known time, schedule it. When the output can be evaluated and improved without you in the room, build the loop.</p>
+
+    <p>That order matters because skipping to loops skips the part where you learn what good looks like. And if you don't know what good looks like, your evaluator doesn't either — so the loop just produces more of the wrong thing, faster, at scale. The nightmare version of automation isn't AI taking your job. It's AI running your bad process a hundred times before lunch.</p>
+
+    <p>Loop engineering is real and it's here. It's also being recommended about two levels too early. If you've built fewer than twenty or thirty skills, the honest next step is a better skill: one that saves repeated instructions, produces artifacts, makes the next move obvious, and stops. Build the research skill before the content agent. Build the handoff skill before the background memory loop. Build the small thing you'll actually use before the impressive thing you can't digest.</p>
+
+    <p>Your workflow has to earn its autonomy. Before you launch another agent, ask the one question: do I need a loop, or do I just need a better skill? If the answer is skill, that's not a downgrade. That's maturity. There's more of this thinking in <a href="/">the rest of what I build in public</a>.</p>
+
+    <div class="cta">
+      <h3>See the two skills that replaced my loops</h3>
+      <p>The video walks through the bounded research skill and the Codex-to-chat handoff skill end to end, including the confirmation step and the artifacts each one leaves behind. If you're deciding what to build this week, that's the ten minutes to spend.</p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="https://www.youtube.com/watch?v=cMrWxMN7FKk" target="_blank" rel="noopener">Watch the full build</a>
+        <a class="btn btn--ghost" href="https://www.skool.com/ai-movers-1936" target="_blank" rel="noopener">Join AI Movers</a>
+      </div>
+    </div>
+
+    <h2 id="faq">Frequently asked questions</h2>
+    <div class="faq">
+      <details>
+        <summary>What is an AI agent loop?</summary>
+        <p>A loop is not just running the model again. A real loop has four parts: a trigger that starts it, an action the model takes, an evaluation that checks the work, and memory or state it writes before deciding whether to go again. Drop the evaluation or the stop condition and what you have left is an expensive random number generator.</p>
+      </details>
+      <details>
+        <summary>When should I use an AI agent loop instead of a skill?</summary>
+        <p>When the task repeats often, success is measurable in a way a machine can check, failure is bounded by a max number of retries, a max spend and a max set of permissions, and the value clearly beats the token cost. If any of those is missing, a skill you call by hand does the same work with a fraction of the risk.</p>
+      </details>
+      <details>
+        <summary>Why do AI agents cost so much to run?</summary>
+        <p>Every iteration re-pays for the whole context. The action is one model call, the evaluation is a second one, and the memory it writes makes the next pass longer than the last. A failing loop is the expensive case, because failure is exactly what makes it retry. Without a spend cap, nothing in that cycle ever says stop.</p>
+      </details>
+      <details>
+        <summary>What is the difference between a skill and an agent?</summary>
+        <p>A skill is a reusable workflow with instructions, context and expected outputs. It can read files and call tools, but it does one bounded job and then stops. An agent keeps deciding what to do next. The stopping is the feature: you stay in the chair, you keep the taste, and you make the final call on the output.</p>
+      </details>
+      <details>
+        <summary>Should I schedule my AI skill to run every day?</summary>
+        <p>Only if you can digest the output at that cadence. A daily report you never open is not leverage, it is an inbox with better branding. Schedule it when you act on the result most times it arrives. If two weeks of runs are sitting unread, the fix is a slower cadence, not a smarter agent.</p>
+      </details>
+    </div>
+
+    <nav class="related" aria-label="Related posts">
+      <h2>Keep reading</h2>
+      <ul>
+        <li><a href="/blog/ai-agent-35x-more-efficient/">I made my AI agent 35x more efficient →</a></li>
+        <li><a href="/blog/automate-video-editing-claude-code/">How I fully automated my video editing with Claude Code →</a></li>
+        <li><a href="/blog/second-brain-claude-code/">I built a second brain in Claude Code to run my life →</a></li>
+      </ul>
+    </nav>
+
+  </article>
+</main>
+
+<footer class="foot">
+  <span>© 2026 Taelo Kim</span>
+  <div class="foot__links">
+    <a href="/">Home</a>
+    <a href="/blog/">Blog</a>
+    <a href="https://www.youtube.com/@TaeloKim" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://x.com/taelo_kim" target="_blank" rel="noopener">X</a>
+    <a href="https://www.skool.com/ai-movers-1936" target="_blank" rel="noopener">AI Movers</a>
+  </div>
+</footer>
+
+<script src="/blog/blog.js" defer></script>
+</body>
+</html>

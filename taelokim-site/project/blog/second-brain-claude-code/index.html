@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Build a Second Brain With Claude Code in 11 Phases</title>
+<meta name="description" content="Build a second brain with Claude Code and Obsidian: the exact 11-phase order, the markdown-first data model, and the rituals that plan and close your day.">
+<link rel="canonical" href="https://taeloai.com/blog/second-brain-claude-code/">
+<meta name="author" content="Taelo Kim">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Build a Second Brain With Claude Code: The Full 11-Phase Guide">
+<meta property="og:description" content="Build a second brain with Claude Code and Obsidian: the exact 11-phase order, the markdown-first data model, and the rituals that plan and close your day.">
+<meta property="og:url" content="https://taeloai.com/blog/second-brain-claude-code/">
+<meta property="og:image" content="https://taeloai.com/blog/img/second-brain-claude-code-thumb.jpg">
+<meta property="og:site_name" content="Taelo Kim">
+<meta property="article:published_time" content="2026-05-31">
+<meta property="article:author" content="https://www.youtube.com/@TaeloKim">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@taelo_kim">
+<meta name="twitter:creator" content="@taelo_kim">
+<meta name="twitter:title" content="Build a Second Brain With Claude Code: The Full 11-Phase Guide">
+<meta name="twitter:description" content="Build a second brain with Claude Code and Obsidian: the exact 11-phase order, the markdown-first data model, and the rituals that plan and close your day.">
+<meta name="twitter:image" content="https://taeloai.com/blog/img/second-brain-claude-code-thumb.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/blog/blog.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://taeloai.com/blog/second-brain-claude-code/#article",
+      "headline": "Build a Second Brain With Claude Code: The Full 11-Phase Guide",
+      "description": "Build a second brain with Claude Code and Obsidian: the exact 11-phase order, the markdown-first data model, and the rituals that plan and close your day.",
+      "image": "https://taeloai.com/blog/img/second-brain-claude-code-thumb.jpg",
+      "datePublished": "2026-05-31",
+      "dateModified": "2026-05-31",
+      "wordCount": 1842,
+      "keywords": "build a second brain with Claude Code, Obsidian second brain, Claude Code Obsidian plugin, markdown second brain, AI daily planning ritual, Obsidian dashboard plugin",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Person",
+        "name": "Taelo Kim",
+        "url": "https://taeloai.com/",
+        "sameAs": ["https://www.youtube.com/@TaeloKim", "https://x.com/taelo_kim", "https://github.com/taelo82"]
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Taelo Kim",
+        "url": "https://taeloai.com/"
+      },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://taeloai.com/blog/second-brain-claude-code/" },
+      "isPartOf": { "@type": "Blog", "@id": "https://taeloai.com/blog/#blog", "name": "Taelo Kim — Build Logs" }
+    },
+    {
+      "@type": "VideoObject",
+      "@id": "https://taeloai.com/blog/second-brain-claude-code/#video",
+      "name": "I Built Second Brain to Run My Entire Life (Full-Guide)",
+      "description": "Build a second brain with Claude Code and Obsidian: the exact 11-phase order, the markdown-first data model, and the rituals that plan and close your day.",
+      "thumbnailUrl": "https://i.ytimg.com/vi/RJXKrNLd90c/maxresdefault.jpg",
+      "uploadDate": "2026-05-31",
+      "duration": "PT14M20S",
+      "embedUrl": "https://www.youtube.com/embed/RJXKrNLd90c",
+      "contentUrl": "https://www.youtube.com/watch?v=RJXKrNLd90c",
+      "publisher": { "@type": "Person", "name": "Taelo Kim" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://taeloai.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://taeloai.com/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "Build a Second Brain With Claude Code: The Full 11-Phase Guide", "item": "https://taeloai.com/blog/second-brain-claude-code/" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do I need to know how to code to build this second brain in Obsidian?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. I described what I wanted to Claude Code one phase at a time, loaded the result in Obsidian, looked at it and asked for the next change. You need to be able to read a screen and say what is wrong with it. The plugin is TypeScript and React, and you will never have to write either by hand." }
+        },
+        {
+          "@type": "Question",
+          "name": "Where does the data live if there is no database?",
+          "acceptedAnswer": { "@type": "Answer", "text": "In plain markdown files inside your Obsidian vault. The current task is a file, the trunk is a file, your to-dos and brain dumps are files. There is no database, no cloud service and no proprietary format. Delete the plugin tomorrow and every note is still a readable text file you can search, back up or edit on your phone." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the calendar sync need an API key, OAuth or Zapier?",
+          "acceptedAnswer": { "@type": "Answer", "text": "None of the three. You drop a block on the dashboard timeline and it becomes a real calendar event immediately, with no third-party account in the middle. That means nothing to re-authorize in six months and no monthly bill for what is essentially a file being written in the right place." }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does the terminal break when you embed Claude Code in Obsidian?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Two reasons, and they hit almost everyone. The terminal has to be rebuilt against Obsidian's exact version rather than your system one, and Obsidian launches with a stripped-down PATH, so the embedded shell cannot find the tools your normal shell finds. Both are fixed at that phase with a rebuild and one command, not a redesign." }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does the build take if I follow the phases in order?",
+          "acceptedAnswer": { "@type": "Answer", "text": "It took me weeks, because I was discovering the order while building and had to trace back through multiple Claude Code sessions to work out what came first. Following the phases in sequence, it is closer to an afternoon of pasting prompts and checking each phase opens cleanly before starting the next one." }
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "name": "Build a second brain dashboard in Obsidian with Claude Code",
+      "description": "Build a second brain with Claude Code and Obsidian: the exact 11-phase order, the markdown-first data model, and the rituals that plan and close your day.",
+      "step": [
+        { "@type": "HowToStep", "position": 1, "name": "Design the dashboard first", "text": "In Claude Design, describe the theme, colour, fills, navigation and sections in detail, and iterate on the picture until it looks like something you want to open every morning.", "url": "https://taeloai.com/blog/second-brain-claude-code/#design-first" },
+        { "@type": "HowToStep", "position": 2, "name": "Scaffold the plugin", "text": "Open Claude Code inside your Obsidian plugin folder and ask for a TypeScript and React skeleton: one dashboard view, five empty tabs, one button to open it. No features yet.", "url": "https://taeloai.com/blog/second-brain-claude-code/#scaffold-and-verify" },
+        { "@type": "HowToStep", "position": 3, "name": "Build the focus banner and timer", "text": "The banner and timer that sit above the tabs. Treat it like the hero section of a website and spend real time on it.", "url": "https://taeloai.com/blog/second-brain-claude-code/#build-order" },
+        { "@type": "HowToStep", "position": 4, "name": "Build the front seat", "text": "The single task that owns your day, displayed in the tab body. This tile took more iterations than anything else in the build.", "url": "https://taeloai.com/blog/second-brain-claude-code/#build-order" },
+        { "@type": "HowToStep", "position": 5, "name": "Move every tile onto plain markdown", "text": "Every tile reads and writes a plain markdown file in your vault. No database, no cloud, no proprietary format. This phase makes every later phase possible.", "url": "https://taeloai.com/blog/second-brain-claude-code/#markdown-files" },
+        { "@type": "HowToStep", "position": 6, "name": "Wire time blocks to your real calendar", "text": "Drop a block on the dashboard timeline and it appears as a real event on your calendar immediately, with no API key, OAuth screen or Zapier account.", "url": "https://taeloai.com/blog/second-brain-claude-code/#calendar-time-blocks" },
+        { "@type": "HowToStep", "position": 7, "name": "Add the live feeds", "text": "A quote of the day plus raw feeds straight from the source, filtered by keywords you choose rather than by an algorithm's guess about you.", "url": "https://taeloai.com/blog/second-brain-claude-code/#feeds-and-inspire" },
+        { "@type": "HowToStep", "position": 8, "name": "Build the Inspire tab", "text": "A piece of art each day, a biography excerpt, language phrases you can click to hear, resurfaced old bookmarks and a brain dump box you keep empty on purpose.", "url": "https://taeloai.com/blog/second-brain-claude-code/#feeds-and-inspire" },
+        { "@type": "HowToStep", "position": 9, "name": "Dock Claude Code in a terminal", "text": "Put a real terminal directly below the dashboard so Claude Code lives where you are already looking. Expect the version rebuild and the stripped-down PATH.", "url": "https://taeloai.com/blog/second-brain-claude-code/#terminal-and-voice" },
+        { "@type": "HowToStep", "position": 10, "name": "Add voice control", "text": "Dictation inside the dashboard instead of a paid third-party app, using a free Groq API key whose free tier covers everything this needs.", "url": "https://taeloai.com/blog/second-brain-claude-code/#terminal-and-voice" },
+        { "@type": "HowToStep", "position": 11, "name": "Write the plan and close rituals", "text": "Plan today reads your calendar, trunk and brain dumps and proposes one task plus time blocks. Close today reports what you finished, what slipped and what carries over.", "url": "https://taeloai.com/blog/second-brain-claude-code/#plan-today-close-today" }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="progress"></div>
+
+<nav class="nav">
+  <a class="nav__brand" href="/">Taelo <em>Kim</em></a>
+  <div class="nav__links">
+    <a href="/blog/" class="nav__keep" aria-current="page">Blog</a>
+    <a href="/#resources">Resources</a>
+    <a href="/#community">Community</a>
+    <a class="nav__cta nav__keep" href="https://www.youtube.com/@TaeloKim?sub_confirmation=1" target="_blank" rel="noopener">Subscribe</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <header class="post-head col">
+    <div class="crumb"><a href="/">Home</a> / <a href="/blog/">Blog</a> / Second brain</div>
+    <h1>From an empty Obsidian folder to a second brain that runs my day</h1>
+    <p class="standfirst">Eleven phases, plain markdown under everything, and a terminal docked to the dashboard — the whole build order, without the weeks I spent finding it.</p>
+    <div class="meta">
+      <span>May 31, 2026</span>
+      <span>9 min read</span>
+      <span>Built with Claude Code + Obsidian</span>
+    </div>
+  </header>
+
+  <div class="col">
+    <div class="video-embed" data-video="RJXKrNLd90c" data-title="I Built Second Brain to Run My Entire Life (Full-Guide)" role="button" tabindex="0" aria-label="Play: I Built Second Brain to Run My Entire Life (Full-Guide)">
+      <img src="/blog/img/second-brain-claude-code-thumb.jpg" alt="I Built Second Brain to Run My Entire Life (Full-Guide) — video walkthrough by Taelo Kim" width="1280" height="720" fetchpriority="high">
+      <div class="video-embed__play"></div>
+      <span class="video-embed__label">Watch the build — 14:20</span>
+    </div>
+  </div>
+
+  <article class="post-body col">
+
+    <p>Every second brain I built before this one died the same way. A beautiful vault, forty notes, and no reason to open it on a Tuesday. The system was storage. My actual day was happening somewhere else: in a calendar, a to-do app, four browser tabs and my head.</p>
+
+    <p>So I stopped building a filing cabinet. What follows is the full guide to building a second brain with Claude Code and Obsidian — a dashboard that shows one task, blocks time for it on my real calendar, hands me something worth reading, and at night tells me what I actually did.</p>
+
+    <p>I didn't handwrite the plugin. I have a 9-5, a channel and side projects, same as you. I described what I wanted to Claude Code one piece at a time, loaded it in Obsidian, looked at what came back and said "now add this." That loop took me weeks, mostly because I did it out of order. Written down properly it's eleven phases, and the order is the actual product.</p>
+
+    <div class="takeaways">
+      <h2>What you'll get out of this</h2>
+      <ul>
+        <li>The two rules that stop a build like this collapsing at phase four</li>
+        <li>Why the entire system sits on plain markdown files, and what that buys you</li>
+        <li>How time blocks reach your real calendar with no OAuth, no API key, no Zapier</li>
+        <li>The two bugs that fight you when you dock Claude Code inside Obsidian</li>
+        <li>The morning and evening rituals that turn a dashboard into something with an opinion</li>
+      </ul>
+    </div>
+
+    <h2 id="build-order">The two rules, and the eleven phases they produce</h2>
+
+    <p>Rule one: design before you build. Get the whole picture before a single file exists. Rule two: build in phases. One phase, reload, look at it, then the next. Never ask for everything at once, because a model asked for eleven things will do nine of them badly and you won't know which nine.</p>
+
+    <p>That's the entire methodology. The eleven phases below are those two rules applied until the thing is finished.</p>
+
+    <figure>
+      <svg viewBox="0 0 880 360" width="100%" class="diagram" role="img" aria-labelledby="sb-d1" xmlns="http://www.w3.org/2000/svg">
+        <title id="sb-d1">The phase loop: design first, build one phase, verify it opens in Obsidian, then move to the next phase</title>
+        <defs>
+          <marker id="sb-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#7AB5B0"></path>
+          </marker>
+        </defs>
+        <text x="40" y="42" font-family="JetBrains Mono, monospace" font-size="12" fill="#7AB5B0">RULE 1 · design before you build</text>
+        <text x="430" y="42" font-family="JetBrains Mono, monospace" font-size="12" fill="#FFB347">RULE 2 · one phase at a time</text>
+
+        <rect x="40" y="100" width="210" height="96" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"></rect>
+        <text x="62" y="136" font-family="JetBrains Mono, monospace" font-size="14" fill="#E8E4DC">Claude Design</text>
+        <text x="62" y="160" font-family="JetBrains Mono, monospace" font-size="11.5" fill="rgba(232,228,220,0.45)">theme, colour, tabs,</text>
+        <text x="62" y="178" font-family="JetBrains Mono, monospace" font-size="11.5" fill="rgba(232,228,220,0.45)">sections — in detail</text>
+
+        <rect x="335" y="100" width="210" height="96" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"></rect>
+        <text x="357" y="136" font-family="JetBrains Mono, monospace" font-size="14" fill="#E8E4DC">Claude Code</text>
+        <text x="357" y="160" font-family="JetBrains Mono, monospace" font-size="11.5" fill="rgba(232,228,220,0.45)">build phase N only,</text>
+        <text x="357" y="178" font-family="JetBrains Mono, monospace" font-size="11.5" fill="rgba(232,228,220,0.45)">nothing from N+1</text>
+
+        <rect x="630" y="100" width="210" height="96" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"></rect>
+        <text x="652" y="136" font-family="JetBrains Mono, monospace" font-size="14" fill="#E8E4DC">Obsidian</text>
+        <text x="652" y="160" font-family="JetBrains Mono, monospace" font-size="11.5" fill="rgba(232,228,220,0.45)">reload, click the icon</text>
+        <text x="652" y="178" font-family="JetBrains Mono, monospace" font-size="11.5" fill="rgba(232,228,220,0.45)">does it open clean?</text>
+
+        <path d="M250,148 L326,148" stroke="#7AB5B0" stroke-width="1" fill="none" marker-end="url(#sb-arrow)"></path>
+        <path d="M545,148 L621,148" stroke="#7AB5B0" stroke-width="1" fill="none" marker-end="url(#sb-arrow)"></path>
+        <path d="M735,196 L735,264 L440,264 L440,203" stroke="#FFB347" stroke-width="1" fill="none" marker-end="url(#sb-arrow)"></path>
+        <text x="460" y="286" font-family="JetBrains Mono, monospace" font-size="11.5" fill="#FFB347">phase N+1 — only after it opens clean</text>
+
+        <line x1="40" y1="312" x2="840" y2="312" stroke="rgba(232,228,220,0.12)"></line>
+        <text x="40" y="338" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">design → scaffold → banner → front seat → markdown → calendar → feeds → inspire → terminal → voice → rituals</text>
+      </svg>
+      <figcaption>The loop runs eleven times. The only exit condition is <b>it opens without crashing</b> — no half-finished phase gets to hide behind the next one.</figcaption>
+    </figure>
+
+    <ol class="steps">
+      <li><h3>Design the dashboard</h3><p>In Claude Design, describe theme, colour, fills, navigation and sections until the picture is something you'd want to open every morning.</p></li>
+      <li><h3>Scaffold the plugin</h3><p>Claude Code inside your Obsidian plugin folder: TypeScript, React, one dashboard view, five empty tabs, one button. No features.</p></li>
+      <li><h3>Build the focus banner</h3><p>The banner and timer above the tabs. Treat it like a hero section and give it the time a hero section deserves.</p></li>
+      <li><h3>Build the front seat</h3><p>The one task that owns your day, sitting in the tab body. As simple as it looks, it took the most iterations of anything here.</p></li>
+      <li><h3>Move everything onto markdown</h3><p>Every tile reads and writes a plain file in your vault. No database, no cloud, nothing proprietary.</p></li>
+      <li><h3>Wire time blocks to the calendar</h3><p>Drop a block on the timeline and it becomes a real event on your actual calendar, immediately.</p></li>
+      <li><h3>Add the live feeds</h3><p>Quote of the day plus raw feeds straight from the source, filtered by keywords you pick.</p></li>
+      <li><h3>Build the Inspire tab</h3><p>Daily art, a biography excerpt, language phrases, resurfaced bookmarks, and a brain dump box.</p></li>
+      <li><h3>Dock the terminal</h3><p>Claude Code running directly under the dashboard so you never leave the window to change it.</p></li>
+      <li><h3>Add voice control</h3><p>Dictation without paying a third party for it, using a free Groq API key.</p></li>
+      <li><h3>Write the rituals</h3><p>Plan today in the morning, close today at night. This is the phase that turns a dashboard into a partner.</p></li>
+    </ol>
+
+    <h2 id="design-first">Why you design the dashboard before you write any code</h2>
+
+    <p>Claude Code will happily generate a dashboard on the first ask. It'll be grey, boxy and generic, and you'll spend the next hour describing everything you didn't want.</p>
+
+    <blockquote>Claude Code is incredible at writing code. It is not great at inventing a look from nothing.</blockquote>
+
+    <p>So the first prompt of this build never went to <a href="https://www.anthropic.com/claude-code" target="_blank" rel="noopener">Claude Code</a> at all. It went to Claude Design, with as much detail as I could stand to type: theme, colour, fills, navigation, sections. The more specific the prompt, the better the odds it lands in one shot. I broke that workflow down properly in <a href="/blog/claude-design-genius-4-steps/">four steps for turning Claude into a design genius</a>.</p>
+
+    <p>The theme decision is yours, and it isn't cosmetic. Mine: monochrome, glass cards, five tabs, an hourglass. My phone is set to greyscale for the same reason — colour and icons everywhere is brain fatigue I don't need. The purpose was maximum productivity while still managing health and social life in one place, so the tabs follow that, not somebody else's template.</p>
+
+    <p>Then iterate visually. The first hourglass came back flat, so I pasted the image back and asked for depth instead of a 2D shape, plus a colour I could only describe as alchemist: the shade you'd get if someone were making diamonds. Vague words work fine here as long as you show it the picture you're reacting to.</p>
+
+    <h2 id="scaffold-and-verify">Scaffolding the Obsidian plugin: five empty tabs and nothing else</h2>
+
+    <p>Now the boring part, on purpose. Open Claude Code inside your <a href="https://obsidian.md/" target="_blank" rel="noopener">Obsidian</a> plugin folder and ask for the skeleton: TypeScript, React, one dashboard view, five empty tabs, a button that opens it. The entire goal is a plugin that installs, opens, and shows five empty tabs.</p>
+
+    <p>Then enable it in Obsidian, click the icon, and watch an empty shell open. That's the discipline for the whole build: verify before you move on. Does it open? Does it crash? Clean open, next phase. Everything after this is the fun part rather than config, but only if the plumbing is finished first.</p>
+
+    <p>While you're in settings, turn on Web Viewer so you never have to leave Obsidian for a browser, and add a couple of plugins from the browse panel. Calendar is non-negotiable. One that opens a terminal is worth having early, for reasons that become obvious at phase nine.</p>
+
+    <h2 id="markdown-files">Why every tile is a plain markdown file</h2>
+
+    <p>This is the most important decision in the build and it takes ten seconds to describe. Everything on the dashboard is a markdown file in your vault. The current task is a file. The trunk is a file. Your to-dos, brain dumps, language notes and side projects are files. No database, no cloud, no proprietary format.</p>
+
+    <figure>
+      <img src="/blog/img/second-brain-claude-code-01.jpg" alt="Obsidian second brain dashboard shown next to the plain markdown file behind a tile during the live sync demo" width="1280" height="720" loading="lazy">
+      <figcaption>Save the file, the tile changes. The sync is the feature — but the file is the source of truth, not the dashboard.</figcaption>
+    </figure>
+
+    <figure>
+      <svg viewBox="0 0 880 420" width="100%" class="diagram" role="img" aria-labelledby="sb-d2" xmlns="http://www.w3.org/2000/svg">
+        <title id="sb-d2">Every dashboard tile is backed by a plain markdown file in the Obsidian vault, syncing in both directions</title>
+        <text x="36" y="56" font-family="JetBrains Mono, monospace" font-size="12" fill="#7AB5B0">YOUR VAULT · plain markdown</text>
+        <rect x="36" y="76" width="290" height="250" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"></rect>
+        <text x="60" y="120" font-family="JetBrains Mono, monospace" font-size="13" fill="#E8E4DC">current task<tspan fill="rgba(232,228,220,0.45)"> .md</tspan></text>
+        <text x="60" y="164" font-family="JetBrains Mono, monospace" font-size="13" fill="#E8E4DC">trunk<tspan fill="rgba(232,228,220,0.45)"> .md</tspan></text>
+        <text x="60" y="208" font-family="JetBrains Mono, monospace" font-size="13" fill="#E8E4DC">to-dos<tspan fill="rgba(232,228,220,0.45)"> .md</tspan></text>
+        <text x="60" y="252" font-family="JetBrains Mono, monospace" font-size="13" fill="#E8E4DC">brain dump<tspan fill="rgba(232,228,220,0.45)"> .md</tspan></text>
+        <text x="60" y="296" font-family="JetBrains Mono, monospace" font-size="13" fill="#E8E4DC">side projects<tspan fill="rgba(232,228,220,0.45)"> .md</tspan></text>
+
+        <text x="554" y="56" font-family="JetBrains Mono, monospace" font-size="12" fill="#FFB347">THE DASHBOARD · five tabs</text>
+        <rect x="554" y="76" width="290" height="250" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"></rect>
+        <text x="578" y="120" font-family="JetBrains Mono, monospace" font-size="13" fill="#E8E4DC">front seat</text>
+        <text x="578" y="164" font-family="JetBrains Mono, monospace" font-size="13" fill="#E8E4DC">time blocks</text>
+        <text x="578" y="208" font-family="JetBrains Mono, monospace" font-size="13" fill="#E8E4DC">to-dos</text>
+        <text x="578" y="252" font-family="JetBrains Mono, monospace" font-size="13" fill="#E8E4DC">feeds</text>
+        <text x="578" y="296" font-family="JetBrains Mono, monospace" font-size="13" fill="#E8E4DC">inspire</text>
+
+        <path d="M334,152 L546,152" stroke="#7AB5B0" stroke-width="1" fill="none" marker-end="url(#sb-arrow)"></path>
+        <text x="440" y="138" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#7AB5B0">save the file → tile updates</text>
+        <path d="M546,240 L334,240" stroke="#7AB5B0" stroke-width="1" fill="none" marker-end="url(#sb-arrow)"></path>
+        <text x="440" y="262" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">edit the tile → file changes</text>
+
+        <line x1="36" y1="356" x2="844" y2="356" stroke="rgba(232,228,220,0.12)"></line>
+        <text x="36" y="382" font-family="JetBrains Mono, monospace" font-size="12.5" fill="#E8E4DC">No database. No cloud. No account.</text>
+        <text x="36" y="404" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">Delete the plugin and every note is still a text file you can grep, back up, or edit on your phone.</text>
+      </svg>
+      <figcaption>The dashboard is a <b>view</b>, not a store. That inversion is why phase five has to come before the feeds, the calendar and the rituals rather than after them.</figcaption>
+    </figure>
+
+    <p>Here's why it matters more than any tile you'll build. Your data stays yours, in plain text. You can search it, back it up with whatever already backs up a folder, and edit it from your phone on the train. If you delete the plugin tomorrow, your entire life is still sitting there in readable files. Nothing locks you in, which is a strange thing to be able to say about a productivity system.</p>
+
+    <div class="watch-nudge">
+      <span>Watching a tile change the instant the markdown file saves is more convincing than reading about it.</span>
+      <a href="https://www.youtube.com/watch?v=RJXKrNLd90c&amp;t=390s" target="_blank" rel="noopener">See the live sync demo →</a>
+    </div>
+
+    <h2 id="calendar-time-blocks">How time blocks reach your real calendar without an API key</h2>
+
+    <p>Deep work, stretch, run, whatever you're protecting: drop it on the timeline and it blocks the time. The point of phase six is that the block doesn't stay inside the dashboard. It shows up on your actual calendar, immediately, exactly as if you'd created it there.</p>
+
+    <figure>
+      <img src="/blog/img/second-brain-claude-code-02.jpg" alt="A time block dropped on the Obsidian dashboard timeline appearing as a real event on the calendar" width="1280" height="720" loading="lazy">
+      <figcaption>The dashboard timeline on one side, the real calendar on the other. Same event, no sync service standing between them.</figcaption>
+    </figure>
+
+    <p>No OAuth screen, no API key, no Zapier account in the middle. Your block becomes a real event with zero third-party services, which also means zero third-party bills and nothing to re-authorize in six months when a token quietly expires. I'm biased here: I've written about <a href="/blog/ai-agent-burning-18-dollars-a-day/">what happens when an agent quietly burns $18 a day</a>, and the fix is almost always removing a service rather than adding one.</p>
+
+    <h2 id="feeds-and-inspire">Feeds and the Inspire tab: signal with nobody in the middle</h2>
+
+    <p>Phases seven and eight are where the dashboard stops being a to-do list. A quote of the day, and feeds pulled straight from the source — Reddit among them — free, with no influencer standing between you and the raw thing. You set the keywords, so the feed reflects what you're actually working on instead of an algorithm's guess about you.</p>
+
+    <p>The Inspire tab is my favourite and the least defensible on a productivity spreadsheet: a real piece of art every day, a biography excerpt about someone's resilience, Chinese phrases you can click to hear pronounced, and old bookmarks resurfacing from wherever you saved and forgot them. At the bottom is a brain dump box I keep deliberately empty, so there's always somewhere to put a thought at 11pm. The reasoning behind that whole tab is in <a href="/blog/command-center-claude-code/">the command center this dashboard grew out of</a>.</p>
+
+    <h2 id="terminal-and-voice">Docking Claude Code in the dashboard, and the two bugs that fight you</h2>
+
+    <p>Phase nine puts a real terminal directly below the dashboard with Claude Code living in it. You stop leaving the window. Whatever you want changed gets asked for in the same place you're looking at the thing you want to change, which is the difference between a dashboard and a workbench. It's the same instinct behind <a href="/blog/automate-video-editing-claude-code/">running my video edits through Claude Code</a> instead of a separate app.</p>
+
+    <figure>
+      <img src="/blog/img/second-brain-claude-code-03.jpg" alt="Claude Code running in a terminal docked directly below the Obsidian second brain dashboard" width="1280" height="720" loading="lazy">
+      <figcaption>The terminal is docked, not floating. Everything you'd otherwise alt-tab for happens under the tiles it changes.</figcaption>
+    </figure>
+
+    <div class="callout callout--warn">
+      <span class="callout__label">Two things will break here</span>
+      <p>The terminal has to be rebuilt to match Obsidian's exact version rather than your system one, and Obsidian launches with a stripped-down PATH, so the embedded shell can't find what your normal shell finds. I lost real time to both. Each is one rebuild and one command, so fix them at this phase instead of working around them for the rest of the build.</p>
+    </div>
+
+    <p>Phase ten is voice. Dictation the way Wispr Flow does it, except it runs inside your own dashboard and you're not paying a third party a subscription for the privilege. Make a <a href="https://console.groq.com/" target="_blank" rel="noopener">Groq</a> account, use the free API key, and the free tier covers everything this needs.</p>
+
+    <h2 id="plan-today-close-today">The two rituals that make it a partner instead of a dashboard</h2>
+
+    <p>Phase eleven is the one I'd build first if I had to start again. In the morning I click Plan today. It reads my calendar, my trunk and my latest brain dumps, then proposes the single task for the front seat plus a couple of time blocks, with its reasoning attached. If I agree, I type buckle in, and the day is set.</p>
+
+    <figure>
+      <img src="/blog/img/second-brain-claude-code-04.jpg" alt="The Plan today ritual proposing one front seat task and time blocks with reasoning in the Obsidian dashboard" width="1280" height="720" loading="lazy">
+      <figcaption>Plan today argues for one task, not ten. The reasoning is visible, which is the only reason I trust it enough to accept the proposal most mornings.</figcaption>
+    </figure>
+
+    <p>At night, Close today. The dashboard has been quietly logging every action all day, so the review isn't a memory test. It tells me what I got done, what slipped and what's worth carrying into tomorrow, and I decide what carries and what gets dropped. Two clicks. That's the whole distance between a dashboard you admire and a system with an opinion about your Tuesday.</p>
+
+    <div class="callout">
+      <span class="callout__label">Make it yours</span>
+      <p>The whole thing is forkable. Swap the quotes, the stories, the language, the calendar, the shape of the front seat, the tab names, the time block durations. Hand Claude Code one phase at a time and describe your changes in your own words — pasting all eleven at once doesn't hold together. Ask it what's immediately implementable and what needs another plugin installed first, and it'll sequence the work for you.</p>
+    </div>
+
+    <p>If something doesn't sync — bookmarks, notes, a tile that stays stubbornly blank — say exactly that and let it find the break. That's the entire debugging workflow, and it's how <a href="/">most of what I build</a> gets finished. It took me weeks to reconstruct this order, digging back through old Claude Code sessions to work out which flow actually came first. You get to skip that part.</p>
+
+    <div class="cta">
+      <h3>Build yours phase by phase</h3>
+      <p>The video is these same eleven phases with my screen in front of you, including the tiles that took several attempts before they looked right. If you build one, come show it in AI Movers — I want to see which tabs you keep and which ones you throw straight out.</p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="https://www.youtube.com/watch?v=RJXKrNLd90c" target="_blank" rel="noopener">Watch the full build</a>
+        <a class="btn btn--ghost" href="https://www.skool.com/ai-movers-1936" target="_blank" rel="noopener">Join AI Movers</a>
+      </div>
+    </div>
+
+    <h2 id="faq">Frequently asked questions</h2>
+    <div class="faq">
+      <details>
+        <summary>Do I need to know how to code to build this second brain in Obsidian?</summary>
+        <p>No. I described what I wanted to Claude Code one phase at a time, loaded the result in Obsidian, looked at it and asked for the next change. You need to be able to read a screen and say what is wrong with it. The plugin is TypeScript and React, and you will never have to write either by hand.</p>
+      </details>
+      <details>
+        <summary>Where does the data live if there is no database?</summary>
+        <p>In plain markdown files inside your Obsidian vault. The current task is a file, the trunk is a file, your to-dos and brain dumps are files. There is no database, no cloud service and no proprietary format. Delete the plugin tomorrow and every note is still a readable text file you can search, back up or edit on your phone.</p>
+      </details>
+      <details>
+        <summary>Does the calendar sync need an API key, OAuth or Zapier?</summary>
+        <p>None of the three. You drop a block on the dashboard timeline and it becomes a real calendar event immediately, with no third-party account in the middle. That means nothing to re-authorize in six months and no monthly bill for what is essentially a file being written in the right place.</p>
+      </details>
+      <details>
+        <summary>Why does the terminal break when you embed Claude Code in Obsidian?</summary>
+        <p>Two reasons, and they hit almost everyone. The terminal has to be rebuilt against Obsidian's exact version rather than your system one, and Obsidian launches with a stripped-down PATH, so the embedded shell cannot find the tools your normal shell finds. Both are fixed at that phase with a rebuild and one command, not a redesign.</p>
+      </details>
+      <details>
+        <summary>How long does the build take if I follow the phases in order?</summary>
+        <p>It took me weeks, because I was discovering the order while building and had to trace back through multiple Claude Code sessions to work out what came first. Following the phases in sequence, it is closer to an afternoon of pasting prompts and checking each phase opens cleanly before starting the next one.</p>
+      </details>
+    </div>
+
+    <nav class="related" aria-label="Related posts">
+      <h2>Keep reading</h2>
+      <ul>
+        <li><a href="/blog/command-center-claude-code/">The command center that runs my life →</a></li>
+        <li><a href="/blog/claude-design-genius-4-steps/">Turn Claude into a design genius in 4 steps →</a></li>
+        <li><a href="/blog/automate-video-editing-claude-code/">Automating video editing with Claude Code →</a></li>
+      </ul>
+    </nav>
+
+  </article>
+</main>
+
+<footer class="foot">
+  <span>© 2026 Taelo Kim</span>
+  <div class="foot__links">
+    <a href="/">Home</a>
+    <a href="/blog/">Blog</a>
+    <a href="https://www.youtube.com/@TaeloKim" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://x.com/taelo_kim" target="_blank" rel="noopener">X</a>
+    <a href="https://www.skool.com/ai-movers-1936" target="_blank" rel="noopener">AI Movers</a>
+  </div>
+</footer>
+
+<script src="/blog/blog.js" defer></script>
+</body>
+</html>

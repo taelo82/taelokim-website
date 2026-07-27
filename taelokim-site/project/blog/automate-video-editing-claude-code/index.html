@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Automate Video Editing With AI: Cut, Dress, Polish</title>
+<meta name="description" content="Automate video editing with AI using Claude Code or Codex. The cut, dress, polish workflow that replaced my $200 editor, with the exact prompts I use.">
+<link rel="canonical" href="https://taeloai.com/blog/automate-video-editing-claude-code/">
+<meta name="author" content="Taelo Kim">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Automate Video Editing With AI: Cut, Dress, Polish">
+<meta property="og:description" content="Automate video editing with AI using Claude Code or Codex. The cut, dress, polish workflow that replaced my $200 editor, with the exact prompts I use.">
+<meta property="og:url" content="https://taeloai.com/blog/automate-video-editing-claude-code/">
+<meta property="og:image" content="https://taeloai.com/blog/img/automate-video-editing-claude-code-thumb.jpg">
+<meta property="og:site_name" content="Taelo Kim">
+<meta property="article:published_time" content="2026-06-10">
+<meta property="article:author" content="https://www.youtube.com/@TaeloKim">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@taelo_kim">
+<meta name="twitter:creator" content="@taelo_kim">
+<meta name="twitter:title" content="Automate Video Editing With AI: Cut, Dress, Polish">
+<meta name="twitter:description" content="Automate video editing with AI using Claude Code or Codex. The cut, dress, polish workflow that replaced my $200 editor, with the exact prompts I use.">
+<meta name="twitter:image" content="https://taeloai.com/blog/img/automate-video-editing-claude-code-thumb.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/blog/blog.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://taeloai.com/blog/automate-video-editing-claude-code/#article",
+      "headline": "Automate Video Editing With AI: Cut, Dress, Polish",
+      "description": "Automate video editing with AI using Claude Code or Codex. The cut, dress, polish workflow that replaced my $200 editor, with the exact prompts I use.",
+      "image": "https://taeloai.com/blog/img/automate-video-editing-claude-code-thumb.jpg",
+      "datePublished": "2026-06-10",
+      "dateModified": "2026-06-10",
+      "wordCount": 2115,
+      "keywords": "automate video editing with AI, Claude Code video editing, AI video editing workflow, remove dead space from video, AI B-roll prompts, Descript vs Claude Code",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Person",
+        "name": "Taelo Kim",
+        "url": "https://taeloai.com/",
+        "sameAs": ["https://www.youtube.com/@TaeloKim", "https://x.com/taelo_kim", "https://github.com/taelo82"]
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Taelo Kim",
+        "url": "https://taeloai.com/"
+      },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://taeloai.com/blog/automate-video-editing-claude-code/" },
+      "isPartOf": { "@type": "Blog", "@id": "https://taeloai.com/blog/#blog", "name": "Taelo Kim — Build Logs" }
+    },
+    {
+      "@type": "VideoObject",
+      "@id": "https://taeloai.com/blog/automate-video-editing-claude-code/#video",
+      "name": "How I Fully Automated My Video Editing (Claude Code)",
+      "description": "Automate video editing with AI using Claude Code or Codex. The cut, dress, polish workflow that replaced my $200 editor, with the exact prompts I use.",
+      "thumbnailUrl": "https://i.ytimg.com/vi/oZsNXqPBolc/maxresdefault.jpg",
+      "uploadDate": "2026-06-10",
+      "duration": "PT9M13S",
+      "embedUrl": "https://www.youtube.com/embed/oZsNXqPBolc",
+      "contentUrl": "https://www.youtube.com/watch?v=oZsNXqPBolc",
+      "publisher": { "@type": "Person", "name": "Taelo Kim" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://taeloai.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://taeloai.com/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "Automate Video Editing With AI: Cut, Dress, Polish", "item": "https://taeloai.com/blog/automate-video-editing-claude-code/" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can Claude Code actually edit video, or does it only give you timestamps?",
+          "acceptedAnswer": { "@type": "Answer", "text": "It reads your footage and returns an edit decision: exact cut points down to the millisecond, plus marked spots for sound effects and transitions. You apply those in your editor, or let it render the cut. For dressing and polish you want the timestamps and assets, not a rendered file, so you stay in control of placement." }
+        },
+        {
+          "@type": "Question",
+          "name": "What prompt do you use to cut dead space out of a video?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Ask it to cut dead space but keep the pauses natural, target around half a second depending on how fast you talk, return exact timestamps down to the millisecond, and allow nothing longer than 0.3 seconds in the intro. Then read the first pass and say do one more round, tighter, until the cadence is right." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Claude Code better than Descript or Opus for cutting a video?",
+          "acceptedAnswer": { "@type": "Answer", "text": "For cutting, yes. I paid about $50 a month across Descript and Opus and they cut worse, because they run one fixed pass with a cheaper model and no room to argue. With Claude Code or Codex you can run multiple rounds, A/B a rough cut against a natural cut, and dictate the exact pause length." }
+        },
+        {
+          "@type": "Question",
+          "name": "Why should you never let AI bake the effects into your video?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Once sound effects and transitions are merged into the render, they are painful to fix, and you will disagree with most of the placements anyway. Ask for a separate asset folder plus a timestamp list instead. The AI does the fetching and the marking, you do the placing and the filtering, and nothing is destructive." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does an AI editing workflow replace a professional video editor?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No, and pretending otherwise wastes your money. You will not get the perfect infographics, the buttery zooms, or the custom sound design a real pro delivers. What you get is a genuinely watchable edit at a fraction of the time and cost, which for most videos is the trade worth making." }
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to automate video editing with AI in three passes",
+      "description": "Automate video editing with AI using Claude Code or Codex. The cut, dress, polish workflow that replaced my $200 editor, with the exact prompts I use.",
+      "step": [
+        { "@type": "HowToStep", "position": 1, "name": "Cut", "text": "Drop the raw long-form footage in and ask for exact millisecond timestamps that kill dead space while keeping pauses natural. Read the first pass, then ask for another, tighter round until the cadence is yours.", "url": "https://taeloai.com/blog/automate-video-editing-claude-code/#how-to-cut-dead-space-with-ai" },
+        { "@type": "HowToStep", "position": 2, "name": "Dress", "text": "Do not ask the model to draw. Have it write you a heavily constrained design brief, paste that into a design tool, and use the returned graphics for your intro, outro, chapter banners and transitions.", "url": "https://taeloai.com/blog/automate-video-editing-claude-code/#b-roll-that-isnt-ai-slop" },
+        { "@type": "HowToStep", "position": 3, "name": "Polish", "text": "Ask it to scan the whole cut and mark every spot where a sound effect or transition would land, then hand you timestamps and a separate asset folder you can drag and drop. Never let it merge effects into the render.", "url": "https://taeloai.com/blog/automate-video-editing-claude-code/#polish-what-ai-cant-do-yet" }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="progress"></div>
+
+<nav class="nav">
+  <a class="nav__brand" href="/">Taelo <em>Kim</em></a>
+  <div class="nav__links">
+    <a href="/blog/" class="nav__keep" aria-current="page">Blog</a>
+    <a href="/#resources">Resources</a>
+    <a href="/#community">Community</a>
+    <a class="nav__cta nav__keep" href="https://www.youtube.com/@TaeloKim?sub_confirmation=1" target="_blank" rel="noopener">Subscribe</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <header class="post-head col">
+    <div class="crumb"><a href="/">Home</a> / <a href="/blog/">Blog</a> / Automating video editing</div>
+    <h1>The cut, dress, polish framework for editing video with AI</h1>
+    <p class="standfirst">Three passes, three prompts, and one rule that keeps it from turning into slop: AI does the labor, you keep the taste.</p>
+    <div class="meta">
+      <span>June 10, 2026</span>
+      <span>8 min read</span>
+      <span>Built with Claude Code + Codex</span>
+    </div>
+  </header>
+
+  <div class="col">
+    <div class="video-embed" data-video="oZsNXqPBolc" data-title="How I Fully Automated My Video Editing (Claude Code)" role="button" tabindex="0" aria-label="Play: How I Fully Automated My Video Editing (Claude Code)">
+      <img src="/blog/img/automate-video-editing-claude-code-thumb.jpg" alt="How I Fully Automated My Video Editing (Claude Code) — video walkthrough by Taelo Kim" width="1280" height="720" fetchpriority="high">
+      <div class="video-embed__play"></div>
+      <span class="video-embed__label">Watch the build — 9:13</span>
+    </div>
+  </div>
+
+  <article class="post-body col">
+
+    <p>The last video I paid a human to edit cost me over $200, and the money was the easy part. The hard part was the weeks it took to find one editor who cut the way I actually wanted. Messages back and forth, negotiating the rate, setting the deadline, writing out every single intro beat by hand, and still getting a file back that missed the point. Then paying double the quote to have it re-cut.</p>
+
+    <p>So I stopped hiring. What follows is the workflow I use to automate video editing with AI: no editor, no new tool to buy, just the Claude Code or Codex subscription you probably already pay for. The video this came from was edited three separate ways, in three completely different styles, and I never touched a timeline.</p>
+
+    <p>Editing isn't solved. It's the last thing standing between having something to say and having it published, and once it falls the barrier to creating drops to roughly zero. This is the closest thing to solved that exists right now, and it is honest about where it stops.</p>
+
+    <div class="takeaways">
+      <h2>What you'll get out of this</h2>
+      <ul>
+        <li>The three-job framework (cut, dress, polish) and which of the three AI is actually good at</li>
+        <li>The exact cutting prompt, including the millisecond constraint that keeps intros sharp</li>
+        <li>Why asking Claude to <em>make</em> the animation is the wrong move, and the prompt-relay that works instead</li>
+        <li>The one rule that stops a polish pass from wrecking your project file</li>
+        <li>An honest read on what this can't do, and which subscriptions to cancel today</li>
+      </ul>
+    </div>
+
+    <h2 id="why-paying-an-editor-broke-first">Why paying an editor broke before the editing did</h2>
+
+    <p>Hiring is not a money problem, it's a latency problem. Every round trip with a human editor costs a day: you write the brief, they interpret it, you watch, you write notes on a cut you'd have fixed in four minutes yourself. Multiply that by the two or three rounds it takes to land a cadence and your video is a week old before anyone sees it.</p>
+
+    <p>The instinct is to buy a tool instead. I did that too: an auto-cut plugin inside Premiere at $20 a month, then Descript and Opus at around $50 a month on top, bought purely on the hope of clawing back half an hour. If a $50 tool bought back the hour I spend editing, I'd pay a thousand. That's not where we are.</p>
+
+    <h2 id="cut-dress-polish-framework">What the cut, dress, polish framework actually splits</h2>
+
+    <p>Break editing into three jobs and it stops being one intimidating blob. <strong>Cut</strong> is killing dead space. <strong>Dress</strong> is adding the B-roll and the graphics. <strong>Polish</strong> is the final layer: sounds, captions, effects. Raw footage doesn't change in any of the three. Cut it tight, dress it up, polish it, and the same forty minutes of talking becomes something people finish.</p>
+
+    <p>Hold onto one line all the way through, because it's the whole point: <strong>AI does the labor, you keep the taste.</strong> Every decision below is an application of that split.</p>
+
+    <figure>
+      <svg viewBox="0 0 880 400" width="100%" class="diagram" role="img" aria-labelledby="diagram1-title">
+        <title id="diagram1-title">The cut, dress, polish pipeline, showing which half of each job the AI performs and which half stays with the editor</title>
+        <defs>
+          <marker id="arw1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+            <path d="M0,0 L9,4.5 L0,9 z" fill="rgba(232,228,220,0.45)"/>
+          </marker>
+        </defs>
+        <rect x="0" y="0" width="880" height="400" fill="#050510"/>
+
+        <rect x="16" y="150" width="110" height="60" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"/>
+        <text x="71" y="176" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">RAW</text>
+        <text x="71" y="194" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">FOOTAGE</text>
+
+        <line x1="132" y1="180" x2="156" y2="180" stroke="rgba(232,228,220,0.45)" stroke-width="1" marker-end="url(#arw1)"/>
+
+        <rect x="162" y="150" width="150" height="60" rx="4" fill="#0B0B18" stroke="#7AB5B0"/>
+        <text x="237" y="186" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="15" fill="#E8E4DC">1 · CUT</text>
+        <text x="237" y="238" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#7AB5B0">AI: finds every gap,</text>
+        <text x="237" y="254" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#7AB5B0">returns ms timestamps</text>
+        <text x="237" y="282" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#FFB347">You: how tight, where</text>
+        <text x="237" y="298" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#FFB347">a pause gets to sit</text>
+
+        <line x1="318" y1="180" x2="346" y2="180" stroke="rgba(232,228,220,0.45)" stroke-width="1" marker-end="url(#arw1)"/>
+
+        <rect x="352" y="150" width="150" height="60" rx="4" fill="#0B0B18" stroke="#7AB5B0"/>
+        <text x="427" y="186" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="15" fill="#E8E4DC">2 · DRESS</text>
+        <text x="427" y="238" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#7AB5B0">AI: writes the design</text>
+        <text x="427" y="254" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#7AB5B0">brief for the tool</text>
+        <text x="427" y="282" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#FFB347">You: the look, the</text>
+        <text x="427" y="298" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#FFB347">pile of don'ts</text>
+
+        <line x1="508" y1="180" x2="536" y2="180" stroke="rgba(232,228,220,0.45)" stroke-width="1" marker-end="url(#arw1)"/>
+
+        <rect x="542" y="150" width="150" height="60" rx="4" fill="#0B0B18" stroke="#7AB5B0"/>
+        <text x="617" y="186" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="15" fill="#E8E4DC">3 · POLISH</text>
+        <text x="617" y="238" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#7AB5B0">AI: marks + fetches</text>
+        <text x="617" y="254" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#7AB5B0">assets, never merges</text>
+        <text x="617" y="282" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#FFB347">You: what lands,</text>
+        <text x="617" y="298" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#FFB347">what gets deleted</text>
+
+        <line x1="698" y1="180" x2="726" y2="180" stroke="rgba(232,228,220,0.45)" stroke-width="1" marker-end="url(#arw1)"/>
+
+        <rect x="732" y="150" width="132" height="60" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"/>
+        <text x="798" y="185" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">PUBLISHED</text>
+
+        <line x1="162" y1="336" x2="692" y2="336" stroke="rgba(232,228,220,0.12)" stroke-width="1"/>
+        <text x="427" y="360" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">AI does the labor · you keep the taste</text>
+
+        <text x="71" y="98" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">unchanged</text>
+        <text x="798" y="98" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">same footage</text>
+      </svg>
+      <figcaption>Only the mint row is safely delegable today. The amber row is where the video either sounds like you or sounds like everyone else — which is why the polish pass returns assets rather than a render.</figcaption>
+    </figure>
+
+    <h2 id="how-to-cut-dead-space-with-ai">How to cut dead space without buying a cutting tool</h2>
+
+    <p>Part one is a saw, and it's the part that works cleanly today. You drop the raw long-form file in and you tell it how to cut. The instructions carry all the weight, so don't be shy about the specifics:</p>
+
+    <pre><code><span class="c"># the cut prompt</span>
+<span class="k">Cut</span> the dead space, but keep the pauses natural.
+<span class="k">Target</span> <span class="s">~0.5s</span> between lines — depends how fast I'm talking.
+<span class="k">Give me</span> exact timestamps down to the <span class="s">millisecond</span>.
+<span class="k">Nothing</span> longer than <span class="s">0.3s</span> in the intro. The intro stays sharp.</code></pre>
+
+    <p>Then read the first pass like a viewer, not an editor. If it's still draggy, you don't reprompt from scratch. You say <em>do one more round, cut it a little tighter</em>, or hand over the exact seconds you want back. It returns a clean pass. That iteration loop is the entire advantage.</p>
+
+    <figure>
+      <img src="/blog/img/automate-video-editing-claude-code-01.jpg" alt="Claude Code terminal running the cut prompt on raw long-form footage and returning millisecond dead-space timestamps" width="1280" height="720" loading="lazy">
+      <figcaption>The cut pass reads as an edit decision list, not a render: every gap it wants to close, with in and out points you can sanity-check before anything is destroyed.</figcaption>
+    </figure>
+
+    <p>I still hand-cut some things. I want my own rhythm of speaking. Sometimes a pause should sit, the line should land and breathe. For that I go in at 0.0 milliseconds myself, and yes, it takes days. That's me being obsessive. For 90% of what you're making, part one is finished business. You should never hand-cut dead air again.</p>
+
+    <h2 id="ai-cutting-tools-vs-claude-code">Why the $50 cutting tools cut worse than an agent</h2>
+
+    <p>I paid for the dedicated tools first, because that's the obvious move. A cut plugin inside Premiere at $20 a month. Descript and Opus at around $50 a month, bought to see whether a purpose-built product beat a general one.</p>
+
+    <p>They don't. They're the lower-spec version. Under the hood they run a cheaper, dumber model on a single fixed pass, and you get exactly one opinion with no way to argue with it. With Claude Code or Codex you run a rough cut and a natural cut, put them side by side, and pick the cadence you want. That's not a nicer tool. That's a whole job leaving the building.</p>
+
+    <figure>
+      <img src="/blog/img/automate-video-editing-claude-code-02.jpg" alt="Comparing Descript and Opus subscription cutting tools against a Claude Code multi-pass cut of the same footage" width="1280" height="720" loading="lazy">
+      <figcaption>Both subscriptions ran on the same raw file. The difference isn't cut quality on pass one — it's that only one of them lets you demand a second pass on your terms.</figcaption>
+    </figure>
+
+    <div class="callout callout--warn">
+      <span class="callout__label">Cancel this</span>
+      <p>If you're paying monthly for a one-click editor right now, cancel it. I kept mine running purely to test them, and they never bought back the 30 or 40 minutes that would have justified the spend. The same logic applies to any agent you're overpaying to run — see <a href="/blog/ai-agent-burning-18-dollars-a-day/">why my agent was burning $18 a day</a>.</p>
+    </div>
+
+    <h2 id="b-roll-that-isnt-ai-slop">How to get B-roll and graphics that aren't AI slop</h2>
+
+    <p>Dressing is the highest-return thing you can do for retention, because a good visual is worth a paragraph of me talking. It's also where I lose the most time, because I refuse to put generic AI slop animation on the channel.</p>
+
+    <p>Here's the move, and it isn't the obvious one: <strong>do not ask Claude or Codex to make the animation directly.</strong> They are genuinely horrible at it. I have tried every way I can think of to keep it inside the terminal so I never have to open another tool, and it does not work. Instead, have the model write you the <em>prompt</em>, and paste that into a design tool: <a href="/blog/claude-design-genius-4-steps/">Claude design, which I've covered in depth</a>, Lovable, whatever's free.</p>
+
+    <figure>
+      <svg viewBox="0 0 880 380" width="100%" class="diagram" role="img" aria-labelledby="diagram2-title">
+        <title id="diagram2-title">The prompt relay: asking the coding agent to write a design brief instead of asking it to draw the graphic</title>
+        <defs>
+          <marker id="arw2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+            <path d="M0,0 L9,4.5 L0,9 z" fill="rgba(232,228,220,0.45)"/>
+          </marker>
+          <marker id="arw2b" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+            <path d="M0,0 L9,4.5 L0,9 z" fill="#7AB5B0"/>
+          </marker>
+        </defs>
+        <rect x="0" y="0" width="880" height="380" fill="#050510"/>
+
+        <text x="24" y="34" font-family="JetBrains Mono, monospace" font-size="12" fill="rgba(232,228,220,0.45)">THE OBVIOUS PATH</text>
+        <rect x="24" y="52" width="190" height="54" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"/>
+        <text x="119" y="84" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">"make me an animation"</text>
+        <line x1="220" y1="79" x2="266" y2="79" stroke="rgba(232,228,220,0.45)" stroke-width="1" marker-end="url(#arw2)"/>
+        <rect x="272" y="52" width="170" height="54" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"/>
+        <text x="357" y="76" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">black screen, purple</text>
+        <text x="357" y="94" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">neon, glowing "!"</text>
+        <text x="470" y="84" font-family="JetBrains Mono, monospace" font-size="13" fill="#FFB347">✕ slop</text>
+
+        <line x1="24" y1="136" x2="856" y2="136" stroke="rgba(232,228,220,0.12)" stroke-width="1"/>
+
+        <text x="24" y="172" font-family="JetBrains Mono, monospace" font-size="12" fill="rgba(232,228,220,0.45)">THE RELAY</text>
+
+        <rect x="24" y="190" width="160" height="70" rx="4" fill="#0B0B18" stroke="#7AB5B0"/>
+        <text x="104" y="220" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">Claude Code</text>
+        <text x="104" y="238" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">writes, doesn't draw</text>
+        <line x1="190" y1="225" x2="222" y2="225" stroke="#7AB5B0" stroke-width="1" marker-end="url(#arw2b)"/>
+
+        <rect x="228" y="190" width="190" height="70" rx="4" fill="#0B0B18" stroke="#7AB5B0"/>
+        <text x="323" y="216" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">design brief</text>
+        <text x="323" y="234" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#FFB347">material · one color</text>
+        <text x="323" y="250" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#FFB347">texture · pile of don'ts</text>
+        <line x1="424" y1="225" x2="456" y2="225" stroke="#7AB5B0" stroke-width="1" marker-end="url(#arw2b)"/>
+
+        <rect x="462" y="190" width="170" height="70" rx="4" fill="#0B0B18" stroke="#7AB5B0"/>
+        <text x="547" y="220" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">design tool</text>
+        <text x="547" y="238" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">renders the graphic</text>
+        <line x1="638" y1="225" x2="670" y2="225" stroke="#7AB5B0" stroke-width="1" marker-end="url(#arw2b)"/>
+
+        <rect x="676" y="190" width="180" height="70" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"/>
+        <text x="766" y="220" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">intro · outro</text>
+        <text x="766" y="238" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">chapter banners</text>
+
+        <text x="24" y="316" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">The specificity lives in the brief. Vague in, neon out.</text>
+        <text x="24" y="342" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">Terminal agents are bad at pixels and good at constraints. Use each for what it is.</text>
+      </svg>
+      <figcaption>The relay costs one extra paste and removes the failure mode entirely: the coding agent never renders anything, so it can never render slop.</figcaption>
+    </figure>
+
+    <p>The secret to something that isn't slop is guardrails: a wall of don'ts. Watch how specific this gets:</p>
+
+    <pre><code><span class="c"># the design brief, as handed to the design tool</span>
+<span class="k">Style:</span> chalkboard graphic on a <span class="s">pre-lit canvas</span> background.
+<span class="k">Color:</span> one only — <span class="s">chocolate</span>.
+<span class="k">Feel:</span> chocolate chalk scratching across canvas, rough texture,
+       like a hand actually wrote it.
+<span class="k">Never:</span> <span class="s">neon, purple glow, gradients, 3D, "futuristic"</span>.</code></pre>
+
+    <p>Hand it something vague ("make it cool, dark, futuristic") and you know exactly what comes back. A black screen, a purple neon sign, a glowing exclamation mark. So direct it hard. The don'ts list is just me telling it everything I hate so it stops guessing.</p>
+
+    <p>The places worth spending this on are your intro, your outro, and your chapter banners and transitions. Instead of my face and a caption, each new chapter gets a clean graphic. People instantly know where they are and that the video is moving. Better retention, better comprehension, basically no extra time once the brief exists. If you want to push the same idea into full animated pages, <a href="/blog/claude-code-nanobanana-animated-sites/">the Nanobanana 2 and Claude design build</a> is the extended version.</p>
+
+    <figure>
+      <img src="/blog/img/automate-video-editing-claude-code-03.jpg" alt="Chalkboard-style chapter banner graphic in a single chocolate colour, generated from a guardrailed design brief" width="1280" height="720" loading="lazy">
+      <figcaption>One color, one material, one texture instruction. Every constraint in the brief is a whole category of generic output that never gets generated.</figcaption>
+    </figure>
+
+    <div class="watch-nudge">
+      <p>This part is easier to see than to read. <a href="https://www.youtube.com/watch?v=oZsNXqPBolc&amp;t=324s" target="_blank" rel="noopener">Jump to 5:24 in the build</a> to watch me read the chocolate-chalk brief out loud and then see the graphic it produced — plus the three different B-roll styles this same video was dressed in.</p>
+    </div>
+
+    <h2 id="polish-what-ai-cant-do-yet">Polish: the pass AI still can't do for you</h2>
+
+    <p>Captions are trivial. Pull the transcript, drop it in, done. The rest of the polish is where AI still needs to catch up, because the final touch isn't a task, it's an orchestration. Where do you zoom in? Where does a sound effect land? Where do you get weird, get funny, drop the meme? The model has no instinct for that. Not yet.</p>
+
+    <p>So delegate the labor and keep the judgment. The prompt:</p>
+
+    <pre><code><span class="c"># the asset-folder prompt</span>
+<span class="k">Scan</span> the whole cut. <span class="k">Mark</span> every spot where a sound effect
+or a transition would land. <span class="k">Give me</span> the timestamps.
+<span class="k">Hand me</span> everything as a <span class="s">separate asset folder</span> so I can
+drag and drop. <span class="k">Do not merge</span> anything into the video.</code></pre>
+
+    <p>That last line is the trick, and it's the one people skip. Never let it bake the effects into your render. When it merges and blends everything, the result is messy and painful to fix, and you won't like most of the placements anyway. Keep the assets loose and the timestamps in a list. It does the fetching and the marking. You do the placing and the filtering.</p>
+
+    <figure>
+      <img src="/blog/img/automate-video-editing-claude-code-04.jpg" alt="Separate asset folder of sound effects and transitions with a timestamp list ready to drag onto the video timeline" width="1280" height="720" loading="lazy">
+      <figcaption>Assets on the left, timestamps in a list, nothing rendered. Every suggestion is one you can ignore without touching a render queue.</figcaption>
+    </figure>
+
+    <p>The scanning half of this only works because the model can genuinely read what's in the footage, the same capability I use for research, covered in <a href="/blog/claude-code-watch-any-video/">giving Claude Code the ability to watch any video</a>.</p>
+
+    <h2 id="what-this-workflow-cant-do">What this workflow can't do, honestly</h2>
+
+    <p>I'm not going to pretend this gets you a polished, professional edit. It doesn't. You are not getting the perfect infographics, the buttery zooms, or the custom sound design a real pro gives you. What you get is a stitched-together edit that's genuinely engaging at a fraction of the time and cost. That's the realistic frame.</p>
+
+    <blockquote>If a $50 tool buys back the hour I spend editing, I'll pay a thousand. That's not where we are.</blockquote>
+
+    <p>My own videos aren't the most polished on the platform, and I spend far more time on them than I should. A dozen takes. Thrown-away scripts. Too much ad-lib. I cut roughly 70% of my own footage because I digress. The three passes above don't fix any of that. They just stop me paying someone else a week's latency to do the mechanical part badly.</p>
+
+    <p>If editing ever gets properly solved end-to-end, I'll be the first to say so, loudly. Until then: cut, dress, polish. AI does the labor, you keep the taste.</p>
+
+    <div class="cta">
+      <h3>Watch the three edits happen in one video</h3>
+      <p>The build walks through all three passes on real footage — and the video itself is cut three different ways in three different styles, none of which I touched a timeline for. Try spotting where each style switches. The prompts are free either way.</p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="https://www.youtube.com/watch?v=oZsNXqPBolc" target="_blank" rel="noopener">Watch the full build</a>
+        <a class="btn btn--ghost" href="https://www.skool.com/ai-movers-1936" target="_blank" rel="noopener">Join AI Movers</a>
+      </div>
+    </div>
+
+    <h2 id="faq">Frequently asked questions</h2>
+    <div class="faq">
+      <details>
+        <summary>Can Claude Code actually edit video, or does it only give you timestamps?</summary>
+        <p>It reads your footage and returns an edit decision: exact cut points down to the millisecond, plus marked spots for sound effects and transitions. You apply those in your editor, or let it render the cut. For dressing and polish you want the timestamps and assets, not a rendered file, so you stay in control of placement.</p>
+      </details>
+      <details>
+        <summary>What prompt do you use to cut dead space out of a video?</summary>
+        <p>Ask it to cut dead space but keep the pauses natural, target around half a second depending on how fast you talk, return exact timestamps down to the millisecond, and allow nothing longer than 0.3 seconds in the intro. Then read the first pass and say do one more round, tighter, until the cadence is right.</p>
+      </details>
+      <details>
+        <summary>Is Claude Code better than Descript or Opus for cutting a video?</summary>
+        <p>For cutting, yes. I paid about $50 a month across Descript and Opus and they cut worse, because they run one fixed pass with a cheaper model and no room to argue. With Claude Code or Codex you can run multiple rounds, A/B a rough cut against a natural cut, and dictate the exact pause length.</p>
+      </details>
+      <details>
+        <summary>Why should you never let AI bake the effects into your video?</summary>
+        <p>Once sound effects and transitions are merged into the render, they are painful to fix, and you will disagree with most of the placements anyway. Ask for a separate asset folder plus a timestamp list instead. The AI does the fetching and the marking, you do the placing and the filtering, and nothing is destructive.</p>
+      </details>
+      <details>
+        <summary>Does an AI editing workflow replace a professional video editor?</summary>
+        <p>No, and pretending otherwise wastes your money. You will not get the perfect infographics, the buttery zooms, or the custom sound design a real pro delivers. What you get is a genuinely watchable edit at a fraction of the time and cost, which for most videos is the trade worth making.</p>
+      </details>
+    </div>
+
+    <p>Everything here runs on tools you can start with today: <a href="https://www.anthropic.com/claude-code" target="_blank" rel="noopener">Claude Code</a> or <a href="https://openai.com/codex/" target="_blank" rel="noopener">Codex</a>, plus whatever design tool you already have open. More build logs live on <a href="/">the home page</a>.</p>
+
+    <nav class="related" aria-label="Related posts">
+      <h2>Keep reading</h2>
+      <ul>
+        <li><a href="/blog/claude-design-genius-4-steps/">Turn Claude into a design genius in 4 steps →</a></li>
+        <li><a href="/blog/claude-code-watch-any-video/">Giving Claude Code the ability to watch video →</a></li>
+        <li><a href="/blog/ai-agent-burning-18-dollars-a-day/">Your AI agent is burning $18 a day →</a></li>
+      </ul>
+    </nav>
+
+  </article>
+</main>
+
+<footer class="foot">
+  <span>© 2026 Taelo Kim</span>
+  <div class="foot__links">
+    <a href="/">Home</a>
+    <a href="/blog/">Blog</a>
+    <a href="https://www.youtube.com/@TaeloKim" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://x.com/taelo_kim" target="_blank" rel="noopener">X</a>
+    <a href="https://www.skool.com/ai-movers-1936" target="_blank" rel="noopener">AI Movers</a>
+  </div>
+</footer>
+
+<script src="/blog/blog.js" defer></script>
+</body>
+</html>

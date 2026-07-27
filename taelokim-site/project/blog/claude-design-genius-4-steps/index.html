@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Pitch Deck Design Prompt: 4 Blocks That Actually Work</title>
+<meta name="description" content="The AI pitch deck design prompt that stops your slides looking machine-made: four blocks, the three tells to ban, and what to hand the model instead.">
+<link rel="canonical" href="https://taeloai.com/blog/claude-design-genius-4-steps/">
+<meta name="author" content="Taelo Kim">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="The four-block prompt that fixes AI-generated deck design">
+<meta property="og:description" content="The AI pitch deck design prompt that stops your slides looking machine-made: four blocks, the three tells to ban, and what to hand the model instead.">
+<meta property="og:url" content="https://taeloai.com/blog/claude-design-genius-4-steps/">
+<meta property="og:image" content="https://taeloai.com/blog/img/claude-design-genius-4-steps-thumb.jpg">
+<meta property="og:site_name" content="Taelo Kim">
+<meta property="article:published_time" content="2026-07-26">
+<meta property="article:author" content="https://www.youtube.com/@TaeloKim">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@taelo_kim">
+<meta name="twitter:creator" content="@taelo_kim">
+<meta name="twitter:title" content="The four-block prompt that fixes AI-generated deck design">
+<meta name="twitter:description" content="The AI pitch deck design prompt that stops your slides looking machine-made: four blocks, the three tells to ban, and what to hand the model instead.">
+<meta name="twitter:image" content="https://taeloai.com/blog/img/claude-design-genius-4-steps-thumb.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/blog/blog.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://taeloai.com/blog/claude-design-genius-4-steps/#article",
+      "headline": "The four-block prompt that fixes AI-generated deck design",
+      "description": "The AI pitch deck design prompt that stops your slides looking machine-made: four blocks, the three tells to ban, and what to hand the model instead.",
+      "image": "https://taeloai.com/blog/img/claude-design-genius-4-steps-thumb.jpg",
+      "datePublished": "2026-07-26",
+      "dateModified": "2026-07-26",
+      "wordCount": 2077,
+      "keywords": "AI pitch deck design prompt, why AI designs look the same, Claude Code pitch deck, design.md file for AI, AI slide deck template GitHub, stop AI generated decks looking generic",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Person",
+        "name": "Taelo Kim",
+        "url": "https://taeloai.com/",
+        "sameAs": ["https://www.youtube.com/@TaeloKim", "https://x.com/taelo_kim", "https://github.com/taelo82"]
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Taelo Kim",
+        "url": "https://taeloai.com/"
+      },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://taeloai.com/blog/claude-design-genius-4-steps/" },
+      "isPartOf": { "@type": "Blog", "@id": "https://taeloai.com/blog/#blog", "name": "Taelo Kim — Build Logs" }
+    },
+    {
+      "@type": "VideoObject",
+      "@id": "https://taeloai.com/blog/claude-design-genius-4-steps/#video",
+      "name": "Turn Claude Into A Design GENIUS in 4 Simple Steps",
+      "description": "The AI pitch deck design prompt that stops your slides looking machine-made: four blocks, the three tells to ban, and what to hand the model instead.",
+      "thumbnailUrl": "https://i.ytimg.com/vi/TOAt3tssL6w/maxresdefault.jpg",
+      "uploadDate": "2026-07-26",
+      "duration": "PT15M20S",
+      "embedUrl": "https://www.youtube.com/embed/TOAt3tssL6w",
+      "contentUrl": "https://www.youtube.com/watch?v=TOAt3tssL6w",
+      "publisher": { "@type": "Person", "name": "Taelo Kim" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://taeloai.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://taeloai.com/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "The four-block prompt that fixes AI-generated deck design", "item": "https://taeloai.com/blog/claude-design-genius-4-steps/" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why do AI-generated pitch decks all look the same?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Because a model's default output is the average of everything it has seen, and the average is tidy. That produces the same three habits every time: one loud accent color doing all the visual work, grids of rounded cards, and no texture at all. Ask for a deck without constraints and you get the median deck." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does this design prompt only work with Claude?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. I built this deck in Claude Code, but the four blocks are a way of thinking rather than a feature. Guardrails, experience, design and assets work the same in Codex or Gemini, because every one of those models has the same problem: without constraints it returns the average of its training data." }
+        },
+        {
+          "@type": "Question",
+          "name": "What should I put in the guardrails section of a design prompt?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Mostly nevers, each paired with a replacement. Never accent bars on cards or text blocks. Never neon accent colors. Never box-and-card grids or rounded rectangles as containers. Then the always: asymmetric grids, hairline rules instead of card borders, content sitting directly on the page. Write never and always literally." }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does AI ignore words like warm, premium or handcrafted?",
+          "acceptedAnswer": { "@type": "Answer", "text": "It doesn't ignore them, it averages them. Every model holds a different median for premium or clean or handcrafted, and the median is exactly what you are trying to escape. A model has never touched linen. Give it images or a live URL to study, plus mechanical instructions about color, grain and depth." }
+        },
+        {
+          "@type": "Question",
+          "name": "Where can I find a design.md template to start from?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Search GitHub for Claude design deck templates. Plenty of design systems are published openly, and the good repos ship a design.md alongside the HTML. I browsed a list, disliked most of it, then found one called Cartesian that was minimal and flowing. I downloaded its design.md and pasted it in as my starting spec." }
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to write a four-block AI pitch deck design prompt",
+      "description": "The AI pitch deck design prompt that stops your slides looking machine-made: four blocks, the three tells to ban, and what to hand the model instead.",
+      "step": [
+        { "@type": "HowToStep", "position": 1, "name": "Write the guardrails first", "text": "Open with what the model must never do. Ban accent bars, neon accents, box grids and rounded-rectangle containers, and pair each ban with the thing that does the job instead.", "url": "https://taeloai.com/blog/claude-design-genius-4-steps/#guardrails" },
+        { "@type": "HowToStep", "position": 2, "name": "Describe the experience you want", "text": "Say what the person opening the deck should feel and how they should move through it, before you say anything about color or layout. Experience is the umbrella the other blocks serve.", "url": "https://taeloai.com/blog/claude-design-genius-4-steps/#experience" },
+        { "@type": "HowToStep", "position": 3, "name": "Specify the design", "text": "Give the concrete layer: color, theme, layout, font. Start from an existing open-source design.md rather than writing a spec from scratch, then tune palette and gradient intensity slide by slide.", "url": "https://taeloai.com/blog/claude-design-genius-4-steps/#design-spec" },
+        { "@type": "HowToStep", "position": 4, "name": "Hand it assets to study", "text": "Attach the reference images or a live URL and tell the model to study them. Never rely on adjectives like warm or handcrafted, because every model averages those words differently.", "url": "https://taeloai.com/blog/claude-design-genius-4-steps/#assets" }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="progress"></div>
+
+<nav class="nav">
+  <a class="nav__brand" href="/">Taelo <em>Kim</em></a>
+  <div class="nav__links">
+    <a href="/blog/" class="nav__keep" aria-current="page">Blog</a>
+    <a href="/#resources">Resources</a>
+    <a href="/#community">Community</a>
+    <a class="nav__cta nav__keep" href="https://www.youtube.com/@TaeloKim?sub_confirmation=1" target="_blank" rel="noopener">Subscribe</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <header class="post-head col">
+    <div class="crumb"><a href="/">Home</a> / <a href="/blog/">Blog</a> / AI deck design prompt</div>
+    <h1>Why every AI-generated deck looks the same, and the four-block prompt that fixes it</h1>
+    <p class="standfirst">Guardrails, experience, design, assets. Four blocks that turned a generic AI deck into one a founder used to close a high-ticket deal.</p>
+    <div class="meta">
+      <span>July 26, 2026</span>
+      <span>10 min read</span>
+      <span>Built with Claude Code</span>
+    </div>
+  </header>
+
+  <div class="col">
+    <div class="video-embed" data-video="TOAt3tssL6w" data-title="Turn Claude Into A Design GENIUS in 4 Simple Steps" role="button" tabindex="0" aria-label="Play: Turn Claude Into A Design GENIUS in 4 Simple Steps">
+      <img src="/blog/img/claude-design-genius-4-steps-thumb.jpg" alt="Turn Claude Into A Design GENIUS in 4 Simple Steps — video walkthrough by Taelo Kim" width="1280" height="720" fetchpriority="high">
+      <div class="video-embed__play"></div>
+      <span class="video-embed__label">Watch the build — 15:20</span>
+    </div>
+  </div>
+
+  <article class="post-body col">
+
+    <p>Ask any model for a pitch deck and you get the same artefact back: a neon accent color, three rounded blocks in a row, a vertical bar glued to the edge of every card. You have seen that deck. So has the person reviewing yours.</p>
+
+    <p>I spent my working life in venture capital reading decks for due diligence, and here is the part nobody tells founders. The reviewer is a human being before they are a rational one. Before I judged the product, before I judged the team, I had already decided whether I wanted to keep reading.</p>
+
+    <p>What follows is the AI pitch deck design prompt I use on real client work. Four blocks: guardrails, experience, design, assets. Same deck, ninety minutes apart, went from machine-generated to warm, textured and quiet enough to read. Nothing here is Claude-specific. I built it in <a href="https://www.anthropic.com/claude-code" target="_blank" rel="noopener">Claude Code</a>, but it works identically in Codex or Gemini, because it is a way of thinking rather than a tool.</p>
+
+    <div class="takeaways">
+      <h2>What you'll get out of this</h2>
+      <ul>
+        <li>The three visual tells that mark a deck as AI-made, and the one-line replacement for each</li>
+        <li>Why your prompt should open with what the model must <em>never</em> do</li>
+        <li>Why adjectives like premium, clean and handcrafted produce garbage every time</li>
+        <li>Where to find an open-source <code>design.md</code> instead of writing a spec from scratch</li>
+        <li>An honest account of what good design does and does not buy you</li>
+      </ul>
+    </div>
+
+    <h2 id="why-ai-decks-look-the-same">Why does every AI deck look the same?</h2>
+
+    <p>A model's default output is the average of everything it has seen. When you describe a target, you get the average version of that target. So most of the work in a design prompt is not describing. It is closing doors.</p>
+
+    <p>Templates make this worse, not better. Templates are the reason every AI deck looks the same: everyone is pulling from the same tidy defaults, and the model optimises for tidy because tidy is safe. A box is the safest way to be tidy.</p>
+
+    <h2 id="three-tells">The three tells that give an AI deck away</h2>
+
+    <p><strong>Tell one: the accent bar.</strong> A thin vertical line in the accent color, stuck to the left edge of a card or a text block. In CSS it is <code>border-left: 3px solid accent</code>, and it is the single most recognisable thing a model makes. The color rotates on a schedule. Right now it is neon lime. Before that it was copper orange. Before that, purple. The color changes every six months and the behaviour never does: one loud accent doing all the visual work, because the model has no other idea where to put interest.</p>
+
+    <p><strong>Tell two: the box grid.</strong> That same accent shows up again as section labels in neon caps. I counted fourteen of them on one deck. Then the containers: ten rounded rectangles on one slide, eleven on the next. Nobody names this tell because every individual box is fine. But a deck where every slide is the same grid of cards reads like a form, and you do not argue with a form. You fill it in and leave.</p>
+
+    <p><strong>Tell three: no texture.</strong> Flat white or flat dark, and nothing else. No grain, no depth, no paper.</p>
+
+    <figure>
+      <img src="/blog/img/claude-design-genius-4-steps-01.jpg" alt="AI-generated pitch deck slide filled with a grid of rounded rectangle cards and neon caps section labels, the most common AI design tell" width="1280" height="720" loading="lazy">
+      <figcaption>Eleven rounded boxes on a single slide. Individually each one is defensible, which is exactly why the pattern survives every review.</figcaption>
+    </figure>
+
+    <h2 id="four-block-prompt">How the four-block design prompt is structured</h2>
+
+    <p>The order is not decorative. Guardrails fence off the average before the model starts generating. Experience is the umbrella intent. Design is whatever is needed to produce that experience. Assets are what design refers to when words run out.</p>
+
+    <figure>
+      <svg viewBox="0 0 880 420" width="100%" class="diagram" role="img" xmlns="http://www.w3.org/2000/svg">
+        <title>The four blocks of a design prompt, nested from guardrails down to assets</title>
+        <defs>
+          <marker id="ar1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="rgba(232,228,220,0.45)"></path>
+          </marker>
+        </defs>
+        <rect x="0" y="0" width="880" height="420" fill="#0B0B18"></rect>
+
+        <rect x="40" y="52" width="480" height="326" rx="4" fill="none" stroke="#FFB347" stroke-width="1" stroke-dasharray="4 4"></rect>
+        <text x="60" y="78" font-family="JetBrains Mono, monospace" font-size="12" fill="#FFB347">1 · GUARDRAILS</text>
+
+        <rect x="70" y="100" width="420" height="256" rx="4" fill="none" stroke="#7AB5B0" stroke-width="1"></rect>
+        <text x="90" y="126" font-family="JetBrains Mono, monospace" font-size="12" fill="#7AB5B0">2 · EXPERIENCE</text>
+
+        <rect x="100" y="148" width="360" height="186" rx="4" fill="none" stroke="#E8E4DC" stroke-width="1"></rect>
+        <text x="120" y="174" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">3 · DESIGN</text>
+
+        <rect x="130" y="196" width="300" height="116" rx="4" fill="none" stroke="rgba(232,228,220,0.45)" stroke-width="1"></rect>
+        <text x="150" y="222" font-family="JetBrains Mono, monospace" font-size="12" fill="rgba(232,228,220,0.45)">4 · ASSETS</text>
+        <text x="150" y="252" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">photos · screenshots · a live URL</text>
+        <text x="150" y="272" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">the model studies these,</text>
+        <text x="150" y="290" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">it does not guess adjectives</text>
+
+        <line x1="524" y1="70" x2="596" y2="70" stroke="rgba(232,228,220,0.45)" stroke-width="1" marker-end="url(#ar1)"></line>
+        <text x="606" y="66" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">what it must never do</text>
+        <text x="606" y="86" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">close the doors first</text>
+
+        <line x1="494" y1="118" x2="596" y2="118" stroke="rgba(232,228,220,0.45)" stroke-width="1" marker-end="url(#ar1)"></line>
+        <text x="606" y="114" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">what should they feel?</text>
+        <text x="606" y="134" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">the umbrella everything serves</text>
+
+        <line x1="464" y1="166" x2="596" y2="166" stroke="rgba(232,228,220,0.45)" stroke-width="1" marker-end="url(#ar1)"></line>
+        <text x="606" y="162" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">color · layout · type</text>
+        <text x="606" y="182" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">the spec, not the vibe</text>
+
+        <line x1="434" y1="214" x2="596" y2="214" stroke="rgba(232,228,220,0.45)" stroke-width="1" marker-end="url(#ar1)"></line>
+        <text x="606" y="210" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">show, do not describe</text>
+        <text x="606" y="230" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">files and links beat words</text>
+
+        <line x1="60" y1="398" x2="820" y2="398" stroke="rgba(232,228,220,0.12)" stroke-width="1"></line>
+        <text x="60" y="392" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">keep the whole thing concise — a long prompt is not a strict prompt</text>
+      </svg>
+      <figcaption>Each block sits inside the one above it. If you start at design you are picking fonts before you have decided what the reader is supposed to feel.</figcaption>
+    </figure>
+
+    <ol class="steps">
+      <li>
+        <h3>Write the guardrails first</h3>
+        <p>Open with the bans, not the brief. Each ban gets a replacement so the model has somewhere to go.</p>
+      </li>
+      <li>
+        <h3>Describe the experience you want</h3>
+        <p>What happens to the person who opens this? Curiosity, or the urge to get out of it as fast as possible?</p>
+      </li>
+      <li>
+        <h3>Specify the design</h3>
+        <p>Color, theme, layout, font. Start from someone else's published <code>design.md</code> rather than a blank page.</p>
+      </li>
+      <li>
+        <h3>Hand it assets to study</h3>
+        <p>Attach the images or the URL. Tell it to study them and get the gist of what you mean.</p>
+      </li>
+    </ol>
+
+    <h2 id="guardrails">Block 1: guardrails, or what the model must never do</h2>
+
+    <p>Everyone teaches you to start by describing what you want. I start with what the model must never do, because you are not describing a target. You are fencing off the average.</p>
+
+    <p>Block one is almost entirely nevers, and the single always is a replacement. I am not taking boxes away and leaving a hole. I am naming what does the job instead. A hairline rule does everything a card border does, and it does not announce itself while doing it.</p>
+
+<pre><code><span class="c"># design.md — guardrails</span>
+<span class="k">NEVER</span> accent bars on cards or text blocks. <span class="s">No exceptions.</span>
+<span class="k">NEVER</span> neon accent colors.
+<span class="k">NEVER</span> box / card grids.
+<span class="k">NEVER</span> rounded rectangles as containers.
+
+<span class="k">ALWAYS</span> asymmetric grids.
+<span class="k">ALWAYS</span> hairline rules instead of card borders.
+<span class="k">ALWAYS</span> content sitting directly on the page.</code></pre>
+
+    <div class="callout callout--warn">
+      <span class="callout__label">Word choice matters</span>
+      <p>Type <strong>never</strong> and <strong>always</strong> literally. "Try to keep it minimal" is a suggestion, and the model will treat it like one. "It looks AI" is a useless instruction because it names a feeling, not a rule. Name the CSS property if you have to.</p>
+    </div>
+
+    <h2 id="experience">Block 2: experience, the block nobody talks about</h2>
+
+    <p>This is the one I have never seen another AI creator cover, and it is the block I spend the most time on. Before layout, before color: what kind of experience does the person opening this deck actually have?</p>
+
+    <p>Are they simply observing information they need? Or are they being carried, getting the right thing at the right moment, never distracted or turned off by the layout? Does the thing evoke curiosity, or is it stale enough that they want out of it? Answer that in plain sentences at the top of your prompt, then let the rest of the prompt serve the answer.</p>
+
+    <blockquote>What is your intention? What kind of experience do you want to create for the person you are giving this to? Decide that first, then be creative inside it.</blockquote>
+
+    <p>Structurally, experience is the biggest umbrella. Design is whatever is necessary to produce it. Assets are what design refers to. Say it to the model in that order and it stops treating your color instructions as isolated preferences. Same logic I use when I <a href="/blog/command-center-claude-code/">wire a command center around a single intent</a> rather than bolting features together.</p>
+
+    <h2 id="design-spec">Block 3: design, the spec rather than the vibe</h2>
+
+    <p>Block two was feeling. This is the concrete layer: color, theme, layout, font.</p>
+
+    <p>I did not write mine from scratch. I searched for the best Claude design slide deck templates on <a href="https://github.com/search?q=claude+design+deck+template&amp;type=repositories" target="_blank" rel="noopener">GitHub</a>, because most of the big brands' design systems are published openly and you can just use them. I browsed the list, disliked most of it, nearly bounced, then landed on one called Cartesian. Minimal, no blocks, flowing. Clicking into it, there was already a <code>design.md</code> sitting in the repo. Downloaded, pasted in, done.</p>
+
+    <p>A few iterations later it still had not dropped the boxes and still had not found the color. So I attached the template HTML and said, roughly word for word: <em>let's apply this template HTML I'm attaching, I don't like the layout of this deck, it's too sloppy with the two or three blocks.</em> That was the whole instruction. Blocks gone, everything flowing, no hard lines.</p>
+
+    <figure>
+      <img src="/blog/img/claude-design-genius-4-steps-03.jpg" alt="Redesigned pitch deck slide after applying the Cartesian template, with flowing layout, hairline rules and no card grid" width="1280" height="720" loading="lazy">
+      <figcaption>The same deck after one message with the template HTML attached. The geometric shapes stay, the containers go.</figcaption>
+    </figure>
+
+    <div class="watch-nudge">
+      <p>The moment the boxes disappear is worth seeing rather than reading — one message, one render, and the card grid is gone.</p>
+      <a class="btn btn--ghost" href="https://www.youtube.com/watch?v=TOAt3tssL6w&amp;t=594s" target="_blank" rel="noopener">Watch it at 9:54</a>
+    </div>
+
+    <p>Then the tuning, which is where most people stop too early. I asked for variation in the gradient mesh intensity across slides, so the deck does not sit at one setting from start to finish. Some slides run stronger, some are deliberately subtle, and the density shifts as somebody browses through.</p>
+
+    <p>The instruction that changed the most: <strong>more white space means more gradient.</strong> Less text, more color. If a slide is crowded and the gradient is running everywhere behind it, you have two things competing and a reader who resolves the conflict by skimming. Where the slide breathes, the gradient goes strongest.</p>
+
+    <figure>
+      <img src="/blog/img/claude-design-genius-4-steps-04.jpg" alt="Pitch deck slide with heavy white space and a dense warm gradient mesh, showing gradient intensity varying per slide" width="1280" height="720" loading="lazy">
+      <figcaption>Gradient density tracks white space. The slides with the least text carry the strongest color, so the deck has a rhythm instead of a setting.</figcaption>
+    </figure>
+
+    <div class="callout">
+      <span class="callout__label">Ask for variations, every time</span>
+      <p>If you do not ask, you get one option, and one option is the average. Ask for a few palettes and a few intensity levels and choose. It costs one line of prompt and it is the difference between picking a design and accepting one.</p>
+    </div>
+
+    <h2 id="assets">Block 4: assets, because you show it rather than describe it</h2>
+
+    <p>This is the real takeaway, and it is the thing that wasted the most of my time before I understood it.</p>
+
+    <p>I wanted a warm linen-canvas texture with a soft gradient behind it. I had seen it at an event hosted by a Zero Base partner alongside Y Combinator and a16z, where the pitch decks all carried this warm, slightly low-resolution palette with actual depth in the background. I liked it enough to want to steal the feeling.</p>
+
+    <figure>
+      <img src="/blog/img/claude-design-genius-4-steps-02.jpg" alt="Reference pitch deck slide with a warm linen canvas texture and low-resolution gradient background, the visual inspiration for the redesign" width="1280" height="720" loading="lazy">
+      <figcaption>The reference I photographed at the event. Warm mixed palette, visible grain, depth in the background — none of which survives being typed as an adjective.</figcaption>
+    </figure>
+
+    <p>So I typed: warm linen texture, analog feeling, handcrafted. Garbage, every time. A model has never touched linen. It has a statistical median for the word and that median is nothing like the thing in my head.</p>
+
+    <p>Adjectives are a trap. Premium, clean, modern, handcrafted. Every model holds a different average for those words, and the average is precisely what you are running from. What works is handing over the actual thing: give it the file path to the photos and tell it to study them and get the gist of what you mean by warm and textured. Or give it a URL and say go browse this site, I want to recreate that feeling.</p>
+
+    <p>Then describe mechanically whatever the images cannot carry: mix these colors, avoid those colors, make the texture read as linen by adding a little depth, some scratches, and deliberately low resolution. The images set the target. The mechanics tell it how to hit it.</p>
+
+    <figure>
+      <svg viewBox="0 0 880 372" width="100%" class="diagram" role="img" xmlns="http://www.w3.org/2000/svg">
+        <title>Adjectives resolve to the model average, references resolve to the thing you meant</title>
+        <defs>
+          <marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="rgba(232,228,220,0.45)"></path>
+          </marker>
+        </defs>
+        <rect x="0" y="0" width="880" height="372" fill="#0B0B18"></rect>
+
+        <text x="40" y="44" font-family="JetBrains Mono, monospace" font-size="12" fill="#FFB347">THE ADJECTIVE PATH</text>
+        <rect x="40" y="60" width="220" height="72" rx="4" fill="none" stroke="rgba(232,228,220,0.45)" stroke-width="1"></rect>
+        <text x="58" y="90" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">warm, premium,</text>
+        <text x="58" y="110" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">handcrafted, clean</text>
+        <line x1="266" y1="96" x2="324" y2="96" stroke="rgba(232,228,220,0.45)" stroke-width="1" marker-end="url(#ar2)"></line>
+        <rect x="330" y="60" width="220" height="72" rx="4" fill="none" stroke="rgba(232,228,220,0.45)" stroke-width="1"></rect>
+        <text x="348" y="90" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">the model's median</text>
+        <text x="348" y="110" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">for that word</text>
+        <line x1="556" y1="96" x2="614" y2="96" stroke="rgba(232,228,220,0.45)" stroke-width="1" marker-end="url(#ar2)"></line>
+        <rect x="620" y="60" width="220" height="72" rx="4" fill="none" stroke="#FFB347" stroke-width="1"></rect>
+        <text x="638" y="90" font-family="JetBrains Mono, monospace" font-size="12" fill="#FFB347">neon accent, cards,</text>
+        <text x="638" y="110" font-family="JetBrains Mono, monospace" font-size="12" fill="#FFB347">flat background</text>
+
+        <line x1="40" y1="176" x2="840" y2="176" stroke="rgba(232,228,220,0.12)" stroke-width="1"></line>
+
+        <text x="40" y="220" font-family="JetBrains Mono, monospace" font-size="12" fill="#7AB5B0">THE REFERENCE PATH</text>
+        <rect x="40" y="236" width="220" height="72" rx="4" fill="none" stroke="rgba(232,228,220,0.45)" stroke-width="1"></rect>
+        <text x="58" y="266" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">./refs/event-01.jpg</text>
+        <text x="58" y="286" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">+ a live URL</text>
+        <line x1="266" y1="272" x2="324" y2="272" stroke="rgba(232,228,220,0.45)" stroke-width="1" marker-end="url(#ar2)"></line>
+        <rect x="330" y="236" width="220" height="72" rx="4" fill="none" stroke="rgba(232,228,220,0.45)" stroke-width="1"></rect>
+        <text x="348" y="266" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">study these, then</text>
+        <text x="348" y="286" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">grain + depth + low-res</text>
+        <line x1="556" y1="272" x2="614" y2="272" stroke="rgba(232,228,220,0.45)" stroke-width="1" marker-end="url(#ar2)"></line>
+        <rect x="620" y="236" width="220" height="72" rx="4" fill="none" stroke="#7AB5B0" stroke-width="1"></rect>
+        <text x="638" y="266" font-family="JetBrains Mono, monospace" font-size="12" fill="#7AB5B0">the texture you</text>
+        <text x="638" y="286" font-family="JetBrains Mono, monospace" font-size="12" fill="#7AB5B0">actually meant</text>
+
+        <text x="40" y="348" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">same model, same deck — the only variable is whether you handed it something to look at</text>
+      </svg>
+      <figcaption>Both paths take one line of prompt. Only one of them survives contact with a model that has never seen linen.</figcaption>
+    </figure>
+
+    <p>This is the same principle behind every good result I get out of an agent: specificity is cheaper than iteration. It is why <a href="/blog/ai-agent-35x-more-efficient/">a tighter agent runs 35x more efficiently</a> and why <a href="/blog/claude-code-nanobanana-animated-sites/">the Nanobanana and Claude design pipeline produces animated sites worth charging for</a>. Vague inputs do not save you time. They move the cost to round two.</p>
+
+    <h2 id="what-design-buys-you">What good design actually buys you</h2>
+
+    <p>Let me be honest about what this does not do. Not every slide from one to fifteen is going to be interesting. Some of them are tables of numbers, and the viewer will drift off and think about lunch. Design is not what makes a boring slide interesting.</p>
+
+    <p>Design is what carries somebody <em>through</em> the boring slides to the part that matters, the part you actually want to sell. That is the whole job.</p>
+
+    <p>It also will not make a bad proposal good. If the strategy is weak, a beautiful animation will not save it. What it buys you is the attention to be judged on the strategy at all, which, when the person on the other side is reading forty of these a week, is not a small thing.</p>
+
+    <p>The deck in this post is real, with brand and logos masked out. The founder closed a high-ticket business deal with it, and large, sceptical brands found it credible enough to keep reading. That is the bar, and it is a lower bar than most people think — it is just one nobody clears with the default output. If you want more of this kind of work, the same approach is how I <a href="/blog/make-money-with-claude/">turn Claude into paid client output</a>. More build logs live on <a href="/">the home page</a>.</p>
+
+    <p>Four blocks. Keep the whole prompt concise. Then be creative inside the structure, starting with the only question that matters: what experience do you want the person on the other side to have?</p>
+
+    <div class="cta">
+      <h3>See the deck change version by version</h3>
+      <p>The video walks the same client deck from the neon-accent default to the finished warm-textured version, one block of the prompt at a time — including the exact wording that finally killed the card grid.</p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="https://www.youtube.com/watch?v=TOAt3tssL6w" target="_blank" rel="noopener">Watch the full build</a>
+        <a class="btn btn--ghost" href="https://www.skool.com/ai-movers-1936" target="_blank" rel="noopener">Join AI Movers</a>
+      </div>
+    </div>
+
+    <h2 id="faq">Frequently asked questions</h2>
+    <div class="faq">
+      <details>
+        <summary>Why do AI-generated pitch decks all look the same?</summary>
+        <p>Because a model's default output is the average of everything it has seen, and the average is tidy. That produces the same three habits every time: one loud accent color doing all the visual work, grids of rounded cards, and no texture at all. Ask for a deck without constraints and you get the median deck.</p>
+      </details>
+      <details>
+        <summary>Does this design prompt only work with Claude?</summary>
+        <p>No. I built this deck in Claude Code, but the four blocks are a way of thinking rather than a feature. Guardrails, experience, design and assets work the same in Codex or Gemini, because every one of those models has the same problem: without constraints it returns the average of its training data.</p>
+      </details>
+      <details>
+        <summary>What should I put in the guardrails section of a design prompt?</summary>
+        <p>Mostly nevers, each paired with a replacement. Never accent bars on cards or text blocks. Never neon accent colors. Never box-and-card grids or rounded rectangles as containers. Then the always: asymmetric grids, hairline rules instead of card borders, content sitting directly on the page. Write never and always literally.</p>
+      </details>
+      <details>
+        <summary>Why does AI ignore words like warm, premium or handcrafted?</summary>
+        <p>It doesn't ignore them, it averages them. Every model holds a different median for premium or clean or handcrafted, and the median is exactly what you are trying to escape. A model has never touched linen. Give it images or a live URL to study, plus mechanical instructions about color, grain and depth.</p>
+      </details>
+      <details>
+        <summary>Where can I find a design.md template to start from?</summary>
+        <p>Search GitHub for Claude design deck templates. Plenty of design systems are published openly, and the good repos ship a design.md alongside the HTML. I browsed a list, disliked most of it, then found one called Cartesian that was minimal and flowing. I downloaded its design.md and pasted it in as my starting spec.</p>
+      </details>
+    </div>
+
+    <nav class="related" aria-label="Related posts">
+      <h2>Keep reading</h2>
+      <ul>
+        <li><a href="/blog/claude-code-nanobanana-animated-sites/">Nanobanana 2 + Claude design: $15K animated sites →</a></li>
+        <li><a href="/blog/make-money-with-claude/">Actually making money with Claude →</a></li>
+        <li><a href="/blog/command-center-claude-code/">The command center that runs my life →</a></li>
+      </ul>
+    </nav>
+
+  </article>
+</main>
+
+<footer class="foot">
+  <span>© 2026 Taelo Kim</span>
+  <div class="foot__links">
+    <a href="/">Home</a>
+    <a href="/blog/">Blog</a>
+    <a href="https://www.youtube.com/@TaeloKim" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://x.com/taelo_kim" target="_blank" rel="noopener">X</a>
+    <a href="https://www.skool.com/ai-movers-1936" target="_blank" rel="noopener">AI Movers</a>
+  </div>
+</footer>
+
+<script src="/blog/blog.js" defer></script>
+</body>
+</html>

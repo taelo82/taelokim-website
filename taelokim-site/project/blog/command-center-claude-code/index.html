@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Obsidian Dashboard with Claude Code: My Life Command Center</title>
+<meta name="description" content="How I built an Obsidian dashboard with Claude Code that runs my whole life: one task in the front seat, time blocks that hit Google Calendar in 3 seconds.">
+<link rel="canonical" href="https://taeloai.com/blog/command-center-claude-code/">
+<meta name="author" content="Taelo Kim">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="I Built an Obsidian Dashboard That Runs My Entire Life">
+<meta property="og:description" content="How I built an Obsidian dashboard with Claude Code that runs my whole life: one task in the front seat, time blocks that hit Google Calendar in 3 seconds.">
+<meta property="og:url" content="https://taeloai.com/blog/command-center-claude-code/">
+<meta property="og:image" content="https://taeloai.com/blog/img/command-center-claude-code-thumb.jpg">
+<meta property="og:site_name" content="Taelo Kim">
+<meta property="article:published_time" content="2026-05-24">
+<meta property="article:author" content="https://www.youtube.com/@TaeloKim">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@taelo_kim">
+<meta name="twitter:creator" content="@taelo_kim">
+<meta name="twitter:title" content="I Built an Obsidian Dashboard That Runs My Entire Life">
+<meta name="twitter:description" content="How I built an Obsidian dashboard with Claude Code that runs my whole life: one task in the front seat, time blocks that hit Google Calendar in 3 seconds.">
+<meta name="twitter:image" content="https://taeloai.com/blog/img/command-center-claude-code-thumb.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/blog/blog.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://taeloai.com/blog/command-center-claude-code/#article",
+      "headline": "I Built an Obsidian Dashboard That Runs My Entire Life",
+      "description": "How I built an Obsidian dashboard with Claude Code that runs my whole life: one task in the front seat, time blocks that hit Google Calendar in 3 seconds.",
+      "image": "https://taeloai.com/blog/img/command-center-claude-code-thumb.jpg",
+      "datePublished": "2026-05-24",
+      "dateModified": "2026-05-24",
+      "wordCount": 1948,
+      "keywords": "Obsidian dashboard with Claude Code, personal command center dashboard, Claude Code Obsidian vault, time blocking Google Calendar sync, personal operating system dashboard, Claude design dashboard UI",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Person",
+        "name": "Taelo Kim",
+        "url": "https://taeloai.com/",
+        "sameAs": ["https://www.youtube.com/@TaeloKim", "https://x.com/taelo_kim", "https://github.com/taelo82"]
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Taelo Kim",
+        "url": "https://taeloai.com/"
+      },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://taeloai.com/blog/command-center-claude-code/" },
+      "isPartOf": { "@type": "Blog", "@id": "https://taeloai.com/blog/#blog", "name": "Taelo Kim — Build Logs" }
+    },
+    {
+      "@type": "VideoObject",
+      "@id": "https://taeloai.com/blog/command-center-claude-code/#video",
+      "name": "I Built a Command Center that Runs My Entire Life",
+      "description": "How I built an Obsidian dashboard with Claude Code that runs my whole life: one task in the front seat, time blocks that hit Google Calendar in 3 seconds.",
+      "thumbnailUrl": "https://i.ytimg.com/vi/WlorPYYgvUQ/maxresdefault.jpg",
+      "uploadDate": "2026-05-24",
+      "duration": "PT13M49S",
+      "embedUrl": "https://www.youtube.com/embed/WlorPYYgvUQ",
+      "contentUrl": "https://www.youtube.com/watch?v=WlorPYYgvUQ",
+      "publisher": { "@type": "Person", "name": "Taelo Kim" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://taeloai.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://taeloai.com/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "I Built an Obsidian Dashboard That Runs My Entire Life", "item": "https://taeloai.com/blog/command-center-claude-code/" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What do you need to build an Obsidian dashboard with Claude Code?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Obsidian with a vault you already write into, Claude Code in your terminal, and the starter kit of prompts and sources. Design work happens in Claude design, which a $20 subscription covers. No Zapier account, no API keys, no paid automation tier. The dashboard is a local interface over markdown files you already own." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the dashboard actually write to Google Calendar?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Dropping a time-block stone on the timeline writes through to the real Google Calendar in about three seconds, and the calendar pings me when the block starts. There is no API key to paste, no OAuth screen and no Zapier step in the middle. It rides the calendar bridge that is already on the machine." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is this an Obsidian community plugin I can install?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. It is not in the Obsidian community directory. The build lives on GitHub so you can download it, fork it and rewrite whatever you want. It is a personal tool shaped around one brain, so treat it as a starting point rather than a finished product and cut the parts that do not fit you." }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does it take to build a personal command center like this?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Getting a working version from the kit is one conversation with Claude Code. Getting the version I actually use took the longest context I have ever run, plus session handoffs and a lot of features that were added, tested and thrown out. One racing-seat animation alone ate a full session. Ship the plain version first." }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does the dashboard only allow one task at a time?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Because it is the 80/20 rule made physical. One task sits in the front seat, everything else goes to the back seat or the trunk. When you genuinely think about it, you already know the one thing that moves the needle. Most deferred items turn out to be unimportant and carry over harmlessly for days." }
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "name": "Build a personal command center dashboard with Claude Code and Obsidian",
+      "description": "How I built an Obsidian dashboard with Claude Code that runs my whole life: one task in the front seat, time blocks that hit Google Calendar in 3 seconds.",
+      "step": [
+        { "@type": "HowToStep", "position": 1, "name": "Start from the kit, not from a blank vault", "text": "Download the prompts and sources from the video description or the AI Movers community. The build lives on GitHub rather than the Obsidian community directory, so you fork it instead of installing it.", "url": "https://taeloai.com/blog/command-center-claude-code/#build-your-own" },
+        { "@type": "HowToStep", "position": 2, "name": "Talk to Claude Code about your brain, not mine", "text": "Point Claude Code at the vault and ask it to cut the sections you will not use, add the ones you will, and change the numbers to yours. The layout should match how you actually work.", "url": "https://taeloai.com/blog/command-center-claude-code/#build-your-own" },
+        { "@type": "HowToStep", "position": 3, "name": "Have Claude Code write the Claude design prompt", "text": "Ask Claude Code for the exact prompt to paste into Claude design, including every detail of the layout, shape and colour, so the design tool is not guessing at your intent.", "url": "https://taeloai.com/blog/command-center-claude-code/#build-your-own" },
+        { "@type": "HowToStep", "position": 4, "name": "Iterate in short sessions with handoffs", "text": "Build one panel per session, hand off the context, and start clean. Long single threads on a dashboard this size run out of room fast and the quality of the edits drops with them.", "url": "https://taeloai.com/blog/command-center-claude-code/#build-your-own" }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="progress"></div>
+
+<nav class="nav">
+  <a class="nav__brand" href="/">Taelo <em>Kim</em></a>
+  <div class="nav__links">
+    <a href="/blog/" class="nav__keep" aria-current="page">Blog</a>
+    <a href="/#resources">Resources</a>
+    <a href="/#community">Community</a>
+    <a class="nav__cta nav__keep" href="https://www.youtube.com/@TaeloKim?sub_confirmation=1" target="_blank" rel="noopener">Subscribe</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <header class="post-head col">
+    <div class="crumb"><a href="/">Home</a> / <a href="/blog/">Blog</a> / Command center</div>
+    <h1>I built an Obsidian dashboard that runs my entire life</h1>
+    <p class="standfirst">One screen for the day job, the side projects, the workouts and the art, built with Claude Code on top of markdown files I already owned.</p>
+    <div class="meta">
+      <span>May 24, 2026</span>
+      <span>9 min read</span>
+      <span>Built with Claude Code + Obsidian</span>
+    </div>
+  </header>
+
+  <div class="col">
+    <div class="video-embed" data-video="WlorPYYgvUQ" data-title="I Built a Command Center that Runs My Entire Life" role="button" tabindex="0" aria-label="Play: I Built a Command Center that Runs My Entire Life">
+      <img src="/blog/img/command-center-claude-code-thumb.jpg" alt="I Built a Command Center that Runs My Entire Life — video walkthrough by Taelo Kim" width="1280" height="720" fetchpriority="high">
+      <div class="video-embed__play"></div>
+      <span class="video-embed__label">Watch the build — 13:49</span>
+    </div>
+  </div>
+
+  <article class="post-body col">
+
+    <p>Every productivity app I have ever installed lasted about a week. Not because the apps were bad, but because each one arrives with somebody else's mental model bolted onto your brain, and brains reject transplants. So I stopped shopping and built an Obsidian dashboard with Claude Code instead: one screen holding my 9-to-5, my side projects, my content pipeline, my workouts, my habits and my social life, all reading from markdown files that were already sitting in my vault.</p>
+
+    <p>It is not a to-do list with a nicer font. It is a heads-up display. I open it, I see the one thing that matters, I close it, and the day goes.</p>
+
+    <p>Below is what is actually on the screen, why each panel earned its place, how the calendar write-through works without a single API key, and how to build your own version without copying my brain.</p>
+
+    <div class="takeaways">
+      <h2>What you'll get out of this</h2>
+      <ul>
+        <li>The front-seat rule: why exactly one task is visible and where the rest go</li>
+        <li>Time-block stones that write to your real Google Calendar in about three seconds, with no API key and no Zapier</li>
+        <li>Why an art panel and a bookmark-revival panel belong in a productivity dashboard</li>
+        <li>The exact build path: Claude Code for the logic, Claude design for the look, handoffs between sessions</li>
+      </ul>
+    </div>
+
+    <h2 id="why-productivity-systems-fail">Why every productivity system falls off after a week</h2>
+
+    <p>I am not a naturally productive person. I hate most productivity systems. They are somebody else's operating model, and they fall off in a week because the friction of translating your life into their categories is higher than the value they give back.</p>
+
+    <p>What I needed was not another system. It was one picture. Everything on it, glanceable, a beacon that tells me where I am and what is next.</p>
+
+    <blockquote>It's not a productivity system. It's a heads-up display.</blockquote>
+
+    <p>That distinction changed what I built. A system asks you to feed it. A display just shows you the truth about your day and gets out of the way. Every design decision below comes from that one rule.</p>
+
+    <h2 id="front-seat-one-task">How the front-seat rule forces exactly one priority</h2>
+
+    <p>The main panel is a racing seat. There is exactly one task in it. One. The seat belt is on, because the metaphor is that you are already moving, and a gauge next to it shows time running out.</p>
+
+    <p>Everything else lives in the back seat or the trunk. When something new becomes the priority, you drag it out of the trunk into the seat, and the thing that was in the seat slides back. Simple, physical, visual. It is the 80/20 rule made literal: when you actually stop and think, you already know the one thing that moves the needle, and the rest can wait.</p>
+
+    <figure>
+      <img src="/blog/img/command-center-claude-code-01.jpg" alt="The command center dashboard front seat panel showing a single active task with the seat belt on and a time gauge" width="1280" height="720" loading="lazy">
+      <figcaption><b>The front seat.</b> One task, a seat belt, and a gauge counting down. Anything competing for attention has to physically displace what is sitting there.</figcaption>
+    </figure>
+
+    <figure>
+      <svg class="diagram" viewBox="0 0 880 340" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
+        <title>How tasks move between the trunk, the front seat and the back seat</title>
+        <defs>
+          <marker id="ar1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#7AB5B0"></path>
+          </marker>
+        </defs>
+        <rect x="20" y="86" width="212" height="168" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"></rect>
+        <text x="40" y="116" font-family="JetBrains Mono, monospace" font-size="13" fill="#7AB5B0">TRUNK</text>
+        <text x="40" y="142" font-family="JetBrains Mono, monospace" font-size="11.5" fill="rgba(232,228,220,0.45)">everything else</text>
+        <text x="40" y="172" font-family="JetBrains Mono, monospace" font-size="11.5" fill="#E8E4DC">rewrite pricing page</text>
+        <text x="40" y="194" font-family="JetBrains Mono, monospace" font-size="11.5" fill="#E8E4DC">reply to Slack thread</text>
+        <text x="40" y="216" font-family="JetBrains Mono, monospace" font-size="11.5" fill="#E8E4DC">book dentist</text>
+
+        <rect x="334" y="70" width="212" height="112" rx="4" fill="#0B0B18" stroke="#FFB347"></rect>
+        <text x="354" y="100" font-family="JetBrains Mono, monospace" font-size="13" fill="#FFB347">FRONT SEAT</text>
+        <text x="354" y="126" font-family="JetBrains Mono, monospace" font-size="11.5" fill="#E8E4DC">exactly one task</text>
+        <text x="354" y="150" font-family="JetBrains Mono, monospace" font-size="11.5" fill="rgba(232,228,220,0.45)">hourglass: 25–30 min</text>
+
+        <rect x="334" y="216" width="212" height="88" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"></rect>
+        <text x="354" y="246" font-family="JetBrains Mono, monospace" font-size="13" fill="#7AB5B0">BACK SEAT</text>
+        <text x="354" y="272" font-family="JetBrains Mono, monospace" font-size="11.5" fill="rgba(232,228,220,0.45)">demoted, still alive</text>
+
+        <rect x="648" y="70" width="212" height="112" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"></rect>
+        <text x="668" y="100" font-family="JetBrains Mono, monospace" font-size="13" fill="#7AB5B0">CLOSE DAY</text>
+        <text x="668" y="126" font-family="JetBrains Mono, monospace" font-size="11.5" fill="#E8E4DC">logged to the vault</text>
+        <text x="668" y="150" font-family="JetBrains Mono, monospace" font-size="11.5" fill="rgba(232,228,220,0.45)">leftovers get trunked</text>
+
+        <line x1="232" y1="126" x2="326" y2="126" stroke="#7AB5B0" stroke-width="1" marker-end="url(#ar1)"></line>
+        <text x="238" y="114" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">new priority</text>
+
+        <line x1="440" y1="182" x2="440" y2="210" stroke="#7AB5B0" stroke-width="1" marker-end="url(#ar1)"></line>
+        <text x="452" y="202" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">displaced</text>
+
+        <line x1="546" y1="126" x2="640" y2="126" stroke="#7AB5B0" stroke-width="1" marker-end="url(#ar1)"></line>
+        <text x="556" y="114" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">done</text>
+
+        <line x1="754" y1="182" x2="754" y2="260" stroke="rgba(232,228,220,0.12)" stroke-width="1"></line>
+        <line x1="754" y1="260" x2="132" y2="260" stroke="rgba(232,228,220,0.12)" stroke-width="1"></line>
+        <line x1="132" y1="260" x2="132" y2="262" stroke="rgba(232,228,220,0.12)" stroke-width="1" marker-end="url(#ar1)"></line>
+        <text x="392" y="326" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">unfinished work returns to the trunk, not to your head</text>
+      </svg>
+      <figcaption><b>The whole priority model.</b> Nothing enters the front seat without evicting what is already there, which is the only rule that has ever stopped me from running six half-finished things at once.</figcaption>
+    </figure>
+
+    <p>Underneath the seat is an hourglass with real falling sand. It runs a 25-minute focus block by default, in the pomodoro tradition, and it is adjustable. I run 30 minutes most days; 45 to 50 is my ceiling before my body wants to move. Anything past an hour of claimed pure focus is usually a lie you are telling yourself.</p>
+
+    <h2 id="time-blocks-google-calendar">How time blocks write straight into Google Calendar</h2>
+
+    <p>The calendar panel uses time-block stones: deep work, reading, run, instrument practice, stretch. You drag a stone onto the timeline and the slot fills with a striped pattern, which means committed. Not a suggestion. Time I told myself I would spend.</p>
+
+    <p>The reason this panel exists is embarrassing but universal. If I do not block creative time, instrument time or family time, it simply does not happen. Blocking it also kills the guilt, which is the real blocker. You will not stretch for twenty minutes in a busy afternoon if you feel like you are stealing the time from work. If it is on the calendar, it is not stolen.</p>
+
+    <figure>
+      <img src="/blog/img/command-center-claude-code-02.jpg" alt="Time-block stones for deep work, reading, run and stretch being dragged onto the dashboard timeline calendar" width="1280" height="720" loading="lazy">
+      <figcaption><b>Time-block stones.</b> Drag one onto the timeline and the slot goes striped. The 10:40–11:00 stretch below took about two seconds to place.</figcaption>
+    </figure>
+
+    <p>Here is the part that surprised people: those blocks are not local. Drop a stone and it writes through to the actual Google Calendar in roughly three seconds, and the calendar pings me when the block starts. No API key pasted into a config file, no OAuth screen, no Zapier sitting in the middle taking a cut. It rides the calendar bridge that already exists on the machine.</p>
+
+    <figure>
+      <img src="/blog/img/command-center-claude-code-03.jpg" alt="Google Calendar showing stretch, reading, instrument and run blocks synced from the Obsidian command center dashboard" width="1280" height="720" loading="lazy">
+      <figcaption><b>The write-through.</b> Stretch, reading, instrument and run, created in the dashboard and landing in the real calendar without an integration layer.</figcaption>
+    </figure>
+
+    <div class="watch-nudge">
+      <span>The three-second calendar write-through is the one thing that reads as a claim and looks like a fact. Watch a stone get dropped on the timeline and appear in Google Calendar.</span>
+      <a class="btn btn--ghost" href="https://www.youtube.com/watch?v=WlorPYYgvUQ&amp;t=163s" target="_blank" rel="noopener">Watch the sync at 2:43</a>
+    </div>
+
+    <h2 id="obsidian-two-way-sync">How the dashboard and the Obsidian vault stay in two-way sync</h2>
+
+    <p>The side-projects tab holds every to-do for the SaaS work, the widget app and the business I am building with a real team of developers, PMs and designers. Those to-dos are not database rows. They are markdown files in the vault. Tick one off in the dashboard and the file updates. Edit the file in <a href="https://obsidian.md/" target="_blank" rel="noopener">Obsidian</a> and the dashboard updates. Two-way, no export step, no lock-in.</p>
+
+    <p>That single decision is why the thing survived. If the dashboard died tomorrow, I would still have every note, task and log as plain text. It is the same principle behind <a href="/blog/second-brain-claude-code/">the second brain I run on Claude Code</a>, and it is the reason both systems compose instead of competing.</p>
+
+    <p>The terminal is embedded in the dashboard too, running <a href="https://www.anthropic.com/claude-code" target="_blank" rel="noopener">Claude Code</a> and Codex, so I am not opening a separate terminal or VS Code to make a change. Next to it sits the YouTube ops column: scripts drafted, videos shot, next upload. That column is the front end of <a href="/blog/automate-video-editing-claude-code/">the editing pipeline I automated with Claude Code</a>. There is also a Slack briefing panel, because threads scattered across a dozen channels turn into noise fast, and what I actually need is a short list of what needs a reply.</p>
+
+    <figure>
+      <svg class="diagram" viewBox="0 0 880 400" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
+        <title>What talks to what inside the command center dashboard</title>
+        <defs>
+          <marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#7AB5B0"></path>
+          </marker>
+        </defs>
+
+        <text x="24" y="40" font-family="JetBrains Mono, monospace" font-size="11.5" fill="rgba(232,228,220,0.45)">READ-ONLY FEEDS</text>
+        <rect x="24" y="56" width="196" height="34" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"></rect>
+        <text x="40" y="78" font-family="JetBrains Mono, monospace" font-size="11.5" fill="#E8E4DC">5 Reddit AI subs</text>
+        <rect x="24" y="102" width="196" height="34" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"></rect>
+        <text x="40" y="124" font-family="JetBrains Mono, monospace" font-size="11.5" fill="#E8E4DC">Slack threads</text>
+        <rect x="24" y="148" width="196" height="34" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"></rect>
+        <text x="40" y="170" font-family="JetBrains Mono, monospace" font-size="11.5" fill="#E8E4DC">museum art of the day</text>
+        <rect x="24" y="194" width="196" height="34" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"></rect>
+        <text x="40" y="216" font-family="JetBrains Mono, monospace" font-size="11.5" fill="#E8E4DC">iTunes top tracks</text>
+        <rect x="24" y="240" width="196" height="34" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"></rect>
+        <text x="40" y="262" font-family="JetBrains Mono, monospace" font-size="11.5" fill="#E8E4DC">saved bookmarks</text>
+
+        <rect x="330" y="56" width="220" height="218" rx="4" fill="#0B0B18" stroke="#FFB347"></rect>
+        <text x="350" y="86" font-family="JetBrains Mono, monospace" font-size="13" fill="#FFB347">DASHBOARD</text>
+        <text x="350" y="112" font-family="JetBrains Mono, monospace" font-size="11.5" fill="rgba(232,228,220,0.45)">tabs:</text>
+        <text x="350" y="136" font-family="JetBrains Mono, monospace" font-size="11.5" fill="#E8E4DC">front seat</text>
+        <text x="350" y="158" font-family="JetBrains Mono, monospace" font-size="11.5" fill="#E8E4DC">side projects</text>
+        <text x="350" y="180" font-family="JetBrains Mono, monospace" font-size="11.5" fill="#E8E4DC">health</text>
+        <text x="350" y="202" font-family="JetBrains Mono, monospace" font-size="11.5" fill="#E8E4DC">art</text>
+        <text x="350" y="224" font-family="JetBrains Mono, monospace" font-size="11.5" fill="#E8E4DC">social</text>
+        <text x="350" y="252" font-family="JetBrains Mono, monospace" font-size="11.5" fill="#7AB5B0">terminal: Claude Code / Codex</text>
+
+        <rect x="660" y="56" width="196" height="106" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"></rect>
+        <text x="680" y="86" font-family="JetBrains Mono, monospace" font-size="13" fill="#7AB5B0">OBSIDIAN VAULT</text>
+        <text x="680" y="112" font-family="JetBrains Mono, monospace" font-size="11.5" fill="#E8E4DC">plain .md files</text>
+        <text x="680" y="136" font-family="JetBrains Mono, monospace" font-size="11.5" fill="rgba(232,228,220,0.45)">tasks, logs, brain dump</text>
+
+        <rect x="660" y="188" width="196" height="86" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"></rect>
+        <text x="680" y="218" font-family="JetBrains Mono, monospace" font-size="13" fill="#7AB5B0">GOOGLE CALENDAR</text>
+        <text x="680" y="244" font-family="JetBrains Mono, monospace" font-size="11.5" fill="rgba(232,228,220,0.45)">~3s write-through</text>
+
+        <line x1="228" y1="165" x2="322" y2="165" stroke="#7AB5B0" stroke-width="1" marker-end="url(#ar2)"></line>
+        <line x1="558" y1="104" x2="652" y2="104" stroke="#7AB5B0" stroke-width="1" marker-start="url(#ar2)" marker-end="url(#ar2)"></line>
+        <text x="566" y="92" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">two-way sync</text>
+        <line x1="558" y1="228" x2="652" y2="228" stroke="#7AB5B0" stroke-width="1" marker-end="url(#ar2)"></line>
+        <text x="566" y="216" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">time blocks</text>
+
+        <text x="24" y="330" font-family="JetBrains Mono, monospace" font-size="11.5" fill="rgba(232,228,220,0.45)">no API keys · no Zapier · no database — the vault is the source of truth</text>
+        <line x1="24" y1="348" x2="856" y2="348" stroke="rgba(232,228,220,0.12)" stroke-width="1"></line>
+        <text x="24" y="378" font-family="JetBrains Mono, monospace" font-size="11.5" fill="#E8E4DC">Edit in the dashboard → the file changes. Edit the file → the dashboard changes.</text>
+      </svg>
+      <figcaption><b>The architecture.</b> Feeds come in read-only, the vault holds state, and the calendar is the only thing the dashboard writes to outside your own files.</figcaption>
+    </figure>
+
+    <h2 id="art-tab-energy">What an art tab is doing in a productivity dashboard</h2>
+
+    <p>This is my favourite panel and the one nobody expects. A dashboard is not a to-do list, it is life navigation, and life includes the thing that gives you energy back.</p>
+
+    <p>Daisy Fancourt, a professor at UCL, published a book on what art does to people: getting art into your day-to-day life lowers depression, reduces inflammation, drops cortisol, and lifts energy and mood. I did not need convincing. The further I drift from art, the worse I feel; the more I surround myself with books, lyrics, paintings and space, the more energised I get.</p>
+
+    <figure>
+      <img src="/blog/img/command-center-claude-code-04.jpg" alt="The art tab of the Obsidian command center showing the daily rotating artwork with its history and description" width="1280" height="720" loading="lazy">
+      <figcaption><b>The art tab.</b> A fresh piece pulled from museum collections each day, with a short note on what it is and what it represents.</figcaption>
+    </figure>
+
+    <p>So the panel serves one real piece of art, music or lyrics a day, rotated fresh, with a short history of what it is and what it represents. Alongside it:</p>
+
+    <ul>
+      <li><strong>Language.</strong> Two to four phrases a day. I used to have a bot message me every three hours to force repetition; putting it on the dashboard is quieter and it still adds up.</li>
+      <li><strong>Quote of the day.</strong> Pulled from an archive file of lines that actually moved me, not generic productivity slop.</li>
+      <li><strong>Bookmark revival.</strong> Three saved links a day, rotated. I have thousands of "read it later" bookmarks that I have never once gone back to. Now they get exhumed, and my first instinct about them is usually right.</li>
+      <li><strong>Brain dump.</strong> Idea hits, hit enter, saved with a timestamp to a markdown file. Searchable later from anywhere.</li>
+    </ul>
+
+    <div class="callout">
+      <span class="callout__label">Why the repetition matters</span>
+      <p>Your brain is a looping machine. If it is going to run something on repeat all day anyway, better it loops a line from someone great than the negative thought you woke up with. That is the entire argument for the language and quote panels.</p>
+    </div>
+
+    <h2 id="current-events-filter">How the current-events panel filters the AI firehose</h2>
+
+    <p>You still need to keep up. You just cannot keep up the way the platforms want you to, with X and the YouTube algorithm feeding you the same take five times and AI influencers reading sponsor copy at you. In an era this loud, a filter is not optional.</p>
+
+    <p>The current-events panel pulls trending Reddit posts across five AI subreddits and scores the same story against itself across them, so what surfaces is the source, not the commentary. That gives me raw signal I can make a decision on. If you want the aggressive version of this idea, it is the same logic as <a href="/blog/ai-agent-35x-more-efficient/">cutting an agent down to the work that actually matters</a>: less input, better filtering, same outcome.</p>
+
+    <div class="callout callout--warn">
+      <span class="callout__label">Honest limitation</span>
+      <p>X killed the free API and the public mirrors broke with it, so the tweets section is hand-curated for now. It can be automated, there are several ways, but I am not going to pretend it is running itself while you watch a static list.</p>
+    </div>
+
+    <p>The bigger point is what the panel replaces. Every time I open YouTube to put on a podcast, I end up watching shorts or a fight I missed last week. The algorithm knows my weakness and it will use it. This dashboard is my firewall: I see what I need, and I close it. Links open inside the dashboard so I never have to leave and come back through a feed.</p>
+
+    <h2 id="plan-and-close-the-day">How the day opens and closes</h2>
+
+    <p>Morning: I hit plan today. It reads my notes and my Google Calendar, lays out what the day actually contains, builds the time blocks and puts them on the dashboard. Then I buckle in, which means one file goes in the front seat and I stop thinking about the schedule.</p>
+
+    <p>Evening: I hit close day. It logs everything I did. Whatever is still open, I trunk. Out of seven leftovers on a typical day, most are unimportant by definition, because the 80/20 rule already sent the important one to the front seat that morning. They carry over without guilt.</p>
+
+    <p>The social tab tracks what I call omni cadence, which is output cadence rather than follower count, because cadence is the only part of the game you control. It also watches comments, since those are the things I genuinely do not want to miss. And there is a daily dose of autobiography, which sounds soft until you notice why it works: read enough of someone's story and, when you hit your own adversity, your brain reaches for how they acted. It is the cheapest resilience I know.</p>
+
+    <h2 id="build-your-own">How to build your own with Claude Code and Claude design</h2>
+
+    <p>The build itself is not clever. It is a conversation.</p>
+
+    <ol class="steps">
+      <li>
+        <h3>Start from the kit, not a blank vault</h3>
+        <p>Download the prompts and sources from the video description or the community. None of this lives in the Obsidian community directory; it sits on GitHub so you can fork it and do whatever you want with it.</p>
+      </li>
+      <li>
+        <h3>Talk to Claude Code about your brain, not mine</h3>
+        <p>"Customise this part. Get rid of that section. Add this feature. Change this number to mine." This is a personal tool built for one person, so assume half of it will not fit you. Cut it. The panels you keep should be the ones you would actually look at.</p>
+      </li>
+      <li>
+        <h3>Let Claude Code write the Claude design prompt</h3>
+        <p>For the look, the colours, the layout, the racing-seat shape, I used <a href="/blog/claude-design-genius-4-steps/">Claude design and a four-step process for getting real design out of it</a>. The move that made the difference: I asked Claude Code to write the exact prompt to paste into Claude design, with every detail supplied, so the design tool never had to guess my intent. You do not need another design tool. A $20 subscription covers this.</p>
+      </li>
+      <li>
+        <h3>Iterate in short sessions and hand off</h3>
+        <p>This was the longest context I have run. Features added, tested, thrown out, added back. I spent an entire session plus a handoff on the racing seat alone, which you do not have to do, because I have an obsessive personality and you probably have a life. Build one panel per session.</p>
+      </li>
+    </ol>
+
+    <div class="cta">
+      <h3>See the front seat, the stones and the calendar sync in motion</h3>
+      <p>Static screenshots undersell a dashboard whose whole point is that it moves — falling sand, dragging stones, blocks landing in Google Calendar. The 13-minute walkthrough shows every tab, and the kit is in the community if you want to fork it tonight.</p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="https://www.youtube.com/watch?v=WlorPYYgvUQ" target="_blank" rel="noopener">Watch the full build</a>
+        <a class="btn btn--ghost" href="https://www.skool.com/ai-movers-1936" target="_blank" rel="noopener">Join AI Movers</a>
+      </div>
+    </div>
+
+    <h2 id="faq">Frequently asked questions</h2>
+    <div class="faq">
+      <details>
+        <summary>What do you need to build an Obsidian dashboard with Claude Code?</summary>
+        <p>Obsidian with a vault you already write into, Claude Code in your terminal, and the starter kit of prompts and sources. Design work happens in Claude design, which a $20 subscription covers. No Zapier account, no API keys, no paid automation tier. The dashboard is a local interface over markdown files you already own.</p>
+      </details>
+      <details>
+        <summary>Does the dashboard actually write to Google Calendar?</summary>
+        <p>Yes. Dropping a time-block stone on the timeline writes through to the real Google Calendar in about three seconds, and the calendar pings me when the block starts. There is no API key to paste, no OAuth screen and no Zapier step in the middle. It rides the calendar bridge that is already on the machine.</p>
+      </details>
+      <details>
+        <summary>Is this an Obsidian community plugin I can install?</summary>
+        <p>No. It is not in the Obsidian community directory. The build lives on GitHub so you can download it, fork it and rewrite whatever you want. It is a personal tool shaped around one brain, so treat it as a starting point rather than a finished product and cut the parts that do not fit you.</p>
+      </details>
+      <details>
+        <summary>How long does it take to build a personal command center like this?</summary>
+        <p>Getting a working version from the kit is one conversation with Claude Code. Getting the version I actually use took the longest context I have ever run, plus session handoffs and a lot of features that were added, tested and thrown out. One racing-seat animation alone ate a full session. Ship the plain version first.</p>
+      </details>
+      <details>
+        <summary>Why does the dashboard only allow one task at a time?</summary>
+        <p>Because it is the 80/20 rule made physical. One task sits in the front seat, everything else goes to the back seat or the trunk. When you genuinely think about it, you already know the one thing that moves the needle. Most deferred items turn out to be unimportant and carry over harmlessly for days.</p>
+      </details>
+    </div>
+
+    <nav class="related" aria-label="Related posts">
+      <h2>Keep reading</h2>
+      <ul>
+        <li><a href="/blog/second-brain-claude-code/">Building a second brain with Claude Code →</a></li>
+        <li><a href="/blog/claude-design-genius-4-steps/">Turn Claude into a design genius in 4 steps →</a></li>
+        <li><a href="/blog/automate-video-editing-claude-code/">Automating video editing with Claude Code →</a></li>
+      </ul>
+    </nav>
+
+  </article>
+</main>
+
+<footer class="foot">
+  <span>© 2026 Taelo Kim</span>
+  <div class="foot__links">
+    <a href="/">Home</a>
+    <a href="/blog/">Blog</a>
+    <a href="https://www.youtube.com/@TaeloKim" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://x.com/taelo_kim" target="_blank" rel="noopener">X</a>
+    <a href="https://www.skool.com/ai-movers-1936" target="_blank" rel="noopener">AI Movers</a>
+  </div>
+</footer>
+
+<script src="/blog/blog.js" defer></script>
+</body>
+</html>

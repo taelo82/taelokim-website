@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Make Claude Code Watch YouTube Videos (Free /watch Skill)</title>
+<meta name="description" content="Make Claude Code watch YouTube videos for real: the free /watch skill turns any link into a structured breakdown in under two minutes, for about $0.">
+<link rel="canonical" href="https://taeloai.com/blog/claude-code-watch-any-video/">
+<meta name="author" content="Taelo Kim">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to make Claude Code actually watch a video">
+<meta property="og:description" content="Make Claude Code watch YouTube videos for real: the free /watch skill turns any link into a structured breakdown in under two minutes, for about $0.">
+<meta property="og:url" content="https://taeloai.com/blog/claude-code-watch-any-video/">
+<meta property="og:image" content="https://taeloai.com/blog/img/claude-code-watch-any-video-thumb.jpg">
+<meta property="og:site_name" content="Taelo Kim">
+<meta property="article:published_time" content="2026-05-09">
+<meta property="article:author" content="https://www.youtube.com/@TaeloKim">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@taelo_kim">
+<meta name="twitter:creator" content="@taelo_kim">
+<meta name="twitter:title" content="How to make Claude Code actually watch a video">
+<meta name="twitter:description" content="Make Claude Code watch YouTube videos for real: the free /watch skill turns any link into a structured breakdown in under two minutes, for about $0.">
+<meta name="twitter:image" content="https://taeloai.com/blog/img/claude-code-watch-any-video-thumb.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/blog/blog.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://taeloai.com/blog/claude-code-watch-any-video/#article",
+      "headline": "How to make Claude Code actually watch a video",
+      "description": "Make Claude Code watch YouTube videos for real: the free /watch skill turns any link into a structured breakdown in under two minutes, for about $0.",
+      "image": "https://taeloai.com/blog/img/claude-code-watch-any-video-thumb.jpg",
+      "datePublished": "2026-05-09",
+      "dateModified": "2026-05-09",
+      "wordCount": 2016,
+      "keywords": "make Claude Code watch YouTube videos, Claude Code watch skill, summarize YouTube videos with AI, yt-dlp ffmpeg pipeline, Claude Code plugin marketplace, Groq Whisper transcription cost",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Person",
+        "name": "Taelo Kim",
+        "url": "https://taeloai.com/",
+        "sameAs": ["https://www.youtube.com/@TaeloKim", "https://x.com/taelo_kim", "https://github.com/taelo82"]
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Taelo Kim",
+        "url": "https://taeloai.com/"
+      },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://taeloai.com/blog/claude-code-watch-any-video/" },
+      "isPartOf": { "@type": "Blog", "@id": "https://taeloai.com/blog/#blog", "name": "Taelo Kim — Build Logs" }
+    },
+    {
+      "@type": "VideoObject",
+      "@id": "https://taeloai.com/blog/claude-code-watch-any-video/#video",
+      "name": "My Claude Code Can INSTANTLY Watch Any Video (Here's How)",
+      "description": "Make Claude Code watch YouTube videos for real: the free /watch skill turns any link into a structured breakdown in under two minutes, for about $0.",
+      "thumbnailUrl": "https://i.ytimg.com/vi/KW0_c23gCss/maxresdefault.jpg",
+      "uploadDate": "2026-05-09",
+      "duration": "PT11M43S",
+      "embedUrl": "https://www.youtube.com/embed/KW0_c23gCss",
+      "contentUrl": "https://www.youtube.com/watch?v=KW0_c23gCss",
+      "publisher": { "@type": "Person", "name": "Taelo Kim" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://taeloai.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://taeloai.com/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "How to make Claude Code actually watch a video", "item": "https://taeloai.com/blog/claude-code-watch-any-video/" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can Claude Code actually watch a video, or is it just reading the transcript?",
+          "acceptedAnswer": { "@type": "Answer", "text": "It watches. The skill uses ffmpeg to slice the video into frames and hands those frames to Claude alongside the transcript, so the model sees the terminal output, the dashboard and the diff on screen, not only the words spoken over them. That visual layer is the difference between a summary that guesses and one that describes the demo." }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does the /watch skill take on a long video?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Under two minutes in every run I have timed, and length barely moves the number. A 45-minute interview and an 8-minute tutorial both land in roughly the same window, because the slow part is downloading and slicing rather than reading. Usually Claude is finished before I would have got through the sponsor read." }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does it cost to run the /watch skill?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Close to nothing. The reasoning runs inside the Claude Code subscription you already pay for, so my Anthropic dashboard for that month read $0. The only line item is transcription, and only when a video ships without captions. Three videos in, one had no captions, and it cost two cents on Groq's free tier." }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does YouTube block the download and how do you fix it?",
+          "acceptedAnswer": { "@type": "Answer", "text": "YouTube's newer protocol wants proof you are a person. It serves a challenge that needs a JavaScript runtime to solve, and it checks browser cookies. Installing the runtime and pointing the downloader at your cookies clears both. It is five extra commands and about fifteen minutes, done once, and then downloads stop failing." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does /watch work on local video files or only YouTube links?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Both. Give it a file path and it watches that file the same way it watches a URL. I run my own raw recordings through it and ask for feedback on pacing and structure, then apply the notes to the next script. It is the fastest editor's second opinion I have ever had." }
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "name": "Install the /watch skill so Claude Code can watch any video",
+      "description": "Make Claude Code watch YouTube videos for real: the free /watch skill turns any link into a structured breakdown in under two minutes, for about $0.",
+      "step": [
+        { "@type": "HowToStep", "position": 1, "name": "Add the marketplace and install the skill", "text": "Inside Claude Code, add the plugin marketplace that hosts the skill, then install the watch plugin from it. Two commands.", "url": "https://taeloai.com/blog/claude-code-watch-any-video/#install-in-two-commands" },
+        { "@type": "HowToStep", "position": 2, "name": "Restart Claude Code", "text": "Restart so the skill registers. The first time you run it, it prints the exact install command for your system if a dependency is missing.", "url": "https://taeloai.com/blog/claude-code-watch-any-video/#install-in-two-commands" },
+        { "@type": "HowToStep", "position": 3, "name": "Grab a free Groq API key", "text": "Get a key from the Groq console. It is only used for Whisper transcription when a video has no captions, and the free tier covers normal use.", "url": "https://taeloai.com/blog/claude-code-watch-any-video/#install-in-two-commands" },
+        { "@type": "HowToStep", "position": 4, "name": "Point /watch at a video", "text": "Run /watch with a YouTube URL or a local file path and ask for the breakdown you want: hook, setup, surprise, punchline.", "url": "https://taeloai.com/blog/claude-code-watch-any-video/#install-in-two-commands" }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="progress"></div>
+
+<nav class="nav">
+  <a class="nav__brand" href="/">Taelo <em>Kim</em></a>
+  <div class="nav__links">
+    <a href="/blog/" class="nav__keep" aria-current="page">Blog</a>
+    <a href="/#resources">Resources</a>
+    <a href="/#community">Community</a>
+    <a class="nav__cta nav__keep" href="https://www.youtube.com/@TaeloKim?sub_confirmation=1" target="_blank" rel="noopener">Subscribe</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <header class="post-head col">
+    <div class="crumb"><a href="/">Home</a> / <a href="/blog/">Blog</a> / Claude Code can watch video</div>
+    <h1>How to make Claude Code actually watch a video</h1>
+    <p class="standfirst">A free skill, two open-source tools and about two cents turn any YouTube link into a structured breakdown before you would have finished the intro.</p>
+    <div class="meta">
+      <span>May 9, 2026</span>
+      <span>8 min read</span>
+      <span>Built with Claude Code + yt-dlp</span>
+    </div>
+  </header>
+
+  <div class="col">
+    <div class="video-embed" data-video="KW0_c23gCss" data-title="My Claude Code Can INSTANTLY Watch Any Video (Here's How)" role="button" tabindex="0" aria-label="Play: My Claude Code Can INSTANTLY Watch Any Video (Here's How)">
+      <img src="/blog/img/claude-code-watch-any-video-thumb.jpg" alt="My Claude Code Can INSTANTLY Watch Any Video (Here's How) — video walkthrough by Taelo Kim" width="1280" height="720" fetchpriority="high">
+      <div class="video-embed__play"></div>
+      <span class="video-embed__label">Watch the build — 11:43</span>
+    </div>
+  </div>
+
+  <article class="post-body col">
+
+    <p>You paste a link into your agent and ask it to watch the video. Back comes the same apology every time: sorry, I can't watch video, but based on the title and description, let me guess. Or, if you're lucky, an offer to work from the transcript.</p>
+
+    <p>So you do the thing everyone does. You screenshot the screen, paste it in, scrub forward, screenshot, paste, screenshot, paste, until the model finally has enough context to be useful. Ten minutes of clipboard work to avoid twenty minutes of watching. That is not automation, that is a worse job.</p>
+
+    <p>There is a fix and it is free. This is how to make Claude Code watch YouTube videos properly, frames included, with a skill called <code>/watch</code> that stitches together two open-source tools you may already have installed. By the end you'll know how the pipeline works, what it costs to run, the one thing that breaks during install, and the research loop I actually use it for.</p>
+
+    <div class="takeaways">
+      <h2>What you'll get out of this</h2>
+      <ul>
+        <li>The exact pipeline: yt-dlp downloads, ffmpeg slices frames and audio, Claude reads the frames like a flip book</li>
+        <li>A two-command install, plus the fix for the day YouTube decides to fight your downloads</li>
+        <li>Real running costs: $0 on my Anthropic dashboard, two cents on transcription across three videos</li>
+        <li>Why the frames matter more than the transcript, with the failure case that proves it</li>
+        <li>The research loop it replaces, and the popular workflow I think is a waste of your time</li>
+      </ul>
+    </div>
+
+    <h2 id="why-claude-code-cant-watch-video">Why a transcript alone gives you a shallow answer</h2>
+
+    <p>Having a transcript and guessing from a thumbnail is a completely different thing from watching. The full context lives in the moment the screen changes, not in the words flowing around it. Someone says "and then it just works" while the terminal prints a specific error, a config value, a price. The transcript keeps the sentence and throws away the evidence.</p>
+
+    <p>Picture hiring a producer for your content who can hear everything and see nothing. They'd still have opinions. The opinions would be shallow, and you'd stop asking. That is exactly what a transcript-only agent is, and it is why the summaries feel plausible and useless at the same time.</p>
+
+    <p>The problem compounds because the best AI content right now ships as video. Long-form, in-depth, live demos and build-alongs. The demos, the news and the step-by-step instructions all live in the one format your agent can't open.</p>
+
+    <figure>
+      <img src="/blog/img/claude-code-watch-any-video-01.jpg" alt="Claude Code returning a structured summary of a 21-minute YouTube video inside the terminal, produced by the /watch skill in under two minutes" width="1280" height="720" loading="lazy">
+      <figcaption>A 21-minute video, fed in as a URL and returned as a structured breakdown in under two minutes. The frames are why it can describe the demo instead of paraphrasing the narration.</figcaption>
+    </figure>
+
+    <h2 id="how-the-watch-skill-works">How the /watch skill works under the hood</h2>
+
+    <p>No new model, no expensive API. Two old open-source tools and the right glue.</p>
+
+    <p><a href="https://github.com/yt-dlp/yt-dlp" target="_blank" rel="noopener">yt-dlp</a> downloads the video. ffmpeg slices it into frames and pulls the audio out. If the source has captions, and most videos do, the transcript is free. If it doesn't, Whisper running on Groq transcribes the audio for pennies. Then Claude reads the frames like a flip book and the transcript like a script, and answers your question against both.</p>
+
+    <figure>
+      <svg viewBox="0 0 880 440" width="100%" class="diagram" role="img" aria-labelledby="pipe-title">
+        <title id="pipe-title">The /watch pipeline: a video URL becomes frames plus a transcript, which Claude Code reads together</title>
+        <defs>
+          <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(232,228,220,0.45)"></path>
+          </marker>
+        </defs>
+        <rect x="1" y="1" width="878" height="438" rx="4" fill="#050510" stroke="rgba(232,228,220,0.12)"></rect>
+
+        <rect x="26" y="54" width="172" height="58" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"></rect>
+        <text x="112" y="79" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="#E8E4DC">/watch &lt;input&gt;</text>
+        <text x="112" y="98" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">URL or local file path</text>
+
+        <line x1="198" y1="83" x2="242" y2="83" stroke="rgba(232,228,220,0.45)" marker-end="url(#arw)"></line>
+
+        <rect x="248" y="54" width="150" height="58" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"></rect>
+        <text x="323" y="79" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="#E8E4DC">yt-dlp</text>
+        <text x="323" y="98" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">downloads source</text>
+
+        <line x1="398" y1="83" x2="442" y2="83" stroke="rgba(232,228,220,0.45)" marker-end="url(#arw)"></line>
+
+        <rect x="448" y="54" width="158" height="58" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"></rect>
+        <text x="527" y="79" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="#E8E4DC">ffmpeg</text>
+        <text x="527" y="98" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">frames + audio</text>
+
+        <path d="M 606 74 L 628 74 L 628 46 L 646 46" fill="none" stroke="rgba(232,228,220,0.45)" marker-end="url(#arw)"></path>
+        <path d="M 606 94 L 628 94 L 628 142 L 646 142" fill="none" stroke="rgba(232,228,220,0.45)" marker-end="url(#arw)"></path>
+        <text x="636" y="112" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">audio</text>
+
+        <rect x="652" y="20" width="204" height="52" rx="4" fill="#0B0B18" stroke="rgba(122,181,176,0.45)"></rect>
+        <text x="754" y="42" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#7AB5B0">captions found — free</text>
+        <text x="754" y="60" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">the usual case</text>
+
+        <rect x="652" y="116" width="204" height="52" rx="4" fill="#0B0B18" stroke="rgba(255,179,71,0.45)"></rect>
+        <text x="754" y="138" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#FFB347">no captions — Whisper</text>
+        <text x="754" y="156" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">on Groq, ~$0.02</text>
+
+        <path d="M 754 72 L 754 96" fill="none" stroke="rgba(232,228,220,0.45)"></path>
+        <path d="M 754 168 L 754 210 L 560 210 L 560 246" fill="none" stroke="rgba(232,228,220,0.45)" marker-end="url(#arw)"></path>
+        <text x="640" y="202" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">transcript</text>
+
+        <path d="M 500 112 L 500 246" fill="none" stroke="rgba(232,228,220,0.45)" marker-end="url(#arw)"></path>
+        <text x="466" y="184" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">frames</text>
+
+        <rect x="248" y="250" width="384" height="76" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"></rect>
+        <text x="440" y="278" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="#E8E4DC">Claude Code</text>
+        <text x="440" y="298" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">frames read like a flip book,</text>
+        <text x="440" y="314" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">transcript read like a script</text>
+
+        <line x1="440" y1="326" x2="440" y2="362" stroke="rgba(232,228,220,0.45)" marker-end="url(#arw)"></line>
+
+        <rect x="176" y="368" width="528" height="52" rx="4" fill="#0B0B18" stroke="rgba(122,181,176,0.45)"></rect>
+        <text x="440" y="390" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="#7AB5B0">structured breakdown</text>
+        <text x="440" y="408" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">hook / setup / surprise / punchline — under 2 min</text>
+      </svg>
+      <figcaption>The only paid branch is the amber one, and it only fires on videos that ship without captions. Everything left of Claude Code is software that has been free for a decade.</figcaption>
+    </figure>
+
+    <p>Speed is the part that changes your behaviour. A 45-minute interview and an 8-minute tutorial finish in roughly the same time, because the download and the slicing dominate, not the reading. I timed a batch of runs and none went over two minutes. Usually Claude is done before I would have made it past the intro.</p>
+
+    <h2 id="install-in-two-commands">How to install it in two commands</h2>
+
+    <p>The clean path is genuinely short. Inside Claude Code, add the marketplace, install the plugin, restart.</p>
+
+    <pre><code><span class="c"># inside Claude Code</span>
+<span class="k">/plugin marketplace add</span> <span class="s">taeloautomates/claude-video</span>
+<span class="k">/plugin install</span> <span class="s">watch@claude-video</span>
+
+<span class="c"># restart, then point it at anything</span>
+<span class="k">/watch</span> <span class="s">https://www.youtube.com/watch?v=...</span>
+<span class="k">/watch</span> <span class="s">~/Movies/raw-take-03.mp4</span></code></pre>
+
+    <ol class="steps">
+      <li>
+        <h3>Add the marketplace, install the skill</h3>
+        <p>Two commands in <a href="https://www.anthropic.com/claude-code" target="_blank" rel="noopener">Claude Code</a>. The repo and the exact marketplace path are linked in the video description.</p>
+      </li>
+      <li>
+        <h3>Restart Claude Code</h3>
+        <p>The skill registers on restart. The first time it runs it checks its own dependencies and prints the exact install command for your system if something is missing, so you're not guessing at Homebrew formulas.</p>
+      </li>
+      <li>
+        <h3>Grab a free Groq API key</h3>
+        <p>From <a href="https://console.groq.com" target="_blank" rel="noopener">the Groq console</a>. This is the transcription fallback and nothing else. If every video you feed it has captions, the key sits unused.</p>
+      </li>
+      <li>
+        <h3>Point /watch at something and ask a real question</h3>
+        <p>Don't ask for "a summary". Ask for the hook, the setup, where the surprise lands, what the punchline is. You get a structure you can act on instead of a paragraph you skim.</p>
+      </li>
+    </ol>
+
+    <figure>
+      <img src="/blog/img/claude-code-watch-any-video-02.jpg" alt="Claude Code terminal showing the plugin marketplace add and plugin install commands used to set up the /watch video skill" width="1280" height="720" loading="lazy">
+      <figcaption>The whole happy-path install: add the marketplace, install the plugin, restart. Five minutes if nothing objects.</figcaption>
+    </figure>
+
+    <h2 id="when-youtube-blocks-the-download">What to do when YouTube fights the download</h2>
+
+    <p>Most of the time it really is two commands and done. The day I installed this, it wasn't. YouTube was actively blocking every download attempt, and no reaction video mentions that part because the clean demo never hits it.</p>
+
+    <p>Here's the actual reason, so the fix makes sense rather than being cargo cult. YouTube's newer protocol serves a challenge that requires a JavaScript runtime to solve, and it checks browser cookies to confirm you're a person and not a bot farm. The downloader needs both: a runtime to answer the challenge, and your cookies to pass the identity check. Install those, point the tool at them, and the failures stop.</p>
+
+    <div class="callout callout--warn">
+      <div class="callout__label">Budget for this once</div>
+      <p>The patched path is five commands and about fifteen minutes, installed through uv. You do it once. After that the two-command experience is the one you live in, and the difference between "this skill is broken" and "this skill is magic" is entirely that fifteen minutes.</p>
+    </div>
+
+    <div class="watch-nudge">
+      <p>Easier to see than to read: watch a 21-minute video go in as a raw link and come back as a structured breakdown, timed, in one unbroken take.</p>
+      <a class="btn btn--primary" href="https://www.youtube.com/watch?v=KW0_c23gCss&amp;t=95s" target="_blank" rel="noopener">Watch the run at 1:35</a>
+    </div>
+
+    <h2 id="what-it-costs-to-run">What it costs to run</h2>
+
+    <p>This is where I expected a nasty surprise and didn't get one. My Anthropic dashboard for the month of running this: $0. Not "cheap", zero. The reasoning happens inside the Claude Code subscription you already pay for, $20 a month on Pro, so there is no second API bill stacked on top.</p>
+
+    <p>The only line item that moves is transcription, and only when the video has no captions. Three videos in, most had captions and one didn't. That one cost two cents. Groq doesn't bill you until you cross the free tier, so unless you're feeding it an endless stack of uncaptioned documentaries, the free tier covers everything you'll realistically do.</p>
+
+    <figure>
+      <svg viewBox="0 0 880 300" width="100%" class="diagram" role="img" aria-labelledby="cost-title">
+        <title id="cost-title">Cost breakdown of running the /watch skill across three videos</title>
+        <rect x="1" y="1" width="878" height="298" rx="4" fill="#050510" stroke="rgba(232,228,220,0.12)"></rect>
+
+        <text x="40" y="46" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">WHERE THE MONEY GOES — 3 VIDEOS WATCHED</text>
+        <line x1="40" y1="62" x2="840" y2="62" stroke="rgba(232,228,220,0.12)"></line>
+
+        <text x="40" y="94" font-family="JetBrains Mono, monospace" font-size="13" fill="#E8E4DC">Claude Pro subscription</text>
+        <text x="40" y="113" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">already paying it before this skill existed</text>
+        <text x="840" y="100" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="15" fill="#E8E4DC">$20 / mo</text>
+        <line x1="40" y1="132" x2="840" y2="132" stroke="rgba(232,228,220,0.12)"></line>
+
+        <text x="40" y="164" font-family="JetBrains Mono, monospace" font-size="13" fill="#E8E4DC">Anthropic API for /watch</text>
+        <text x="40" y="183" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">runs inside the subscription, no extra bill</text>
+        <text x="840" y="170" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="15" fill="#7AB5B0">$0.00</text>
+        <line x1="40" y1="202" x2="840" y2="202" stroke="rgba(232,228,220,0.12)"></line>
+
+        <text x="40" y="234" font-family="JetBrains Mono, monospace" font-size="13" fill="#E8E4DC">Whisper on Groq</text>
+        <text x="40" y="253" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">1 of 3 videos had no captions — free tier, not yet billed</text>
+        <text x="840" y="240" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="15" fill="#FFB347">$0.02</text>
+        <line x1="40" y1="272" x2="840" y2="272" stroke="rgba(232,228,220,0.12)"></line>
+
+        <text x="40" y="292" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">NEW SPEND CREATED BY THE SKILL</text>
+        <text x="840" y="292" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="12" fill="#7AB5B0">$0.02</text>
+      </svg>
+      <figcaption>The interesting number isn't the two cents, it's the $0 row. Most agent workflows fail on the second bill nobody modelled — see what happens when <a href="/blog/ai-agent-burning-18-dollars-a-day/">an agent quietly burns $18 a day</a>.</figcaption>
+    </figure>
+
+    <figure>
+      <img src="/blog/img/claude-code-watch-any-video-03.jpg" alt="Anthropic usage dashboard showing $0 spend for the month despite running the /watch video skill inside the Claude Code subscription" width="1280" height="720" loading="lazy">
+      <figcaption>The Anthropic dashboard for the month. Every one of those runs happened under the subscription rather than on top of it.</figcaption>
+    </figure>
+
+    <p>If you care about keeping agent costs near zero as a discipline rather than an accident, the same instinct that makes this cheap is the one behind <a href="/blog/ai-agent-35x-more-efficient/">making an agent 35x more efficient</a>: don't send the model work it doesn't need to do.</p>
+
+    <h2 id="the-research-loop-it-replaces">The research loop this actually replaces</h2>
+
+    <p>Here's my real use. I already run a scanner that watches 40-plus AI YouTubers and ranks the videos that broke at least double their own channel's average views. It tells me what's worth my attention right now. Useful, and also the start of the problem: it hands me winners I then have to sit and watch, 20 to 30 minutes each, three deep, before I know whether any of them matter.</p>
+
+    <p>Now the scanner picks the video, <code>/watch</code> ingests it, and Claude hands back the breakdown. Hook, setup, where the surprise lands, what the punchline is. Forty-plus minutes of work compressed into two.</p>
+
+    <figure>
+      <img src="/blog/img/claude-code-watch-any-video-04.jpg" alt="Outlier ranking of 40-plus AI YouTube channels, sorted by videos that beat double their channel average views, feeding the /watch skill" width="1280" height="720" loading="lazy">
+      <figcaption>The scanner ranks outliers against each channel's own baseline, so a small creator beating their average outranks a big channel coasting.</figcaption>
+    </figure>
+
+    <h2 id="stop-building-a-research-vault">Why I stopped stockpiling a research vault</h2>
+
+    <p>This is where I part ways with most people running a stack like this. The popular move is to compound: an Obsidian vault full of competitor breakdowns, auto-filed, cross-linked, growing forever. It looks impressive. It's mostly waste.</p>
+
+    <p>An AI take from three days ago is already half stale. Worse, it actively misleads, because an agent reading your archive can't tell that the video with two million views stopped mattering last Tuesday. You can tell, as a human, instantly. The agent sees a big number and reports it as a live trend. That's how you end up making a video about something the audience finished being interested in.</p>
+
+    <p>So I don't compound automatically anymore. I run the scan and <code>/watch</code> the top three on the day I'm hunting for an idea, not on a schedule, not the week before. Fresh, then ship, then throw it away.</p>
+
+    <blockquote>The leverage isn't in the library. The leverage is in the skill being fast enough that you don't need a library.</blockquote>
+
+    <p>That's a claim about competitor research specifically, not about note-taking in general. Your own notes, decisions and project state compound beautifully, which is exactly why I still run <a href="/blog/second-brain-claude-code/">a second brain built with Claude Code</a>. Someone else's opinion about a model that shipped last week does not.</p>
+
+    <div class="cta">
+      <h3>Watch the install go wrong, then go right</h3>
+      <p>The video has the parts a written post can't carry: the live run against a 21-minute video, timed, and the exact five-command patch for the day YouTube decides your machine is a bot. If you build something on <code>/watch</code>, bring it to AI Movers and I'll run it through mine.</p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="https://www.youtube.com/watch?v=KW0_c23gCss" target="_blank" rel="noopener">Watch the full build</a>
+        <a class="btn btn--ghost" href="https://www.skool.com/ai-movers-1936" target="_blank" rel="noopener">Join AI Movers</a>
+      </div>
+    </div>
+
+    <h2 id="what-this-doesnt-solve">What this doesn't solve</h2>
+
+    <p>Two big pieces of AI content are still standing, and honest positioning beats hype here.</p>
+
+    <p>Scripting and filming, you shouldn't delegate. I write my own scripts and I've never let a model write one, because people can tell. To mimic your rhythm and cadence a model needs a mountain of your existing work, and even then you'd rewrite it. Unless you have a Hormozi-sized archive to train against, the voice stays yours. The human side isn't going anywhere.</p>
+
+    <p>Editing is the other one. Choosing the structure, the motion graphics, the B-roll, where the captions pop. Every AI edit still needs a human sitting on top of it, which is a different claim from saying it can't be automated at all, and it's the reason I built <a href="/blog/automate-video-editing-claude-code/">an automated editing pipeline in Claude Code</a> rather than handing the whole edit to a model.</p>
+
+    <p>What <code>/watch</code> takes off the table is the research. Where trends are going, how the best videos are structured, what pattern keeps repeating across the winners. You just gave your producer eyes when they previously only had ears. That's the front half of the job, and it was the half eating the most hours. The rest of <a href="/">the stack I run</a> is built on the same principle: give the agent the input a human would have, then get out of the way.</p>
+
+    <h2 id="faq">Frequently asked questions</h2>
+    <div class="faq">
+      <details>
+        <summary>Can Claude Code actually watch a video, or is it just reading the transcript?</summary>
+        <p>It watches. The skill uses ffmpeg to slice the video into frames and hands those frames to Claude alongside the transcript, so the model sees the terminal output, the dashboard and the diff on screen, not only the words spoken over them. That visual layer is the difference between a summary that guesses and one that describes the demo.</p>
+      </details>
+      <details>
+        <summary>How long does the /watch skill take on a long video?</summary>
+        <p>Under two minutes in every run I have timed, and length barely moves the number. A 45-minute interview and an 8-minute tutorial both land in roughly the same window, because the slow part is downloading and slicing rather than reading. Usually Claude is finished before I would have got through the sponsor read.</p>
+      </details>
+      <details>
+        <summary>How much does it cost to run the /watch skill?</summary>
+        <p>Close to nothing. The reasoning runs inside the Claude Code subscription you already pay for, so my Anthropic dashboard for that month read $0. The only line item is transcription, and only when a video ships without captions. Three videos in, one had no captions, and it cost two cents on Groq's free tier.</p>
+      </details>
+      <details>
+        <summary>Why does YouTube block the download and how do you fix it?</summary>
+        <p>YouTube's newer protocol wants proof you are a person. It serves a challenge that needs a JavaScript runtime to solve, and it checks browser cookies. Installing the runtime and pointing the downloader at your cookies clears both. It is five extra commands and about fifteen minutes, done once, and then downloads stop failing.</p>
+      </details>
+      <details>
+        <summary>Does /watch work on local video files or only YouTube links?</summary>
+        <p>Both. Give it a file path and it watches that file the same way it watches a URL. I run my own raw recordings through it and ask for feedback on pacing and structure, then apply the notes to the next script. It is the fastest editor's second opinion I have ever had.</p>
+      </details>
+    </div>
+
+    <nav class="related" aria-label="Related posts">
+      <h2>Keep reading</h2>
+      <ul>
+        <li><a href="/blog/ai-agent-burning-18-dollars-a-day/">Your AI agent is burning $18 a day →</a></li>
+        <li><a href="/blog/automate-video-editing-claude-code/">Automating video editing with Claude Code →</a></li>
+        <li><a href="/blog/second-brain-claude-code/">Building a second brain with Claude Code →</a></li>
+      </ul>
+    </nav>
+
+  </article>
+</main>
+
+<footer class="foot">
+  <span>© 2026 Taelo Kim</span>
+  <div class="foot__links">
+    <a href="/">Home</a>
+    <a href="/blog/">Blog</a>
+    <a href="https://www.youtube.com/@TaeloKim" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://x.com/taelo_kim" target="_blank" rel="noopener">X</a>
+    <a href="https://www.skool.com/ai-movers-1936" target="_blank" rel="noopener">AI Movers</a>
+  </div>
+</footer>
+
+<script src="/blog/blog.js" defer></script>
+</body>
+</html>

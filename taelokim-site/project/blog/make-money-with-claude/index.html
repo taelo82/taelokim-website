@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Make Money With Claude: The API Cost Math That Works</title>
+<meta name="description" content="The test I run before spending on Claude API credits: when a premium AI bill is a cost centre, when it's an investment, and what it bought on a client deck.">
+<link rel="canonical" href="https://taeloai.com/blog/make-money-with-claude/">
+<meta name="author" content="Taelo Kim">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to Make Money With Claude (Without Torching Your API Budget)">
+<meta property="og:description" content="The test I run before spending on Claude API credits: when a premium AI bill is a cost centre, when it's an investment, and what it bought on a client deck.">
+<meta property="og:url" content="https://taeloai.com/blog/make-money-with-claude/">
+<meta property="og:image" content="https://taeloai.com/blog/img/make-money-with-claude-thumb.jpg">
+<meta property="og:site_name" content="Taelo Kim">
+<meta property="article:published_time" content="2026-07-05">
+<meta property="article:author" content="https://www.youtube.com/@TaeloKim">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@taelo_kim">
+<meta name="twitter:creator" content="@taelo_kim">
+<meta name="twitter:title" content="How to Make Money With Claude (Without Torching Your API Budget)">
+<meta name="twitter:description" content="The test I run before spending on Claude API credits: when a premium AI bill is a cost centre, when it's an investment, and what it bought on a client deck.">
+<meta name="twitter:image" content="https://taeloai.com/blog/img/make-money-with-claude-thumb.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/blog/blog.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://taeloai.com/blog/make-money-with-claude/#article",
+      "headline": "How to Make Money With Claude (Without Torching Your API Budget)",
+      "description": "The test I run before spending on Claude API credits: when a premium AI bill is a cost centre, when it's an investment, and what it bought on a client deck.",
+      "image": "https://taeloai.com/blog/img/make-money-with-claude-thumb.jpg",
+      "datePublished": "2026-07-05",
+      "dateModified": "2026-07-05",
+      "wordCount": 1732,
+      "keywords": "make money with Claude, is the Claude API worth it, AI API cost justification, using Claude for client work, AI cost vs labour value, pay as you go API credits",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Person",
+        "name": "Taelo Kim",
+        "url": "https://taeloai.com/",
+        "sameAs": ["https://www.youtube.com/@TaeloKim", "https://x.com/taelo_kim", "https://github.com/taelo82"]
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Taelo Kim",
+        "url": "https://taeloai.com/"
+      },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://taeloai.com/blog/make-money-with-claude/" },
+      "isPartOf": { "@type": "Blog", "@id": "https://taeloai.com/blog/#blog", "name": "Taelo Kim — Build Logs" }
+    },
+    {
+      "@type": "VideoObject",
+      "@id": "https://taeloai.com/blog/make-money-with-claude/#video",
+      "name": "How to Actually Make Money with Claude Fable 5 (Real Result)",
+      "description": "The test I run before spending on Claude API credits: when a premium AI bill is a cost centre, when it's an investment, and what it bought on a client deck.",
+      "thumbnailUrl": "https://i.ytimg.com/vi/flvhSBASt5o/maxresdefault.jpg",
+      "uploadDate": "2026-07-05",
+      "duration": "PT7M54S",
+      "embedUrl": "https://www.youtube.com/embed/flvhSBASt5o",
+      "contentUrl": "https://www.youtube.com/watch?v=flvhSBASt5o",
+      "publisher": { "@type": "Person", "name": "Taelo Kim" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://taeloai.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://taeloai.com/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "How to Make Money With Claude (Without Torching Your API Budget)", "item": "https://taeloai.com/blog/make-money-with-claude/" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is paying for premium AI API credits actually worth it?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Only when the credits replace work someone would otherwise be paid to do. Price the labour first: hours of design, forecasting or writing, at what those hours are worth to you. If the API cost sits well under that number, it is an investment. If it sits above it, or the output is an internal experiment nobody pays for, use a cheaper model." }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I know if an AI model is good enough for client work?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Run one real deliverable through it, not a demo prompt. Then count how many passes it took to reach something you would send. If your team spends longer repairing the output than it would have spent building from scratch, the model is not ready for that job. That repair time is the only benchmark that maps to money." }
+        },
+        {
+          "@type": "Question",
+          "name": "What kinds of projects should stay on a cheaper model?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Internal brainstorming, drafts nobody sees, formatting, summarising, and anything where a marginal quality jump does not compress your delivery time or raise your contract value. Side projects with no paying user belong here too. A model being smarter is not a business reason to pay more for it." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does a better AI model still need human editing?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes, and the edits move rather than disappear. On my client proposal the structure, the reasoning and the design held up, so my corrections concentrated on the revenue forecast, where I know what this particular client expects to see. A model cannot know which numbers you will personally be held to on a weekly call." }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I buy API credits in advance when a new model drops?",
+          "acceptedAnswer": { "@type": "Answer", "text": "There is no reason to panic-buy. Credits do not make you money sitting in an account, and access keeps shifting between labs. Wait until you have a specific job that clears your cost test, then buy for that job. If the model proves it buys back your time or saves a contract, scale the spend after the evidence, not before." }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="progress"></div>
+
+<nav class="nav">
+  <a class="nav__brand" href="/">Taelo <em>Kim</em></a>
+  <div class="nav__links">
+    <a href="/blog/" class="nav__keep" aria-current="page">Blog</a>
+    <a href="/#resources">Resources</a>
+    <a href="/#community">Community</a>
+    <a class="nav__cta nav__keep" href="https://www.youtube.com/@TaeloKim?sub_confirmation=1" target="_blank" rel="noopener">Subscribe</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <header class="post-head col">
+    <div class="crumb"><a href="/">Home</a> / <a href="/blog/">Blog</a> / Make money with Claude</div>
+    <h1>How to make money with Claude, instead of just spending money on it</h1>
+    <p class="standfirst">A three-question test for deciding which jobs deserve the expensive model — and the client deliverable that made the API bill worth paying.</p>
+    <div class="meta">
+      <span>July 5, 2026</span>
+      <span>8 min read</span>
+      <span>Built with Claude (API)</span>
+    </div>
+  </header>
+
+  <div class="col">
+    <div class="video-embed" data-video="flvhSBASt5o" data-title="How to Actually Make Money with Claude Fable 5 (Real Result)" role="button" tabindex="0" aria-label="Play: How to Actually Make Money with Claude Fable 5 (Real Result)">
+      <img src="/blog/img/make-money-with-claude-thumb.jpg" alt="How to Actually Make Money with Claude Fable 5 (Real Result) — video walkthrough by Taelo Kim" width="1280" height="720" fetchpriority="high">
+      <div class="video-embed__play"></div>
+      <span class="video-embed__label">Watch the build — 7:54</span>
+    </div>
+  </div>
+
+  <article class="post-body col">
+
+    <p>Most advice on how to make money with Claude stops at the demo. Someone one-shots a game, the timeline claps, and nobody mentions the thing needs months of real development before a human being would pay for it.</p>
+
+    <p>Your API invoice, meanwhile, is due now.</p>
+
+    <p>That gap is the whole problem once a top-tier model sits behind pay-as-you-go credits instead of a flat subscription. Every serious run costs real money, upfront, before you know whether the work lands. So you need a test — a boring, unromantic one — for deciding which jobs get the expensive model and which get the cheap one. Below is the test I use, the client deliverable it justified for my agency, and the part the model still could not do for me.</p>
+
+    <div class="takeaways">
+      <h2>What you'll get out of this</h2>
+      <ul>
+        <li>The three-question audit I run before spending a cent of API credit on a job</li>
+        <li>Why "10% smarter" is worth nothing unless it moves delivery time or contract value</li>
+        <li>What a top-tier model produced on a real client proposal, and the one section I had to override by hand</li>
+        <li>The leverage equation: upfront API cost versus the labour value it replaces</li>
+        <li>What to do when the next heavy model drops and everyone starts panic-buying credits</li>
+      </ul>
+    </div>
+
+    <h2 id="cool-demos-dont-pay">Why cool demos don't pay the bills</h2>
+
+    <p>There is an entire genre of AI content built on things that look shippable and aren't. A game that runs. A tool that renders. An app that demos beautifully for ninety seconds. Everyone watching knows, on some level, that each of those needs a tremendous amount of further development before it's a business or even a deliverable. We clap anyway.</p>
+
+    <p>The trap isn't that the demos are fake. It's the timing. Your API cost is present tense and your revenue is hypothetical. You buy the credits upfront, you burn them producing something, and then you find out whether anyone wants it. You might get zero users. Nobody pays premium API prices for a future promise, least of all the lab billing you.</p>
+
+    <p>So the question is never "is this model impressive." It's whether the output of this specific run is something a person has already agreed to pay for, or is credibly close to it.</p>
+
+    <h2 id="three-questions">The three questions I ask before spending API credits</h2>
+
+    <p>This takes about ninety seconds and it has saved me more money than any prompt trick.</p>
+
+    <ol class="steps">
+      <li>
+        <h3>What's your baseline for deliverable output?</h3>
+        <p>Are you using AI for internal brainstorming, or do you have paying clients expecting flawless, production-ready results? Those are different economies. Brainstorming tolerates a mediocre draft; a client proposal does not. Only the second one has a price attached, and only the second one justifies a premium bill.</p>
+      </li>
+      <li>
+        <h3>Does the marginal improvement translate into real dollars?</h3>
+        <p>Say the better model is 10% smarter. Fine — does that 10% compress your delivery time or increase your contract value? If you can't draw a line from the quality jump to a number on an invoice, the answer is no, and you stick with the cheaper model. "Smarter" that doesn't move a dollar figure is a hobby expense.</p>
+      </li>
+      <li>
+        <h3>Is the upfront cost below the labour value it replaces?</h3>
+        <p>The last gate is the strictest. Unless the upfront API cost is meaningfully lower than the labour value the model replaces or creates, it doesn't go into your core infrastructure. Not as a trial, not "to see what happens." You want hard business justification here, not emotional attachment to a model you like using.</p>
+      </li>
+    </ol>
+
+    <figure>
+      <svg viewBox="0 0 880 448" width="100%" class="diagram" role="img" xmlns="http://www.w3.org/2000/svg">
+        <title>Three-gate decision flow for whether a job should run on the expensive AI model</title>
+        <defs>
+          <marker id="ar1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="rgba(232,228,220,0.45)"></path>
+          </marker>
+        </defs>
+        <rect x="0" y="0" width="880" height="448" fill="#050510"></rect>
+        <text x="40" y="34" font-family="JetBrains Mono, monospace" font-size="12" fill="#7AB5B0" letter-spacing="1.6">SHOULD THIS JOB RUN ON THE EXPENSIVE MODEL?</text>
+
+        <rect x="40" y="60" width="470" height="70" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"></rect>
+        <text x="60" y="88" font-family="JetBrains Mono, monospace" font-size="13" fill="#E8E4DC">1 · Is the output a paid, client-facing deliverable?</text>
+        <text x="60" y="110" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">not a draft, not an experiment</text>
+
+        <rect x="40" y="162" width="470" height="70" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"></rect>
+        <text x="60" y="190" font-family="JetBrains Mono, monospace" font-size="13" fill="#E8E4DC">2 · Does the quality jump move a number on an invoice?</text>
+        <text x="60" y="212" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">shorter delivery time or higher contract value</text>
+
+        <rect x="40" y="264" width="470" height="70" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"></rect>
+        <text x="60" y="292" font-family="JetBrains Mono, monospace" font-size="13" fill="#E8E4DC">3 · Is the upfront API cost below the labour it replaces?</text>
+        <text x="60" y="314" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">price the hours, then compare</text>
+
+        <rect x="40" y="366" width="470" height="58" rx="4" fill="#0B0B18" stroke="#FFB347"></rect>
+        <text x="60" y="393" font-family="JetBrains Mono, monospace" font-size="13" fill="#FFB347">THREE YES → write the check for the API</text>
+        <text x="60" y="412" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">one no anywhere → cheaper model, same day</text>
+
+        <line x1="120" y1="130" x2="120" y2="158" stroke="rgba(232,228,220,0.45)" marker-end="url(#ar1)"></line>
+        <line x1="120" y1="232" x2="120" y2="260" stroke="rgba(232,228,220,0.45)" marker-end="url(#ar1)"></line>
+        <line x1="120" y1="334" x2="120" y2="362" stroke="rgba(232,228,220,0.45)" marker-end="url(#ar1)"></line>
+        <text x="132" y="149" font-family="JetBrains Mono, monospace" font-size="11" fill="#7AB5B0">yes</text>
+        <text x="132" y="251" font-family="JetBrains Mono, monospace" font-size="11" fill="#7AB5B0">yes</text>
+        <text x="132" y="353" font-family="JetBrains Mono, monospace" font-size="11" fill="#7AB5B0">yes</text>
+
+        <line x1="510" y1="95" x2="596" y2="95" stroke="rgba(232,228,220,0.45)" marker-end="url(#ar1)"></line>
+        <line x1="510" y1="197" x2="596" y2="197" stroke="rgba(232,228,220,0.45)" marker-end="url(#ar1)"></line>
+        <line x1="510" y1="299" x2="596" y2="299" stroke="rgba(232,228,220,0.45)" marker-end="url(#ar1)"></line>
+        <text x="524" y="86" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">no</text>
+        <text x="524" y="188" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">no</text>
+        <text x="524" y="290" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">no</text>
+
+        <rect x="600" y="60" width="240" height="70" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"></rect>
+        <text x="618" y="90" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">Cheaper model.</text>
+        <text x="618" y="110" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">internal work isn't top-tier work</text>
+
+        <rect x="600" y="162" width="240" height="70" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"></rect>
+        <text x="618" y="192" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">Cheaper model.</text>
+        <text x="618" y="212" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">quality with no dollar effect</text>
+
+        <rect x="600" y="264" width="240" height="70" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"></rect>
+        <text x="618" y="294" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">Cheaper model.</text>
+        <text x="618" y="314" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">keep it out of core infra</text>
+      </svg>
+      <figcaption>Every gate is a veto, not a score. A job that fails gate two can still be worth doing — just not on the expensive model, and not this week.</figcaption>
+    </figure>
+
+    <h2 id="the-70k-deck">What the expensive model bought on a $70,000-a-month account</h2>
+
+    <p>Here's the run that passed all three gates, and the reason I have an opinion about any of this.</p>
+
+    <p>One of my agency's clients pays us $70,000 a month for marketing — north of $800,000 a year, close to a million. They do around $200 million in annual revenue in Korea; we run their overseas side. Their contract expired in June and the renewal was not a formality. After a year and a lot of their money, the brief was blunt: convince us why we should keep investing, show us how you'll improve, and justify scaling the ad spend.</p>
+
+    <p>The whole deal hung on one proposal deck. They wanted target revenue, a sales forecast, the marketing budget, how we operate, and how we plan to improve — four or five load-bearing sections, each with numbers we'd be held to. I told my team to drop what they were doing, put every direction and figure they had into the model, and trust it. Deadline was July 7th. I gave one teammate two days, sat with her through the revisions, and we sent it.</p>
+
+    <figure>
+      <img src="/blog/img/make-money-with-claude-01.jpg" alt="Client proposal deck built with Claude showing the target revenue and sales forecast sections, client brand masked" width="1280" height="720" loading="lazy">
+      <figcaption>The proposal deck, brand masked. Target revenue, sales forecast, budget and operating plan — the four sections the renewal actually turned on.</figcaption>
+    </figure>
+
+    <div class="callout callout--warn">
+      <span class="callout__label">Read this before you quote the number</span>
+      <p>This is one result on one account of my own agency, after a year of existing client relationship and two days of human revision. It is not a typical outcome, not a template, and not a promise about what any model will do for your revenue. The framework transfers. The figure doesn't.</p>
+    </div>
+
+    <h2 id="reasoning-vs-organising">Organising past data is not the same as reasoning about it</h2>
+
+    <p>The difference showed up in exactly one place: the gap between a model that arranges what you give it and a model that thinks about it.</p>
+
+    <p>On the previous generation — Opus 4.8 for us — the model could simulate and organise past data competently, and I'd feed it context here and there, but I always had to touch a lot. Design revisions constantly. Forecast sections with spots that simply didn't make sense. Worse, the reasoning underneath wouldn't match the numbers: the chart said one thing and the paragraph explaining why the figures moved said another. Catching that costs more attention than writing it yourself. If you want the design half of that fight solved properly, I wrote up <a href="/blog/claude-design-genius-4-steps/">the four steps that turn Claude into a design genius</a> separately.</p>
+
+    <p>Giving the newer model more room to reason changed which parts came back usable. It analysed, produced the simulation, and suggested the moves I would have suggested. The plans matched the graphs. The reasons behind the numbers held up on read. Failure rate on the design side dropped too — fewer broken layouts to repair per pass. My revisions collapsed to a single section instead of the whole deck.</p>
+
+    <figure>
+      <img src="/blog/img/make-money-with-claude-02.jpg" alt="Forecast slide in the client deck where the chart and the written reasoning behind the numbers line up" width="1280" height="720" loading="lazy">
+      <figcaption>The test I care about: does the written reasoning explain the shape of the chart next to it? Here it did, without me rewriting the paragraph.</figcaption>
+    </figure>
+
+    <div class="watch-nudge">
+      <p>Easier to see than to read: in the video I walk the actual deck section by section — target revenue, forecast, budget, operating plan — and point at the slides where the model's reasoning matched the graph and where it didn't.</p>
+      <a class="btn btn--ghost" href="https://www.youtube.com/watch?v=flvhSBASt5o&amp;t=165s" target="_blank" rel="noopener">Watch the deck walkthrough →</a>
+    </div>
+
+    <h2 id="human-touch">Where the human touch still had to override the model</h2>
+
+    <p>One section. The revenue line.</p>
+
+    <p>The forecast the model produced dipped in the early months before climbing. Defensible on the numbers, wrong for the room. I know this client, and I know they want to see a line that sits at least above where it was two months ago — so I raised those early figures myself, and adjusted the ones downstream to match. That's not the model failing. That's client psychology, and it isn't in the training data.</p>
+
+    <figure>
+      <img src="/blog/img/make-money-with-claude-03.jpg" alt="Monthly sales target row in the proposal deck where the early-month forecast numbers were manually raised" width="1280" height="720" loading="lazy">
+      <figcaption>The one override. The model's early-month figures dipped; I lifted them because of what this specific client expects to see on slide one.</figcaption>
+    </figure>
+
+    <p>The stakes are why. We run their TikTok Shop operation and we set monthly and annual sales targets in that deck. Forecasting those honestly is grueling work, because we can't sell dreams — there are weekly and monthly calls where those exact numbers come back. Miss a target and we owe a clear explanation of why the return on ad spend was bad and what changes next month.</p>
+
+    <blockquote>These are not college-project numbers. If it goes in the deck, we get held to it on a weekly call.</blockquote>
+
+    <p>Which is the honest version of "AI did my client work." The model did the structure, the analysis and most of the argument. The judgement about which number I'd be defending in six weeks stayed with me.</p>
+
+    <h2 id="leverage-equation">The leverage equation: API cost versus labour value</h2>
+
+    <p>Look at your team leverage before you look at the model's benchmarks.</p>
+
+    <p>If you don't have employees or teammates who can design, build or operate, an advanced model is a solo multiplier — it's the hire you haven't made. If you do have a team, it multiplies their hours instead. Either way the formula is the same one from gate three: unless the upfront API cost is significantly lower than the labour value it replaces or creates, it doesn't belong in your core infrastructure.</p>
+
+    <p>The reason that formula bites is that failed automation isn't free. We tried automating this same deliverable in an earlier era of models. The results were completely undeliverable — broken layers, design logic scrambled, numbers that felt off. My team spent more time repairing the model's mistakes and going back and forth until the whole thread degraded than they would have spent building the deck from scratch. Negative leverage, paid for in credits.</p>
+
+    <figure>
+      <svg viewBox="0 0 880 372" width="100%" class="diagram" role="img" xmlns="http://www.w3.org/2000/svg">
+        <title>Where the hours go on the same deliverable: failed automation versus a run that shipped</title>
+        <rect x="0" y="0" width="880" height="372" fill="#050510"></rect>
+
+        <text x="40" y="34" font-family="JetBrains Mono, monospace" font-size="12" fill="rgba(232,228,220,0.45)" letter-spacing="1.6">EARLIER ATTEMPT — NEGATIVE LEVERAGE</text>
+        <rect x="40" y="52" width="380" height="34" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"></rect>
+        <text x="58" y="74" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">model draft</text>
+        <rect x="40" y="94" width="380" height="34" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"></rect>
+        <text x="58" y="116" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">rebuild broken layers</text>
+        <rect x="40" y="136" width="380" height="34" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"></rect>
+        <text x="58" y="158" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">fix scrambled design logic</text>
+        <rect x="40" y="178" width="380" height="34" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"></rect>
+        <text x="58" y="200" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">re-check every number</text>
+        <rect x="40" y="220" width="380" height="34" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"></rect>
+        <text x="58" y="242" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">thread degrades → start over</text>
+        <rect x="40" y="270" width="380" height="46" rx="4" fill="#0B0B18" stroke="#FFB347"></rect>
+        <text x="58" y="290" font-family="JetBrains Mono, monospace" font-size="12" fill="#FFB347">slower than building it from scratch</text>
+        <text x="58" y="308" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">and you paid for the credits anyway</text>
+
+        <line x1="450" y1="52" x2="450" y2="330" stroke="rgba(232,228,220,0.12)"></line>
+
+        <text x="480" y="34" font-family="JetBrains Mono, monospace" font-size="12" fill="#7AB5B0" letter-spacing="1.6">THE RUN THAT SHIPPED</text>
+        <rect x="480" y="52" width="360" height="60" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"></rect>
+        <text x="498" y="76" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">structured, client-ready foundation</text>
+        <text x="498" y="96" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">analysis + simulation + recommendation</text>
+        <rect x="480" y="120" width="360" height="60" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"></rect>
+        <text x="498" y="144" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">human override: revenue forecast only</text>
+        <text x="498" y="164" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">client psychology, not model error</text>
+        <rect x="480" y="188" width="360" height="60" rx="4" fill="#0B0B18" stroke="rgba(232,228,220,0.12)"></rect>
+        <text x="498" y="212" font-family="JetBrains Mono, monospace" font-size="12" fill="#E8E4DC">two days, multiple revision passes</text>
+        <text x="498" y="232" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">one teammate, deadline held</text>
+        <rect x="480" y="270" width="360" height="46" rx="4" fill="#0B0B18" stroke="#7AB5B0"></rect>
+        <text x="498" y="290" font-family="JetBrains Mono, monospace" font-size="12" fill="#7AB5B0">days of high-end design labour saved</text>
+        <text x="498" y="308" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(232,228,220,0.45)">API bill stops being a cost centre</text>
+      </svg>
+      <figcaption>The variable that decides everything is repair time. A model that needs less repair than a human needs to start converts your invoice from an expense into margin.</figcaption>
+    </figure>
+
+    <p>When a model saves your team days of high-end design labour on an account that size, the expensive API bill stops being a cost centre and becomes a high-margin investment. That's the whole conversion, and it's arithmetic rather than vibes. The same arithmetic is why I keep a hard eye on running costs elsewhere too — I wrote about <a href="/blog/ai-agent-burning-18-dollars-a-day/">the agent that was quietly burning $18 a day</a>, and about <a href="/blog/automate-video-editing-claude-code/">handing my video editing to Claude Code</a>, where the labour saved is measured in hours per upload rather than deals per year.</p>
+
+    <h2 id="when-the-next-model-drops">What to do when the next heavy model drops</h2>
+
+    <p>Access is fragmenting. One lab pulls its strongest model behind pay-as-you-go credits; the next is lining up its own heavy hitter — GPT-5.6 was the one queued up when I recorded this. It'll keep happening, and each release will arrive with a wave of people buying credits they have no job for.</p>
+
+    <p>Don't panic-buy. Credits earn nothing sitting in an account. Take one real deliverable — the one with a deadline and an invoice attached — and run it through the three gates. If the model systematically buys back your time or saves a client contract, write the check without flinching. If it doesn't, hold your money and maximise your credits when the thing you actually need it for shows up.</p>
+
+    <p>My use case is worth the money. Building things for fun is a completely different calculation, and pretending otherwise is how people end up with an invoice and a prototype nobody asked for. Everything I ship goes through the same test — the <a href="/">rest of the build logs</a> are here, and your own <a href="https://console.anthropic.com/" target="_blank" rel="noopener">API usage dashboard</a> is worth reading before you commit.</p>
+
+    <div class="cta">
+      <h3>See the deck the framework paid for</h3>
+      <p>The video walks the masked client proposal slide by slide — the forecast, the budget, the section I overrode, and what "client-ready foundation" actually looks like when a model gets it right. If you're weighing an API bill against a real deliverable this week, that's the seven minutes to watch.</p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="https://www.youtube.com/watch?v=flvhSBASt5o" target="_blank" rel="noopener">Watch the full build</a>
+        <a class="btn btn--ghost" href="https://www.skool.com/ai-movers-1936" target="_blank" rel="noopener">Join AI Movers</a>
+      </div>
+    </div>
+
+    <h2 id="faq">Frequently asked questions</h2>
+    <div class="faq">
+      <details>
+        <summary>Is paying for premium AI API credits actually worth it?</summary>
+        <p>Only when the credits replace work someone would otherwise be paid to do. Price the labour first: hours of design, forecasting or writing, at what those hours are worth to you. If the API cost sits well under that number, it is an investment. If it sits above it, or the output is an internal experiment nobody pays for, use a cheaper model.</p>
+      </details>
+      <details>
+        <summary>How do I know if an AI model is good enough for client work?</summary>
+        <p>Run one real deliverable through it, not a demo prompt. Then count how many passes it took to reach something you would send. If your team spends longer repairing the output than it would have spent building from scratch, the model is not ready for that job. That repair time is the only benchmark that maps to money.</p>
+      </details>
+      <details>
+        <summary>What kinds of projects should stay on a cheaper model?</summary>
+        <p>Internal brainstorming, drafts nobody sees, formatting, summarising, and anything where a marginal quality jump does not compress your delivery time or raise your contract value. Side projects with no paying user belong here too. A model being smarter is not a business reason to pay more for it.</p>
+      </details>
+      <details>
+        <summary>Does a better AI model still need human editing?</summary>
+        <p>Yes, and the edits move rather than disappear. On my client proposal the structure, the reasoning and the design held up, so my corrections concentrated on the revenue forecast, where I know what this particular client expects to see. A model cannot know which numbers you will personally be held to on a weekly call.</p>
+      </details>
+      <details>
+        <summary>Should I buy API credits in advance when a new model drops?</summary>
+        <p>There is no reason to panic-buy. Credits do not make you money sitting in an account, and access keeps shifting between labs. Wait until you have a specific job that clears your cost test, then buy for that job. If the model proves it buys back your time or saves a contract, scale the spend after the evidence, not before.</p>
+      </details>
+    </div>
+
+    <nav class="related" aria-label="Related posts">
+      <h2>Keep reading</h2>
+      <ul>
+        <li><a href="/blog/ai-agent-burning-18-dollars-a-day/">Your AI agent is burning $18 a day →</a></li>
+        <li><a href="/blog/automate-video-editing-claude-code/">Automating video editing with Claude Code →</a></li>
+        <li><a href="/blog/claude-design-genius-4-steps/">Turn Claude into a design genius in 4 steps →</a></li>
+      </ul>
+    </nav>
+
+  </article>
+</main>
+
+<footer class="foot">
+  <span>© 2026 Taelo Kim</span>
+  <div class="foot__links">
+    <a href="/">Home</a>
+    <a href="/blog/">Blog</a>
+    <a href="https://www.youtube.com/@TaeloKim" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://x.com/taelo_kim" target="_blank" rel="noopener">X</a>
+    <a href="https://www.skool.com/ai-movers-1936" target="_blank" rel="noopener">AI Movers</a>
+  </div>
+</footer>
+
+<script src="/blog/blog.js" defer></script>
+</body>
+</html>
