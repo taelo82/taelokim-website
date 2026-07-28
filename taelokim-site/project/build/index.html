@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>The Build — an AI employee that does your actual job | Taelo Kim</title>
+<meta name="description" content="Four weeks, live, in a small cohort. You leave every week with something that works — an AI employee built by you, running on your machine. Season 01 starts 8 August.">
+<link rel="canonical" href="https://taeloai.com/build/">
+<meta name="author" content="Taelo Kim">
+<meta name="robots" content="index, follow, max-image-preview:large">
+
+<meta property="og:title" content="Build the AI employee that does your actual job">
+<meta property="og:description" content="Four weeks, live, in a small cohort. I ship it with you and every single person gets feedback. Season 01 starts 8 August — founding 50 at $44/mo.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://taeloai.com/build/">
+<meta property="og:image" content="https://taeloai.com/taelo.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@taelo_kim">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --void:    #050510;
+  --paper:   #E8E4DC;
+  --thread:  #7AB5B0;
+  --dust:    #FFFFFF;
+
+  --font-display: "Fraunces", "GT Sectra", Georgia, serif;
+  --font-italic:  "Instrument Serif", Georgia, serif;
+  --font-body:    "Inter Tight", "Söhne", system-ui, sans-serif;
+  --font-mono:    "JetBrains Mono", "Berkeley Mono", monospace;
+
+  --type-hero:  clamp(40px, 7.5vw, 92px);
+  --type-h2:    clamp(26px, 3vw, 40px);
+  --type-body:  17px;
+
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 40px;
+  --space-6: 64px;
+  --space-7: 96px;
+
+  --line: rgba(232, 228, 220, 0.14);
+  --muted: rgba(232, 228, 220, 0.62);
+  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--void);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-size: var(--type-body);
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 56px); }
+
+a { color: var(--thread); }
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--thread);
+  outline-offset: 3px;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ---------- top bar ---------- */
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-4);
+  padding: var(--space-4) 0;
+  flex-wrap: wrap;
+}
+.topbar a.home {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--paper);
+  text-decoration: none;
+  opacity: 0.75;
+  transition: opacity 0.3s var(--ease-cinematic);
+}
+.topbar a.home:hover { opacity: 1; }
+
+/* ---------- hero ---------- */
+
+.hero { padding: clamp(48px, 9vw, 110px) 0 var(--space-6); }
+.hero h1 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: var(--type-hero);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  margin: 0 0 var(--space-5);
+  max-width: 16ch;
+  text-wrap: balance;
+}
+.hero h1 em {
+  font-family: var(--font-italic);
+  font-style: italic;
+  color: var(--thread);
+  letter-spacing: -0.01em;
+}
+.hero .deck {
+  font-size: clamp(19px, 2vw, 23px);
+  line-height: 1.5;
+  max-width: 44ch;
+  margin: 0 0 var(--space-5);
+  color: var(--muted);
+}
+.hero .deck strong { color: var(--paper); font-weight: 500; }
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px var(--space-5);
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: var(--space-5);
+}
+.facts b { color: var(--paper); font-family: var(--font-mono); font-weight: 500; font-size: 12px; letter-spacing: 0.08em; }
+
+.cta-row { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: stretch; }
+.btn {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  padding: 15px 26px;
+  border-radius: 4px;
+  text-decoration: none;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 3px;
+  transition: transform 0.4s var(--ease-cinematic), background 0.3s ease, border-color 0.3s ease;
+}
+.btn span { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.7; }
+.btn-primary { background: var(--thread); color: var(--void); border: 1px solid var(--thread); }
+.btn-primary:hover { transform: translateY(-2px); background: #8FC7C2; }
+.btn-ghost { background: transparent; color: var(--paper); border: 1px solid var(--line); }
+.btn-ghost:hover { transform: translateY(-2px); border-color: var(--paper); }
+
+/* ---------- sections ---------- */
+
+section.blk { padding: var(--space-7) 0; border-top: 1px solid var(--line); }
+section.blk > .mono { display: block; margin-bottom: var(--space-4); }
+h2 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: var(--type-h2);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  margin: 0 0 var(--space-4);
+  max-width: 22ch;
+  text-wrap: balance;
+}
+h2 em { font-family: var(--font-italic); font-style: italic; color: var(--thread); }
+p { margin: 0 0 var(--space-3); max-width: 62ch; }
+p:last-child { margin-bottom: 0; }
+.muted { color: var(--muted); }
+
+.quote {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(22px, 2.6vw, 32px);
+  line-height: 1.28;
+  letter-spacing: -0.02em;
+  color: var(--paper);
+  border-left: 2px solid var(--thread);
+  padding-left: var(--space-4);
+  margin: 0 0 var(--space-5);
+  max-width: 24ch;
+}
+
+/* ---------- weeks ---------- */
+
+.weeks { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
+.week {
+  background: var(--void);
+  padding: var(--space-4) var(--space-4);
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 72px minmax(0, 1fr) minmax(0, 200px);
+  align-items: start;
+}
+@media (max-width: 760px) { .week { grid-template-columns: 1fr; } }
+.week .n {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: var(--thread);
+  padding-top: 3px;
+}
+.week h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin: 0 0 6px;
+}
+.week p { font-size: 15.5px; color: var(--muted); margin: 0; max-width: none; }
+.week .out {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: var(--thread);
+  text-transform: uppercase;
+  padding-top: 4px;
+}
+
+/* ---------- price ---------- */
+
+.price-grid { display: grid; gap: var(--space-3); }
+@media (min-width: 800px) { .price-grid { grid-template-columns: repeat(3, 1fr); } }
+.price-card {
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: var(--space-4);
+  display: grid;
+  gap: 8px;
+  align-content: start;
+}
+.price-card.lead { border-color: var(--thread); background: rgba(122, 181, 176, 0.06); }
+.price-card .amt {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 44px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.price-card.lead .amt { color: var(--thread); }
+.price-card .amt small { font-family: var(--font-body); font-size: 14px; letter-spacing: 0; color: var(--muted); }
+.price-card p { font-size: 14.5px; color: var(--muted); margin: 0; }
+
+/* ---------- proof ---------- */
+
+.proof { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); margin-top: var(--space-5); }
+.proof .n {
+  font-family: var(--font-display); font-weight: 300; font-size: 34px;
+  line-height: 1; letter-spacing: -0.03em; color: var(--thread); display: block;
+}
+.proof .t { font-size: 14px; color: var(--muted); display: block; margin-top: 8px; line-height: 1.4; }
+
+/* ---------- close ---------- */
+
+.close { text-align: left; padding: var(--space-7) 0 var(--space-6); border-top: 1px solid var(--line); }
+.close h2 { font-size: clamp(30px, 4vw, 52px); max-width: 18ch; }
+
+footer {
+  border-top: 1px solid var(--line);
+  padding: var(--space-4) 0 var(--space-6);
+  display: flex; flex-wrap: wrap; gap: 10px var(--space-5); justify-content: space-between;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="topbar">
+    <a class="home" href="/">← Taelo Kim</a>
+    <span class="mono">AI Movers+ · Season 01</span>
+  </div>
+
+  <header class="hero">
+    <h1>Build the <em>AI employee</em> that does your actual job.</h1>
+
+    <p class="deck">
+      Four weeks, live, in a small cohort. <strong>You leave every week with something that
+      works</strong> — built by you, running on your machine, not rented from anyone.
+    </p>
+
+    <div class="facts mono">
+      <span>Starts <b>Sat 8 Aug</b></span>
+      <span>Founding seats <b>50</b></span>
+      <span>Then <b>$99/mo</b></span>
+      <span>Live <b>Saturdays</b></span>
+    </div>
+
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://www.skool.com/ai-movers-4991/about">Join Season 01 — $44/mo<span>Founding rate, locked for life</span></a>
+      <a class="btn btn-ghost" href="https://waitlist-tau-ashy.vercel.app#apply">Not ready? Hold your rate<span>Free · until 1 Aug</span></a>
+    </div>
+  </header>
+
+  <section class="blk">
+    <span class="mono">Why there's a deadline</span>
+    <p class="quote">Without a deadline, nobody builds anything. Nobody ships anything.</p>
+    <p>
+      You already know this. The vault, the command centre, the assistant with the ambitious
+      name — it got to about 60%, it half-works, and it's sitting in a folder next to the other
+      three you started.
+    </p>
+    <p>
+      It was never a skill problem. Nobody was watching, nothing was due, and every tutorial you
+      found built a demo instead of a thing that still runs on a Tuesday when you're busy.
+    </p>
+    <p>
+      So this is a cohort, not a library. Everyone starts the same day, everyone ships the same
+      day, and there's a room full of people who notice if you don't. That constraint
+      <em>is</em> the product.
+    </p>
+  </section>
+
+  <section class="blk">
+    <span class="mono">Season 01 · four weeks</span>
+    <h2>You leave every single week with something that <em>works</em>.</h2>
+    <p class="quote" style="max-width:30ch">
+      I ship it with you. We do this together as a small cohort — and every single one of you
+      gets feedback.
+    </p>
+
+    <div class="weeks">
+      <div class="week">
+        <span class="n">Week 01</span>
+        <div>
+          <h3>Your bottleneck dies.</h3>
+          <p>We find the one job eating your week and you build an AI employee that owns it — bounded and guardrailed, not an autonomous loop. I scope five live on the call.</p>
+        </div>
+        <span class="out">An AI employee running, week one</span>
+      </div>
+      <div class="week">
+        <span class="n">Week 02</span>
+        <div>
+          <h3>Your stack, not somebody's template.</h3>
+          <p>The skills, plugins and automations that plug into how you actually work — built for your workflow, not a demo's.</p>
+        </div>
+        <span class="out">3–5 custom skills, yours</span>
+      </div>
+      <div class="week">
+        <span class="n">Week 03</span>
+        <div>
+          <h3>It runs without you.</h3>
+          <p>Routines, triggers, sub-agents, cost control. The time comes back — and you spend it building the thing you've had in your head for a year. An app, a SaaS, a game. You ship it.</p>
+        </div>
+        <span class="out">Unattended + the thing you finally built</span>
+      </div>
+      <div class="week">
+        <span class="n">Week 04</span>
+        <div>
+          <h3>Demo day.</h3>
+          <p>You demo the working thing, I audit it live, we publish it, and we start scaling it.</p>
+        </div>
+        <span class="out">Published, working, and what's next</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <span class="mono">The price</span>
+    <h2>Founding rate is less than half. It doesn't come back.</h2>
+    <div class="price-grid">
+      <div class="price-card lead">
+        <span class="mono">Founding 50 · now</span>
+        <span class="amt">$44<small>/mo</small></span>
+        <p>Locked in for as long as you stay. Straight into the community, no waiting, and you're in Season 01.</p>
+      </div>
+      <div class="price-card">
+        <span class="mono">Waitlist</span>
+        <span class="amt">Free<small> to hold</small></span>
+        <p>Not ready today? The list holds your $44 founding rate until 1 August. No payment, nothing to commit to.</p>
+      </div>
+      <div class="price-card">
+        <span class="mono">Once the 50 fill</span>
+        <span class="amt">$99<small>/mo</small></span>
+        <p>What it costs from Season 02. The founding 50 never pay it, for as long as they stay.</p>
+      </div>
+    </div>
+    <p class="muted" style="margin-top:var(--space-4)">Cancel any time — but the founding rate goes with you if you do.</p>
+  </section>
+
+  <section class="blk">
+    <span class="mono">Who's running it</span>
+    <h2>Someone who gets <em>paid</em> to do this, not to teach it.</h2>
+    <p>
+      An agency client pays me $70,000 a month to run their overseas marketing. They do about
+      $200M a year in Korea. At the end of year one they asked me to convince them why they
+      should keep investing — and I won the renewal on a deck built with AI.
+    </p>
+    <p>
+      Most people teaching this make their money teaching it. The systems in this cohort are the
+      ones doing my actual work.
+    </p>
+    <div class="proof">
+      <div><span class="n">$70k</span><span class="t">Monthly agency retainer</span></div>
+      <div><span class="n">$200M</span><span class="t">Client's annual revenue</span></div>
+      <div><span class="n">4 weeks</span><span class="t">To your first working AI employee</span></div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <span class="mono">Terms</span>
+    <h2>Ship it or don't pay.</h2>
+    <p>
+      Turn up to the four Build Labs, do the weekly ship, and if you don't have a working AI
+      employee running by day 30 — full refund, and you keep everything.
+    </p>
+    <p>I can offer that because the only variable is whether you turn up. The rest is my job.</p>
+    <p class="muted">
+      <strong style="color:var(--paper)">This isn't a course.</strong> There's no pre-recorded
+      curriculum to work through, and there won't be. It's four weeks of building the thing in a
+      room with a deadline.
+    </p>
+  </section>
+
+  <div class="close">
+    <h2>Season 01 starts <em>Saturday 8 August</em>.</h2>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://www.skool.com/ai-movers-4991/about">Join Season 01 — $44/mo<span>Founding rate, locked for life</span></a>
+      <a class="btn btn-ghost" href="https://waitlist-tau-ashy.vercel.app#apply">Hold my rate instead<span>Free · until 1 Aug</span></a>
+    </div>
+  </div>
+
+  <footer class="mono">
+    <span>Build Labs · Sat 8, 15, 22, 29 Aug</span>
+    <span><a href="/" style="color:inherit; text-decoration:none">taeloai.com</a></span>
+  </footer>
+
+</div>
+
+</body>
+</html>

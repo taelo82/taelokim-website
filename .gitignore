@@ -28,3 +28,4 @@ taelo-content-system/final video/
 # Local launch configs / scratch servers — per-machine, not synced
 **/.claude/launch.json
 **/.claude/serve.py
+.vercel
