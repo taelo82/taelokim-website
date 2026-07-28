@@ -5,9 +5,9 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Taelo Kim — Build real AI products with Claude</title>
-<meta name="description" content="Playbooks, prompt packs and build logs for people shipping real AI products with Claude — plus AI Movers, the builder community that doesn't sell you a course.">
+<meta name="description" content="In four weeks, build the AI employee that does your actual job. Live cohort with Taelo Kim — Season 01 starts 8 August. Plus playbooks, prompt packs and build logs for shipping real AI products with Claude.">
 <meta property="og:title" content="Taelo Kim — Build real AI products with Claude">
-<meta property="og:description" content="Playbooks, prompt packs and build logs for people shipping real AI products with Claude — plus AI Movers, the builder community.">
+<meta property="og:description" content="In four weeks, build the AI employee that does your actual job. Live cohort with Taelo Kim — Season 01 starts 8 August, founding 50 at $44/mo.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://taeloai.com/">
 <meta property="og:image" content="https://taeloai.com/taelo.jpg">
@@ -181,6 +181,17 @@ nav a::before {
 nav a:hover { color: var(--void); }
 nav a:hover::before { transform: scale(1); }
 nav a.active { color: var(--thread); }
+
+/* The offer sits first and reads as a button, not a nav item. It is the
+   only thing in the bar that is lit before you touch it. */
+nav a.nav-offer {
+  background: var(--thread);
+  color: var(--void);
+  font-weight: 600;
+  margin-right: 4px;
+}
+nav a.nav-offer::before { background: #A5D6D1; }
+nav a.nav-offer:hover { color: var(--void); }
 
 /* ── BG STAGE — fixed, full bleed ── */
 #bg-stage {
@@ -1278,13 +1289,13 @@ body:not(:hover) #cursor-thread { opacity: 0; }
 
 <!-- ── NAV ── -->
 <nav class="glass" role="navigation" aria-label="Main navigation">
+  <a href="/build/" class="nav-offer">Season 01 →</a>
   <a href="#hero" data-section="hero">Home</a>
   <a href="#about" data-section="about">About</a>
   <a href="#resources" data-section="resources">Resources</a>
   <a href="#community" data-section="community">Community</a>
   <a href="#writing" data-section="writing">Watch</a>
   <a href="/blog/">Blog</a>
-  <a href="#join" data-section="join">Join</a>
 </nav>
 
 <!-- ── MAIN ── -->
@@ -1297,10 +1308,10 @@ body:not(:hover) #cursor-thread { opacity: 0; }
     <h1 class="hero-headline" id="hero-hl" aria-label="Pull the thread.">
     </h1>
     <p class="hero-sub" id="hero-sub">
-      Playbooks, prompt packs and build logs for people shipping real AI products with Claude. Plus AI Movers — the builder community that doesn't sell you a course.
+      In four weeks you'll have an AI employee that does your actual job — built by you, running on your machine. Season 01 starts 8 August. Founding 50 at $44/mo.
     </p>
     <div class="hero-cta-wrap" id="hero-cta">
-      <a href="#join" class="cta-primary">Connect with Taelo →</a>
+      <a href="/build/" class="cta-primary">Join Season 01 — $44/mo →</a>
       <a href="#about" class="cta-secondary">Who's behind this</a>
     </div>
   </div>
@@ -1458,17 +1469,17 @@ body:not(:hover) #cursor-thread { opacity: 0; }
       <div class="community-grid">
         <div class="community-card card-interactive" data-pull="c1">
           <div class="murphy-echo"></div>
-          <div class="card-label">Community</div>
-          <div class="card-title">AI Movers</div>
-          <p class="card-desc">A community of serious AI builders shipping real products. The only one that doesn't sell you a course — fast feedback, real builds, quality-filtered.</p>
-          <a href="https://www.skool.com/ai-movers-1936" target="_blank" rel="noopener noreferrer" class="card-action">Join the community</a>
+          <div class="card-label">Season 01 · starts 8 Aug</div>
+          <div class="card-title">AI Movers+</div>
+          <p class="card-desc">Four weeks, live, in a small cohort. You leave every week with something that works — and week one you ship an AI employee that owns the job eating your week. I ship it with you, and every single person gets feedback. Founding 50 at $44/mo, then $99.</p>
+          <a href="/build/" class="card-action">Join Season 01 →</a>
         </div>
         <div class="community-card card-interactive" data-pull="c2">
           <div class="murphy-echo"></div>
-          <div class="card-label">Inside</div>
-          <div class="card-title">Build-alongs & office hours</div>
-          <p class="card-desc">Live build sessions, events and a classroom full of step-by-step walkthroughs. Bring what you're stuck on — I'll be direct.</p>
-          <a href="https://www.skool.com/ai-movers-1936" target="_blank" rel="noopener noreferrer" class="card-action">See what's inside</a>
+          <div class="card-label">Free</div>
+          <div class="card-title">AI Movers</div>
+          <p class="card-desc">The open room. 600+ builders, intros, wins and questions, plus the playbooks I've given away. Start here if you want to see how I work before you pay for anything.</p>
+          <a href="https://www.skool.com/ai-movers-1936" target="_blank" rel="noopener noreferrer" class="card-action">Join free</a>
         </div>
       </div>
     </div>
