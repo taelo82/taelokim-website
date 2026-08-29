@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Taelo Kim — Build real AI products with Claude</title>
-<meta name="description" content="Playbooks, prompt packs and build logs for people shipping real AI products with Claude — plus AI Movers, the builder community that doesn't sell you a course.">
-<meta property="og:title" content="Taelo Kim — Build real AI products with Claude">
-<meta property="og:description" content="Playbooks, prompt packs and build logs for people shipping real AI products with Claude — plus AI Movers, the builder community.">
+<title>Taelo Kim — Build your first AI employee with Claude Code</title>
+<meta name="description" content="The 16 Claude Code agents that run my business — free, skill files included. Plus AI Movers, the builder community that doesn't sell you a course.">
+<meta property="og:title" content="Taelo Kim — Build your first AI employee with Claude Code">
+<meta property="og:description" content="Free: the 16 Claude Code agents that run my business, skill files included. Plus AI Movers, the community that doesn't sell you a course.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://taeloai.com/">
 <meta property="og:image" content="https://taeloai.com/taelo.jpg">
@@ -29,7 +29,7 @@
       "url": "https://taeloai.com/",
       "image": "https://taeloai.com/taelo.jpg",
       "jobTitle": "Operator and AI product builder",
-      "description": "VC-turned-operator building and shipping AI products across Korea, Japan and Southeast Asia. Publishes build logs on Claude Code, AI agents and automation.",
+      "description": "VC-turned-operator who builds AI systems for real companies and hands over the files. Publishes build logs on Claude Code, AI agents and automation, and runs the AI Movers community.",
       "knowsAbout": ["Claude Code", "AI agents", "Anthropic Claude", "AI automation", "prompt engineering", "product design"],
       "sameAs": [
         "https://www.youtube.com/@TaeloKim",
@@ -352,8 +352,8 @@ main {
   font-weight: 300;
   color: var(--dust);
   line-height: 1.7;
-  max-width: 360px;
-  margin-bottom: 48px;
+  max-width: 460px;
+  margin-bottom: 34px;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.8s 0.9s var(--ease-cin), transform 0.8s 0.9s var(--ease-cin);
@@ -368,6 +368,19 @@ main {
   transition: opacity 0.8s 1.1s var(--ease-cin), transform 0.8s 1.1s var(--ease-cin);
 }
 .hero-cta-wrap.lit { opacity: 1; transform: translateY(0); }
+/* Hero capture: stack the form + note instead of sitting buttons side by side. */
+.hero-cta-wrap.stack {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+.email-form.hero-form { margin: 0; width: 100%; max-width: 420px; }
+.hero-note {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: rgba(107,91,79,0.9);
+}
 .cta-primary {
   font-family: var(--font-body);
   font-size: 12px;
@@ -1032,6 +1045,7 @@ main {
 .email-form:focus-within { border-color: var(--thread); }
 .email-input {
   flex: 1;
+  min-width: 0;
   background: transparent;
   border: none;
   padding: 16px 20px;
@@ -1052,6 +1066,8 @@ main {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   cursor: pointer;
+  white-space: nowrap;
+  flex: 0 0 auto;
   transition: background var(--dur-med);
 }
 .email-btn:hover { background: var(--thread-glow); }
@@ -1103,9 +1119,41 @@ footer {
 
 /* ── MOBILE ADJUSTMENTS ── */
 @media (max-width: 768px) {
-  nav { gap: 2px; padding: 8px 16px; }
-  nav a { padding: 4px 7px; font-size: 10px; }
-  .hero-content { padding-left: 24px; padding-right: 24px; max-width: none; }
+  nav { gap: 2px; padding: 8px 12px; }
+  /* flex:0 0 auto stops the last pill being squeezed and clipped mid-word. */
+  nav a { padding: 4px 6px; font-size: 10px; flex: 0 0 auto; }
+  /* Seven pills don't fit a phone. Drop the two secondary destinations (both are
+     still reachable by scrolling the page) and let the bar scroll as a backstop,
+     so Home and the Get-the-stack CTA are never clipped off the edges. */
+  nav a[data-section="resources"],
+  nav a[data-section="about"],
+  nav a[href="/blog/"] { display: none; }
+  nav {
+    max-width: calc(100vw - 20px);
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  .hero-content { padding-left: 24px; padding-right: 24px; max-width: none; min-width: 0; }
+  /* Phone: stack the capture instead of squeezing a nowrap button next to the
+     input — side by side, the two together are wider than the viewport. */
+  .email-form { flex-direction: column; align-items: stretch; max-width: 100%; }
+  .email-form .email-btn { width: 100%; }
+  /* On phones the intro paragraph runs across the lit part of the video. Lay a
+     scrim under the copy (above the video, below .hero-content's z-index 6). */
+  #hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    background: linear-gradient(180deg,
+      rgba(10,10,17,0.30) 0%,
+      rgba(10,10,17,0.72) 34%,
+      rgba(10,10,17,0.86) 62%,
+      rgba(10,10,17,0.55) 100%);
+    pointer-events: none;
+  }
   .hero-headline { margin-bottom: 24px; }
   .hero-sub { margin-bottom: 32px; max-width: none; }
   .hero-cta-wrap { flex-wrap: wrap; gap: 12px; }
@@ -1279,68 +1327,82 @@ body:not(:hover) #cursor-thread { opacity: 0; }
 <!-- ── NAV ── -->
 <nav class="glass" role="navigation" aria-label="Main navigation">
   <a href="#hero" data-section="hero">Home</a>
+  <a href="#community" data-section="community">Products</a>
+  <a href="#writing" data-section="writing">Build logs</a>
+  <a href="#resources" data-section="resources">Classroom</a>
   <a href="#about" data-section="about">About</a>
-  <a href="#resources" data-section="resources">Resources</a>
-  <a href="#community" data-section="community">Community</a>
-  <a href="#writing" data-section="writing">Watch</a>
   <a href="/blog/">Blog</a>
-  <a href="#join" data-section="join">Join</a>
+  <a href="#join" data-section="join">Get the stack</a>
 </nav>
 
 <!-- ── MAIN ── -->
 <main>
 
-<!-- 01 HERO -->
+<!-- 01 HERO — promise + capture -->
 <section id="hero" data-screen-label="01 Hero">
   <div class="hero-content">
-    <p class="hero-eyebrow">Taelo Kim · Seoul · 2026</p>
-    <h1 class="hero-headline" id="hero-hl" aria-label="Pull the thread.">
+    <p class="hero-eyebrow">Taelo Kim · Seoul · building in public</p>
+    <h1 class="hero-headline" id="hero-hl" aria-label="Build your first AI employee.">
     </h1>
     <p class="hero-sub" id="hero-sub">
-      Playbooks, prompt packs and build logs for people shipping real AI products with Claude. Plus AI Movers — the builder community that doesn't sell you a course.
+      Hi — I'm Taelo. I build AI systems that do real work, then hand over the files.
+      Below: the machines running my business right now, the community where we build
+      them together, and my free <strong>Operator Stack</strong> — 16 Claude Code agents,
+      skill files included. Just drop your email.
     </p>
-    <div class="hero-cta-wrap" id="hero-cta">
-      <a href="#join" class="cta-primary">Connect with Taelo →</a>
-      <a href="#about" class="cta-secondary">Who's behind this</a>
+    <div class="hero-cta-wrap stack" id="hero-cta">
+      <form class="email-form hero-form"
+            action="https://formspree.io/f/xzdoepzz"
+            method="POST"
+            onsubmit="handleJoin(event)">
+        <input class="email-input" type="email" name="email"
+               placeholder="your@email.com" autocomplete="email" required>
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"
+               aria-hidden="true" style="position:absolute;left:-9999px">
+        <input type="hidden" name="_subject" value="Operator Stack request — hero form">
+        <button class="email-btn" type="submit">Send me the stack</button>
+      </form>
+      <p class="join-msg" hidden></p>
+      <p class="hero-note">16 agents. One email. Unsubscribe in one click.</p>
     </div>
   </div>
   <div class="scroll-indicator">
     <div class="scroll-line"></div>
-    <span class="scroll-label">Scroll to drift</span>
+    <span class="scroll-label">See what they do</span>
   </div>
 </section>
 
 <!-- RIFT -->
 <div class="rift" id="rift-1" aria-hidden="true"></div>
 
-<!-- 02 WHAT YOU FEEL -->
+<!-- 02 WHAT YOU GET -->
 <div class="panel-slot" id="slot-what" data-section-id="what-you-feel">
-  <section id="what-you-feel" class="scene" data-screen-label="02 What You Feel">
+  <section id="what-you-feel" class="scene" data-screen-label="02 What You Get">
     <div class="scene-reveal">
-      <div class="section-label">The signal</div>
+      <div class="section-label">What you actually get</div>
       <p class="feel-intro">
-        You're <strong>already in the tesseract.</strong> Every decision
-        you make today — which market, which product, which bet — is a thread
-        reaching across time. You just can't see where it lands yet.
+        Most people collect AI tools. <strong>Operators build machines that run
+        without them.</strong> Everything here is the second kind — the systems doing
+        my work while I sleep, handed over whole, with nothing filed off.
       </p>
       <div class="pillars">
         <div class="pillar card-interactive" data-pull="1">
           <div class="murphy-echo"></div>
           <div class="pillar-num">01</div>
-          <div class="pillar-title">Operator playbooks.</div>
-          <p class="pillar-desc">How to actually ship an AI product — what to build, what to validate, the failure modes I've seen across 150+ pitches and my own products. Steal them.</p>
+          <div class="pillar-title">The agents.</div>
+          <p class="pillar-desc">Sixteen Claude Code skills running my business daily — trend scouting, video cutting, the newsletter, the second brain. You get the skill files, not a screenshot of them.</p>
         </div>
         <div class="pillar card-interactive" data-pull="2">
           <div class="murphy-echo"></div>
           <div class="pillar-num">02</div>
-          <div class="pillar-title">Prompt packs.</div>
-          <p class="pillar-desc">The exact prompts I use to ship faster. Banned defaults sheets, reference dictionaries, voice specs, design tokens. No fluff, just the working ones.</p>
+          <div class="pillar-title">The specs.</div>
+          <p class="pillar-desc">The prompts and design docs underneath the agents — banned-defaults sheets, reference dictionaries, voice specs, tokens. The part every tutorial leaves out.</p>
         </div>
         <div class="pillar card-interactive" data-pull="3">
           <div class="murphy-echo"></div>
           <div class="pillar-num">03</div>
-          <div class="pillar-title">Build logs.</div>
-          <p class="pillar-desc">Real numbers from real products. What's working, what isn't, what I'd do differently at every inflection. No theory. No case studies.</p>
+          <div class="pillar-title">The build logs.</div>
+          <p class="pillar-desc">What each machine cost me, what broke, and what I'd wire differently now. Real numbers from someone still running them. No theory, no case studies.</p>
         </div>
       </div>
     </div>
@@ -1350,125 +1412,28 @@ body:not(:hover) #cursor-thread { opacity: 0; }
 <!-- RIFT -->
 <div class="rift" id="rift-2" aria-hidden="true"></div>
 
-<!-- 03 ABOUT -->
-<div class="panel-slot" id="slot-about" data-section-id="about">
-  <section id="about" class="scene" data-screen-label="03 About">
-    <div class="scene-reveal">
-      <div class="section-label">Cooper on the other side</div>
-      <div class="about-split">
-        <div class="about-left">
-          <div class="about-portrait">
-            <img src="taelo.jpg" alt="Taelo Kim" width="1200" height="675" loading="lazy">
-          </div>
-          <p class="about-statement">
-            I spent years as a VC investing in <em>40+ startups</em> — then crossed the
-            table to build. Today I run businesses globally, ship real AI products with
-            Claude, and lead <em>AI Movers</em>, a community of serious builders.
-            Everything here is something I actually use, not something I think might work.
-          </p>
-        </div>
-        <div class="about-facts">
-          <div class="fact-row">
-            <div class="fact-num">40<span>+</span></div>
-            <div class="fact-label">Startups invested in as VC</div>
-          </div>
-          <div class="fact-row">
-            <div class="fact-num">Global</div>
-            <div class="fact-label">Operating multiple businesses worldwide</div>
-          </div>
-          <div class="fact-row">
-            <div class="fact-num">50<span>+</span></div>
-            <div class="fact-label">AI products shipped and running</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
-
-<!-- 03b CONSULT — book a call -->
-<section id="consult" class="scene" data-screen-label="03b Consult">
-  <div class="scene-reveal">
-    <div class="consult-band card-interactive" data-pull="consult">
-      <div class="murphy-echo"></div>
-      <div>
-        <div class="consult-title">Running a business? <em>Let's talk.</em></div>
-        <p class="consult-desc">Startup ideas, bringing AI into your business, training your team, automating workflows, better design — 30 minutes is enough to see if I can help.</p>
-      </div>
-      <div class="consult-cta">
-        <a href="https://calendly.com/taelokim1/30min" target="_blank" rel="noopener noreferrer" class="cta-primary">Book a 30-min call →</a>
-        <span class="consult-note">No pitch. No pressure. Free.</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- RIFT -->
-<div class="rift" id="rift-3" aria-hidden="true"></div>
-
-<!-- 04 RESOURCES -->
-<div class="panel-slot" id="slot-resources" data-section-id="resources">
-  <section id="resources" class="scene" data-screen-label="04 Resources">
-    <div class="scene-reveal">
-      <div class="section-label">Pull a thread</div>
-
-      <div class="resource-featured card-interactive" data-pull="featured">
-        <div class="murphy-echo"></div>
-        <div class="featured-tag">Featured · Free inside the classroom</div>
-        <div class="featured-title">The AI Movers classroom</div>
-        <p class="featured-desc">Every build broken down step by step — the prompts, the specs, the exact Claude Code setups I use to ship. New walkthroughs added as I build them. Free to start.</p>
-        <a href="https://www.skool.com/ai-movers-1936/classroom" target="_blank" rel="noopener noreferrer" class="resource-link">Open the classroom</a>
-      </div>
-
-      <div class="resource-grid">
-        <a href="https://www.skool.com/ai-movers-1936/classroom" target="_blank" rel="noopener noreferrer" class="resource-card card-interactive" data-pull="r1">
-          <div class="murphy-echo"></div>
-          <div class="resource-card-tag">Build-along</div>
-          <div class="resource-card-title">Ship an AI product with Claude</div>
-          <p class="resource-card-desc">Full walkthroughs — the repo, the prompts and the Claude Code setup, start to finish.</p>
-        </a>
-        <a href="https://www.skool.com/ai-movers-1936/classroom" target="_blank" rel="noopener noreferrer" class="resource-card card-interactive" data-pull="r2">
-          <div class="murphy-echo"></div>
-          <div class="resource-card-tag">Templates</div>
-          <div class="resource-card-title">Spec + prompt packs</div>
-          <p class="resource-card-desc">The exact docs and prompts I use for every product I ship. Copy them.</p>
-        </a>
-        <a href="https://www.skool.com/ai-movers-1936" target="_blank" rel="noopener noreferrer" class="resource-card card-interactive" data-pull="r3">
-          <div class="murphy-echo"></div>
-          <div class="resource-card-tag">Feedback</div>
-          <div class="resource-card-title">Get your build reviewed</div>
-          <p class="resource-card-desc">Post what you're building and get fast, honest feedback from serious movers.</p>
-        </a>
-      </div>
-    </div>
-  </section>
-</div>
-
-<!-- RIFT -->
-<div class="rift" id="rift-4" aria-hidden="true"></div>
-
-<!-- 05 COMMUNITY -->
+<!-- 03 PRODUCTS -->
 <div class="panel-slot" id="slot-community" data-section-id="community">
-  <section id="community" class="scene" data-screen-label="05 Community">
+  <section id="community" class="scene" data-screen-label="03 Products">
     <div class="scene-reveal">
-      <div class="section-label">Other hands on the threads</div>
+      <div class="section-label">Popular products</div>
       <h2 class="community-headline">
-        You're not the only one<br><em>navigating this.</em>
+        Start free.<br><em>Ship on a deadline.</em>
       </h2>
       <div class="community-grid">
         <div class="community-card card-interactive" data-pull="c1">
           <div class="murphy-echo"></div>
-          <div class="card-label">Community</div>
+          <div class="card-label">Free · 600+ builders</div>
           <div class="card-title">AI Movers</div>
-          <p class="card-desc">A community of serious AI builders shipping real products. The only one that doesn't sell you a course — fast feedback, real builds, quality-filtered.</p>
-          <a href="https://www.skool.com/ai-movers-1936" target="_blank" rel="noopener noreferrer" class="card-action">Join the community</a>
+          <p class="card-desc">The AI builders' community that doesn't sell you a course. Post what you're building, get it pulled apart by people who actually ship. Free, and it stays free.</p>
+          <a href="https://www.skool.com/ai-movers-1936" target="_blank" rel="noopener noreferrer" class="card-action">Join free</a>
         </div>
         <div class="community-card card-interactive" data-pull="c2">
           <div class="murphy-echo"></div>
-          <div class="card-label">Inside</div>
-          <div class="card-title">Build-alongs & office hours</div>
-          <p class="card-desc">Live build sessions, events and a classroom full of step-by-step walkthroughs. Bring what you're stuck on — I'll be direct.</p>
-          <a href="https://www.skool.com/ai-movers-1936" target="_blank" rel="noopener noreferrer" class="card-action">See what's inside</a>
+          <div class="card-label">AI Movers+ · $44/mo</div>
+          <div class="card-title">Build Labs</div>
+          <p class="card-desc">Live labs on a fixed calendar. Every week ships one keepable thing — an AI employee running by week one, your own skill stack by week two. Without a deadline nobody ships anything. The deadline is the product.</p>
+          <a href="https://www.skool.com/ai-movers-4991" target="_blank" rel="noopener noreferrer" class="card-action">See what's inside</a>
         </div>
       </div>
     </div>
@@ -1476,39 +1441,39 @@ body:not(:hover) #cursor-thread { opacity: 0; }
 </div>
 
 <!-- RIFT -->
-<div class="rift" id="rift-5" aria-hidden="true"></div>
+<div class="rift" id="rift-3" aria-hidden="true"></div>
 
-<!-- 06 WRITING -->
+<!-- 04 BUILD LOGS -->
 <div class="panel-slot" id="slot-writing" data-section-id="writing">
-  <section id="writing" class="scene" data-screen-label="06 Writing">
+  <section id="writing" class="scene" data-screen-label="04 Build Logs">
     <div class="scene-reveal">
-      <div class="section-label">Build logs · read or watch</div>
+      <div class="section-label">Latest builds · read or watch</div>
       <div class="writing-entries">
         <a href="/blog/ai-agent-35x-more-efficient/" class="writing-row card-interactive" data-pull="w1">
           <div class="writing-left">
             <div class="writing-title">This NEW Method Makes Your AI Agent 35x More Efficient</div>
-            <div class="writing-sub">Sub-agents and context engineering, end to end.</div>
+            <div class="writing-sub">Sub-agents and context engineering — why one giant prompt is the expensive way.</div>
           </div>
           <div class="writing-date">Read + watch →</div>
         </a>
         <a href="/blog/automate-video-editing-claude-code/" class="writing-row card-interactive" data-pull="w2">
           <div class="writing-left">
             <div class="writing-title">I Fired My $2,000/mo Video Editor — Claude Code Replaced Him</div>
-            <div class="writing-sub">Automating real, expensive work with Claude Code.</div>
+            <div class="writing-sub">$2,000 a month of editing, replaced by one skill file.</div>
           </div>
           <div class="writing-date">Read + watch →</div>
         </a>
         <a href="/blog/second-brain-claude-code/" class="writing-row card-interactive" data-pull="w3">
           <div class="writing-left">
             <div class="writing-title">I Built a Second Brain to Run My Entire Life (Full Guide)</div>
-            <div class="writing-sub">A complete build, start to finish.</div>
+            <div class="writing-sub">Every note, doc and decision in one place Claude can actually read.</div>
           </div>
           <div class="writing-date">Read + watch →</div>
         </a>
         <a href="/blog/command-center-claude-code/" class="writing-row card-interactive" data-pull="w4">
           <div class="writing-left">
             <div class="writing-title">I Built a Command Center that Runs My Entire Life</div>
-            <div class="writing-sub">One dashboard, everything wired together.</div>
+            <div class="writing-sub">One dashboard wired to everything I run, built in a weekend.</div>
           </div>
           <div class="writing-date">Read + watch →</div>
         </a>
@@ -1522,19 +1487,118 @@ body:not(:hover) #cursor-thread { opacity: 0; }
 </div>
 
 <!-- RIFT -->
+<div class="rift" id="rift-4" aria-hidden="true"></div>
+
+<!-- 05 CLASSROOM -->
+<div class="panel-slot" id="slot-resources" data-section-id="resources">
+  <section id="resources" class="scene" data-screen-label="05 Classroom">
+    <div class="scene-reveal">
+      <div class="section-label">Free to steal</div>
+
+      <div class="resource-featured card-interactive" data-pull="featured">
+        <div class="murphy-echo"></div>
+        <div class="featured-tag">Featured · No card, no upsell</div>
+        <div class="featured-title">The AI Movers classroom</div>
+        <p class="featured-desc">Every machine I've built, broken down step by step — the prompts, the specs, the exact Claude Code setup. A new walkthrough every time I ship something. You don't pay for it.</p>
+        <a href="https://www.skool.com/ai-movers-1936/classroom" target="_blank" rel="noopener noreferrer" class="resource-link">Open the classroom</a>
+      </div>
+
+      <div class="resource-grid">
+        <a href="https://www.skool.com/ai-movers-1936/classroom" target="_blank" rel="noopener noreferrer" class="resource-card card-interactive" data-pull="r1">
+          <div class="murphy-echo"></div>
+          <div class="resource-card-tag">Build-along</div>
+          <div class="resource-card-title">Ship an AI product with Claude</div>
+          <p class="resource-card-desc">The repo, the prompts and the setup. Start to finish, with nothing skipped.</p>
+        </a>
+        <a href="https://www.skool.com/ai-movers-1936/classroom" target="_blank" rel="noopener noreferrer" class="resource-card card-interactive" data-pull="r2">
+          <div class="murphy-echo"></div>
+          <div class="resource-card-tag">Templates</div>
+          <div class="resource-card-title">Spec + prompt packs</div>
+          <p class="resource-card-desc">The docs underneath every build — banned-defaults sheets, voice specs, design tokens.</p>
+        </a>
+        <a href="https://www.skool.com/ai-movers-1936" target="_blank" rel="noopener noreferrer" class="resource-card card-interactive" data-pull="r3">
+          <div class="murphy-echo"></div>
+          <div class="resource-card-tag">Feedback</div>
+          <div class="resource-card-title">Get your build pulled apart</div>
+          <p class="resource-card-desc">Post what you're stuck on. Fast and direct, from people who ship.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- RIFT -->
+<div class="rift" id="rift-5" aria-hidden="true"></div>
+
+<!-- 06 ABOUT -->
+<div class="panel-slot" id="slot-about" data-section-id="about">
+  <section id="about" class="scene" data-screen-label="06 About">
+    <div class="scene-reveal">
+      <div class="section-label">Who's behind this</div>
+      <div class="about-split">
+        <div class="about-left">
+          <div class="about-portrait">
+            <img src="taelo.jpg" alt="Taelo Kim" width="1200" height="675" loading="lazy">
+          </div>
+          <p class="about-statement">
+            I spent years as a VC — <em>40+ investments, 150+ pitches</em> — then crossed
+            the table to build. Today I run AI systems inside real companies, including a
+            $200M-revenue client on an enterprise retainer, and I ship products with Claude
+            Code every week. Everything on this site is something I actually run. When one
+            breaks, <em>I write that up too.</em>
+          </p>
+        </div>
+        <div class="about-facts">
+          <div class="fact-row">
+            <div class="fact-num">40<span>+</span></div>
+            <div class="fact-label">Startups backed as a VC</div>
+          </div>
+          <div class="fact-row">
+            <div class="fact-num">$70K<span>/mo</span></div>
+            <div class="fact-label">Enterprise AI retainer, running now</div>
+          </div>
+          <div class="fact-row">
+            <div class="fact-num">16</div>
+            <div class="fact-label">Agents running my business daily</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- 06b CONSULT — book a call -->
+<section id="consult" class="scene" data-screen-label="06b Consult">
+  <div class="scene-reveal">
+    <div class="consult-band card-interactive" data-pull="consult">
+      <div class="murphy-echo"></div>
+      <div>
+        <div class="consult-title">Running a business? <em>I'll build the system.</em></div>
+        <p class="consult-desc">The same machines, built inside your company — the workflow eating your team's week, automated end to end. Fixed scope or monthly retainer. Thirty minutes tells us both whether it's worth doing.</p>
+      </div>
+      <div class="consult-cta">
+        <a href="https://calendly.com/taelokim1/30min" target="_blank" rel="noopener noreferrer" class="cta-primary">Book a 30-min call →</a>
+        <span class="consult-note">No pitch deck. If it's not a fit, I'll say so.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RIFT -->
 <div class="rift" id="rift-6" aria-hidden="true"></div>
 
 <!-- 07 JOIN / CTA -->
 <section id="join" class="scene" data-screen-label="07 Join" style="padding-top:0;max-width:100%;padding-left:0;padding-right:0;">
   <div class="join-bg-glow"></div>
   <div class="join-content scene-reveal">
-    <div class="join-eyebrow">The other dimension</div>
+    <div class="join-eyebrow">One last thing</div>
     <h2 class="join-headline">
-      Get resources<br><em>before they're public.</em>
+      Take the stack<br><em>with you.</em>
     </h2>
     <p class="join-sub">
-      Free packs and playbooks sent only when something's actually ready.
-      No weekly cadence. No hype. No upsells. Unsubscribe in one click.
+      Sixteen Claude Code agents, the skill files, and the specs underneath them.
+      Then a note whenever I ship a new machine. No weekly cadence, no hype,
+      no upsells. One click to leave.
     </p>
     <!-- Formspree form: submissions land in Taelo's inbox via xzdoepzz. -->
     <form class="email-form" id="join-form"
@@ -1546,15 +1610,15 @@ body:not(:hover) #cursor-thread { opacity: 0; }
       <!-- Honeypot: bots fill it, humans don't see it. -->
       <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"
              aria-hidden="true" style="position:absolute;left:-9999px">
-      <input type="hidden" name="_subject" value="New signup from taeloai.com">
-      <button class="email-btn" type="submit">Join the list</button>
+      <input type="hidden" name="_subject" value="Operator Stack request — footer form">
+      <button class="email-btn" type="submit">Send me the stack</button>
     </form>
     <p class="join-msg" id="join-msg" hidden></p>
-    <p class="join-note">One email per new resource. That's the deal.</p>
+    <p class="join-note">One email per new machine. That's the deal.</p>
     <p class="join-note" style="margin-top:18px">
       Or skip the list and
       <a href="https://www.skool.com/ai-movers-1936" target="_blank" rel="noopener noreferrer"
-         style="color:var(--thread);text-decoration:none;border-bottom:1px solid rgba(122,181,176,0.4)">join AI Movers now ↗</a>
+         style="color:var(--thread);text-decoration:none;border-bottom:1px solid rgba(122,181,176,0.4)">join AI Movers free ↗</a>
     </p>
   </div>
 </section>
@@ -1591,7 +1655,7 @@ const REDUCED     = window.matchMedia('(prefers-reduced-motion: reduce)').matche
   const hl = document.getElementById('hero-hl');
   // Each line wraps in a `.line` block so the inline-block chars never break
   // mid-word on narrow viewports.
-  const lines = ['Pull the', '<em>thread</em>.'];
+  const lines = ['Build your first', '<em>AI employee</em>.'];
   let charDelay = 0;
 
   lines.forEach((line) => {
@@ -2038,22 +2102,25 @@ async function handleJoin(e) {
   e.preventDefault();
   const form = e.target;
   const btn = form.querySelector('.email-btn');
-  const input = document.getElementById('email-in');
-  const msg = document.getElementById('join-msg');
+  // Scoped to the submitted form so hero + footer captures both work.
+  const input = form.querySelector('.email-input');
+  const msg = form.parentElement.querySelector('.join-msg');
   const originalLabel = btn.textContent;
   const action = form.getAttribute('action') || '';
 
   // Formspree not yet wired — surface that instead of a silent failure.
   if (action.includes('REPLACE_WITH_FORMSPREE_ID') || !action) {
-    msg.textContent = 'Form is being set up — DM @taelo_kim on X to join early.';
-    msg.style.color = 'var(--dust)';
-    msg.hidden = false;
+    if (msg) {
+      msg.textContent = 'Form is being set up — DM @taelo_kim on X to join early.';
+      msg.style.color = 'var(--dust)';
+      msg.hidden = false;
+    }
     return;
   }
 
   btn.disabled = true;
   btn.textContent = 'Sending…';
-  msg.hidden = true;
+  if (msg) msg.hidden = true;
 
   try {
     const res = await fetch(action, {
@@ -2065,14 +2132,18 @@ async function handleJoin(e) {
     form.reset();
     btn.textContent = 'Sent ✓';
     btn.style.background = 'var(--thread-glow)';
-    msg.textContent = "You're in. Resources land in your inbox first.";
-    msg.style.color = 'var(--thread)';
-    msg.hidden = false;
+    if (msg) {
+      msg.textContent = "You're in. I'll send the stack to that address.";
+      msg.style.color = 'var(--thread)';
+      msg.hidden = false;
+    }
   } catch (err) {
     btn.textContent = 'Try again';
-    msg.textContent = 'Something went wrong. Try again, or DM @taelo_kim on X.';
-    msg.style.color = 'var(--dust)';
-    msg.hidden = false;
+    if (msg) {
+      msg.textContent = 'Something went wrong. Try again, or DM @taelo_kim on X.';
+      msg.style.color = 'var(--dust)';
+      msg.hidden = false;
+    }
   } finally {
     setTimeout(() => {
       btn.disabled = false;
